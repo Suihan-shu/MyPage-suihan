@@ -1,16 +1,11 @@
-{% assign current_lang = page.lang | default: site.active_lang | default: site.default_lang %}
-{% assign t = site.data.i18n[current_lang] | default: site.data.i18n.en %}
+{% assign t = site.data.i18n.zh %}
 {% assign resource_courses = site.data.course_resources %}
-{% assign semester_key = 'semester' %}
-{% if current_lang == 'zh' %}
-  {% assign semester_key = 'semester_zh' %}
-{% endif %}
 
 {% if resource_courses and resource_courses.size > 0 %}
   <div class="courses course-resources">
     {% assign current_semester = '' %}
     {% for course in resource_courses %}
-      {% assign course_semester = course[semester_key] | default: course.semester %}
+      {% assign course_semester = course.semester_zh | default: course.semester %}
 
       {% if course_semester != current_semester %}
         {% if current_semester != '' %}
@@ -21,16 +16,8 @@
         {% assign current_semester = course_semester %}
       {% endif %}
 
-      {% assign course_title = course.title %}
-      {% assign course_summary = course.summary %}
-      {% if current_lang == 'zh' %}
-        {% if course.title_zh %}
-          {% assign course_title = course.title_zh %}
-        {% endif %}
-        {% if course.summary_zh %}
-          {% assign course_summary = course.summary_zh %}
-        {% endif %}
-      {% endif %}
+      {% assign course_title = course.title_zh | default: course.title %}
+      {% assign course_summary = course.summary_zh | default: course.summary %}
 
       {% assign ordered_types = 'review|slides|exam|solution|assignment|project|code|book' | split: '|' %}
 
@@ -73,10 +60,7 @@
                 </summary>
                 <ul class="course-card-items">
                   {% for item in items %}
-                    {% assign item_name = item.name %}
-                    {% if current_lang == 'zh' and item.name_zh %}
-                      {% assign item_name = item.name_zh %}
-                    {% endif %}
+                    {% assign item_name = item.name_zh | default: item.name %}
                     <li class="course-card-item">
                       <span class="course-card-item-name">{{ item_name }}</span>
                       <span class="course-card-item-actions">
@@ -101,7 +85,7 @@
 
         <div class="course-card-footer">
           <a class="course-card-more" href="{{ '/courses/' | append: course.slug | append: '/' | relative_url }}">
-            {{ t.courses.enter_course | default: 'Course details' }} &rarr;
+            {{ t.courses.enter_course | default: '课程详情' }} &rarr;
           </a>
         </div>
       </div>
@@ -111,5 +95,5 @@
     {% endif %}
   </div>
 {% else %}
-  <p>{{ t.courses.empty | default: 'No courses available yet.' }}</p>
+  <p>{{ t.courses.empty | default: '暂无课程内容。' }}</p>
 {% endif %}

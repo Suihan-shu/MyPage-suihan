@@ -1,8 +1,7 @@
 ---
 layout: page
-title: Theoretical Mechanics
+title: 理论力学
 permalink: /courses/theoretical-mechanics/
-lang: en
 back_to_courses: true
 ---
 

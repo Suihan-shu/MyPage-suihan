@@ -1,8 +1,7 @@
 ---
 layout: page
-title: Mechanical Control Engineering
+title: 机械控制工程
 permalink: /courses/mechanical-control/
-lang: en
 back_to_courses: true
 ---
 

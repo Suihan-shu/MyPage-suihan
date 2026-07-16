@@ -1,8 +1,7 @@
 ---
 layout: page
-title: Engineering Machinery Construction
+title: 工程机械构造
 permalink: /courses/machinery-construction/
-lang: en
 back_to_courses: true
 ---
 

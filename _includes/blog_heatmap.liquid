@@ -24,19 +24,19 @@
     updateChartHeight();
 
     let myChart = echarts.init(chartDom);
-    const locale = 'en-US';
+    const locale = 'zh-CN';
     const rootStyle = getComputedStyle(document.documentElement);
     const heatmapFont = rootStyle.getPropertyValue('--custom-font-heatmap').trim()
       || rootStyle.getPropertyValue('--custom-font-ui').trim()
       || 'inherit';
-    const monthNameMap = 'en';
-    const dayNameMap = ['Sun', '', 'Tue', '', 'Thu', '', 'Sat'];
-    const zeroPostsLabel = 'No posts on';
-    const postSingularLabel = 'post';
-    const postPluralLabel = 'posts';
-    const onDateLabel = 'on';
-    const legendMore = 'More';
-    const legendLess = 'Less';
+    const monthNameMap = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+    const dayNameMap = ['日', '', '二', '', '四', '', '六'];
+    const zeroPostsLabel = '没有发布文章';
+    const postSingularLabel = '篇文章';
+    const postPluralLabel = '篇文章';
+    const onDateLabel = '发布于';
+    const legendMore = '多';
+    const legendLess = '少';
 
     function formatDate(dateObj) {
       const y = dateObj.getFullYear();
@@ -47,7 +47,7 @@
     
     // Aggregation Logic
     const postData = {};
-    {% assign filtered_posts = site.posts | where: "lang", site.active_lang %}
+    {% assign filtered_posts = site.posts | where: "lang", "zh" %}
     {% for post in filtered_posts %}
       {% capture post_date %}{{ post.date | date: "%Y-%m-%d" }}{% endcapture %}
       postData["{{ post_date }}"] = (postData["{{ post_date }}"] || 0) + 1;
@@ -88,7 +88,7 @@
       const t = themes[themeName] || themes.light;
       const isMobile = mobileMedia.matches;
       const mobileSizing = getMobileSizing();
-      const dayNameMap = isMobile ? ['S', 'M', 'T', 'W', 'T', 'F', 'S'] : ['Sun', '', 'Tue', '', 'Thu', '', 'Sat'];
+      const dayNameMap = isMobile ? ['日', '一', '二', '三', '四', '五', '六'] : ['日', '', '二', '', '四', '', '六'];
 
       return {
         textStyle: {

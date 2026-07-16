@@ -1,17 +1,16 @@
 ---
 layout: about
-title: About
-lang: en
-lang-ref: about
+title: 关于
+lang: zh
 permalink: /
-display_name: Suihan-shu
-subtitle: Learning, building, and documenting along the way.
+display_name: 何岁寒
+subtitle: 保持好奇，持续学习与创造。
 
 profile:
   position: header
   image: profile.jpg
   image_circular: true
-  alt: Profile image of Suihan-shu
+  alt: 何岁寒的头像
 
 selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
@@ -27,4 +26,4 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-Hi, I'm Suihan-shu. This is where I share my projects, learning notes, and the books and films that inspire me.
+你好，我是何岁寒。这里用于整理我的项目、学习记录，以及未来想分享的书籍与电影。

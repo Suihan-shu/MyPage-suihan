@@ -1,28 +1,28 @@
 # Suihan-shu
 
-Suihan-shu（何岁寒）的中文个人主页，使用 Jekyll、al-folio、jekyll-polyglot 和 Sass 构建。
+Suihan-shu（何岁寒）的中文个人主页，使用 Jekyll、al-folio 和 Sass 构建。
 
-## Local development
+## 本地预览
 
 ```bash
 docker compose up
 ```
 
-Open <http://localhost:8040>.
+浏览器打开 <http://localhost:8040>。
 
-Production build:
+正式构建：
 
 ```bash
 docker compose run --rm jekyll bundle exec jekyll build
 ```
 
-Structure audit on Windows:
+Windows 结构检查：
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/validate_structure.ps1
 ```
 
-## Active navigation
+## 当前导航
 
 - 关于
 - 代码库
@@ -30,16 +30,14 @@ powershell -ExecutionPolicy Bypass -File scripts/validate_structure.ps1
 - 书籍与电影
 - 旅行日志（密码保护）
 
-Blog and Courses remain in the source tree but are soft-hidden from navigation, the home page, and search.
+博客和课程源码暂时保留，但没有显示在导航、首页和搜索中。书籍与电影暂时为空，后续可在 `_books/`、`_movies/` 和 `assets/img/media/` 中添加条目及合法使用的封面。
 
-Books and Movies are intentionally empty until entries and legally usable covers are added under `_books/`, `_movies/`, and `assets/img/media/`.
+## 旅行日志
 
-## Travel journal
+旅行日志使用轻量的前端密码校验。在 `_data/travel.yml` 中设置密码并添加记录，照片放在 `assets/img/travel/`。字段格式见 [旅行日志说明](docs/TRAVEL_LOG.md)。前端密码只能阻止普通访问，不能替代服务器端访问控制。
 
-The Travel Journal uses a lightweight front-end password gate. Set the password and add entries in [_data/travel.yml](_data/travel.yml), then place photos under `assets/img/travel/`. See [docs/TRAVEL_LOG.md](docs/TRAVEL_LOG.md) for the entry format. This is only a casual privacy gate; it is not server-side access control.
+## 致谢与许可
 
-## Credits and license
+本项目基于 [al-folio](https://github.com/alshedivat/al-folio) 主题，并参考 [WiseZenn/wisezenn.github.io](https://github.com/WiseZenn/wisezenn.github.io) 进行定制，通过 GitHub Pages 发布。
 
-This project uses the [al-folio](https://github.com/alshedivat/al-folio) theme and was customized with reference to [WiseZenn/wisezenn.github.io](https://github.com/WiseZenn/wisezenn.github.io). Powered by Jekyll and designed for GitHub Pages.
-
-The original MIT License is retained in [LICENSE](LICENSE).
+项目保留原始 [MIT 许可证](LICENSE)。

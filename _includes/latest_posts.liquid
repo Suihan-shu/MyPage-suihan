@@ -1,6 +1,6 @@
 <div class="news">
-  {% assign t = site.data.i18n[site.active_lang] | default: site.data.i18n.en %}
-  {% assign latest_date_format = t.latest_posts.date_format | default: '%b %d, %Y' %}
+  {% assign t = site.data.i18n.zh %}
+  {% assign latest_date_format = t.latest_posts.date_format | default: '%Y年%m月%d日' %}
   {% if page.latest_posts != blank %}
     {% assign latest_posts_size = site.posts | size %}
     <div
@@ -10,7 +10,7 @@
       {% endif %}
     >
       <table class="table table-sm table-borderless">
-        {% assign latest_posts = site.posts | where: "lang", site.active_lang %}
+        {% assign latest_posts = site.posts | where: "lang", "zh" %}
         {% assign latest_posts_size = latest_posts | size %}
         {% if page.latest_posts.limit %}
           {% assign latest_posts_limit = page.latest_posts.limit %}
@@ -46,6 +46,6 @@
       </table>
     </div>
   {% else %}
-    <p>{{ t.latest_posts.empty | default: 'No posts so far...' }}</p>
+    <p>{{ t.latest_posts.empty | default: '暂无文章' }}</p>
   {% endif %}
 </div>

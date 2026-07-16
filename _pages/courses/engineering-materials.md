@@ -1,8 +1,7 @@
 ---
 layout: page
-title: Engineering Materials and Mechanical Manufacturing
+title: 工程材料与机械制造
 permalink: /courses/engineering-materials/
-lang: en
 back_to_courses: true
 ---
 

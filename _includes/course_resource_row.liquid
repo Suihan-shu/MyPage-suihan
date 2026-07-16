@@ -1,17 +1,8 @@
 {% assign item = include.item %}
-{% assign current_lang = include.current_lang %}
 {% assign t = include.t %}
 
-{% assign item_name = item.name %}
-{% assign item_notes = item.notes %}
-{% if current_lang == 'zh' %}
-  {% if item.name_zh %}
-    {% assign item_name = item.name_zh %}
-  {% endif %}
-  {% if item.notes_zh %}
-    {% assign item_notes = item.notes_zh %}
-  {% endif %}
-{% endif %}
+{% assign item_name = item.name_zh | default: item.name %}
+{% assign item_notes = item.notes_zh | default: item.notes %}
 
 {% assign has_backup_menu = false %}
 {% if item.backup_links and item.backup_links.size > 0 %}

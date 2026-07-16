@@ -7,12 +7,8 @@
 {% if sorted_items and sorted_items.size > 0 %}
   <div class="media-grid">
     {% for item in sorted_items %}
-      {% assign display_title = item.title %}
-      {% assign display_creator = item.creator %}
-      {% if include.current_lang == 'zh' %}
-        {% assign display_title = item.title_zh | default: item.title %}
-        {% assign display_creator = item.creator_zh | default: item.creator %}
-      {% endif %}
+      {% assign display_title = item.title_zh | default: item.title %}
+      {% assign display_creator = item.creator_zh | default: item.creator %}
       {% assign status_key = item.status | downcase | strip %}
       {% assign status_labels = include.translations.status %}
       {% assign status_label = status_labels[status_key] | default: item.status %}
@@ -29,9 +25,9 @@
       {% endif %}
 
         {% if item.cover %}
-          <img class="media-card__cover" src="{{ item.cover | relative_url }}" alt="{{ display_title }} cover" loading="lazy">
+          <img class="media-card__cover" src="{{ item.cover | relative_url }}" alt="{{ display_title }}封面" loading="lazy">
         {% else %}
-          <div class="media-card__cover media-card__placeholder" role="img" aria-label="{{ display_title }} cover placeholder">
+          <div class="media-card__cover media-card__placeholder" role="img" aria-label="{{ display_title }}封面占位图">
             <span aria-hidden="true">{% if include.type == 'movie' %}🎞️{% else %}📖{% endif %}</span>
           </div>
         {% endif %}

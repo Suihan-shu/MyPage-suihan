@@ -1,21 +1,20 @@
 ---
 layout: page
-title: More
+title: 更多
 nav_order: 7
 nav: false
 dropdown: true
 children:
-  - title: Publications
+  - title: 发表论文
     permalink: /publications/
-  - title: Courses
+  - title: 课程资料
     permalink: /courses/
-  - title: Books
+  - title: 书架
     permalink: /books/
-  - title: Repositories
+  - title: 代码仓库
     permalink: /repositories/
-lang: en
-lang-ref: dropdown
+lang: zh
 ---
 
-This is a dropdown navigation menu template.
-To enable it, set `nav: true` in the front matter above.
+这是一个下拉导航菜单模板。
+要启用它，请在上面的 front matter 中设置 `nav: true`。

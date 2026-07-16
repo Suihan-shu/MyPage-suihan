@@ -1,5 +1,4 @@
-{% assign current_lang = page.lang | default: site.active_lang | default: site.default_lang %}
-{% assign t = site.data.i18n[current_lang] | default: site.data.i18n.en %}
+{% assign t = site.data.i18n.zh %}
 {% assign course = site.data.course_resources | where: 'id', include.course_id | first %}
 
 {% if course and course.resources %}
@@ -36,7 +35,7 @@
             </thead>
             <tbody>
               {% for item in items %}
-                {% include course_resource_row.liquid item=item current_lang=current_lang t=t %}
+                {% include course_resource_row.liquid item=item t=t %}
               {% endfor %}
             </tbody>
           </table>

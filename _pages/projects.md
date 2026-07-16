@@ -1,8 +1,9 @@
 ---
 layout: page
-title: projects
+title: 项目
+lang: zh
 permalink: /projects/
-description: A growing collection of your cool projects.
+description: 一个不断丰富的项目集合（目前隐藏在主导航）。
 nav: false
 # nav_order: 2
 display_categories: [work, fun]
@@ -29,7 +30,7 @@ horizontal: false
     </div>
   </div>
   {% else %}
-  <div class="row row-cols-1 row-cols-md-3">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-3">
     {% for project in sorted_projects %}
       {% include projects.liquid %}
     {% endfor %}
@@ -38,15 +39,10 @@ horizontal: false
   {% endfor %}
 
 {% else %}
-
 <!-- Display projects without categories -->
-
-{% assign sorted_projects = site.projects | sort: "importance" %}
-
+  {% assign sorted_projects = site.projects | sort: "importance" %}
   <!-- Generate cards for each project -->
-
-{% if page.horizontal %}
-
+  {% if page.horizontal %}
   <div class="container">
     <div class="row row-cols-1 row-cols-md-2">
     {% for project in sorted_projects %}
@@ -55,7 +51,7 @@ horizontal: false
     </div>
   </div>
   {% else %}
-  <div class="row row-cols-1 row-cols-md-3">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-3">
     {% for project in sorted_projects %}
       {% include projects.liquid %}
     {% endfor %}

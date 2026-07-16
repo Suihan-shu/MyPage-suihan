@@ -1,8 +1,7 @@
 ---
 layout: page
-title: Mechatronics System
+title: 机电一体化系统
 permalink: /courses/mechatronics/
-lang: en
 back_to_courses: true
 ---
 

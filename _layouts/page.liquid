@@ -1,8 +1,7 @@
 ---
 layout: default
 ---
-{% assign current_lang = page.lang | default: site.active_lang | default: site.default_lang %}
-{% assign t = site.data.i18n[current_lang] | default: site.data.i18n.en %}
+{% assign t = site.data.i18n.zh %}
 {% if page._styles %}
   <!-- Page/Post style -->
   <style type="text/css">
@@ -12,7 +11,7 @@ layout: default
 
 <div class="post">
   {% if page.back_to_courses %}
-    <a class="page-back-link" href="{% if current_lang == 'zh' %}{{ '/zh/courses/' | relative_url }}{% else %}{{ '/courses/' | relative_url }}{% endif %}"><span class="page-back-link-icon" aria-hidden="true">&larr;</span><span>{{ t.courses.back_to_courses | default: 'Back to courses' }}</span></a>
+    <a class="page-back-link" href="{{ '/courses/' | relative_url }}"><span class="page-back-link-icon" aria-hidden="true">&larr;</span><span>{{ t.courses.back_to_courses | default: '返回课程总览' }}</span></a>
   {% endif %}
   <header class="post-header">
     <h1 class="post-title">{{ page.title }}</h1>
@@ -24,7 +23,7 @@ layout: default
   </article>
 
   {% if page.related_publications %}
-    <h2>References</h2>
+    <h2>参考文献</h2>
     <div class="publications">
       {% bibliography --cited_in_order %}
     </div>

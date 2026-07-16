@@ -14,13 +14,11 @@ wechat_qr:
   url: "#contact-qr-wechat"
   title: 微信
   qr_img: wechat-qr.jpg
-  alt_en: "WeChat QR code for Suihan-shu"
-  alt_zh: "何岁寒的微信二维码"
+  alt: "何岁寒的微信二维码"
 
 qq_qr:
   logo: fa-brands fa-qq
   url: "#contact-qr-qq"
   title: QQ
   qr_img: qq-qr.jpg
-  alt_en: "QQ QR code for Suihan-shu"
-  alt_zh: "何岁寒的 QQ 二维码"
+  alt: "何岁寒的 QQ 二维码"

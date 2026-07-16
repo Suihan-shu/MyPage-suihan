@@ -1,41 +1,39 @@
 ---
 layout: page
 permalink: /courses/microcontroller/
-title: Microcontroller Principles and Interface Technology
-lang: en
-lang-ref: microcontroller
-description: Review tips, exam strategy, and course materials.
+title: 单片机原理及接口技术
+description: 包含复习重点、备考策略、考试建议和课程资料。
 back_to_courses: true
 toc:
   sidebar: left
 ---
 
-This page compiles key materials for Microcontroller Principles and Interface Technology, along with detailed exam preparation tips for quick reference.
+本页汇总了单片机原理及接口技术课程的主要资料，并附有详细的考试备考建议，便于复习时快速查阅。
 
-## Exam Tips
+## 考试建议
 
-### Question Type Trends
+### 题型特点
 
-- **Overall trend**: Exam question types are similar every year with little change.
-- **Programming questions**: Basically the same with only numbers changed.
-- **Short answer questions**: Many review questions are valuable for understanding the course content.
+- **整体趋势**：每年卷子题型类似，基本没有太大变化。
+- **编程题**：编程题基本就是一样的，改改数字罢了。
+- **简答题**：复习题里面很多简答比较有价值，有助于理解这门课的内容。
 
-### Fill-in-the-Blank
+### 填空题
 
-- **Earlier chapters**: Tests more details; mastering the review questions should suffice.
-- **Later chapters**: Focuses on section title-related content; not too detailed — knowing the material is enough.
+- **前面章节**：考察可能比较细，把复习题里的搞明白基本没问题。
+- **后面章节**：主要是小节标题相关的内容，不会考太细，知道就能写。
 
-### Recommended Review Strategy
+### 推荐复习策略
 
-1. Go through all knowledge points systematically
-2. Work through the review questions
-3. Review homework problems, redo the most valuable ones
-4. Use past exams to identify and fill gaps
-5. Focus on programming and comprehensive questions
+1. 先把知识点梳理一遍
+2. 把复习题整理过一遍
+3. 看看作业题，把自己觉得有价值的再做一下
+4. 最后根据卷子查缺补漏，巩固经常考的知识点
+5. 重点复习编程和综合题
 
-## Usage Notes
+## 使用说明
 
-Materials are compiled for academic exchange; some resources are collaborative or inherited from previous cohorts. Please use and cite properly.
+资料以学习交流为目的整理；其中部分资料来自协作与传承，请规范使用与引用。
 
 <div class="course-detail-render">
 {% include course_detail_resources.liquid course_id='microcontroller' %}

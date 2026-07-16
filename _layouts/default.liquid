@@ -1,6 +1,5 @@
 <!doctype html>
-{% assign current_lang = page.lang | default: site.active_lang | default: site.lang %}
-<html lang="{{ current_lang }}">
+<html lang="zh-CN">
   <!-- Head -->
   <head>
     {% if page.redirect %}
@@ -17,7 +16,7 @@
   </head>
 
   <!-- Body -->
-  <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %} {% if page.layout == 'post' or page.collection == 'posts' or page.layout == 'series' %}is-blog-post{% endif %} {% if page.lang-ref == 'courses' %}is-courses-page{% endif %}">
+  <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %} {% if page.layout == 'post' or page.collection == 'posts' or page.layout == 'series' %}is-blog-post{% endif %} {% if page.permalink == '/courses/' %}is-courses-page{% endif %}">
     <!-- Header -->
     {% include header.liquid %}
 
@@ -34,8 +33,8 @@
                 id="toc-sidebar"
                 class="sticky-top toc-sidebar-generated"
                 data-toc-mode="jekyll"
-                data-mobile-label="{% if current_lang == 'zh' %}目录{% else %}Contents{% endif %}"
-                data-mobile-close-label="{% if current_lang == 'zh' %}关闭{% else %}Close{% endif %}"
+                data-mobile-label="目录"
+                data-mobile-close-label="关闭"
                 data-mobile-current-prefix=""
               ></nav>
             </div>
@@ -48,8 +47,8 @@
                 id="toc-sidebar"
                 class="sticky-top toc-sidebar-generated"
                 data-toc-mode="jekyll"
-                data-mobile-label="{% if current_lang == 'zh' %}目录{% else %}Contents{% endif %}"
-                data-mobile-close-label="{% if current_lang == 'zh' %}关闭{% else %}Close{% endif %}"
+                data-mobile-label="目录"
+                data-mobile-close-label="关闭"
                 data-mobile-current-prefix=""
               ></nav>
             </div>

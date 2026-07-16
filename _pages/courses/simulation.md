@@ -1,8 +1,7 @@
 ---
 layout: page
-title: Computer Simulation of Mechatronic Control Systems
+title: 机电控制系统仿真
 permalink: /courses/simulation/
-lang: en
 back_to_courses: true
 ---
 

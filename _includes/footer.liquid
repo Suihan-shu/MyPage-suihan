@@ -1,17 +1,16 @@
 {% capture footer_contents %}
-  {% assign current_lang = page.lang | default: site.active_lang | default: site.default_lang %}
-  {% assign t = site.data.i18n[current_lang] | default: site.data.i18n.en %}
-  &copy; Copyright {{ site.time | date: '%Y' }}
+  {% assign t = site.data.i18n.zh %}
+  &copy; {{ site.time | date: '%Y' }}
   {{ site.first_name }}
   {{ site.middle_name }}
   {{ site.last_name }}. 
   {{ site.footer_text }}
   {% if site.impressum_path %}
-    <a href="{{ site.url }}{{ site.baseurl }}{{ site.impressum_path }}">Impressum</a>.
+    <a href="{{ site.url }}{{ site.baseurl }}{{ site.impressum_path }}">法律声明</a>。
   {% endif %}
   {% if site.last_updated %}
-    {% assign footer_date_format = t.footer.date_format | default: '%B %d, %Y' %}
-    {{ t.footer.last_updated_prefix | default: 'Last updated:' }} {{ 'now' | date: footer_date_format }}.
+    {% assign footer_date_format = t.footer.date_format | default: '%Y年%m月%d日' %}
+    {{ t.footer.last_updated_prefix | default: '最后更新于' }} {{ 'now' | date: footer_date_format }}。
   {% endif %}
 {% endcapture %}
 
@@ -33,7 +32,6 @@
   </footer>
 {% endif %}
 
-{% assign current_lang = page.lang | default: site.active_lang | default: site.default_lang %}
 {% assign email_contact = site.data.socials.email_contact %}
 {% if email_contact and email_contact.emails %}
   <div
@@ -42,14 +40,14 @@
     role="dialog"
     aria-modal="true"
     aria-hidden="true"
-    aria-label="{% if current_lang == 'zh' %}邮箱{% else %}Email addresses{% endif %}"
+    aria-label="邮箱"
     tabindex="-1"
   >
-    <button class="contact-qr-modal__close" type="button" aria-label="{% if current_lang == 'zh' %}关闭{% else %}Close{% endif %}">
+    <button class="contact-qr-modal__close" type="button" aria-label="关闭">
       &times;
     </button>
     <div class="contact-qr-modal__panel contact-email-modal__panel">
-      <h2>{% if current_lang == 'zh' %}邮箱{% else %}Email{% endif %}</h2>
+      <h2>邮箱</h2>
       <ul class="contact-email-list">
         {% for email in email_contact.emails %}
           <li>{{ email }}</li>
@@ -64,7 +62,6 @@
   {% assign social = site.data.socials[social_key] %}
   {% if social and social.qr_img %}
     {% assign modal_key = social_key | replace: '_qr', '' %}
-    {% assign alt_key = 'alt_' | append: current_lang %}
     <div
       id="contact-qr-{{ modal_key }}"
       class="contact-qr-modal"
@@ -74,13 +71,13 @@
       aria-label="{{ social.title }}"
       tabindex="-1"
     >
-      <button class="contact-qr-modal__close" type="button" aria-label="{% if current_lang == 'zh' %}关闭{% else %}Close{% endif %}">
+      <button class="contact-qr-modal__close" type="button" aria-label="关闭">
         &times;
       </button>
       <div class="contact-qr-modal__panel">
         <img
           src="{{ social.qr_img | prepend: 'assets/img/' | relative_url }}"
-          alt="{{ social[alt_key] | default: social.title }}"
+          alt="{{ social.alt | default: social.alt_zh | default: social.title }}"
         >
         <p>{{ social.title }}</p>
       </div>

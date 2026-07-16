@@ -112,14 +112,14 @@ giscus:
   repo_id: # leave empty or specify your repo_id (see https://giscus.app/)
   category: # name of the category under which discussions will be created
   category_id: # leave empty or specify your category_id (see https://giscus.app/)
-  mapping: pathname # identify discussions by page path (stable for bilingual posts)
+  mapping: pathname # use the page path as the discussion identifier
   strict: 0 # relaxed matching works best with pathname mapping
   reactions_enabled: 1 # enable (1) or disable (0) emoji reactions
   input_position: bottom # whether to display input form below (bottom) or above (top) the comments
   dark_theme: dark # name of the dark color scheme (preferred works well with al-folio dark mode)
   light_theme: light # name of the light color scheme (preferred works well with al-folio light mode)
   emit_metadata: 0
-  lang: auto # auto-detect from page language (zh pages use zh-CN, others use en)
+  lang: zh-CN
 
 # Disqus comments (DEPRECATED)
 disqus_shortname: # put your disqus shortname
@@ -166,9 +166,6 @@ collections:
 # Jekyll settings
 # -----------------------------------------------------------------------------
 
-languages: ["zh"]
-default_lang: "zh"
-parallel_localization: false # avoid race conditions with imagemagick/polyglot concurrent writes
 
 # Markdown and syntax highlight
 markdown: kramdown
@@ -230,7 +227,6 @@ plugins:
   - jekyll-terser
   - jekyll-toc
   - jekyll-twitter-plugin
-  - jekyll-polyglot
   - jemoji
 
 # Sitemap settings

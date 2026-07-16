@@ -1,36 +1,34 @@
 ---
 layout: page
 permalink: /courses/ee-tech-2/
-title: Electrical and Electronic Technology II
-lang: en
-lang-ref: ee-tech-2
-description: Review tips, exam advice, and course materials.
+title: 电工与电子技术基础 II
+description: 包含复习重点、考试建议和课程资料。
 back_to_courses: true
 toc:
   sidebar: left
 ---
 
-This page compiles key materials for Electrical and Electronic Technology II, along with exam preparation tips for quick reference.
+本页汇总了电工与电子技术基础 II 课程的主要资料，并附有考试备考建议，便于复习时快速查阅。
 
-## Exam Tips
+## 考试建议
 
-### TTL Tri-State Gates (Likely Exam Topic)
+### TTL 三态门（必考）
 
-The following points must be mastered:
+以下知识点必须掌握：
 
-1. **Three states**: High level, low level, and high-impedance state
-2. **Input characteristics**: TTL inputs allow floating (treated as high level / 1)
-3. **Internal structure**: TTL uses bipolar transistors internally, as opposed to CMOS which uses field-effect transistors (FETs)
-4. **Unused input handling**: Refer to textbook P248
+1. **三种状态**：高电平、低电平、高阻态
+2. **输入端特性**：TTL 输入端允许悬空（相当于高电平 1）
+3. **内部结构**：TTL 内部以三极管（双极型晶体管）构成，区别于 CMOS 内部的场效应晶体管
+4. **多余输入端处理**：参考课本 P248
 
-### Additional Notes
+### 其他注意事项
 
-- Content with triangle symbols may also be tested; foundational knowledge should still be reviewed
-- **Open-collector gates (OC gates)**: Not tested
+- 带三角符号的内容也可能考到，基础知识仍需掌握
+- **开路门（OC 门）**：不考
 
-## Usage Notes
+## 使用说明
 
-Materials are compiled for academic exchange; some resources are collaborative or inherited from previous cohorts. Please use and cite properly.
+资料以学习交流为目的整理；其中部分资料来自协作与传承，请规范使用与引用。
 
 <div class="course-detail-render">
 {% include course_detail_resources.liquid course_id='ee-tech-2' %}

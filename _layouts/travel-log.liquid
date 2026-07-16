@@ -1,30 +1,24 @@
 ---
 layout: default
 ---
-{% assign current_lang = page.lang | default: site.active_lang | default: site.default_lang %}
-{% assign is_zh = false %}
-{% if current_lang == 'zh' %}
-  {% assign is_zh = true %}
-{% endif %}
-
 <div
   class="post travel-log-page"
   id="travel-log"
   data-travel-log
-  data-lang="{{ current_lang }}"
+  data-baseurl="{{ site.baseurl }}"
   data-password="{{ site.data.travel.password | default: '' | escape }}"
-  data-unlocking="{% if is_zh %}正在验证密码…{% else %}Checking password…{% endif %}"
-  data-wrong-password="{% if is_zh %}密码不正确。{% else %}The password is incorrect.{% endif %}"
-  data-config-missing="{% if is_zh %}请先在 _data/travel.yml 中设置密码。{% else %}Set a password in _data/travel.yml first.{% endif %}"
-  data-password-required="{% if is_zh %}请输入密码。{% else %}Enter the password.{% endif %}"
-  data-empty="{% if is_zh %}还没有旅行记录。{% else %}No travel entries yet.{% endif %}"
-  data-photo-error="{% if is_zh %}照片无法加载{% else %}Photo unavailable{% endif %}"
-  data-photo-label="{% if is_zh %}查看旅行照片{% else %}View travel photo{% endif %}"
-  data-show-password="{% if is_zh %}显示密码{% else %}Show password{% endif %}"
-  data-hide-password="{% if is_zh %}隐藏密码{% else %}Hide password{% endif %}"
+  data-unlocking="正在验证密码…"
+  data-wrong-password="密码不正确。"
+  data-config-missing="请先在 _data/travel.yml 中设置密码。"
+  data-password-required="请输入密码。"
+  data-empty="还没有旅行记录。"
+  data-photo-error="照片无法加载"
+  data-photo-label="查看旅行照片"
+  data-show-password="显示密码"
+  data-hide-password="隐藏密码"
 >
   <header class="post-header travel-log-header">
-    <p class="travel-log-eyebrow"><i class="fa-solid fa-route" aria-hidden="true"></i> {% if is_zh %}私人空间{% else %}Private space{% endif %}</p>
+    <p class="travel-log-eyebrow"><i class="fa-solid fa-route" aria-hidden="true"></i> 私人空间</p>
     <h1 class="post-title">{{ page.title }}</h1>
     {% if page.description %}<p class="post-description">{{ page.description }}</p>{% endif %}
   </header>
@@ -32,76 +26,44 @@ layout: default
   <article>
     <section class="travel-gate" id="travel-gate" aria-labelledby="travel-gate-title">
       <div class="travel-gate__icon" aria-hidden="true"><i class="fa-solid fa-lock"></i></div>
-      <h2 id="travel-gate-title">{% if is_zh %}这本旅行日志需要密码{% else %}This travel journal is password-protected{% endif %}</h2>
-      <p>
-        {% if is_zh %}
-          输入密码后，在当前浏览器页面中查看旅行文字和照片。
-        {% else %}
-          Enter the password to view travel notes and photos in this browser tab.
-        {% endif %}
-      </p>
+      <h2 id="travel-gate-title">这本旅行日志需要密码</h2>
+      <p>输入密码后，在当前浏览器页面中查看旅行文字和照片。</p>
 
       <form class="travel-gate__form" id="travel-unlock-form" novalidate>
-        <label for="travel-password">{% if is_zh %}访问密码{% else %}Access password{% endif %}</label>
+        <label for="travel-password">访问密码</label>
         <div class="travel-password-field">
-          <input
-            id="travel-password"
-            name="password"
-            type="password"
-            autocomplete="current-password"
-            minlength="12"
-            required
-            placeholder="{% if is_zh %}请输入密码{% else %}Enter password{% endif %}"
-          >
-          <button
-            type="button"
-            id="travel-password-toggle"
-            class="travel-password-toggle"
-            aria-label="{% if is_zh %}显示密码{% else %}Show password{% endif %}"
-            aria-pressed="false"
-          >
+          <input id="travel-password" name="password" type="password" autocomplete="current-password" minlength="12" required placeholder="请输入密码">
+          <button type="button" id="travel-password-toggle" class="travel-password-toggle" aria-label="显示密码" aria-pressed="false">
             <i class="fa-solid fa-eye" aria-hidden="true"></i>
           </button>
         </div>
         <button class="travel-unlock-button" id="travel-unlock-button" type="submit">
-          <i class="fa-solid fa-key" aria-hidden="true"></i>
-          <span>{% if is_zh %}解锁日志{% else %}Unlock journal{% endif %}</span>
+          <i class="fa-solid fa-key" aria-hidden="true"></i><span>解锁日志</span>
         </button>
       </form>
 
       <p class="travel-gate__status" id="travel-gate-status" role="status" aria-live="polite"></p>
-      <p class="travel-gate__privacy">
-        <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
-        {% if is_zh %}密码只在浏览器中校验，不会发送到服务器。{% else %}The password is checked in the browser and is not sent to a server.{% endif %}
-      </p>
+      <p class="travel-gate__privacy"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> 密码只在浏览器中校验，不会发送到服务器。</p>
     </section>
 
     <section class="travel-journal" id="travel-journal" aria-label="{{ page.title }}" hidden>
       <div class="travel-journal__toolbar">
-        <p><i class="fa-solid fa-lock-open" aria-hidden="true"></i> {% if is_zh %}已在当前页面解锁{% else %}Unlocked in this tab{% endif %}</p>
-        <button type="button" id="travel-lock-button">
-          <i class="fa-solid fa-lock" aria-hidden="true"></i>
-          {% if is_zh %}重新锁定{% else %}Lock again{% endif %}
-        </button>
+        <p><i class="fa-solid fa-lock-open" aria-hidden="true"></i> 已在当前页面解锁</p>
+        <button type="button" id="travel-lock-button"><i class="fa-solid fa-lock" aria-hidden="true"></i> 重新锁定</button>
       </div>
       <div class="travel-entry-grid" id="travel-entry-grid"></div>
-      <p class="travel-journal__empty" id="travel-journal-empty" hidden>{% if is_zh %}还没有旅行记录。{% else %}No travel entries yet.{% endif %}</p>
+      <p class="travel-journal__empty" id="travel-journal-empty" hidden>还没有旅行记录。</p>
     </section>
 
-    <noscript>
-      <p class="travel-noscript">{% if is_zh %}需要启用 JavaScript 才能查看旅行日志。{% else %}JavaScript is required to view this travel journal.{% endif %}</p>
-    </noscript>
+    <noscript><p class="travel-noscript">需要启用 JavaScript 才能查看旅行日志。</p></noscript>
   </article>
 </div>
 
 <script id="travel-log-data" type="application/json">{{ site.data.travel.entries | jsonify | replace: '</', '<\/' }}</script>
 
-<div class="travel-lightbox" id="travel-lightbox" role="dialog" aria-modal="true" aria-label="{% if is_zh %}旅行照片{% else %}Travel photo{% endif %}" hidden>
-  <button class="travel-lightbox__close" id="travel-lightbox-close" type="button" aria-label="{% if is_zh %}关闭{% else %}Close{% endif %}">&times;</button>
-  <figure>
-    <img id="travel-lightbox-image" alt="">
-    <figcaption id="travel-lightbox-caption"></figcaption>
-  </figure>
+<div class="travel-lightbox" id="travel-lightbox" role="dialog" aria-modal="true" aria-label="旅行照片" hidden>
+  <button class="travel-lightbox__close" id="travel-lightbox-close" type="button" aria-label="关闭">&times;</button>
+  <figure><img id="travel-lightbox-image" alt=""><figcaption id="travel-lightbox-caption"></figcaption></figure>
 </div>
 
 <script defer src="{{ '/assets/js/travel-log.js' | relative_url | bust_file_cache }}"></script>

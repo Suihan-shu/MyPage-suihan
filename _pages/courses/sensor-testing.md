@@ -1,25 +1,23 @@
 ---
 layout: page
 permalink: /courses/sensor-testing/
-title: Sensor and Testing Technology
-lang: en
-lang-ref: sensor-testing
-description: Review tips, exam advice, and course materials.
+title: 传感器与测试技术（双语）
+description: 包含复习重点、考试建议和课程资料。
 back_to_courses: true
 toc:
   sidebar: left
 ---
 
-This page compiles key materials for Sensor and Testing Technology, along with exam preparation tips for quick reference during review.
+本页汇总了传感器与测试技术课程的主要资料，并附有考试备考建议，便于复习时快速查阅。
 
-## Exam Tips
+## 考试建议
 
-- **Focus**: Prioritize textbook exercises; if time permits, also review problems from the Chinese textbook.
-- **Question types**: Multiple choice and calculations are mainly from exercises and examples. Short answer questions may be more flexible.
+- **复习重点**：以课后习题为主，有时间也可以看看中文书的一些习题。
+- **题型特点**：选填和计算基本上都是课后习题和例题，简答题可能考查得更灵活一些。
 
-## Usage Notes
+## 使用说明
 
-Materials are compiled for academic exchange; some resources are collaborative or inherited from previous cohorts. Please use and cite properly.
+资料以学习交流为目的整理；其中部分资料来自协作与传承，请规范使用与引用。
 
 <div class="course-detail-render">
 {% include course_detail_resources.liquid course_id='sensor-testing' %}

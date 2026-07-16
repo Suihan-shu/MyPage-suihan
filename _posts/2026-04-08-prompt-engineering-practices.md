@@ -6,7 +6,6 @@ categories: ["DevOps & Workflow"]
 tags: ["Prompt Engineering", "AI Agent", "System Architecture", "Vibe Coding"]
 description: 记录自己关于Agent使用的一些想法。
 lang: zh
-lang-ref: post-prompt-architecture-workflow-01
 toc: 
   sidebar: left
 series_key: geek-survival-guide

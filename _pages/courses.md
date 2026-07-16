@@ -1,10 +1,9 @@
 ---
 layout: page
 permalink: /courses/
-title: Courses
-lang: en
-lang-ref: courses
-description: Course materials, resources, and notes for sharing.
+title: 课程
+lang: zh
+description: 课程相关材料、资源与笔记分享。
 nav: false
 nav_order: 4
 calendar: false
@@ -12,6 +11,6 @@ toc:
   sidebar: left
 ---
 
-This page contains course materials and resources from my undergraduate studies, available for download and reference.
+本页面包含了我本科学习期间整理的课程资料与资源，供大家下载参考。
 
 {% include courses.liquid %}

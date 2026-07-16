@@ -1,48 +1,46 @@
 ---
 layout: page
 permalink: /courses/microcomputer/
-title: Principles of Microcomputer
-lang: en
-lang-ref: microcomputer
-description: Review tips, exam question breakdown, key chapters, and course materials.
+title: 微机原理
+description: 包含复习重点、考试题型分析、重点章节和课程资料。
 back_to_courses: true
 toc:
   sidebar: left
 ---
 
-This page compiles key materials for Principles of Microcomputer, along with detailed exam question analysis and review guidance for quick reference.
+本页汇总了微机原理课程的主要资料，并附有详细的考试题型分析与复习指引，便于备考时快速查阅。
 
-## Exam Tips
+## 考试建议
 
-### Question Format Overview
+### 题型概览
 
-Every year the exam follows a similar format:
+每年考试基本都是以下题型：
 
-### 1. Short Answer Questions
+### 1. 简答题
 
-Review the assigned textbook exercises.
+多看看布置的课后习题。
 
-### 2. Data Segment Question (Chapter 7)
+### 2. 数据段题（第七章）
 
-Refer to **P145** of the textbook.
+参考教材 **P145** 的相关内容。
 
-### 3. Programming Question
+### 3. 编程题
 
-Example problems from lectures. Focus on **Exercise 7.9**, especially **Exercise 7.9(1)** which has appeared multiple times.
+课堂上讲的例题，重点掌握 **习题 7.9**，其中 **习题 7.9(1)** 考过好几次。
 
-### 4. 8259A Initialization (Chapter 10)
+### 4. 8259A 的初始化（第十章）
 
-- Reference the diagram on **P294** (this information will be provided on the exam — no need to memorize)
-- Master **Examples 10.1 and 10.2**; the exam uses this exact format
+- 参考教材 **P294** 图中的信息（考试会给，不需要背）
+- **例 10.1、例 10.2** 要掌握，考试就是这种题
 
-### 5. Programmable Interface Chip Initialization
+### 5. 常用可编程接口芯片的初始化
 
-- **8255A**: Reference **P312**, master **Example 11.1**; exam questions are similar to **Exercise 11.2**
-- **8253**: Reference **P327–P328**, master the initialization programming example; practice with **Exercise 11.11**
+- **8255A**：参考教材 **P312**，掌握 **例 11.1**；考试题和 **习题 11.2** 基本类似
+- **8253**：参考教材 **P327–P328**，掌握该处的初始化编程示例；可练习 **习题 11.11**
 
-## Usage Notes
+## 使用说明
 
-Materials are compiled for academic exchange; some resources are collaborative or inherited from previous cohorts. Please use and cite properly.
+资料以学习交流为目的整理；其中部分资料来自协作与传承，请规范使用与引用。
 
 <div class="course-detail-render">
 {% include course_detail_resources.liquid course_id='microcomputer' %}

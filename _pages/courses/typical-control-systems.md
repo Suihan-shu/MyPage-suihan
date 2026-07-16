@@ -1,24 +1,22 @@
 ---
 layout: page
 permalink: /courses/typical-control-systems/
-title: Typical Control Systems of Engineering Machinery
-lang: en
-lang-ref: typical-control-systems
-description: Review tips, exam advice, and course materials.
+title: 工程机械典型控制系统
+description: 包含复习重点、考试建议和课程资料。
 back_to_courses: true
 toc:
   sidebar: left
 ---
 
-This page compiles key materials for Typical Control Systems of Engineering Machinery, along with exam preparation tips for quick reference.
+本页汇总了工程机械典型控制系统课程的主要资料，并附有考试备考建议，便于复习时快速查阅。
 
-## Exam Tips
+## 考试建议
 
-- **Source of questions**: Exam questions basically come from homework. Thoroughly completing and reviewing homework is sufficient.
+- **出题来源**：考试基本上都从作业题来，认真完成和复习作业即可。
 
-## Usage Notes
+## 使用说明
 
-Materials are compiled for academic exchange; some resources are collaborative or inherited from previous cohorts. Please use and cite properly.
+资料以学习交流为目的整理；其中部分资料来自协作与传承，请规范使用与引用。
 
 <div class="course-detail-render">
 {% include course_detail_resources.liquid course_id='typical-control-systems' %}

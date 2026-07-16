@@ -1,8 +1,7 @@
 ---
 layout: page
-title: Interchangeability and Geometric Measurement Technology
+title: 互换性与几何测量技术
 permalink: /courses/interchangeability/
-lang: en
 back_to_courses: true
 ---
 

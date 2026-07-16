@@ -5,23 +5,23 @@ layout: default
   <header class="post-header">
     {% if page.type == 'categories' %}
       <h1 class="post-title"><i class="fa-solid fa-tag fa-sm"></i> {{ page.title }}</h1>
-      <p class="post-description">{% if site.active_lang == 'zh' %}分类归档{% else %}an archive of {{ page.collection_name }} in this category{% endif %}</p>
+      <p class="post-description">分类归档</p>
     {% elsif page.type == 'year' %}
       <h1 class="post-title"><i class="fa-solid fa-calendar fa-sm"></i> {{ page.date | date: '%Y' }}</h1>
-      <p class="post-description">{% if site.active_lang == 'zh' %}年度归档{% else %}an archive of {{ page.collection_name }} from this year{% endif %}</p>
+      <p class="post-description">年度归档</p>
     {% elsif page.type == 'tags' %}
       <h1 class="post-title"><i class="fa-solid fa-hashtag fa-sm"></i> {{ page.title }}</h1>
-      <p class="post-description">{% if site.active_lang == 'zh' %}标签归档{% else %}an archive of {{ page.collection_name }} with this tag{% endif %}</p>
+      <p class="post-description">标签归档</p>
     {% endif %}
   </header>
 
   <article class="archive">
     <div class="table-responsive">
       <table class="table table-sm table-borderless">
-        {% assign filtered_docs = page.documents | where: "lang", site.active_lang %}
+        {% assign filtered_docs = page.documents | where: "lang", "zh" %}
         {% for document in filtered_docs %}
           <tr>
-            <th scope="row">{{ document.date | date: '%b %d, %Y' }}</th>
+            <th scope="row">{{ document.date | date: '%Y年%m月%d日' }}</th>
             <td>
               {% if document.redirect == blank %}
                 <a class="post-link" href="{{ document.url | relative_url }}">{{ document.title }}</a>

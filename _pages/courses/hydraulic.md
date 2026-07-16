@@ -1,24 +1,22 @@
 ---
 layout: page
 permalink: /courses/hydraulic/
-title: Hydraulic and Pneumatic Transmission
-lang: en
-lang-ref: hydraulic
-description: Review tips, exam advice, and course materials.
+title: 液压与气压传动
+description: 包含复习重点、考试建议和课程资料。
 back_to_courses: true
 toc:
   sidebar: left
 ---
 
-This page compiles key materials for Hydraulic and Pneumatic Transmission, along with exam preparation tips for quick reference.
+本页汇总了液压与气压传动课程的主要资料，并附有考试备考建议，便于复习时快速查阅。
 
-## Exam Tips
+## 考试建议
 
-- **Question bank usage**: The question bank is mainly for review and consolidation. Use it as a foundation for systematic study.
+- **题库用法**：题库主要用来梳理和巩固知识点，建议以此为基础进行系统复习。
 
-## Usage Notes
+## 使用说明
 
-Materials are compiled for academic exchange; some resources are collaborative or inherited from previous cohorts. Please use and cite properly.
+资料以学习交流为目的整理；其中部分资料来自协作与传承，请规范使用与引用。
 
 <div class="course-detail-render">
 {% include course_detail_resources.liquid course_id='hydraulic' %}

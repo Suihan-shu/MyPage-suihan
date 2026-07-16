@@ -1,8 +1,7 @@
 ---
 layout: page
-title: Fundamentals of Mechanical Design II
+title: 机械设计基础（二）
 permalink: /courses/mechanical-design-2/
-lang: en
 back_to_courses: true
 ---
 

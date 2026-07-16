@@ -6,7 +6,6 @@ categories: ["Tools & Resources"]
 tags: ["GitHub Education", "Copilot", "Student Developer Pack", "CHSI"]
 description: "GitHub学生包申请全流程：学信网认证翻译、IP避坑、Copilot Pro领取实操。"
 lang: zh
-lang-ref: post-github-student-pack-guide-01
 toc:
   sidebar: left
 series_key: geek-survival-guide

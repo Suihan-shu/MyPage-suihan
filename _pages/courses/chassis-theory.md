@@ -1,8 +1,7 @@
 ---
 layout: page
-title: Chassis Theory and Performance of Engineering Machinery
+title: 工程机械底盘理论与性能
 permalink: /courses/chassis-theory/
-lang: en
 back_to_courses: true
 ---
 

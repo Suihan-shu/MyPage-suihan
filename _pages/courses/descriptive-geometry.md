@@ -1,8 +1,7 @@
 ---
 layout: page
-title: Descriptive Geometry and Mechanical Drawing
+title: 画法几何与机械制图
 permalink: /courses/descriptive-geometry/
-lang: en
 back_to_courses: true
 ---
 

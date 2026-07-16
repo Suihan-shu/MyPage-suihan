@@ -1,20 +1,20 @@
+# 中文博客系列页模板
+
+系列页放在 `_series/`：
+
+```yaml
 ---
 layout: series
-title: "<系列标题>"
-description: "<中文一句话系列简介>"
+title: "系列标题"
+description: "一句话系列简介"
 lang: zh
-lang-ref: series-<series-key>
-permalink: /series/<series-key>/
-series_key: <series-key>
+permalink: /series/系列标识/
+series_key: 系列标识
 img: assets/img/1.jpg
 importance: 1
 ---
 
-欢迎来到 **<系列标题>**。
+这里填写系列介绍、学习目标和建议阅读顺序。
+```
 
-这里是该系列的总览页。建议写清楚学习目标、阅读顺序和适合人群。
-
-下方文章列表会自动聚合满足以下条件的文章：
-
-- `lang: zh`
-- `series_key: <series-key>`
+下方文章列表会自动聚合 `series_key` 相同的中文文章，并按照 `series_order` 排序。

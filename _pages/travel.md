@@ -1,11 +1,10 @@
 ---
 layout: travel-log
 permalink: /travel/
-title: Travel Journal
-lang: en
-lang-ref: travel
+title: 旅行日志
+lang: zh
 nav: true
 nav_order: 4
-description: Private notes, places, moments, and photographs from the road.
+description: 收藏旅途中的时间、地点、片刻与照片。
 sitemap: false
 ---

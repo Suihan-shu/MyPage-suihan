@@ -17,8 +17,8 @@
   const lightboxImage = document.getElementById("travel-lightbox-image");
   const lightboxCaption = document.getElementById("travel-lightbox-caption");
   const lightboxClose = document.getElementById("travel-lightbox-close");
-  const language = root.dataset.lang === "zh" ? "zh" : "en";
   const expectedPassword = root.dataset.password || "";
+  const baseUrl = (root.dataset.baseurl || "").replace(/\/$/, "");
   let entries = [];
   let lightboxTrigger = null;
 
@@ -41,7 +41,7 @@
     if (value === undefined || value === null) return "";
     if (typeof value === "string" || typeof value === "number") return String(value);
     if (typeof value === "object") {
-      return String(value[language] ?? value.en ?? value.zh ?? Object.values(value).find((item) => typeof item === "string") ?? "");
+      return String(value.zh ?? Object.values(value).find((item) => typeof item === "string") ?? "");
     }
     return "";
   };
@@ -51,16 +51,18 @@
     const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value));
     if (!match) return String(value);
     const date = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
-    return new Intl.DateTimeFormat(language === "zh" ? "zh-CN" : "en-US", {
+    return new Intl.DateTimeFormat("zh-CN", {
       year: "numeric",
-      month: language === "zh" ? "long" : "short",
+      month: "long",
       day: "numeric",
     }).format(date);
   };
 
   const resolvePhotoPath = (path) => {
     try {
-      return new URL(String(path), document.baseURI).href;
+      const value = String(path);
+      if (value.startsWith("/assets/")) return new URL(`${baseUrl}${value}`, window.location.origin).href;
+      return new URL(value, document.baseURI).href;
     } catch (error) {
       return "";
     }

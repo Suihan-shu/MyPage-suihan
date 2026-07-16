@@ -6,7 +6,6 @@ categories: ["Tools & Resources"]
 tags: ["Ubuntu", "Dual Boot", "Linux", "Windows"]
 description: "Ubuntu 双系统安装全流程：准备工作、分区方案、安装步骤、系统删除。"
 lang: zh
-lang-ref: post-ubuntu-dual-boot-guide-01
 series_key: dev-env-setup
 series_order: 1
 toc:

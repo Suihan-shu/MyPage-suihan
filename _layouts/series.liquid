@@ -1,13 +1,11 @@
 ---
 layout: default
 ---
-{% assign t = site.data.i18n[site.active_lang] | default: site.data.i18n.en %}
-{% assign current_lang = page.lang | default: site.active_lang | default: site.default_lang %}
-{% assign t = site.data.i18n[current_lang] | default: site.data.i18n.en %}
-{% assign read_label = t.blog.read_label | default: 'min read' %}
-{% assign date_format = t.post.date_format | default: '%B %d, %Y' %}
+{% assign t = site.data.i18n.zh %}
+{% assign read_label = t.blog.read_label | default: '分钟阅读' %}
+{% assign date_format = t.post.date_format | default: '%Y年%m月%d日' %}
 <div class="post">
-  <a class="page-back-link" href="{% if current_lang == 'zh' %}{{ '/zh/blog/' | relative_url }}{% else %}{{ '/blog/' | relative_url }}{% endif %}"><span class="page-back-link-icon" aria-hidden="true">&larr;</span><span>{{ t.nav.back_to_blog | default: 'Back to Blog' }}</span></a>
+  <a class="page-back-link" href="{{ '/blog/' | relative_url }}"><span class="page-back-link-icon" aria-hidden="true">&larr;</span><span>{{ t.nav.back_to_blog | default: '返回博客' }}</span></a>
   <header class="post-header">
     <h1 class="post-title">{{ page.title }}</h1>
     <p class="post-description">{{ page.description }}</p>
@@ -19,7 +17,7 @@ layout: default
     <hr>
     
     <ul class="post-list mt-4">
-      {% assign local_posts = site.posts | where: "lang", site.active_lang %}
+      {% assign local_posts = site.posts | where: "lang", "zh" %}
       {% assign series_posts = local_posts | where: "series_key", page.series_key | sort: "series_order" %}
 
       {% for post in series_posts %}
@@ -47,7 +45,7 @@ layout: default
           {%- if post.thumbnail -%}
             </div>
             <div class="col-sm-3">
-              <img class="card-img" src="{{ post.thumbnail | relative_url }}" style="object-fit: cover; height: 90%" alt="image">
+              <img class="card-img" src="{{ post.thumbnail | relative_url }}" style="object-fit: cover; height: 90%" alt="{{ post.title }}缩略图">
             </div>
           </div>
           {%- endif -%}

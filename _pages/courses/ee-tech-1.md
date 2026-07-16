@@ -1,8 +1,7 @@
 ---
 layout: page
-title: Electrical and Electronic Technology I
+title: 电工与电子技术基础 I
 permalink: /courses/ee-tech-1/
-lang: en
 back_to_courses: true
 ---
 

@@ -1,28 +1,29 @@
-# Blog Post Front Matter Template
+# 中文博客文章模板
 
-Use this template for normal (non-series) blog posts.
+普通文章文件名使用 `YYYY-MM-DD-文章标题.md`，放入 `_posts/`：
 
 ```yaml
 ---
 layout: post
-title: "<Post Title>"
+title: "文章标题"
 date: YYYY-MM-DD HH:MM:SS +0800
-categories: [<Category1>, <Category2>]
-tags: [<tag1>, <tag2>]
-lang: zh # or en
-lang-ref: <paired-post-id>
-description: "<One-line description>"
+categories: [分类]
+tags: [标签一, 标签二]
+lang: zh
+description: "一句话摘要"
 giscus_comments: true
 related_posts: true
 toc:
   sidebar: left
-# thumbnail: https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/Blog-assets@main/images/posts/YYYY/MM/thumbnail.jpg
-# featured: true
+# thumbnail: /assets/img/缩略图.jpg
 ---
 ```
 
-Rules:
+如果文章属于系列，再增加：
 
-1. Keep `lang-ref` identical between paired EN/ZH posts.
-2. Use concise tags and categories for cleaner archive pages.
-3. Enable `toc.sidebar` only when the article has enough heading structure.
+```yaml
+series_key: 系列标识
+series_order: 10
+```
+
+`series_key` 必须与系列页一致，`series_order` 使用数字控制阅读顺序。

@@ -6,7 +6,6 @@ categories: ["Tools & Resources"]
 tags: ["WSL2", "CUDA", "PyTorch", "ROS2", "Ubuntu"]
 description: "WSL2 下 CUDA 13、cuDNN、Miniconda、PyTorch、ROS2 Jazzy 环境配置记录。"
 lang: zh
-lang-ref: post-wsl2-dev-environment-01
 series_key: dev-env-setup
 series_order: 2
 toc:

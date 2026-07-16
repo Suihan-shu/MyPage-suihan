@@ -1,8 +1,7 @@
 ---
 layout: page
-title: Engineering Economics and Management
+title: 工程经济与管理
 permalink: /courses/engineering-economics/
-lang: en
 back_to_courses: true
 ---
 

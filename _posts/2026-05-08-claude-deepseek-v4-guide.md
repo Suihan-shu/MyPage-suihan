@@ -6,7 +6,6 @@ categories: ["Tools & Resources"]
 tags: ["Claude Code", "DeepSeek V4", "CC Switch", "AI Agent"]
 description: "Claude Code配置DeepSeek V4全流程：API申请、CC Switch配置、桌面端/CLI/VS Code插件安装与优化。"
 lang: zh
-lang-ref: post-claude-deepseek-v4-guide-01
 toc:
   sidebar: left
 series_key: geek-survival-guide

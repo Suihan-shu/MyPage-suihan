@@ -1,8 +1,7 @@
 ---
 layout: page
 ---
-{% assign current_lang = page.lang | default: site.active_lang | default: site.default_lang %}
-{% assign t = site.data.i18n[current_lang] | default: site.data.i18n.en %}
+{% assign t = site.data.i18n.zh %}
 
 {{ content }}
 
@@ -15,7 +14,6 @@ layout: page
     items=site.books
     type="book"
     empty_text=t.media.empty_books
-    current_lang=current_lang
     translations=t.media
   %}
 </section>
@@ -29,7 +27,6 @@ layout: page
     items=site.movies
     type="movie"
     empty_text=t.media.empty_movies
-    current_lang=current_lang
     translations=t.media
   %}
 </section>
