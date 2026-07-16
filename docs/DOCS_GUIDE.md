@@ -5,6 +5,7 @@
 - [架构与改动指南](ARCHITECTURE_CHANGE_GUIDE.md)
 - [改动决策树](CHANGE_DECISION_TREE.md)
 - [维护运行手册](MAINTENANCE_RUNBOOK.md)
+- [后续操作指南](后续操作指南.md)
 - [文档治理规范](DOCUMENTATION_GOVERNANCE.md)
 - [样式自定义指南](../customize.md)
 - [Prompt 文档说明](prompt/PROMPT_GUIDE.md)
