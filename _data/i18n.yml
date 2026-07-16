@@ -1,63 +1,12 @@
 zh:
   nav:
     search: "搜索"
-    back_to_blog: "返回博客"
-    back_to_series: "返回系列"
-  blog:
-    title: "我的博客"
-    subtitle: "这里记录了我的技术探索、生活随笔和一些胡思乱想。"
-    series_title: "系列专栏"
-    read_label: "分钟阅读"
-    published_in_prefix: "发表在"
-  post:
-    created_on: "创建于"
-    by: "作者"
-    last_updated_on: "最后更新于"
-    references: "参考文献"
-    date_format: "%Y年%m月%d日"
-  heatmap:
-    locale: "zh-CN"
-    day_names: ["日", "", "二", "", "四", "", "六"]
-    month_names: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
-    zero_posts: "没有发布文章"
-    posts_suffix_singular: "篇文章"
-    posts_suffix_plural: "篇文章"
-    on_date: "发布于"
-    legend_more: "多"
-    legend_less: "少"
-  latest_posts:
-    empty: "暂无文章"
-    date_format: "%Y年%m月%d日"
   search:
     placeholder: "输入关键词开始搜索"
     section_navigation: "导航"
     section_dropdown: "下拉菜单"
-    section_posts: "文章"
     section_socials: "社交"
     section_theme: "主题"
-    section_series: "系列"
-  courses:
-    resource_name: "资料"
-    resource_meta: "信息"
-    resource_links: "访问"
-    preview: "预览"
-    download: "下载"
-    backup: "备用"
-    more_access: "更多链接"
-    section_review: "复习重点"
-    section_exam: "期末试卷"
-    section_solution: "期末答案"
-    section_project: "课程项目"
-    section_code: "代码资料"
-    section_book: "参考书"
-    section_slides: "课件"
-    section_assignment: "作业"
-    more_resources: "更多资料"
-    enter_course: "课程详情"
-    back_to_courses: "返回课程总览"
-    no_resources: "暂无资料。"
-    empty: "暂无课程内容。"
-    resources_count: "项资料"
   media:
     books_title: "书籍"
     movies_title: "电影"

@@ -1,6 +1,6 @@
 #!/bin/bash
 # =============================================================================
-# YOUR_GITHUB_USERNAME's Blog - Local Build Script (Bash)
+# Suihan-shu homepage - Local Build Script (Bash)
 # Build Jekyll static site using Docker
 # =============================================================================
 
@@ -21,7 +21,7 @@ while [[ "$#" -gt 0 ]]; do
 done
 
 echo "========================================"
-echo " YOUR_GITHUB_USERNAME's Blog - Local Build"
+echo " Suihan-shu homepage - Local Build"
 echo "========================================"
 
 # Check if Docker is running

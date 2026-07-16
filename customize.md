@@ -16,7 +16,7 @@ Use `_sass/_custom.scss` as the single source of truth for global visual tuning:
 
 1. Typography tokens and section-level font policy.
 2. TOC typography sizing (`--custom-size-toc-level-*`).
-3. Blog post max reading width (`--custom-max-width-post`).
+3. CV, repository, media and travel-journal presentation.
 
 Do not spread one-off typography overrides into multiple Sass partials. If a change is purely visual, start in `_sass/_custom.scss` first.
 
@@ -39,10 +39,8 @@ docker compose run --rm jekyll bash -c "bundle exec jekyll build --config _confi
 
 Then spot-check:
 
-1. One EN post page with TOC.
-2. One ZH post page with TOC.
-3. Repositories page typography.
-4. Courses page TOC and card readability.
+1. Repositories page typography.
+2. CV, media and travel-journal sections.
 
 ## Global Typography Matrix
 
@@ -60,11 +58,9 @@ In `_sass/_custom.scss`, update these variables:
 - `--custom-font-table`: table text typography.
 - `--custom-font-quote`: blockquote typography.
 - `--custom-font-code`: code/pre/monospace typography.
-- `--custom-font-heatmap`: blog heatmap labels/legend/tooltip typography.
 - `--custom-font-footer`: footer typography.
 - `--custom-font-toc`: left sidebar table-of-contents typography.
 - `--custom-font-repo`: repositories section typography.
-- `--custom-font-series`: Series section heading and Series cards typography.
 
 Weight tokens:
 
@@ -74,11 +70,9 @@ Weight tokens:
 - `--custom-weight-nav`
 - `--custom-weight-button`
 - `--custom-weight-repo-title`
-- `--custom-weight-series-title`
 - `--custom-size-toc-level-1`
 - `--custom-size-toc-level-2`
 - `--custom-size-toc-level-3`
-- `--custom-max-width-post`
 
 ## Examples
 
@@ -110,15 +104,6 @@ Weight tokens:
   --custom-font-card-body: var(--custom-font-card);
   --custom-weight-card-title: 530;
   --custom-weight-card-body: 500;
-}
-```
-
-### Keep global fonts, but change only Series typography
-
-```css
-:root {
-  --custom-font-series: "New York", "Times New Roman", serif;
-  --custom-weight-series-title: 800;
 }
 ```
 

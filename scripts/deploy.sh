@@ -1,6 +1,6 @@
 #!/bin/bash
 # =============================================================================
-# YOUR_GITHUB_USERNAME's Blog - One-Click Deploy Script (Bash)
+# Suihan-shu homepage - One-Click Deploy Script (Bash)
 # Deploy build artifacts to gh-pages branch
 # =============================================================================
 
@@ -14,7 +14,7 @@ CUSTOM_MSG="${2:-}"
 NON_INTERACTIVE="${NON_INTERACTIVE:-false}"
 
 echo "========================================"
-echo " YOUR_GITHUB_USERNAME's Blog - One-Click Deploy"
+echo " Suihan-shu homepage - One-Click Deploy"
 echo "========================================"
 
 # Check if Docker is running

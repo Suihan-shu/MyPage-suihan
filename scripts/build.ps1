@@ -1,5 +1,5 @@
 # =============================================================================
-# YOUR_GITHUB_USERNAME's Blog - Local Build Script (PowerShell)
+# Suihan-shu homepage - Local Build Script (PowerShell)
 # Build Jekyll static site using Docker
 # =============================================================================
 
@@ -12,7 +12,7 @@ $ErrorActionPreference = "Stop"
 $ProjectRoot = Split-Path -Parent $PSScriptRoot
 
 Write-Host "========================================" -ForegroundColor Cyan
-Write-Host " YOUR_GITHUB_USERNAME's Blog - Local Build" -ForegroundColor Cyan
+Write-Host " Suihan-shu homepage - Local Build" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 
 # Check if Docker is installed and running

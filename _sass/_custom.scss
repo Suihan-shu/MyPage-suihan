@@ -22,7 +22,6 @@
   --custom-font-card: var(--custom-font-heading);
   --custom-font-card-title: var(--custom-font-card);
   --custom-font-card-body: var(--custom-font-card);
-  --custom-font-heatmap: var(--custom-font-ui);
   --custom-font-nav: var(--custom-font-heading);
   --custom-font-ui: var(--custom-font-body);
   --custom-font-button: var(--custom-font-ui);
@@ -35,7 +34,6 @@
 
   /* Section-specific tokens */
   --custom-font-repo: var(--custom-font-card-title);
-  --custom-font-series: var(--custom-font-card-title);
 
   /* Weight tokens */
   --custom-weight-heading: 700;
@@ -44,11 +42,9 @@
   --custom-weight-nav: 600;
   --custom-weight-button: 600;
   --custom-weight-repo-title: 530;
-  --custom-weight-series-title: 530;
   --custom-size-toc-level-1: 0.96rem;
   --custom-size-toc-level-2: 0.9rem;
   --custom-size-toc-level-3: 0.86rem;
-  --custom-max-width-post: 1140px;
 }
 
 html[data-theme="dark"] {
@@ -404,23 +400,15 @@ h6,
   font-weight: var(--custom-weight-heading);
 }
 
-/* Card typography scope: only repository/series cards */
+/* Card typography scope: repository cards */
 .repo-card,
 .repo-card .card-body,
 .repo-card p,
 .repo-card li,
 .repo-card span,
 .repo-card .badge,
-.repo-card .card-text,
-.repo-card .btn,
-.series-card,
-.series-card .card-body,
-.series-card p,
-.series-card li,
-.series-card span,
-.series-card .badge,
-.series-card .card-text,
-.series-card .btn {
+  .repo-card .card-text,
+  .repo-card .btn {
   font-family: var(--custom-font-card-body);
   font-weight: var(--custom-weight-card-body);
   font-variant-numeric: proportional-nums;
@@ -432,15 +420,8 @@ h6,
 .repo-card h2,
 .repo-card h3,
 .repo-card h4,
-.repo-card h5,
-.repo-card h6,
-.series-card .card-title,
-.series-card h1,
-.series-card h2,
-.series-card h3,
-.series-card h4,
-.series-card h5,
-.series-card h6 {
+  .repo-card h5,
+  .repo-card h6 {
   font-family: var(--custom-font-card-title);
   font-weight: var(--custom-weight-card-title);
   font-variant-numeric: proportional-nums;
@@ -450,9 +431,8 @@ h6,
 /* Navigation */
 .navbar,
 .navbar .nav-link,
-.navbar .dropdown-item,
-.navbar .dropdown-menu,
-.lang-toggle .nav-link {
+  .navbar .dropdown-item,
+  .navbar .dropdown-menu {
   font-family: var(--custom-font-nav);
   font-weight: var(--custom-weight-nav);
 }
@@ -467,9 +447,8 @@ h6,
 }
 
 .navbar .navbar-nav .nav-item .nav-link,
-.navbar .navbar-nav .nav-item.active > .nav-link,
-.navbar .dropdown-item,
-.lang-toggle .nav-link {
+  .navbar .navbar-nav .nav-item.active > .nav-link,
+  .navbar .dropdown-item {
   font-weight: 400;
 }
 
@@ -545,78 +524,6 @@ footer a {
   font-weight: var(--custom-weight-repo-title);
 }
 
-/* Blog Series section */
-.post .series-section-title,
-.post .series-section-title strong {
-  font-family: var(--custom-font-heading) !important;
-}
-
-.post .series-grid .series-card-title,
-.post .series-grid .series-card .card-text {
-  font-family: var(--custom-font-series) !important;
-  font-variant-numeric: proportional-nums;
-  font-feature-settings: "pnum" 1, "lnum" 1;
-}
-
-.post .series-section-title,
-.post .series-section-title strong {
-  font-weight: var(--custom-weight-heading);
-}
-
-.post .series-grid .series-card-title {
-  font-weight: var(--custom-weight-series-title);
-}
-
-/* Uniform card heights across rows — CSS grid ensures all rows share the same row height */
-@media (min-width: 768px) {
-  .post .series-grid {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-  }
-
-  .post .series-grid > .col {
-    width: 100% !important;
-    max-width: 100% !important;
-    flex: none !important;
-    padding: 0 !important;
-  }
-}
-
-.post .series-grid .col {
-  display: flex;
-}
-
-.post .series-grid .col > a {
-  display: flex;
-  flex: 1;
-  width: 100%;
-}
-
-.post .series-grid .series-card {
-  flex: 1;
-  min-height: 160px;
-  width: 100%;
-}
-
-/* Keep original card visual color behavior under link wrappers */
-.post .series-grid .series-card-title,
-.post .series-grid .series-card .card-text {
-  color: var(--global-text-color);
-}
-
-.post .series-grid .series-card .series-card-title,
-.post .series-grid .series-card .card-text {
-  transition: color 0.2s ease-in-out;
-}
-
-.post .series-grid a:hover .series-card-title,
-.post .series-grid a:hover .card-text,
-.post .series-grid .series-card:hover .series-card-title,
-.post .series-grid .series-card:hover .card-text {
-  color: var(--global-theme-color);
-}
-
 .page-back-link {
   display: inline-flex;
   align-items: center;
@@ -690,45 +597,6 @@ footer a {
 #toc-sidebar.toc-sidebar-generated a.toc-nav-link.active {
   color: var(--global-theme-color);
   font-weight: 650;
-}
-
-/* Blog post reading width on desktop */
-@media (min-width: 1200px) {
-  body.is-blog-post .container[role="main"] {
-    max-width: var(--custom-max-width-post);
-  }
-}
-
-@media (min-width: 992px) {
-  body.is-blog-post .toc-layout-row > [class*="col-"] {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
-
-  body.is-courses-page .toc-layout-row > [class*="col-"] {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
-
-  body.is-courses-page .toc-layout-row > .col-lg-4 {
-    flex: 0 0 33%;
-    max-width: 33%;
-  }
-
-  body.is-courses-page .toc-layout-row > .col-lg-8 {
-    flex: 0 0 67%;
-    max-width: 67%;
-  }
-
-  body.is-courses-page .toc-layout-row > .col-xl-4 {
-    flex: 0 0 31%;
-    max-width: 31%;
-  }
-
-  body.is-courses-page .toc-layout-row > .col-xl-8 {
-    flex: 0 0 69%;
-    max-width: 69%;
-  }
 }
 
 /* Keep mobile TOC UI fully hidden on desktop by default. */

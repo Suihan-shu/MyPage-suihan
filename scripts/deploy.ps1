@@ -1,5 +1,5 @@
 # =============================================================================
-# YOUR_GITHUB_USERNAME's Blog - One-Click Deploy Script (PowerShell)
+# Suihan-shu homepage - One-Click Deploy Script (PowerShell)
 # Deploy build artifacts to gh-pages branch
 # =============================================================================
 
@@ -15,7 +15,7 @@ $GhPagesDir = Join-Path $ProjectRoot "_gh-pages"
 $SiteDir = Join-Path $ProjectRoot "_site"
 
 Write-Host "========================================" -ForegroundColor Cyan
-Write-Host " YOUR_GITHUB_USERNAME's Blog - One-Click Deploy" -ForegroundColor Cyan
+Write-Host " Suihan-shu homepage - One-Click Deploy" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 
 # Check if Docker is installed and running

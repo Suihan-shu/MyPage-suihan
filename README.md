@@ -30,7 +30,7 @@ powershell -ExecutionPolicy Bypass -File scripts/validate_structure.ps1
 - 书籍与电影
 - 旅行日志（密码保护）
 
-博客和课程源码暂时保留，但没有显示在导航、首页和搜索中。书籍与电影暂时为空，后续可在 `_books/`、`_movies/` 和 `assets/img/media/` 中添加条目及合法使用的封面。
+书籍与电影暂时为空，后续可在 `_books/`、`_movies/` 和 `assets/img/media/` 中添加条目及合法使用的封面。
 
 ## 旅行日志
 

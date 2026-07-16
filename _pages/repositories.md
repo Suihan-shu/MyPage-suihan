@@ -3,7 +3,7 @@ layout: page
 permalink: /repositories/
 lang: zh
 title: 代码库
-description: 这里展示我的课程项目、个人项目和技术实验。
+description: 这里展示我的个人项目、技术实验和开源仓库。
 nav: true
 nav_order: 1
 ---

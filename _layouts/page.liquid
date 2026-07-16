@@ -1,7 +1,6 @@
 ---
 layout: default
 ---
-{% assign t = site.data.i18n.zh %}
 {% if page._styles %}
   <!-- Page/Post style -->
   <style type="text/css">
@@ -10,9 +9,6 @@ layout: default
 {% endif %}
 
 <div class="post">
-  {% if page.back_to_courses %}
-    <a class="page-back-link" href="{{ '/courses/' | relative_url }}"><span class="page-back-link-icon" aria-hidden="true">&larr;</span><span>{{ t.courses.back_to_courses | default: '返回课程总览' }}</span></a>
-  {% endif %}
   <header class="post-header">
     <h1 class="post-title">{{ page.title }}</h1>
     <p class="post-description">{{ page.description }}</p>

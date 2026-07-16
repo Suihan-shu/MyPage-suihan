@@ -22,16 +22,13 @@
 @use "typography";
 @use "navbar";
 @use "footer";
-@use "blog";
 @use "publications";
 @use "components";
 @use "utilities";
 
 // Other specialized styles
-@use "distill";
 @use "cv";
 @use "tabs";
-@use "courses";
 @use "travel";
 @use "typograms";
 @use "font-awesome/fontawesome";

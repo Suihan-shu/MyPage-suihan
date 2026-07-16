@@ -38,13 +38,29 @@ try {
         "_pages/books.md",
         "_pages/travel.md",
         "_layouts/travel-log.liquid",
-        "assets/js/travel-log.js"
+        "assets/js/travel-log.js",
+        "_scripts/search.liquid.js"
     )
     foreach ($file in $requiredFiles) { Assert-FileExists $file }
 
     Assert-NoMatch @("_pages", "_posts", "_series") "^lang:\s*en\s*$" "English content files still exist."
     Assert-NoMatch @("_pages", "_posts", "_series", "_layouts", "_includes") "^lang-ref:" "Deprecated lang-ref fields still exist."
     Assert-NoMatch @("_layouts", "_includes") "site\.active_lang|site\.default_lang|/zh/" "Legacy bilingual routing or language state still exists."
+    $forbiddenFiles = @(
+        "_pages/blog.md",
+        "_pages/courses.md",
+        "_data/course_resources.yml",
+        "_layouts/post.liquid",
+        "_layouts/series.liquid",
+        "_layouts/course.liquid",
+        "_includes/blog_index_content.liquid",
+        "_includes/courses.liquid",
+        "_sass/_blog.scss",
+        "_sass/_courses.scss"
+    )
+    foreach ($file in $forbiddenFiles) {
+        if (Test-Path -LiteralPath $file) { throw "Removed blog/course source still exists: $file" }
+    }
 
     $gemfile = Get-Content -LiteralPath "Gemfile" -Raw
     $config = Get-Content -LiteralPath "_config.yml" -Raw

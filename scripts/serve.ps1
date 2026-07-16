@@ -1,5 +1,5 @@
 # =============================================================================
-# YOUR_GITHUB_USERNAME's Blog - Quick Start Script (PowerShell)
+# Suihan-shu homepage - Quick Start Script (PowerShell)
 # Shortcut: Start local development server
 # =============================================================================
 
@@ -36,7 +36,7 @@ try {
 
     Remove-BuildDirectories
 
-    Write-Host "`nStarting YOUR_GITHUB_USERNAME's Blog local development server..." -ForegroundColor Cyan
+    Write-Host "`nStarting Suihan-shu homepage local development server..." -ForegroundColor Cyan
     Write-Host "Visit: http://localhost:8040" -ForegroundColor Yellow
     Write-Host "Press Ctrl+C to stop" -ForegroundColor Yellow
     Write-Host ""
