@@ -9,7 +9,7 @@ github_repos:
     tags:
       - C#
 
-  - name: Suihan-shu/Suihan
+  - name: Suihan-shu/MyPage-suihan
     platform: github
     tags:
       - Personal
