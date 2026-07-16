@@ -38,6 +38,6 @@ powershell -ExecutionPolicy Bypass -File scripts/validate_structure.ps1
 
 ## 致谢与许可
 
-本项目基于 [al-folio](https://github.com/alshedivat/al-folio) 主题，并参考 [WiseZenn/wisezenn.github.io](https://github.com/WiseZenn/wisezenn.github.io) 进行定制，通过 GitHub Pages 发布。
+本项目基于 [al-folio](https://github.com/alshedivat/al-folio) 主题进行定制，通过 GitHub Pages 发布。
 
 项目保留原始 [MIT 许可证](LICENSE)。
