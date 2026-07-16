@@ -2,7 +2,7 @@
 email_contact:
   logo: fa-solid fa-envelope
   url: "#contact-email"
-  title: Email
+  title: 邮箱
   emails:
     - hesuihan95@gmail.com
     - suihan_shu@163.com
@@ -12,7 +12,7 @@ github_username: Suihan-shu
 wechat_qr:
   logo: fa-brands fa-weixin
   url: "#contact-qr-wechat"
-  title: WeChat
+  title: 微信
   qr_img: wechat-qr.jpg
   alt_en: "WeChat QR code for Suihan-shu"
   alt_zh: "何岁寒的微信二维码"

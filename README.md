@@ -1,6 +1,6 @@
 # Suihan-shu
 
-Suihan-shu（何岁寒）的双语个人主页，使用 Jekyll、al-folio、jekyll-polyglot 和 Sass 构建。
+Suihan-shu（何岁寒）的中文个人主页，使用 Jekyll、al-folio、jekyll-polyglot 和 Sass 构建。
 
 ## Local development
 
@@ -24,11 +24,11 @@ powershell -ExecutionPolicy Bypass -File scripts/validate_structure.ps1
 
 ## Active navigation
 
-- About / 关于
-- Repositories / 代码库
-- CV / 简历
-- Books & Movies / 书籍与电影
-- Travel Journal / 旅行日志（密码保护）
+- 关于
+- 代码库
+- 简历
+- 书籍与电影
+- 旅行日志（密码保护）
 
 Blog and Courses remain in the source tree but are soft-hidden from navigation, the home page, and search.
 

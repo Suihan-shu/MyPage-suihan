@@ -9,13 +9,13 @@ middle_name:
 last_name:
 contact_note: >
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  Personal homepage of Suihan-shu, featuring projects, a CV, and a bilingual media shelf.
+  Suihan-shu（何岁寒）的中文个人主页，记录项目、学习、旅行与生活。
 footer_text: >
-  Powered by <a href="https://jekyllrb.com/" target="_blank" rel="noopener noreferrer">Jekyll</a> with
-  <a href="https://github.com/alshedivat/al-folio" target="_blank" rel="noopener noreferrer">al-folio</a>.
-  Hosted by <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>.
+  基于 <a href="https://jekyllrb.com/" target="_blank" rel="noopener noreferrer">Jekyll</a> 和
+  <a href="https://github.com/alshedivat/al-folio" target="_blank" rel="noopener noreferrer">al-folio</a> 构建，
+  由 <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a> 托管。
 keywords: personal-website, portfolio, projects, cv, books, movies
-lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
+lang: zh # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: 🩵 # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 
 url: https://suihan-shu.github.io
@@ -92,8 +92,8 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # Blog
 # -----------------------------------------------------------------------------
 
-blog_name: "Suihan-shu's Blog" # retained for future re-enabling
-blog_description: "Notes and articles by Suihan-shu."
+blog_name: "岁寒的博客" # retained for future re-enabling
+blog_description: "记录技术探索、生活随笔和个人思考。"
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
 
@@ -166,8 +166,8 @@ collections:
 # Jekyll settings
 # -----------------------------------------------------------------------------
 
-languages: ["en", "zh"]
-default_lang: "en"
+languages: ["zh"]
+default_lang: "zh"
 parallel_localization: false # avoid race conditions with imagemagick/polyglot concurrent writes
 
 # Markdown and syntax highlight

@@ -146,13 +146,15 @@
               </button>
             </li>
           {% endif %}
-          <!-- Language Toggle -->
-          {% capture alt_url %}{% include lang_switch_url.liquid current_page=page %}{% endcapture %}
-          {% assign alt_url = alt_url | strip %}
+          {% if site.languages.size > 1 %}
+            <!-- Language Toggle -->
+            {% capture alt_url %}{% include lang_switch_url.liquid current_page=page %}{% endcapture %}
+            {% assign alt_url = alt_url | strip %}
 
-          <li class="nav-item lang-toggle">
-            <a href="#" onclick="window.location.href='{{ alt_url | relative_url }}'; return false;" class="nav-link" aria-label="Switch language">{{ t.nav.lang_switch | default: 'EN / 中文' }}</a>
-          </li>
+            <li class="nav-item lang-toggle">
+              <a href="#" onclick="window.location.href='{{ alt_url | relative_url }}'; return false;" class="nav-link" aria-label="Switch language">{{ t.nav.lang_switch | default: 'EN / 中文' }}</a>
+            </li>
+          {% endif %}
         </ul>
       </div>
     </div>
