@@ -1,0 +1,40 @@
+{% comment %}
+  Image Gallery Component
+  Renders a responsive grid of images with lightbox support via medium-zoom.
+
+  Usage in front matter:
+    gallery:
+      - url: /assets/img/photo1.jpg
+        alt: "Description of photo 1"
+      - url: /assets/img/photo2.jpg
+        alt: "Description of photo 2"
+
+  Usage in markdown:
+    {% include image_gallery.liquid images=page.gallery columns=3 %}
+
+  Parameters:
+    images  — array of {url, alt?, caption?} objects (required)
+    columns — grid columns: 2, 3, or 4 (default: 3)
+{% endcomment %}
+
+{% assign gallery_images = include.images %}
+{% assign cols = include.columns | default: 3 %}
+
+{% if gallery_images and gallery_images.size > 0 %}
+  <div class="image-gallery image-gallery--cols-{{ cols }}">
+    {% for img in gallery_images %}
+      <figure class="image-gallery__item">
+        <img
+          src="{{ img.url | relative_url }}"
+          alt="{{ img.alt | default: '' }}"
+          loading="lazy"
+          class="image-gallery__img"
+          data-zoomable
+        >
+        {% if img.caption %}
+          <figcaption class="image-gallery__caption">{{ img.caption }}</figcaption>
+        {% endif %}
+      </figure>
+    {% endfor %}
+  </div>
+{% endif %}

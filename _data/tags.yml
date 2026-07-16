@@ -1,0 +1,8 @@
+Embedded: primary
+ESP32: success
+Driver: warning
+ADS131M08: info
+TypeScript: primary
+Markdown: info
+CLI: warning
+Image: success

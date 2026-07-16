@@ -1,0 +1,26 @@
+# Contact icons are rendered in this exact order.
+email_contact:
+  logo: fa-solid fa-envelope
+  url: "#contact-email"
+  title: Email
+  emails:
+    - hesuihan95@gmail.com
+    - suihan_shu@163.com
+
+github_username: Suihan-shu
+
+wechat_qr:
+  logo: fa-brands fa-weixin
+  url: "#contact-qr-wechat"
+  title: WeChat
+  qr_img: wechat-qr.jpg
+  alt_en: "WeChat QR code for Suihan-shu"
+  alt_zh: "何岁寒的微信二维码"
+
+qq_qr:
+  logo: fa-brands fa-qq
+  url: "#contact-qr-qq"
+  title: QQ
+  qr_img: qq-qr.jpg
+  alt_en: "QQ QR code for Suihan-shu"
+  alt_zh: "何岁寒的 QQ 二维码"

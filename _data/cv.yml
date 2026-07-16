@@ -1,0 +1,61 @@
+cv:
+  # Contact information. Leave a field empty until you are ready to publish it.
+  name:
+  label:
+  email:
+  phone:
+  location:
+  website:
+
+  # Personal summary. Markdown is supported.
+  summary:
+
+  sections:
+    # Example item:
+    # - company: Organization or project name
+    #   position: Role
+    #   start_date: 2025
+    #   end_date: present
+    #   location: Location
+    #   summary: Short description
+    #   highlights:
+    #     - Achievement or responsibility
+    Experience: []
+
+    # Example item:
+    # - institution: Institution
+    #   area: Field of study
+    #   degree: Degree
+    #   start_date: 2021
+    #   end_date: 2025
+    #   location: Location
+    #   highlights:
+    #     - Relevant course or achievement
+    Education: []
+
+    # Example item:
+    # - title: Award name
+    #   awarder: Awarding organization
+    #   date: 2025
+    #   summary: Short description
+    Awards: []
+
+    # Example item:
+    # - name: Skill category
+    #   level: Proficiency
+    #   keywords:
+    #     - Skill one
+    #     - Skill two
+    Skills: []
+
+    # Example item:
+    # - name: Language
+    #   summary: Proficiency
+    Languages: []
+
+    # Example item:
+    # - name: Interest category
+    #   keywords:
+    #     - Interest one
+    #     - Interest two
+    Interests: []

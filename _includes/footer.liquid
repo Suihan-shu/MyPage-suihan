@@ -1,0 +1,89 @@
+{% capture footer_contents %}
+  {% assign current_lang = page.lang | default: site.active_lang | default: site.default_lang %}
+  {% assign t = site.data.i18n[current_lang] | default: site.data.i18n.en %}
+  &copy; Copyright {{ site.time | date: '%Y' }}
+  {{ site.first_name }}
+  {{ site.middle_name }}
+  {{ site.last_name }}. 
+  {{ site.footer_text }}
+  {% if site.impressum_path %}
+    <a href="{{ site.url }}{{ site.baseurl }}{{ site.impressum_path }}">Impressum</a>.
+  {% endif %}
+  {% if site.last_updated %}
+    {% assign footer_date_format = t.footer.date_format | default: '%B %d, %Y' %}
+    {{ t.footer.last_updated_prefix | default: 'Last updated:' }} {{ 'now' | date: footer_date_format }}.
+  {% endif %}
+{% endcapture %}
+
+{% if site.footer_fixed %}
+  <footer class="fixed-bottom" role="contentinfo">
+    <div class="container mt-0">
+      {{ footer_contents }}
+    </div>
+  </footer>
+{% else %}
+  <footer class="sticky-bottom mt-5" role="contentinfo">
+    {% if site.newsletter.enabled %}
+      {% include newsletter.liquid %}
+    {% endif %}
+
+    <div class="container">
+      {{ footer_contents }}
+    </div>
+  </footer>
+{% endif %}
+
+{% assign current_lang = page.lang | default: site.active_lang | default: site.default_lang %}
+{% assign email_contact = site.data.socials.email_contact %}
+{% if email_contact and email_contact.emails %}
+  <div
+    id="contact-email"
+    class="contact-qr-modal contact-email-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-label="{% if current_lang == 'zh' %}邮箱{% else %}Email addresses{% endif %}"
+    tabindex="-1"
+  >
+    <button class="contact-qr-modal__close" type="button" aria-label="{% if current_lang == 'zh' %}关闭{% else %}Close{% endif %}">
+      &times;
+    </button>
+    <div class="contact-qr-modal__panel contact-email-modal__panel">
+      <h2>{% if current_lang == 'zh' %}邮箱{% else %}Email{% endif %}</h2>
+      <ul class="contact-email-list">
+        {% for email in email_contact.emails %}
+          <li>{{ email }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endif %}
+
+{% assign qr_social_keys = 'wechat_qr,qq_qr' | split: ',' %}
+{% for social_key in qr_social_keys %}
+  {% assign social = site.data.socials[social_key] %}
+  {% if social and social.qr_img %}
+    {% assign modal_key = social_key | replace: '_qr', '' %}
+    {% assign alt_key = 'alt_' | append: current_lang %}
+    <div
+      id="contact-qr-{{ modal_key }}"
+      class="contact-qr-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+      aria-label="{{ social.title }}"
+      tabindex="-1"
+    >
+      <button class="contact-qr-modal__close" type="button" aria-label="{% if current_lang == 'zh' %}关闭{% else %}Close{% endif %}">
+        &times;
+      </button>
+      <div class="contact-qr-modal__panel">
+        <img
+          src="{{ social.qr_img | prepend: 'assets/img/' | relative_url }}"
+          alt="{{ social[alt_key] | default: social.title }}"
+        >
+        <p>{{ social.title }}</p>
+      </div>
+    </div>
+  {% endif %}
+{% endfor %}

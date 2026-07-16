@@ -1,0 +1,210 @@
+<div id="github-heatmap" style="width: 100%; height: 160px; margin: 20px 0;"></div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const chartDom = document.getElementById('github-heatmap');
+    const mobileMedia = window.matchMedia('(max-width: 767.98px)');
+
+    function getMobileSizing() {
+      const width = chartDom.clientWidth || window.innerWidth || 360;
+      const clamped = Math.max(320, Math.min(width, 768));
+      const dayCell = Math.max(7, Math.min(11, Math.floor((clamped - 46) / 53)));
+      const chartHeight = dayCell * 7 + 58;
+      return { dayCell, chartHeight };
+    }
+
+    function updateChartHeight() {
+      if (mobileMedia.matches) {
+        const sizing = getMobileSizing();
+        chartDom.style.height = `${sizing.chartHeight}px`;
+      } else {
+        chartDom.style.height = '160px';
+      }
+    }
+    updateChartHeight();
+
+    let myChart = echarts.init(chartDom);
+    const locale = 'en-US';
+    const rootStyle = getComputedStyle(document.documentElement);
+    const heatmapFont = rootStyle.getPropertyValue('--custom-font-heatmap').trim()
+      || rootStyle.getPropertyValue('--custom-font-ui').trim()
+      || 'inherit';
+    const monthNameMap = 'en';
+    const dayNameMap = ['Sun', '', 'Tue', '', 'Thu', '', 'Sat'];
+    const zeroPostsLabel = 'No posts on';
+    const postSingularLabel = 'post';
+    const postPluralLabel = 'posts';
+    const onDateLabel = 'on';
+    const legendMore = 'More';
+    const legendLess = 'Less';
+
+    function formatDate(dateObj) {
+      const y = dateObj.getFullYear();
+      const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+      const d = String(dateObj.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
+    
+    // Aggregation Logic
+    const postData = {};
+    {% assign filtered_posts = site.posts | where: "lang", site.active_lang %}
+    {% for post in filtered_posts %}
+      {% capture post_date %}{{ post.date | date: "%Y-%m-%d" }}{% endcapture %}
+      postData["{{ post_date }}"] = (postData["{{ post_date }}"] || 0) + 1;
+    {% endfor %}
+
+    // Generate rolling 365-day data for a stable year-round view.
+    const endDate = new Date();
+    const startDate = new Date(endDate);
+    startDate.setDate(endDate.getDate() - 364);
+    const startDateStr = formatDate(startDate);
+    const endDateStr = formatDate(endDate);
+    const data = [];
+    
+    for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+        const dateStr = formatDate(d);
+        const count = postData[dateStr] || 0;
+        data.push([dateStr, count]);
+    }
+
+    const themes = {
+      light: {
+        bg: '#ffffff', // Site background
+        empty: '#ebedf0',
+        border: '#ffffff', // Gap color matches site background
+        colors: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
+        text: '#24292f'
+      },
+      dark: {
+        bg: '#1c1c1d', // Site background from _themes.scss
+        empty: '#2d333b', // Slightly lighter than bg for visibility
+        border: '#1c1c1d', // Gap color matches site background
+        colors: ['#2d333b', '#0e4429', '#006d32', '#26a641', '#39d353'],
+        text: '#adbac7'
+      }
+    };
+
+    function getOption(themeName) {
+      const t = themes[themeName] || themes.light;
+      const isMobile = mobileMedia.matches;
+      const mobileSizing = getMobileSizing();
+      const dayNameMap = isMobile ? ['S', 'M', 'T', 'W', 'T', 'F', 'S'] : ['Sun', '', 'Tue', '', 'Thu', '', 'Sat'];
+
+      return {
+        textStyle: {
+          fontFamily: heatmapFont
+        },
+        tooltip: {
+          padding: 10,
+          backgroundColor: themeName === 'dark' ? '#2d333b' : '#ffffff',
+          borderColor: themeName === 'dark' ? '#444c56' : '#e1e4e8',
+          textStyle: { color: t.text, fontSize: 12, fontFamily: heatmapFont },
+          formatter: function (p) {
+            const count = p.data[1];
+            const date = p.data[0];
+            const dateObj = new Date(`${date}T00:00:00`);
+            const dateStr = dateObj.toLocaleDateString(locale, {
+              month: 'short',
+              day: 'numeric',
+              year: 'numeric'
+            });
+            if (count === 0) return `${dateStr} ${zeroPostsLabel}`;
+            const postLabel = count === 1 ? postSingularLabel : postPluralLabel;
+            return `<strong>${count} ${postLabel}</strong> ${onDateLabel} ${dateStr}`;
+          }
+        },
+        visualMap: {
+          show: true,
+          type: 'piecewise',
+          min: 0,
+          max: 4,
+          orient: 'horizontal',
+          right: isMobile ? 6 : 0,
+          bottom: 0,
+          itemWidth: isMobile ? 7 : 10,
+          itemHeight: isMobile ? 7 : 10,
+          itemGap: isMobile ? 1 : 4,
+          text: [legendMore, legendLess],
+          textStyle: { color: t.text, fontSize: isMobile ? 9 : 12, fontFamily: heatmapFont },
+          pieces: [
+             {min: 4, color: t.colors[4]}, 
+             {value: 3, color: t.colors[3]},
+             {value: 2, color: t.colors[2]},
+             {value: 1, color: t.colors[1]},
+             {value: 0, color: t.colors[0]} 
+          ]
+        },
+        calendar: {
+          top: isMobile ? 18 : 30,
+          left: isMobile ? 18 : 40,
+          right: isMobile ? 8 : 20,
+          bottom: isMobile ? 18 : 22,
+          cellSize: isMobile ? [mobileSizing.dayCell, mobileSizing.dayCell] : ['auto', 13],
+          range: [startDateStr, endDateStr],
+          itemStyle: {
+            borderWidth: 3,
+            borderColor: t.border, // Gap matching background
+            color: t.empty
+          },
+          splitLine: { show: false },
+          yearLabel: { show: false },
+          dayLabel: {
+            firstDay: 0, // Sunday
+            nameMap: dayNameMap,
+            show: true,
+            color: t.text,
+            fontSize: isMobile ? 8 : 10,
+            fontFamily: heatmapFont,
+            margin: isMobile ? 2 : 5
+          },
+          monthLabel: {
+            show: true,
+            color: t.text,
+            fontSize: isMobile ? 9 : 10,
+            fontFamily: heatmapFont,
+            nameMap: monthNameMap,
+            margin: isMobile ? 4 : 10
+          }
+        },
+        series: {
+          type: 'heatmap',
+          coordinateSystem: 'calendar',
+          data: data,
+          itemStyle: {
+            borderRadius: 2
+          }
+        }
+      };
+    }
+
+    // Initialize
+    let currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    myChart.setOption(getOption(currentTheme));
+
+    function reRenderChart() {
+      updateChartHeight();
+      myChart.resize();
+      myChart.setOption(getOption(currentTheme), true);
+    }
+
+    // Theme Switch Listener
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.type === "attributes" && mutation.attributeName === "data-theme") {
+          currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+          myChart.dispose();
+          myChart = echarts.init(chartDom);
+          myChart.setOption(getOption(currentTheme));
+        }
+      });
+    });
+    
+    observer.observe(document.documentElement, { attributes: true });
+    window.addEventListener('resize', reRenderChart);
+    if (mobileMedia.addEventListener) {
+      mobileMedia.addEventListener('change', reRenderChart);
+    } else if (mobileMedia.addListener) {
+      mobileMedia.addListener(reRenderChart);
+    }
+  });
+</script>

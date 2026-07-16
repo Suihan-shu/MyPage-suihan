@@ -1,0 +1,35 @@
+---
+layout: page
+---
+{% assign current_lang = page.lang | default: site.active_lang | default: site.default_lang %}
+{% assign t = site.data.i18n[current_lang] | default: site.data.i18n.en %}
+
+{{ content }}
+
+<section class="media-section" aria-labelledby="books-title">
+  <div class="media-section__heading">
+    <h2 id="books-title">{{ t.media.books_title }}</h2>
+    <span aria-hidden="true">📚</span>
+  </div>
+  {% include media-shelf-section.liquid
+    items=site.books
+    type="book"
+    empty_text=t.media.empty_books
+    current_lang=current_lang
+    translations=t.media
+  %}
+</section>
+
+<section class="media-section" aria-labelledby="movies-title">
+  <div class="media-section__heading">
+    <h2 id="movies-title">{{ t.media.movies_title }}</h2>
+    <span aria-hidden="true">🎬</span>
+  </div>
+  {% include media-shelf-section.liquid
+    items=site.movies
+    type="movie"
+    empty_text=t.media.empty_movies
+    current_lang=current_lang
+    translations=t.media
+  %}
+</section>

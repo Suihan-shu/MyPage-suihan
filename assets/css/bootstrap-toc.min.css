@@ -1,0 +1,26 @@
+/*!
+ * Bootstrap Table of Contents v1.0.1 (http://afeld.github.io/bootstrap-toc/)
+ * Copyright 2015 Aidan Feldman
+ * Licensed under MIT (https://github.com/afeld/bootstrap-toc/blob/gh-pages/LICENSE.md)
+ *
+ * Patched: child lists always visible, improved visual hierarchy.
+ */
+nav[data-toggle=toc] .nav>li>a{display:block;padding:4px 20px;font-size:13px;font-weight:600;color:#767676}
+nav[data-toggle=toc] .nav>li>a:focus,nav[data-toggle=toc] .nav>li>a:hover{padding-left:19px;color:#563d7c;text-decoration:none;background-color:transparent;border-left:1px solid #563d7c}
+nav[data-toggle=toc] .nav-link.active,nav[data-toggle=toc] .nav-link.active:focus,nav[data-toggle=toc] .nav-link.active:hover{padding-left:18px;font-weight:700;color:#563d7c;background-color:transparent;border-left:2px solid #563d7c}
+nav[data-toggle=toc] .nav-link+ul{display:block;padding-bottom:6px}
+nav[data-toggle=toc] .nav .nav>li>a{padding-top:2px;padding-bottom:2px;padding-left:32px;font-size:12px;font-weight:500;color:#888}
+nav[data-toggle=toc] .nav .nav>li>a:focus,nav[data-toggle=toc] .nav .nav>li>a:hover{padding-left:31px;color:#563d7c}
+nav[data-toggle=toc] .nav .nav>li>.active,nav[data-toggle=toc] .nav .nav>li>.active:focus,nav[data-toggle=toc] .nav .nav>li>.active:hover{padding-left:30px;font-weight:600}
+nav[data-toggle=toc] .nav .nav .nav>li>a{padding-left:44px;font-size:12px;font-weight:400;color:#999}
+nav[data-toggle=toc] .nav .nav .nav>li>a:focus,nav[data-toggle=toc] .nav .nav .nav>li>a:hover{padding-left:43px;color:#563d7c}
+nav[data-toggle=toc] .nav .nav .nav>li>.active,nav[data-toggle=toc] .nav .nav .nav>li>.active:focus,nav[data-toggle=toc] .nav .nav .nav>li>.active:hover{padding-left:42px;font-weight:500}
+nav[data-toggle=toc] li.toc-level-1>a.nav-link{padding-left:0;font-size:14px;font-weight:700;color:#c000c0}
+nav[data-toggle=toc] li.toc-level-1>a.nav-link:focus,nav[data-toggle=toc] li.toc-level-1>a.nav-link:hover{padding-left:0;color:#c000c0;border-left:0}
+nav[data-toggle=toc] li.toc-level-1>a.nav-link.active,nav[data-toggle=toc] li.toc-level-1>a.nav-link.active:focus,nav[data-toggle=toc] li.toc-level-1>a.nav-link.active:hover{padding-left:0;color:#c000c0;border-left:0}
+nav[data-toggle=toc] li.toc-level-2>a.nav-link{padding-left:22px;font-size:13px;font-weight:700;color:#777}
+nav[data-toggle=toc] li.toc-level-2>a.nav-link:focus,nav[data-toggle=toc] li.toc-level-2>a.nav-link:hover{padding-left:21px;color:#563d7c}
+nav[data-toggle=toc] li.toc-level-2>a.nav-link.active,nav[data-toggle=toc] li.toc-level-2>a.nav-link.active:focus,nav[data-toggle=toc] li.toc-level-2>a.nav-link.active:hover{padding-left:20px;font-weight:700}
+nav[data-toggle=toc] li.toc-level-3>a.nav-link{padding-left:48px;font-size:12px;font-weight:400;color:#888}
+nav[data-toggle=toc] li.toc-level-3>a.nav-link:focus,nav[data-toggle=toc] li.toc-level-3>a.nav-link:hover{padding-left:47px;color:#563d7c}
+nav[data-toggle=toc] li.toc-level-3>a.nav-link.active,nav[data-toggle=toc] li.toc-level-3>a.nav-link.active:focus,nav[data-toggle=toc] li.toc-level-3>a.nav-link.active:hover{padding-left:46px;font-weight:500}

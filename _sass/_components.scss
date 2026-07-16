@@ -1,0 +1,320 @@
+/*******************************************************************************
+ * Reusable component styles: Cards, captions, profiles, etc.
+ ******************************************************************************/
+
+// Checklist
+
+ul.task-list {
+  list-style-type: none;
+  /* Remove bullets from all levels */
+}
+
+ul.task-list>li ul {
+  /* Nested lists within .task-list */
+  padding-inline-start: 1.5rem;
+}
+
+ul.task-list input[type="checkbox"] {
+  margin: 0.275rem 0.5rem 0.5rem -1rem;
+  vertical-align: middle;
+}
+
+// Math
+
+.equation {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+// Caption
+
+.caption {
+  font-size: 0.875rem;
+  margin-top: 0.75rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+// Card
+
+.card {
+  background-color: var(--global-card-bg-color);
+
+  .card-img {
+    width: 100%;
+    padding-top: 1.25rem;
+  }
+
+  .card-title {
+    color: var(--global-text-color);
+  }
+
+  .card-body {
+    padding: 1.25rem 1.25rem 1.25rem 1.25rem;
+  }
+}
+
+// Profile
+
+.profile {
+  width: 100%;
+
+  .more-info {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-family: monospace;
+
+    p {
+      display: inline-block;
+      margin: 0;
+    }
+  }
+}
+
+.profile.float-right {
+  margin-left: 1rem;
+}
+
+.profile.float-left {
+  margin-right: 1rem;
+}
+
+@media (min-width: 576px) {
+  .profile {
+    width: 30%;
+
+    .address {
+      p {
+        display: block;
+      }
+    }
+  }
+}
+
+// CV
+
+.cv {
+  margin-bottom: 40px;
+
+  .card {
+    background-color: var(--global-card-bg-color);
+    border: 1px solid var(--global-divider-color);
+
+    .list-group-item {
+      background-color: inherit;
+      border-color: var(--global-divider-color);
+
+      .badge {
+        color: var(--global-card-bg-color) !important;
+        background-color: var(--global-theme-color) !important;
+      }
+    }
+  }
+}
+
+.table-cv-map {
+  background-color: transparent;
+  border: none;
+  color: var(--global-text-color);
+}
+
+.date-column {
+  width: 75px;
+  transform: translateX(-15px) translateY(-5px);
+}
+
+// Projects
+
+.projects {
+  a {
+    text-decoration: none;
+
+    &:hover {
+      .card-title {
+        color: var(--global-theme-color);
+      }
+    }
+  }
+
+  .card {
+    img {
+      width: 100%;
+    }
+  }
+
+  .col {
+    padding-bottom: 1rem;
+  }
+
+  .grid-sizer,
+  .grid-item {
+    width: 250px;
+    margin-bottom: 10px;
+  }
+
+  h2.category {
+    color: var(--global-divider-color);
+    border-bottom: 1px solid var(--global-divider-color);
+    padding-top: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    text-align: right;
+  }
+}
+
+// Repositories
+
+.repositories {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.repo {
+  padding: 0;
+}
+
+.repo-card {
+  transition: all 0.3s ease-in-out;
+  border: 1px solid var(--global-divider-color);
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    border-color: var(--global-theme-color);
+
+    .card-title {
+      color: var(--global-theme-color);
+    }
+  }
+}
+
+// Social (bottom)
+
+.social {
+  text-align: center;
+
+  .contact-icons {
+    font-size: 2rem;
+
+    a {
+      img {
+        width: 1.6rem;
+        height: 1.6rem;
+        margin-bottom: 0.5rem;
+      }
+
+      svg {
+        width: 1.75rem;
+        height: 2rem;
+        margin-bottom: 0.25rem;
+
+        image {
+          width: 1.75rem;
+          height: 1.75rem;
+        }
+      }
+
+      i::before {
+        color: var(--global-text-color);
+        transition-property: all 0.2s ease-in-out;
+      }
+
+      &:hover {
+        text-decoration: none;
+
+        i::before {
+          color: var(--global-theme-color);
+        }
+      }
+    }
+  }
+
+  .contact-note {
+    font-size: 0.8rem;
+  }
+}
+
+// Distill
+
+.distill {
+  a:hover {
+    border-bottom-color: var(--global-theme-color);
+    text-decoration: none;
+  }
+}
+
+// diff2html
+
+.d2h-diff-table {
+  position: relative;
+}
+
+// Image Gallery
+// Responsive grid of images with lightbox support via medium-zoom.
+
+.image-gallery {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+
+  &--cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  &--cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  &--cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    &--cols-3,
+    &--cols-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    &--cols-2,
+    &--cols-3,
+    &--cols-4 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__item {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 6px;
+    border: 1px solid var(--global-divider-color);
+    background-color: var(--global-card-bg-color);
+    transition: box-shadow 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &__img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    cursor: zoom-in;
+  }
+
+  &__caption {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+    color: var(--global-text-color-light);
+    text-align: center;
+    line-height: 1.4;
+  }
+}

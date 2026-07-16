@@ -1,0 +1,92 @@
+{% assign item = include.item %}
+{% assign current_lang = include.current_lang %}
+{% assign t = include.t %}
+
+{% assign item_name = item.name %}
+{% assign item_notes = item.notes %}
+{% if current_lang == 'zh' %}
+  {% if item.name_zh %}
+    {% assign item_name = item.name_zh %}
+  {% endif %}
+  {% if item.notes_zh %}
+    {% assign item_notes = item.notes_zh %}
+  {% endif %}
+{% endif %}
+
+{% assign has_backup_menu = false %}
+{% if item.backup_links and item.backup_links.size > 0 %}
+  {% assign has_backup_menu = true %}
+{% elsif item.backup_url and item.backup_url != blank %}
+  {% assign has_backup_menu = true %}
+{% endif %}
+
+<tr>
+  <td>
+    <div class="resource-title">{{ item_name }}</div>
+    {% if item_notes %}
+      <div class="resource-notes">{{ item_notes }}</div>
+    {% endif %}
+  </td>
+  <td>
+    <div class="resource-meta-badges">
+      {% if item.type %}
+        <span class="resource-badge">{{ item.type }}</span>
+      {% endif %}
+      {% if item.year %}
+        <span class="resource-badge">{{ item.year }}</span>
+      {% endif %}
+      {% if item.format %}
+        <span class="resource-badge">{{ item.format }}</span>
+      {% endif %}
+      {% if item.updated_at %}
+        <span class="resource-badge">{{ item.updated_at }}</span>
+      {% endif %}
+    </div>
+  </td>
+  <td>
+    <div class="resource-actions">
+      <div class="resource-actions-main">
+        {% if item.preview_url and item.preview_url != blank %}
+          {% if item.preview_url contains '://' %}
+            <a class="btn btn-sm btn-outline-primary" href="{{ item.preview_url }}" target="_blank" rel="noopener noreferrer">{{ t.courses.preview | default: 'Preview' }}</a>
+          {% else %}
+            <a class="btn btn-sm btn-outline-primary" href="{{ item.preview_url | relative_url }}" target="_blank" rel="noopener noreferrer">{{ t.courses.preview | default: 'Preview' }}</a>
+          {% endif %}
+        {% endif %}
+        {% if item.download_url and item.download_url != blank %}
+          {% if item.download_url contains '://' %}
+            <a class="btn btn-sm btn-primary" href="{{ item.download_url }}" target="_blank" rel="noopener noreferrer">{{ t.courses.download | default: 'Download' }}</a>
+          {% else %}
+            <a class="btn btn-sm btn-primary" href="{{ item.download_url | relative_url }}" target="_blank" rel="noopener noreferrer">{{ t.courses.download | default: 'Download' }}</a>
+          {% endif %}
+        {% endif %}
+      </div>
+
+      {% if has_backup_menu %}
+        <details class="resource-more">
+          <summary aria-label="{{ t.courses.more_access | default: 'More links' }}">&hellip;</summary>
+          <div class="resource-more-menu">
+            {% if item.backup_links and item.backup_links.size > 0 %}
+              {% for backup in item.backup_links %}
+                {% assign backup_label = backup.label | default: t.courses.backup | default: 'Backup' %}
+                {% if backup.url and backup.url != blank %}
+                  {% if backup.url contains '://' %}
+                    <a href="{{ backup.url }}" target="_blank" rel="noopener noreferrer">{{ backup_label }}</a>
+                  {% else %}
+                    <a href="{{ backup.url | relative_url }}" target="_blank" rel="noopener noreferrer">{{ backup_label }}</a>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            {% elsif item.backup_url and item.backup_url != blank %}
+              {% if item.backup_url contains '://' %}
+                <a href="{{ item.backup_url }}" target="_blank" rel="noopener noreferrer">{{ t.courses.backup | default: 'Backup' }}</a>
+              {% else %}
+                <a href="{{ item.backup_url | relative_url }}" target="_blank" rel="noopener noreferrer">{{ t.courses.backup | default: 'Backup' }}</a>
+              {% endif %}
+            {% endif %}
+          </div>
+        </details>
+      {% endif %}
+    </div>
+  </td>
+</tr>

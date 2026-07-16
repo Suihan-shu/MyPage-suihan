@@ -1,0 +1,14 @@
+---
+layout: cv
+permalink: /cv/
+title: 简历
+lang: zh
+lang-ref: cv
+nav: true
+nav_order: 2
+cv_pdf: /assets/pdf/CV.pdf
+cv_format: rendercv
+description: 结构化个人简历，内容将逐步补充。
+toc:
+  sidebar: left
+---

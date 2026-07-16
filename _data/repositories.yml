@@ -1,0 +1,15 @@
+repo_description_lines_max: 2
+
+repo_trophies:
+  enabled: false
+
+github_repos:
+  - name: Suihan-shu/HomestayManager
+    platform: github
+    tags:
+      - C#
+
+  - name: Suihan-shu/Suihan
+    platform: github
+    tags:
+      - Personal

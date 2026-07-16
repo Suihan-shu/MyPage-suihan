@@ -1,0 +1,400 @@
+/* Private travel journal */
+.travel-log-page {
+  --travel-card-radius: 1rem;
+  max-width: 62rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.travel-log-header {
+  margin-bottom: 1.8rem;
+}
+
+.travel-log-eyebrow {
+  margin: 0 0 0.6rem;
+  color: var(--global-theme-color);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.travel-gate {
+  max-width: 34rem;
+  margin: 1.5rem auto 2rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid color-mix(in srgb, var(--global-theme-color) 22%, var(--global-divider-color));
+  border-radius: var(--travel-card-radius);
+  background: color-mix(in srgb, var(--global-theme-color) 7%, var(--global-bg-color));
+  box-shadow: 0 1rem 2.5rem rgba(44, 76, 106, 0.08);
+  text-align: center;
+}
+
+.travel-gate__icon {
+  display: grid;
+  width: 3.8rem;
+  height: 3.8rem;
+  margin: 0 auto 1.2rem;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--global-theme-color);
+  background: color-mix(in srgb, var(--global-theme-color) 16%, transparent);
+  font-size: 1.45rem;
+}
+
+.travel-gate h2 {
+  margin-bottom: 0.6rem;
+  font-size: 1.35rem;
+}
+
+.travel-gate > p {
+  color: var(--global-text-color-light);
+}
+
+.travel-gate__form {
+  margin: 1.4rem auto 0;
+  text-align: left;
+}
+
+.travel-gate__form > label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.travel-password-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.travel-password-field input {
+  width: 100%;
+  min-height: 2.8rem;
+  padding: 0.55rem 2.9rem 0.55rem 0.8rem;
+  color: var(--global-text-color);
+  border: 1px solid var(--global-divider-color);
+  border-radius: 0.55rem;
+  background: var(--global-bg-color);
+}
+
+.travel-password-field input:focus {
+  border-color: var(--global-theme-color);
+  outline: 2px solid color-mix(in srgb, var(--global-theme-color) 25%, transparent);
+  outline-offset: 1px;
+}
+
+.travel-password-toggle {
+  position: absolute;
+  right: 0.25rem;
+  display: grid;
+  width: 2.35rem;
+  height: 2.35rem;
+  place-items: center;
+  color: var(--global-text-color-light);
+  border: 0;
+  background: transparent;
+}
+
+.travel-password-toggle:hover,
+.travel-password-toggle:focus {
+  color: var(--global-theme-color);
+  outline: none;
+}
+
+.travel-unlock-button,
+.travel-journal__toolbar button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 2.65rem;
+  border: 1px solid var(--global-theme-color);
+  border-radius: 0.55rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.travel-unlock-button {
+  width: 100%;
+  margin-top: 0.8rem;
+  color: #fff;
+  background: var(--global-theme-color);
+}
+
+.travel-unlock-button:hover,
+.travel-unlock-button:focus {
+  filter: brightness(0.94);
+}
+
+.travel-unlock-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.travel-gate__status {
+  min-height: 1.45rem;
+  margin: 0.9rem 0 0;
+  color: var(--global-theme-color);
+  font-size: 0.9rem;
+}
+
+.travel-gate__status.is-error {
+  color: #a94343;
+}
+
+.travel-gate__privacy {
+  margin: 1rem 0 0;
+  font-size: 0.78rem;
+  opacity: 0.76;
+}
+
+.travel-gate__privacy i {
+  margin-right: 0.25rem;
+}
+
+.travel-journal__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.15rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--global-divider-color);
+}
+
+.travel-journal__toolbar p {
+  margin: 0;
+  color: var(--global-text-color-light);
+  font-size: 0.86rem;
+}
+
+.travel-journal__toolbar p i {
+  color: var(--global-theme-color);
+}
+
+.travel-journal__toolbar button {
+  padding: 0.35rem 0.7rem;
+  color: var(--global-theme-color);
+  border-color: color-mix(in srgb, var(--global-theme-color) 40%, var(--global-divider-color));
+  background: transparent;
+  font-size: 0.82rem;
+}
+
+.travel-journal__toolbar button:hover,
+.travel-journal__toolbar button:focus {
+  background: color-mix(in srgb, var(--global-theme-color) 8%, transparent);
+  outline: none;
+}
+
+.travel-entry-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.travel-entry {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--global-divider-color);
+  border-radius: var(--travel-card-radius);
+  background: var(--global-bg-color);
+  box-shadow: 0 0.75rem 1.8rem rgba(44, 76, 106, 0.07);
+}
+
+.travel-entry__header,
+.travel-entry__title,
+.travel-entry__text {
+  margin-left: 1.15rem;
+  margin-right: 1.15rem;
+}
+
+.travel-entry__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem 0.8rem;
+  padding-top: 1.05rem;
+}
+
+.travel-entry__date {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  color: var(--global-theme-color);
+  font-size: 0.91rem;
+  font-weight: 700;
+}
+
+.travel-entry__time {
+  color: var(--global-text-color-light);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.travel-entry__location {
+  margin: 0;
+  color: var(--global-text-color-light);
+  font-size: 0.82rem;
+}
+
+.travel-entry__location i {
+  color: var(--global-theme-color);
+}
+
+.travel-entry__title {
+  margin-top: 0.65rem;
+  margin-bottom: 0.35rem;
+  font-size: 1.18rem;
+}
+
+.travel-entry__text {
+  margin-top: 0.65rem;
+  margin-bottom: 1rem;
+  white-space: pre-line;
+  color: var(--global-text-color-light);
+  line-height: 1.68;
+}
+
+.travel-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.35rem;
+  padding: 0 0.65rem 0.65rem;
+}
+
+.travel-photo-grid[data-count="1"] {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.travel-photo-grid[data-count="2"] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.travel-photo {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  border-radius: 0.45rem;
+  color: var(--global-text-color-light);
+  background: color-mix(in srgb, var(--global-theme-color) 8%, var(--global-bg-color));
+  cursor: zoom-in;
+}
+
+.travel-photo-grid[data-count="1"] .travel-photo {
+  aspect-ratio: 4 / 3;
+}
+
+.travel-photo:hover,
+.travel-photo:focus {
+  outline: 2px solid var(--global-theme-color);
+  outline-offset: 1px;
+}
+
+.travel-photo__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.travel-photo__loading {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 1rem;
+  height: 1rem;
+  margin: -0.5rem;
+  border: 2px solid color-mix(in srgb, var(--global-theme-color) 25%, transparent);
+  border-top-color: var(--global-theme-color);
+  border-radius: 50%;
+  animation: travel-spin 0.8s linear infinite;
+}
+
+.travel-photo--error {
+  padding: 0.65rem;
+  cursor: not-allowed;
+  font-size: 0.75rem;
+}
+
+.travel-journal__empty,
+.travel-noscript {
+  margin: 1rem 0;
+  padding: 1.2rem;
+  color: var(--global-text-color-light);
+  border: 1px dashed var(--global-divider-color);
+  border-radius: 0.7rem;
+  text-align: center;
+}
+
+.travel-lightbox {
+  position: fixed;
+  z-index: 1100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 3rem 1rem 1rem;
+  background: rgba(8, 18, 30, 0.88);
+}
+
+.travel-lightbox figure {
+  max-width: min(92vw, 72rem);
+  max-height: 88vh;
+  margin: 0;
+  text-align: center;
+}
+
+.travel-lightbox img {
+  display: block;
+  max-width: 100%;
+  max-height: 78vh;
+  margin: auto;
+  object-fit: contain;
+}
+
+.travel-lightbox figcaption {
+  margin-top: 0.65rem;
+  color: #fff;
+}
+
+.travel-lightbox__close {
+  position: fixed;
+  top: 0.7rem;
+  right: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  background: transparent;
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.travel-lightbox__close:hover,
+.travel-lightbox__close:focus {
+  background: rgba(255, 255, 255, 0.14);
+  outline: none;
+}
+
+body.travel-lightbox-open {
+  overflow: hidden;
+}
+
+@keyframes travel-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 700px) {
+  .travel-entry-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .travel-journal__toolbar {
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,7 @@
+# Front-end-only travel journal settings.
+# Set a password before publishing. This value is intentionally simple and is
+# visible to anyone who inspects the generated page source.
+password: "hshyyds0905"
+
+# Add one object per trip. See docs/TRAVEL_LOG.md for the full field format.
+entries: []

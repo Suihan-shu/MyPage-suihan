@@ -1,0 +1,36 @@
+---
+layout: default
+---
+{% assign current_lang = page.lang | default: site.active_lang | default: site.default_lang %}
+{% assign t = site.data.i18n[current_lang] | default: site.data.i18n.en %}
+{% if page._styles %}
+  <!-- Page/Post style -->
+  <style type="text/css">
+    {{ page._styles }}
+  </style>
+{% endif %}
+
+<div class="post">
+  {% if page.back_to_courses %}
+    <a class="page-back-link" href="{% if current_lang == 'zh' %}{{ '/zh/courses/' | relative_url }}{% else %}{{ '/courses/' | relative_url }}{% endif %}"><span class="page-back-link-icon" aria-hidden="true">&larr;</span><span>{{ t.courses.back_to_courses | default: 'Back to courses' }}</span></a>
+  {% endif %}
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <p class="post-description">{{ page.description }}</p>
+  </header>
+
+  <article>
+    {{ content }}
+  </article>
+
+  {% if page.related_publications %}
+    <h2>References</h2>
+    <div class="publications">
+      {% bibliography --cited_in_order %}
+    </div>
+  {% endif %}
+
+  {% if site.giscus and page.giscus_comments %}
+    {% include giscus.liquid %}
+  {% endif %}
+</div>

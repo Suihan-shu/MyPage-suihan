@@ -1,0 +1,68 @@
+{% comment %}
+  News component with auto-classification badges.
+  Inspired by nandofioretto/flab.github.io — auto-detects news type from content keywords.
+
+  Usage:
+    {% include news.liquid limit=true %}    ← compact (about page)
+    {% include news.liquid %}               ← full list (news page)
+
+  News items can set `news_type` in front matter to override auto-detection:
+    news_type: publication | award | talk | funding | general
+{% endcomment %}
+
+<div class="news">
+  {% if site.news != blank %}
+    {% assign news_size = site.news | size %}
+
+    {% if include.limit %}
+      {% assign news = site.news | reverse | limit: 5 %}
+      {% assign show_compact = true %}
+    {% else %}
+      {% assign news = site.news | reverse %}
+      {% assign show_compact = false %}
+    {% endif %}
+
+    <div class="{% if show_compact %}news-compact{% else %}news-stream{% endif %}">
+      {% for item in news %}
+        {% comment %}Auto-classify news type from content or front matter{% endcomment %}
+        {% assign news_type = item.news_type | default: "auto" %}
+        {% if news_type == "auto" %}
+          {% assign content_lower = item.content | downcase %}
+          {% if content_lower contains "accepted" or content_lower contains "published" or content_lower contains "paper" or content_lower contains "journal" or content_lower contains "conference" %}
+            {% assign news_type = "publication" %}
+          {% elsif content_lower contains "award" or content_lower contains "prize" or content_lower contains "scholarship" or content_lower contains "fellowship" %}
+            {% assign news_type = "award" %}
+          {% elsif content_lower contains "talk" or content_lower contains "keynote" or content_lower contains "presentation" or content_lower contains "invited" or content_lower contains "seminar" %}
+            {% assign news_type = "talk" %}
+          {% elsif content_lower contains "grant" or content_lower contains "funding" or content_lower contains "nsf" or content_lower contains "sponsor" %}
+            {% assign news_type = "funding" %}
+          {% else %}
+            {% assign news_type = "general" %}
+          {% endif %}
+        {% endif %}
+
+        <div class="news-entry">
+          <span class="news-date">{{ item.date | date: '%b %d, %Y' }}</span>
+          <span class="news-badge news-badge--{{ news_type }}">{{ news_type }}</span>
+          <span class="news-content">
+            {% if item.inline %}
+              {{ item.content | remove: '<p>' | remove: '</p>' | emojify }}
+            {% else %}
+              <a class="news-title" href="{{ item.url | relative_url }}">{{ item.title }}</a>
+            {% endif %}
+          </span>
+        </div>
+      {% endfor %}
+
+      {% if include.limit and news_size > 5 %}
+        <div class="news-view-all">
+          <a href="{{ '/news/' | relative_url }}">
+            View all {{ news_size }} news items →
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  {% else %}
+    <p>No news so far...</p>
+  {% endif %}
+</div>

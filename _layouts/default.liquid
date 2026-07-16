@@ -1,0 +1,71 @@
+<!doctype html>
+{% assign current_lang = page.lang | default: site.active_lang | default: site.lang %}
+<html lang="{{ current_lang }}">
+  <!-- Head -->
+  <head>
+    {% if page.redirect %}
+      {% if page.redirect == true %}
+        {% assign redirect = site.baseurl | append: '/' %}
+      {% elsif page.redirect contains '://' %}
+        {% assign redirect = page.redirect %}
+      {% else %}
+        {% assign redirect = page.redirect | relative_url %}
+      {% endif %}
+      <meta http-equiv="refresh" content="3; url={{ redirect }}">
+    {% endif %}
+    {% include head.liquid %}
+  </head>
+
+  <!-- Body -->
+  <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %} {% if page.layout == 'post' or page.collection == 'posts' or page.layout == 'series' %}is-blog-post{% endif %} {% if page.lang-ref == 'courses' %}is-courses-page{% endif %}">
+    <!-- Header -->
+    {% include header.liquid %}
+
+    <!-- Content -->
+    <div class="container mt-5" role="main">
+      {% if page.toc and page.toc.sidebar %}
+        {% if page.toc.sidebar == 'right' %}
+          <div class="row no-gutters toc-layout-row">
+            <!-- main content area -->
+            <div class="col-lg-8 col-xl-8 order-1 order-lg-1">{{ content }}</div>
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-lg-4 col-xl-4 order-2 order-lg-2">
+              <nav
+                id="toc-sidebar"
+                class="sticky-top toc-sidebar-generated"
+                data-toc-mode="jekyll"
+                data-mobile-label="{% if current_lang == 'zh' %}目录{% else %}Contents{% endif %}"
+                data-mobile-close-label="{% if current_lang == 'zh' %}关闭{% else %}Close{% endif %}"
+                data-mobile-current-prefix=""
+              ></nav>
+            </div>
+          </div>
+        {% else %}
+          <div class="row no-gutters toc-layout-row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-lg-4 col-xl-4 order-2 order-lg-1">
+              <nav
+                id="toc-sidebar"
+                class="sticky-top toc-sidebar-generated"
+                data-toc-mode="jekyll"
+                data-mobile-label="{% if current_lang == 'zh' %}目录{% else %}Contents{% endif %}"
+                data-mobile-close-label="{% if current_lang == 'zh' %}关闭{% else %}Close{% endif %}"
+                data-mobile-current-prefix=""
+              ></nav>
+            </div>
+            <!-- main content area -->
+            <div class="col-lg-8 col-xl-8 order-1 order-lg-2">{{ content }}</div>
+          </div>
+        {% endif %}
+      {% else %}
+        {{ content }}
+      {% endif %}
+    </div>
+
+    <!-- Footer -->
+    {% include footer.liquid %}
+
+    <!-- JavaScripts -->
+    {% include scripts.liquid %}
+  </body>
+</html>

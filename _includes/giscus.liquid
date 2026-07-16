@@ -1,0 +1,28 @@
+<div
+  id="giscus_thread"
+  {% if page.layout == 'post' %}
+    style="max-width: {{ site.max_width }}; margin: 0 auto;"
+  {% endif %}
+>
+  {% if page.layout == 'post' %}
+    <br>
+  {% endif %}
+
+  {% if site.giscus.repo and site.giscus.repo_id and site.giscus.category_id %}
+    <script defer src="{{ '/assets/js/giscus-setup.js' | relative_url }}"></script>
+    <noscript>
+      Please enable JavaScript to view the
+      <a href="http://giscus.app/?ref_noscript">comments powered by giscus.</a>
+    </noscript>
+  {% else %}
+    {% capture giscus_warning %}
+> ##### giscus comments misconfigured
+> Please follow instructions at [http://giscus.app](http://giscus.app) and complete these required fields in `_config.yml`:
+> - `giscus.repo`
+> - `giscus.repo_id`
+> - `giscus.category_id`
+{: .block-danger }
+    {% endcapture %}
+    {{ giscus_warning | markdownify }}
+  {% endif %}
+</div>

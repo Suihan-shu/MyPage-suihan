@@ -1,0 +1,2155 @@
+# Course resource index (data-driven rendering for /courses/)
+# Fields:
+# - id: stable key for a course
+# - title: default display title
+# - title_zh: optional Chinese display title
+# - term: optional term text (e.g., 2025 Fall)
+# - summary: optional short description (default language)
+# - summary_zh: optional Chinese summary
+# - resources[]:
+#   - name: resource title
+#   - name_zh: optional Chinese title
+#   - type: exam | notes | review | slides | assignment | other
+#   - year: optional numeric year
+#   - format: pdf | docx | md | zip | etc.
+#   - preview_url: optional online preview URL
+#   - download_url: optional download URL
+#   - backup_url: optional backup URL (e.g., OneDrive)
+#   - backup_links: optional list of backup links for the three-dot menu
+#       - label: backup source label (e.g., OneDrive, Netdisk)
+#       - url: backup source URL
+#   - updated_at: optional date string
+#   - notes: optional note (default language)
+#   - notes_zh: optional Chinese note
+
+- id: descriptive-geometry
+  slug: descriptive-geometry
+  title: Descriptive Geometry and Mechanical Drawing
+  title_zh: 画法几何与机械制图
+  term: 2022 Spring
+  semester_zh: 2021-2022 春季学期
+  semester: 2021-2022 Spring
+  summary: "CAD drawings, 3D models, and assembly drawings for gear oil pump and safety valve projects."
+  summary_zh: 包含齿轮油泵与安全阀的 CAD 图纸、三维模型及装配图。
+  resources:
+    - name: 3d Model Sw2021
+      name_zh: 齿轮油泵三维模型
+      type: project
+      year: 2021
+      format: zip
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Descriptive%20Geometry%20and%20Mechanical%20Drawing/2022-spring/project/gear-oil-pump/3d-model-sw2021.zip"
+      updated_at: "2026-05-30"
+    - name: Cad Drawings
+      name_zh: 齿轮油泵CAD图纸
+      type: project
+      format: zip
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Descriptive%20Geometry%20and%20Mechanical%20Drawing/2022-spring/project/gear-oil-pump/cad-drawings.zip"
+      updated_at: "2026-05-30"
+    - name: Drawings Pdf
+      name_zh: 齿轮油泵图纸PDF
+      type: project
+      format: zip
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Descriptive%20Geometry%20and%20Mechanical%20Drawing/2022-spring/project/gear-oil-pump/drawings-pdf.zip"
+      updated_at: "2026-05-30"
+    - name: Assembly
+      name_zh: 安全阀装配图
+      type: project
+      format: dwg
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Descriptive%20Geometry%20and%20Mechanical%20Drawing/2022-spring/project/safety-valve/assembly.dwg"
+      updated_at: "2026-05-30"
+    - name: Assembly
+      name_zh: 安全阀装配图
+      type: project
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Descriptive%20Geometry%20and%20Mechanical%20Drawing/2022-spring/project/safety-valve/assembly.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Descriptive%20Geometry%20and%20Mechanical%20Drawing/2022-spring/project/safety-valve/assembly.pdf"
+      updated_at: "2026-05-30"
+    - name: Valve Body
+      name_zh: 安全阀阀体零件图
+      type: project
+      format: dwg
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Descriptive%20Geometry%20and%20Mechanical%20Drawing/2022-spring/project/safety-valve/valve-body.dwg"
+      updated_at: "2026-05-30"
+    - name: Valve Body
+      name_zh: 安全阀阀体零件图
+      type: project
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Descriptive%20Geometry%20and%20Mechanical%20Drawing/2022-spring/project/safety-valve/valve-body.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Descriptive%20Geometry%20and%20Mechanical%20Drawing/2022-spring/project/safety-valve/valve-body.pdf"
+      updated_at: "2026-05-30"
+
+- id: ee-tech-1
+  slug: ee-tech-1
+  title: Electrical and Electronic Technology I
+  title_zh: 电工与电子技术基础 I
+  term: 2022 Fall
+  semester_zh: 2022-2023 秋季学期
+  semester: 2022-2023 Fall
+  summary: "Chapter slides (1–10), review materials, and past exam scans."
+  summary_zh: 包含各章课件（第1~10章）、复习资料与历年期末试卷扫描件。
+  resources:
+    - name: Past Final Exam 2019 A Scan 01
+      name_zh: past final exam 2019 A scan 01
+      type: exam
+      year: 2019
+      format: jpg
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/exams/past-final-exam-2019-A-scan-01.jpg"
+      updated_at: "2026-05-30"
+    - name: Past Final Exam 2019 A Scan 02
+      name_zh: past final exam 2019 A scan 02
+      type: exam
+      year: 2019
+      format: jpg
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/exams/past-final-exam-2019-A-scan-02.jpg"
+      updated_at: "2026-05-30"
+    - name: Past Final Exam 2019 A Scan 03
+      name_zh: past final exam 2019 A scan 03
+      type: exam
+      year: 2019
+      format: jpg
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/exams/past-final-exam-2019-A-scan-03.jpg"
+      updated_at: "2026-05-30"
+    - name: Past Final Exam 2019 A Scan 04
+      name_zh: past final exam 2019 A scan 04
+      type: exam
+      year: 2019
+      format: jpg
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/exams/past-final-exam-2019-A-scan-04.jpg"
+      updated_at: "2026-05-30"
+    - name: Supplementary Notes 01
+      name_zh: supplementary notes 01
+      type: review
+      format: jpg
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/review/supplementary-notes-01.jpg"
+      updated_at: "2026-05-30"
+    - name: Supplementary Notes 02
+      name_zh: supplementary notes 02
+      type: review
+      format: jpg
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/review/supplementary-notes-02.jpg"
+      updated_at: "2026-05-30"
+    - name: Supplementary Notes 03
+      name_zh: supplementary notes 03
+      type: review
+      format: jpg
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/review/supplementary-notes-03.jpg"
+      updated_at: "2026-05-30"
+    - name: Typical Problems
+      name_zh: 电工典型题目
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/review/typical-problems.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/review/typical-problems.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch1 Slides
+      name_zh: 第1章 电路基本概念
+      type: slides
+      format: ppsx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/slides/ch1-slides.ppsx"
+      updated_at: "2026-05-30"
+    - name: Ch10 Slides
+      name_zh: 第10章 继电接触器控制系统
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/slides/ch10-slides.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/slides/ch10-slides.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch2 Slides Notes
+      name_zh: 第2章 电路分析方法讲义
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/slides/ch2-slides-notes.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/slides/ch2-slides-notes.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch2 Slides
+      name_zh: 第2章 电路分析方法
+      type: slides
+      format: ppsx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/slides/ch2-slides.ppsx"
+      updated_at: "2026-05-30"
+    - name: Ch3 Slides
+      name_zh: 第3章 电路暂态分析
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/slides/ch3-slides.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/slides/ch3-slides.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch4 Slides
+      name_zh: 第4章 正弦交流电路
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/slides/ch4-slides.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/slides/ch4-slides.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch5 Slides
+      name_zh: 第5章 三相电路
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/slides/ch5-slides.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/slides/ch5-slides.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch6 Slides
+      name_zh: 第6章 磁路与铁心线圈电路
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/slides/ch6-slides.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/slides/ch6-slides.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch7 Slides
+      name_zh: 第7章 交流电动机
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/slides/ch7-slides.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20I/2022-fall/slides/ch7-slides.pdf"
+      updated_at: "2026-05-30"
+
+- id: ee-tech-2
+  slug: ee-tech-2
+  title: Electrical and Electronic Technology II
+  title_zh: 电工与电子技术基础 II
+  term: 2023 Spring
+  semester_zh: 2022-2023 春季学期
+  semester: 2022-2023 Spring
+  summary: "Chapter slides (14–21), assignments, exams, and circuit review diagrams."
+  summary_zh: 包含各章课件（第14~21章）、课堂作业、期末试卷与答案、电路复习图。
+  notes: "TTL tri-state gates, bipolar transistors vs CMOS FETs, unused input handling — see textbook P248."
+  notes_zh: TTL 三态门、双极型晶体管 vs CMOS 场效应管、多余输入端处理 — 参见课本 P248。
+  resources:
+    - name: Past Final Exam 2019 A Solution
+      name_zh: 2019年期末试卷答案
+      type: exam
+      year: 2019
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/exams/past-final-exam-2019-A-solution.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/exams/past-final-exam-2019-A-solution.pdf"
+      updated_at: "2026-05-30"
+    - name: Past Final Exam 2019 A
+      name_zh: 2019年期末试卷
+      type: exam
+      year: 2019
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/exams/past-final-exam-2019-A.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/exams/past-final-exam-2019-A.pdf"
+      updated_at: "2026-05-30"
+    - name: Past Midterm Exam 2023
+      name_zh: 2023年期中试卷
+      type: exam
+      year: 2023
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/exams/past-midterm-exam-2023.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/exams/past-midterm-exam-2023.pdf"
+      updated_at: "2026-05-30"
+    - name: All Assignments
+      name_zh: 课堂作业汇总
+      type: assignment
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/assignments/all-assignments.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/assignments/all-assignments.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch1 Assignment
+      name_zh: 课堂作业1
+      type: assignment
+      format: docx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/assignments/ch1-assignment.docx"
+      updated_at: "2026-05-30"
+    - name: Ch2 Assignment
+      name_zh: 课堂作业2
+      type: assignment
+      format: docx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/assignments/ch2-assignment.docx"
+      updated_at: "2026-05-30"
+    - name: Ch3 Assignment
+      name_zh: 课堂作业3
+      type: assignment
+      format: docx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/assignments/ch3-assignment.docx"
+      updated_at: "2026-05-30"
+    - name: Ch4 Assignment
+      name_zh: 课堂作业4
+      type: assignment
+      format: docx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/assignments/ch4-assignment.docx"
+      updated_at: "2026-05-30"
+    - name: Ch5 Assignment
+      name_zh: 课堂作业5
+      type: assignment
+      format: docx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/assignments/ch5-assignment.docx"
+      updated_at: "2026-05-30"
+    - name: Ch6 Assignment
+      name_zh: 课堂作业6
+      type: assignment
+      format: docx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/assignments/ch6-assignment.docx"
+      updated_at: "2026-05-30"
+    - name: Ch8 Assignment
+      name_zh: 课堂作业8
+      type: assignment
+      format: docx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/assignments/ch8-assignment.docx"
+      updated_at: "2026-05-30"
+    - name: Ch9 Assignment
+      name_zh: 课堂作业9
+      type: assignment
+      format: docx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/assignments/ch9-assignment.docx"
+      updated_at: "2026-05-30"
+    - name: Rectifier Circuits
+      name_zh: 整流电路
+      type: review
+      format: png
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/review/rectifier-circuits.png"
+      updated_at: "2026-05-30"
+    - name: Single Phase Bridge Rectifier
+      name_zh: 单相桥式整流电路
+      type: review
+      format: png
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/review/single-phase-bridge-rectifier.png"
+      updated_at: "2026-05-30"
+    - name: Ch14 Slides
+      name_zh: 第14章 二极管和晶体管
+      type: slides
+      format: ppt
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/slides/ch14-slides.ppt"
+      updated_at: "2026-05-30"
+    - name: Ch15 Slides
+      name_zh: 第15章 基本放大电路
+      type: slides
+      format: ppt
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/slides/ch15-slides.ppt"
+      updated_at: "2026-05-30"
+    - name: Ch16 Slides
+      name_zh: 第16章 集成运算放大器
+      type: slides
+      format: ppt
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/slides/ch16-slides.ppt"
+      updated_at: "2026-05-30"
+    - name: Ch17 Slides
+      name_zh: 第17章 电子电路中的反馈
+      type: slides
+      format: ppt
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/slides/ch17-slides.ppt"
+      updated_at: "2026-05-30"
+    - name: Ch18 Slides
+      name_zh: 第18章 直流稳压电源
+      type: slides
+      format: ppt
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/slides/ch18-slides.ppt"
+      updated_at: "2026-05-30"
+    - name: Ch20 Slides
+      name_zh: 第20章 门电路和组合逻辑电路
+      type: slides
+      format: ppt
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/slides/ch20-slides.ppt"
+      updated_at: "2026-05-30"
+    - name: Ch21 Slides
+      name_zh: 第21章 触发器和时序逻辑电路
+      type: slides
+      format: ppt
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Electrical%20and%20Electronic%20Technology%20II/2023-spring/slides/ch21-slides.ppt"
+      updated_at: "2026-05-30"
+
+- id: theoretical-mechanics
+  slug: theoretical-mechanics
+  title: Theoretical Mechanics
+  title_zh: 理论力学
+  term: 2023 Spring
+  semester_zh: 2022-2023 春季学期
+  semester: 2022-2023 Spring
+  summary: Exercise session slides and summary for Theoretical Mechanics review.
+  summary_zh: 包含理论力学习题课课件与习题总结。
+  resources:
+    - name: Exercise Session 20230219
+      name_zh: 习题课课件
+      type: review
+      year: 2023
+      format: pptx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Theoretical%20Mechanics/2023-spring/review/exercise-session-20230219.pptx"
+      updated_at: "2026-05-30"
+    - name: Exercise Summary
+      name_zh: 习题总结
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Theoretical%20Mechanics/2023-spring/review/exercise-summary.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Theoretical%20Mechanics/2023-spring/review/exercise-summary.pdf"
+      updated_at: "2026-05-30"
+
+- id: mechanics-of-materials
+  slug: mechanics-of-materials
+  title: Mechanics of Materials
+  title_zh: 材料力学
+  term: 2023 Spring
+  semester_zh: 2022-2023 春季学期
+  semester: 2022-2023 Spring
+  summary: Review materials and final exam papers for Mechanics of Materials.
+  summary_zh: 包含材料力学课程复习资料与历年期末试卷。
+  resources:
+    - name: Keypoint Review Slides
+      name_zh: 复习重点课件
+      type: review
+      year: 2023
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanics%20of%20Materials/2023-spring/review/keypoint-review.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanics%20of%20Materials/2023-spring/review/keypoint-review.pdf"
+      updated_at: "2026-04-04"
+      notes: Review slides for final exam preparation.
+      notes_zh: 期末复习重点课件。
+
+    - name: Summary Key Review Questions
+      name_zh: 重点复习题汇总
+      type: review
+      year: 2023
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanics%20of%20Materials/2023-spring/review/summary-key-review-questions.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanics%20of%20Materials/2023-spring/review/summary-key-review-questions.pdf"
+      updated_at: "2026-04-04"
+      notes: Consolidated key review questions.
+      notes_zh: 重点复习题整理。
+
+    - name: Past Final Exam 2020 A
+      name_zh: 2020 期末试卷 A
+      type: exam
+      year: 2020
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanics%20of%20Materials/2023-spring/exams/final/exams/past-final-exam-2020-A.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanics%20of%20Materials/2023-spring/exams/final/exams/past-final-exam-2020-A.pdf"
+      updated_at: "2026-04-04"
+      notes: Final exam paper.
+      notes_zh: 历年期末试卷。
+
+    - name: Past Final Exam 2021 A
+      name_zh: 2021 期末试卷 A
+      type: exam
+      year: 2021
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanics%20of%20Materials/2023-spring/exams/final/exams/past-final-exam-2021-A.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanics%20of%20Materials/2023-spring/exams/final/exams/past-final-exam-2021-A.pdf"
+      updated_at: "2026-04-04"
+      notes: Final exam paper.
+      notes_zh: 历年期末试卷。
+
+    - name: Past Final Exam 2021 B
+      name_zh: 2021 期末试卷 B
+      type: exam
+      year: 2021
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanics%20of%20Materials/2023-spring/exams/final/exams/past-final-exam-2021-B.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanics%20of%20Materials/2023-spring/exams/final/exams/past-final-exam-2021-B.pdf"
+      updated_at: "2026-04-04"
+      notes: Final exam paper.
+      notes_zh: 历年期末试卷。
+
+- id: numerical-methods
+  slug: numerical-methods
+  title: Numerical Methods
+  title_zh: 计算方法
+  term: 2023 Spring
+  semester_zh: 2022-2023 春季学期
+  semester: 2022-2023 Spring
+  summary: Selected materials for review, exams, project, and coding practice.
+  summary_zh: 包含复习重点、历年期末试卷与答案、课程项目和代码资料。
+  resources:
+    - name: Keypoint Review
+      name_zh: 期末复习重点
+      type: review
+      year: 2023
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/review/keypoint-review.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/review/keypoint-review.pdf"
+      updated_at: "2026-04-04"
+      notes: Review notes prepared for final exam.
+      notes_zh: 期末复习重点整理。
+
+    - name: Past Final Exam 2021 A
+      name_zh: 2021 期末试卷 A
+      type: exam
+      year: 2021
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/exams/past-final-exam-2021-A.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/exams/past-final-exam-2021-A.pdf"
+      updated_at: "2026-04-04"
+      notes: Final exam paper.
+      notes_zh: 历年期末试卷。
+
+    - name: Past Final Exam 2021 B
+      name_zh: 2021 期末试卷 B
+      type: exam
+      year: 2021
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/exams/past-final-exam-2021-B.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/exams/past-final-exam-2021-B.pdf"
+      updated_at: "2026-04-04"
+      notes: Final exam paper.
+      notes_zh: 历年期末试卷。
+
+    - name: Past Final Exam 2022 A
+      name_zh: 2022 期末试卷 A
+      type: exam
+      year: 2022
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/exams/past-final-exam-2022-A.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/exams/past-final-exam-2022-A.pdf"
+      updated_at: "2026-04-04"
+      notes: Final exam paper.
+      notes_zh: 历年期末试卷。
+
+    - name: Past Final Exam 2023 A
+      name_zh: 2023 期末试卷 A
+      type: exam
+      year: 2023
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/exams/past-final-exam-2023-A.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/exams/past-final-exam-2023-A.pdf"
+      updated_at: "2026-04-04"
+      notes: Final exam paper.
+      notes_zh: 历年期末试卷。
+
+    - name: Past Final Exam 2021 A Solution
+      name_zh: 2021 期末答案 A
+      type: solution
+      year: 2021
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/solutions/past-final-exam-2021-A-solution.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/solutions/past-final-exam-2021-A-solution.pdf"
+      updated_at: "2026-04-04"
+      notes: Final exam solution.
+      notes_zh: 期末试卷答案。
+
+    - name: Project Report
+      name_zh: 课程项目报告
+      type: project
+      year: 2023
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/project/report-zw.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/project/report-zw.pdf"
+      updated_at: "2026-04-04"
+      notes: Final project report, written by YOUR_GITHUB_USERNAME(based on Latex).
+      notes_zh: 课程项目报告, 由YOUR_GITHUB_USERNAME撰写(基于Latex)。
+
+    - name: Course Code Package
+      name_zh: 课程代码压缩包
+      type: code
+      year: 2023
+      format: zip
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/code/code.zip"
+      updated_at: "2026-04-04"
+      notes: Source code archive, coode by YOUR_GITHUB_USERNAME.
+      notes_zh: 课程代码归档文件, 由YOUR_GITHUB_USERNAME撰写。
+
+    - name: A Concise Course on Numerical Methods
+      name_zh: 数值方法简明教程
+      type: book
+      year: 2023
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/book/A%20Concise%20Course%20on%20Numerical%20Methods.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/book/A%20Concise%20Course%20on%20Numerical%20Methods.pdf"
+      updated_at: "2026-04-04"
+      notes: Reference textbook.
+      notes_zh: 课程参考书。
+
+    - name: Past Final Exam 2021 B Solution
+      name_zh: 2021 期末答案 B
+      type: solution
+      year: 2021
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/solutions/past-final-exam-2021-B-solution.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/solutions/past-final-exam-2021-B-solution.pdf"
+      updated_at: "2026-04-04"
+      notes: Final exam solution.
+      notes_zh: 期末试卷答案。
+
+    - name: Past Final Exam 2022 A Solution
+      name_zh: 2022 期末答案 A
+      type: solution
+      year: 2022
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/solutions/past-final-exam-2022-A-solution.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/solutions/past-final-exam-2022-A-solution.pdf"
+      updated_at: "2026-04-04"
+      notes: Final exam solution.
+      notes_zh: 期末试卷答案。
+
+    - name: Past Final Exam 2024 A
+      name_zh: 2024 期末试卷 A
+      type: exam
+      year: 2024
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/exams/past-final-exam-2024-A.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/exams/past-final-exam-2024-A.pdf"
+      updated_at: "2026-05-30"
+      notes: Final exam paper.
+      notes_zh: 历年期末试卷。
+
+    - name: Past Final Exam 2025 A
+      name_zh: 2025 期末试卷 A
+      type: exam
+      year: 2025
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/exams/past-final-exam-2025-A.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/exams/past-final-exam-2025-A.pdf"
+      updated_at: "2026-05-30"
+      notes: Final exam paper.
+      notes_zh: 历年期末试卷。
+
+    - name: Past Final Exam 2023 A Solution
+      name_zh: 2023 期末答案 A
+      type: solution
+      year: 2023
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/solutions/past-final-exam-2023-A-solution.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/solutions/past-final-exam-2023-A-solution.pdf"
+      updated_at: "2026-05-30"
+      notes: Final exam solution.
+      notes_zh: 期末试卷答案。
+
+    - name: Past Final Exam 2024 A Solution
+      name_zh: 2024 期末答案 A
+      type: solution
+      year: 2024
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/solutions/past-final-exam-2024-A-solution.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/solutions/past-final-exam-2024-A-solution.pdf"
+      updated_at: "2026-05-30"
+      notes: Final exam solution.
+      notes_zh: 期末试卷答案。
+
+    - name: Past Final Exam 2025 A Solution
+      name_zh: 2025 期末答案 A
+      type: solution
+      year: 2025
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/solutions/past-final-exam-2025-A-solution.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Numerical%20Methods/2023-spring/exams/final/solutions/past-final-exam-2025-A-solution.pdf"
+      updated_at: "2026-05-30"
+      notes: Final exam solution.
+      notes_zh: 期末试卷答案。
+
+- id: hydraulic
+  slug: hydraulic
+  title: Hydraulic and Pneumatic Transmission
+  title_zh: 液压与气压传动
+  term: 2023 Fall
+  semester_zh: 2023-2024 秋季学期
+  semester: 2023-2024 Fall
+  summary: "Review slides, review questions, question bank, and past exams collection."
+  summary_zh: 包含复习课件、复习题、题库与历年真题合集。
+  notes: Question bank is mainly for review and consolidation.
+  notes_zh: 题库主要用来梳理巩固。
+  resources:
+    - name: Past Exams Collection
+      name_zh: 历年真题合集
+      type: exam
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Hydraulic%20and%20Pneumatic%20Transmission/2023-fall/exams/past-exams-collection.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Hydraulic%20and%20Pneumatic%20Transmission/2023-fall/exams/past-exams-collection.pdf"
+      updated_at: "2026-05-30"
+    - name: Past Final Exam 2022 A
+      name_zh: 2022-2023期末A卷
+      type: exam
+      year: 2022
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Hydraulic%20and%20Pneumatic%20Transmission/2023-fall/exams/past-final-exam-2022-A.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Hydraulic%20and%20Pneumatic%20Transmission/2023-fall/exams/past-final-exam-2022-A.pdf"
+      updated_at: "2026-05-30"
+    - name: Question Bank
+      name_zh: 题库
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Hydraulic%20and%20Pneumatic%20Transmission/2023-fall/review/question-bank.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Hydraulic%20and%20Pneumatic%20Transmission/2023-fall/review/question-bank.pdf"
+      updated_at: "2026-05-30"
+    - name: Review Questions 1
+      name_zh: 复习题1
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Hydraulic%20and%20Pneumatic%20Transmission/2023-fall/review/review-questions-1.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Hydraulic%20and%20Pneumatic%20Transmission/2023-fall/review/review-questions-1.pdf"
+      updated_at: "2026-05-30"
+    - name: Review Questions 2
+      name_zh: 复习题2
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Hydraulic%20and%20Pneumatic%20Transmission/2023-fall/review/review-questions-2.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Hydraulic%20and%20Pneumatic%20Transmission/2023-fall/review/review-questions-2.pdf"
+      updated_at: "2026-05-30"
+    - name: Review Questions 3
+      name_zh: 复习题3
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Hydraulic%20and%20Pneumatic%20Transmission/2023-fall/review/review-questions-3.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Hydraulic%20and%20Pneumatic%20Transmission/2023-fall/review/review-questions-3.pdf"
+      updated_at: "2026-05-30"
+    - name: Review Questions 4
+      name_zh: 复习题4
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Hydraulic%20and%20Pneumatic%20Transmission/2023-fall/review/review-questions-4.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Hydraulic%20and%20Pneumatic%20Transmission/2023-fall/review/review-questions-4.pdf"
+      updated_at: "2026-05-30"
+    - name: Review Slides
+      name_zh: 复习课件
+      type: review
+      format: pptx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Hydraulic%20and%20Pneumatic%20Transmission/2023-fall/review/review-slides.pptx"
+      updated_at: "2026-05-30"
+
+- id: mechanical-control
+  slug: mechanical-control
+  title: Mechanical Control Engineering
+  title_zh: 机械控制工程
+  term: 2023 Fall
+  semester_zh: 2023-2024 秋季学期
+  semester: 2023-2024 Fall
+  summary: "Full chapter slides, review materials with answers, past exams with solutions, and midterm paper."
+  summary_zh: 包含全部章节课件、复习资料与答案、历年期末试卷与答案、期中试卷。
+  resources:
+    - name: Past Final Exam 2019 A Solution
+      name_zh: 2019-2020期末试卷答案
+      type: exam
+      year: 2019
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/exams/past-final-exam-2019-A-solution.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/exams/past-final-exam-2019-A-solution.pdf"
+      updated_at: "2026-05-30"
+    - name: Past Final Exam 2019 A
+      name_zh: 2019-2020期末试卷
+      type: exam
+      year: 2019
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/exams/past-final-exam-2019-A.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/exams/past-final-exam-2019-A.pdf"
+      updated_at: "2026-05-30"
+    - name: Past Final Exam 2021 A Solution
+      name_zh: 2021-2022期末试卷答案
+      type: exam
+      year: 2021
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/exams/past-final-exam-2021-A-solution.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/exams/past-final-exam-2021-A-solution.pdf"
+      updated_at: "2026-05-30"
+    - name: Past Final Exam 2021 A
+      name_zh: 2021-2022期末试卷
+      type: exam
+      year: 2021
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/exams/past-final-exam-2021-A.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/exams/past-final-exam-2021-A.pdf"
+      updated_at: "2026-05-30"
+    - name: Past Final Exam 2021 B
+      name_zh: 2021年考卷
+      type: exam
+      year: 2021
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/exams/past-final-exam-2021-B.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/exams/past-final-exam-2021-B.pdf"
+      updated_at: "2026-05-30"
+    - name: Past Midterm Exam 2022 A
+      name_zh: 2022年期中A卷
+      type: exam
+      year: 2022
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/exams/past-midterm-exam-2022-A.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/exams/past-midterm-exam-2022-A.pdf"
+      updated_at: "2026-05-30"
+    - name: Exercise Collection Answers
+      name_zh: 习题汇总答案
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/review/exercise-collection-answers.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/review/exercise-collection-answers.pdf"
+      updated_at: "2026-05-30"
+    - name: Exercise Collection
+      name_zh: 习题汇总
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/review/exercise-collection.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/review/exercise-collection.pdf"
+      updated_at: "2026-05-30"
+    - name: Review Questions Blank
+      name_zh: 复习题挖空版
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/review/review-questions-blank.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/review/review-questions-blank.pdf"
+      updated_at: "2026-05-30"
+    - name: Review Questions With Answers
+      name_zh: 复习题及答案
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/review/review-questions-with-answers.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/review/review-questions-with-answers.pdf"
+      updated_at: "2026-05-30"
+    - name: Short Answer Questions
+      name_zh: 简答题
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/review/short-answer-questions.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/review/short-answer-questions.pdf"
+      updated_at: "2026-05-30"
+    - name: Frequency Response Analysis Slides
+      name_zh: 频率特性分析
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/slides/frequency-response-analysis-slides.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/slides/frequency-response-analysis-slides.pdf"
+      updated_at: "2026-05-30"
+    - name: Introduction Slides
+      name_zh: 绪论
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/slides/introduction-slides.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/slides/introduction-slides.pdf"
+      updated_at: "2026-05-30"
+    - name: Lead Lag Compensation Slides
+      name_zh: 超前校正与滞后校正
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/slides/lead-lag-compensation-slides.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/slides/lead-lag-compensation-slides.pdf"
+      updated_at: "2026-05-30"
+    - name: Mathematical Model Slides
+      name_zh: 数学模型
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/slides/mathematical-model-slides.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/slides/mathematical-model-slides.pdf"
+      updated_at: "2026-05-30"
+    - name: Performance Specification Correction Slides
+      name_zh: 性能指标与校正
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/slides/performance-specification-correction-slides.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/slides/performance-specification-correction-slides.pdf"
+      updated_at: "2026-05-30"
+    - name: Stability Slides
+      name_zh: 系统稳定性
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/slides/stability-slides.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/slides/stability-slides.pdf"
+      updated_at: "2026-05-30"
+    - name: Time Response Analysis Slides
+      name_zh: 时间响应分析
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/slides/time-response-analysis-slides.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Control%20Engineering/2023-fall/slides/time-response-analysis-slides.pdf"
+      updated_at: "2026-05-30"
+
+- id: machinery-construction
+  slug: machinery-construction
+  title: Engineering Machinery Construction
+  title_zh: 工程机械构造
+  term: 2023 Fall
+  semester_zh: 2023-2024 秋季学期
+  semester: 2023-2024 Fall
+  summary: "Chapter slides (ch1–ch9 + intro), review materials, and past exam paper."
+  summary_zh: 包含各章课件（绪论及第1~9章）、复习资料与往年考试题。
+  resources:
+    - name: Past Exam
+      name_zh: 往年考试题
+      type: exam
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/exams/past-exam.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/exams/past-exam.pdf"
+      updated_at: "2026-05-30"
+    - name: Exercises And Answers
+      name_zh: 底盘试题及答案
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/review/exercises-and-answers.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/review/exercises-and-answers.pdf"
+      updated_at: "2026-05-30"
+    - name: Exercises
+      name_zh: 构造习题
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/review/exercises.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/review/exercises.pdf"
+      updated_at: "2026-05-30"
+    - name: Review Notes From Seniors
+      name_zh: 复习笔记
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/review/review-notes-from-seniors.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/review/review-notes-from-seniors.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch1 Drivetrain Overview Clutch
+      name_zh: 第1章 传动系概述及离合器
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/ch1-drivetrain-overview-clutch.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/ch1-drivetrain-overview-clutch.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch2 Piston Connecting Rod
+      name_zh: 第2章 活塞连杆机构与机体组件
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/ch2-piston-connecting-rod.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/ch2-piston-connecting-rod.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch3 Valve Mechanism
+      name_zh: 第3章 配气机构
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/ch3-valve-mechanism.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/ch3-valve-mechanism.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch4 Fuel System Part1
+      name_zh: 第4章 柴油机燃油供给系(1)
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/ch4-fuel-system-part1.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/ch4-fuel-system-part1.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch4 Fuel System Part2
+      name_zh: 第4章 柴油机燃油供给系(2)
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/ch4-fuel-system-part2.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/ch4-fuel-system-part2.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch4 Fuel System Part3
+      name_zh: 第4章 柴油机燃油供给系(3)
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/ch4-fuel-system-part3.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/ch4-fuel-system-part3.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch5 Electronic Fuel Injection
+      name_zh: 第5章 柴油电控喷射技术
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/ch5-electronic-fuel-injection.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/ch5-electronic-fuel-injection.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch6 Lubrication Cooling Starting
+      name_zh: 第6章 润滑冷却起动系
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/ch6-lubrication-cooling-starting.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/ch6-lubrication-cooling-starting.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch7 Transmission
+      name_zh: 第7章 变速箱
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/ch7-transmission.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/ch7-transmission.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch8 Drive Axle
+      name_zh: 第8章 驱动桥
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/ch8-drive-axle.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/ch8-drive-axle.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch9 Steering System
+      name_zh: 第9章 轮式车辆转向系
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/ch9-steering-system.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/ch9-steering-system.pdf"
+      updated_at: "2026-05-30"
+    - name: Introduction
+      name_zh: 绪论
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/introduction.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Machinery%20Construction/2023-fall/slides/introduction.pdf"
+      updated_at: "2026-05-30"
+
+- id: microcomputer
+  slug: microcomputer
+  title: Principles of Microcomputer
+  title_zh: 微机原理
+  term: 2023 Fall
+  semester_zh: 2023-2024 秋季学期
+  semester: 2023-2024 Fall
+  summary: "Chapter slides, assembly code, review materials, past exams, and partial solutions."
+  summary_zh: 包含各章课件、汇编代码、复习资料、期末试卷与部分答案。
+  notes: "Similar format every year: data segment (ch7), 8259A init (ch10), 8255A/8253 init (ch11)."
+  notes_zh: 每年题型类似：数据段题（第7章）、8259A 初始化（第10章）、8255A/8253 初始化（第11章）。
+  resources:
+    - name: Past Exams Collection
+      name_zh: 往年试卷合集
+      type: exam
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/exams/past-exams-collection.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/exams/past-exams-collection.pdf"
+      updated_at: "2026-05-30"
+    - name: Past Final Exam 2019 A Partial Solution
+      name_zh: 2019年期末部分答案
+      type: exam
+      year: 2019
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/exams/past-final-exam-2019-A-partial-solution.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/exams/past-final-exam-2019-A-partial-solution.pdf"
+      updated_at: "2026-05-30"
+    - name: Past Final Exam 2019 A
+      name_zh: 2019年期末试卷
+      type: exam
+      year: 2019
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/exams/past-final-exam-2019-A.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/exams/past-final-exam-2019-A.pdf"
+      updated_at: "2026-05-30"
+    - name: Cube
+      name_zh: 立方程序
+      type: code
+      format: asm
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/code/cube.asm"
+      updated_at: "2026-05-30"
+    - name: Mirror
+      name_zh: 镜子程序
+      type: code
+      format: asm
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/code/mirror.asm"
+      updated_at: "2026-05-30"
+    - name: Square Alt
+      name_zh: 求平方程序
+      type: code
+      format: asm
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/code/square-alt.asm"
+      updated_at: "2026-05-30"
+    - name: Square
+      name_zh: 平方程序
+      type: code
+      format: asm
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/code/square.asm"
+      updated_at: "2026-05-30"
+    - name: Final Review
+      name_zh: 期末复习内容
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/review/final-review.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/review/final-review.pdf"
+      updated_at: "2026-05-30"
+    - name: Review Questions 1
+      name_zh: 复习题
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/review/review-questions-1.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/review/review-questions-1.pdf"
+      updated_at: "2026-05-30"
+    - name: Review Questions 2
+      name_zh: 复习题1
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/review/review-questions-2.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/review/review-questions-2.pdf"
+      updated_at: "2026-05-30"
+    - name: Review Questions 3
+      name_zh: 复习题2
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/review/review-questions-3.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/review/review-questions-3.pdf"
+      updated_at: "2026-05-30"
+    - name: Short Answer Review
+      name_zh: 简答题复习
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/review/short-answer-review.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/review/short-answer-review.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch1 Slides
+      name_zh: 第1章课件
+      type: slides
+      format: pptx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/slides/ch1-slides.pptx"
+      updated_at: "2026-05-30"
+    - name: Ch10 Slides
+      name_zh: 第10章课件
+      type: slides
+      format: pptx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/slides/ch10-slides.pptx"
+      updated_at: "2026-05-30"
+    - name: Ch11 Slides
+      name_zh: 第11章课件
+      type: slides
+      format: pptx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/slides/ch11-slides.pptx"
+      updated_at: "2026-05-30"
+    - name: Ch2 Slides
+      name_zh: 第2章课件
+      type: slides
+      format: pptx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/slides/ch2-slides.pptx"
+      updated_at: "2026-05-30"
+    - name: Ch3 Slides
+      name_zh: 第3章课件
+      type: slides
+      format: pptx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/slides/ch3-slides.pptx"
+      updated_at: "2026-05-30"
+    - name: Ch4 Slides
+      name_zh: 第4章课件
+      type: slides
+      format: pptx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/slides/ch4-slides.pptx"
+      updated_at: "2026-05-30"
+    - name: Ch6 Slides
+      name_zh: 第6章课件
+      type: slides
+      format: pptx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/slides/ch6-slides.pptx"
+      updated_at: "2026-05-30"
+    - name: Ch7 Slides
+      name_zh: 第7章课件
+      type: slides
+      format: pptx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/slides/ch7-slides.pptx"
+      updated_at: "2026-05-30"
+    - name: Ch9 Slides
+      name_zh: 第9章课件
+      type: slides
+      format: pptx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Principles%20of%20Microcomputer/2023-fall/slides/ch9-slides.pptx"
+      updated_at: "2026-05-30"
+
+- id: interchangeability
+  slug: interchangeability
+  title: Interchangeability and Geometric Measurement Technology
+  title_zh: 互换性与几何测量技术
+  term: 2023 Fall
+  semester_zh: 2023-2024 秋季学期
+  semester: 2023-2024 Fall
+  summary: Final exam paper with solutions and exercise workbook.
+  summary_zh: 包含期末试卷与答案、习题册。
+  resources:
+    - name: Past Final Exam 2022 A Solution
+      name_zh: 2022年期末试卷答案
+      type: exam
+      year: 2022
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Interchangeability%20and%20Geometric%20Measurement%20Technology/2023-fall/exams/past-final-exam-2022-A-solution.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Interchangeability%20and%20Geometric%20Measurement%20Technology/2023-fall/exams/past-final-exam-2022-A-solution.pdf"
+      updated_at: "2026-05-30"
+    - name: Past Final Exam 2022 A
+      name_zh: 2022年期末试卷
+      type: exam
+      year: 2022
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Interchangeability%20and%20Geometric%20Measurement%20Technology/2023-fall/exams/past-final-exam-2022-A.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Interchangeability%20and%20Geometric%20Measurement%20Technology/2023-fall/exams/past-final-exam-2022-A.pdf"
+      updated_at: "2026-05-30"
+    - name: Exercise Workbook
+      name_zh: 习题册
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Interchangeability%20and%20Geometric%20Measurement%20Technology/2023-fall/review/exercise-workbook.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Interchangeability%20and%20Geometric%20Measurement%20Technology/2023-fall/review/exercise-workbook.pdf"
+      updated_at: "2026-05-30"
+
+- id: mechanical-principles
+  slug: mechanical-principles
+  title: Mechanical Principles
+  title_zh: 机械原理
+  term: 2023 Fall
+  semester_zh: 2023-2024 秋季学期
+  semester: 2023-2024 Fall
+  summary: "Textbook notes, MOOC review, midterm exams with solutions, and mock exams."
+  summary_zh: 包含教材笔记、慕课复习题、期中试卷与答案、模拟试卷。
+  notes: Final exams are mainly from previous Mechanical Design Fundamentals courses. More short answer questions expected.
+  notes_zh: 期末试卷主要来源于以前机电上的机械设计基础课程，机械原理考试简答考察较多。
+  resources:
+    - name: Mock Exam A
+      name_zh: 模拟卷A
+      type: exam
+      format: doc
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Principles/2023-fall/exams/mock-exam-A.doc"
+      updated_at: "2026-05-30"
+    - name: Mock Exam B
+      name_zh: 模拟卷B
+      type: exam
+      format: doc
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Principles/2023-fall/exams/mock-exam-B.doc"
+      updated_at: "2026-05-30"
+    - name: Mock Exam C
+      name_zh: 模拟卷C
+      type: exam
+      format: doc
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Principles/2023-fall/exams/mock-exam-C.doc"
+      updated_at: "2026-05-30"
+    - name: Mock Exam D
+      name_zh: 模拟卷D
+      type: exam
+      format: doc
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Principles/2023-fall/exams/mock-exam-D.doc"
+      updated_at: "2026-05-30"
+    - name: Past Final Exam 2010 A Solution Mechanical Design Fundamentals
+      name_zh: 2010-2011机械设计基础A卷答案
+      type: exam
+      year: 2010
+      format: doc
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Principles/2023-fall/exams/past-final-exam-2010-A-solution-mechanical-design-fundamentals.doc"
+      updated_at: "2026-05-30"
+    - name: Past Final Exam 2010 B Solution Mechanical Design Fundamentals
+      name_zh: 2010-2011机械设计基础B卷答案
+      type: exam
+      year: 2010
+      format: doc
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Principles/2023-fall/exams/past-final-exam-2010-B-solution-mechanical-design-fundamentals.doc"
+      updated_at: "2026-05-30"
+    - name: Past Midterm Exam 2022
+      name_zh: 2022年期中试卷
+      type: exam
+      year: 2022
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Principles/2023-fall/exams/past-midterm-exam-2022.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Principles/2023-fall/exams/past-midterm-exam-2022.pdf"
+      updated_at: "2026-05-30"
+    - name: Past Midterm Exam 2023 Solution
+      name_zh: 2023年期中试卷答案
+      type: exam
+      year: 2023
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Principles/2023-fall/exams/past-midterm-exam-2023-solution.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Principles/2023-fall/exams/past-midterm-exam-2023-solution.pdf"
+      updated_at: "2026-05-30"
+    - name: Past Midterm Exam 2023
+      name_zh: 2023年期中试卷
+      type: exam
+      year: 2023
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Principles/2023-fall/exams/past-midterm-exam-2023.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Principles/2023-fall/exams/past-midterm-exam-2023.pdf"
+      updated_at: "2026-05-30"
+    - name: Mooc Fill Blank Short Answer
+      name_zh: 慕课填空简答题
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Principles/2023-fall/review/mooc-fill-blank-short-answer.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Principles/2023-fall/review/mooc-fill-blank-short-answer.pdf"
+      updated_at: "2026-05-30"
+    - name: Textbook Exercises Summary
+      name_zh: 课后习题汇总
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Principles/2023-fall/review/textbook-exercises-summary.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Principles/2023-fall/review/textbook-exercises-summary.pdf"
+      updated_at: "2026-05-30"
+    - name: Textbook Notes And Exercises
+      name_zh: 笔记与课后习题
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Principles/2023-fall/review/textbook-notes-and-exercises.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechanical%20Principles/2023-fall/review/textbook-notes-and-exercises.pdf"
+      updated_at: "2026-05-30"
+
+- id: simulation
+  slug: simulation
+  title: Computer Simulation of Mechatronic Control Systems
+  title_zh: 机电控制系统仿真
+  term: 2024 Spring
+  semester_zh: 2023-2024 春季学期
+  semester: 2023-2024 Spring
+  summary: "Chapter assignments, past exams (with solutions), and review materials."
+  summary_zh: 包含各章作业、期末试卷（含答案）与复习资料。
+  resources:
+    - name: Past Final Exam 2020 A With Solution
+      name_zh: 2020年期末试卷含答案
+      type: exam
+      year: 2020
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/exams/past-final-exam-2020-A-with-solution.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/exams/past-final-exam-2020-A-with-solution.pdf"
+      updated_at: "2026-05-30"
+    - name: Past Final Exam 2024 A Partial
+      name_zh: 2024年期末试卷(部分)
+      type: exam
+      year: 2024
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/exams/past-final-exam-2024-A-partial.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/exams/past-final-exam-2024-A-partial.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch1 Assignment
+      name_zh: 第1章作业
+      type: assignment
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/assignments/ch1-assignment.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/assignments/ch1-assignment.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch2 Assignment
+      name_zh: 第2章作业
+      type: assignment
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/assignments/ch2-assignment.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/assignments/ch2-assignment.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch3 Assignment
+      name_zh: 第3章作业
+      type: assignment
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/assignments/ch3-assignment.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/assignments/ch3-assignment.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch4 Assignment
+      name_zh: 第4章作业
+      type: assignment
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/assignments/ch4-assignment.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/assignments/ch4-assignment.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch6 Assignment
+      name_zh: 第6章作业
+      type: assignment
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/assignments/ch6-assignment.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/assignments/ch6-assignment.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch7 Assignment
+      name_zh: 第7章作业
+      type: assignment
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/assignments/ch7-assignment.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/assignments/ch7-assignment.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch8 Assignment
+      name_zh: 第8章作业
+      type: assignment
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/assignments/ch8-assignment.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/assignments/ch8-assignment.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch9 Assignment
+      name_zh: 第9章作业
+      type: assignment
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/assignments/ch9-assignment.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/assignments/ch9-assignment.pdf"
+      updated_at: "2026-05-30"
+    - name: Review Questions
+      name_zh: 复习题
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/review/review-questions.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/review/review-questions.pdf"
+      updated_at: "2026-05-30"
+    - name: Review Summary
+      name_zh: 复习总结
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/review/review-summary.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Computer%20Simulation%20of%20Mechatronic%20Control%20Systems/2024-spring/review/review-summary.pdf"
+      updated_at: "2026-05-30"
+
+- id: engineering-materials
+  slug: engineering-materials
+  title: Engineering Materials and Mechanical Manufacturing
+  title_zh: 工程材料与机械制造
+  term: 2024 Spring
+  semester_zh: 2023-2024 春季学期
+  semester: 2023-2024 Spring
+  summary: Chapter slides and hot-working review questions.
+  summary_zh: 包含各章课件与热加工复习题。
+  resources:
+    - name: Hot Working Review Questions
+      name_zh: 热加工基础复习题
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Materials%20and%20Mechanical%20Manufacturing/2024-spring/review/hot-working-review-questions.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Materials%20and%20Mechanical%20Manufacturing/2024-spring/review/hot-working-review-questions.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch1 Slides
+      name_zh: 第1章课件
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Materials%20and%20Mechanical%20Manufacturing/2024-spring/slides/ch1-slides.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Materials%20and%20Mechanical%20Manufacturing/2024-spring/slides/ch1-slides.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch10 Slides
+      name_zh: 第10章 机械加工工艺过程
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Materials%20and%20Mechanical%20Manufacturing/2024-spring/slides/ch10-slides.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Materials%20and%20Mechanical%20Manufacturing/2024-spring/slides/ch10-slides.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch2 Slides
+      name_zh: 第2章课件
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Materials%20and%20Mechanical%20Manufacturing/2024-spring/slides/ch2-slides.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Materials%20and%20Mechanical%20Manufacturing/2024-spring/slides/ch2-slides.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch3 Slides
+      name_zh: 第3章课件
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Materials%20and%20Mechanical%20Manufacturing/2024-spring/slides/ch3-slides.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Materials%20and%20Mechanical%20Manufacturing/2024-spring/slides/ch3-slides.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch4 Slides
+      name_zh: 第4章课件
+      type: slides
+      format: ppt
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Materials%20and%20Mechanical%20Manufacturing/2024-spring/slides/ch4-slides.ppt"
+      updated_at: "2026-05-30"
+    - name: Ch8 Slides
+      name_zh: 第8章 金属切削加工基础
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Materials%20and%20Mechanical%20Manufacturing/2024-spring/slides/ch8-slides.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Materials%20and%20Mechanical%20Manufacturing/2024-spring/slides/ch8-slides.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch9 Slides
+      name_zh: 第9章 切削加工方法
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Materials%20and%20Mechanical%20Manufacturing/2024-spring/slides/ch9-slides.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Materials%20and%20Mechanical%20Manufacturing/2024-spring/slides/ch9-slides.pdf"
+      updated_at: "2026-05-30"
+
+- id: microcontroller
+  slug: microcontroller
+  title: Microcontroller Principles and Interface Technology
+  title_zh: 单片机原理及接口技术
+  term: 2024 Spring
+  semester_zh: 2023-2024 春季学期
+  semester: 2023-2024 Spring
+  summary: "Chapter slides (1–8), review questions, and past final exams."
+  summary_zh: 包含各章课件（第1~8章）、复习题与历年期末试卷。
+  notes: Exam types are similar every year. Programming questions are basically the same with changed numbers.
+  notes_zh: 每年卷子题型类似，编程题基本一样，改改数字罢了。复习题里的简答题比较有价值。
+  resources:
+    - name: Past Final Exam 2023 A
+      name_zh: 2023年期末试卷
+      type: exam
+      year: 2023
+      format: zip
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Microcontroller%20Principles%20and%20Interface%20Technology/2024-spring/exams/past-final-exam-2023-A.zip"
+      updated_at: "2026-05-30"
+    - name: Past Final Exam 2024 A
+      name_zh: 2024年期末试卷
+      type: exam
+      year: 2024
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Microcontroller%20Principles%20and%20Interface%20Technology/2024-spring/exams/past-final-exam-2024-A.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Microcontroller%20Principles%20and%20Interface%20Technology/2024-spring/exams/past-final-exam-2024-A.pdf"
+      updated_at: "2026-05-30"
+    - name: Review Questions
+      name_zh: 复习题
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Microcontroller%20Principles%20and%20Interface%20Technology/2024-spring/review/review-questions.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Microcontroller%20Principles%20and%20Interface%20Technology/2024-spring/review/review-questions.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch1 Slides
+      name_zh: 第1章课件
+      type: slides
+      format: pptx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Microcontroller%20Principles%20and%20Interface%20Technology/2024-spring/slides/ch1-slides.pptx"
+      updated_at: "2026-05-30"
+    - name: Ch2 Slides
+      name_zh: 第2章课件
+      type: slides
+      format: pptx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Microcontroller%20Principles%20and%20Interface%20Technology/2024-spring/slides/ch2-slides.pptx"
+      updated_at: "2026-05-30"
+    - name: Ch3 Slides
+      name_zh: 第3章课件
+      type: slides
+      format: pptx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Microcontroller%20Principles%20and%20Interface%20Technology/2024-spring/slides/ch3-slides.pptx"
+      updated_at: "2026-05-30"
+    - name: Ch4 Slides
+      name_zh: 第4章课件
+      type: slides
+      format: pptx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Microcontroller%20Principles%20and%20Interface%20Technology/2024-spring/slides/ch4-slides.pptx"
+      updated_at: "2026-05-30"
+    - name: Ch5 Slides
+      name_zh: 第5章课件
+      type: slides
+      format: pptx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Microcontroller%20Principles%20and%20Interface%20Technology/2024-spring/slides/ch5-slides.pptx"
+      updated_at: "2026-05-30"
+    - name: Ch6 Slides
+      name_zh: 第6章课件
+      type: slides
+      format: pptx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Microcontroller%20Principles%20and%20Interface%20Technology/2024-spring/slides/ch6-slides.pptx"
+      updated_at: "2026-05-30"
+    - name: Ch7 Slides
+      name_zh: 第7章课件
+      type: slides
+      format: pptx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Microcontroller%20Principles%20and%20Interface%20Technology/2024-spring/slides/ch7-slides.pptx"
+      updated_at: "2026-05-30"
+    - name: Ch8 Slides
+      name_zh: 第8章课件
+      type: slides
+      format: pptx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Microcontroller%20Principles%20and%20Interface%20Technology/2024-spring/slides/ch8-slides.pptx"
+      updated_at: "2026-05-30"
+
+- id: sensor-testing
+  slug: sensor-testing
+  title: Sensor and Testing Technology
+  title_zh: 传感器与测试技术（双语）
+  term: 2024 Spring
+  semester_zh: 2023-2024 春季学期
+  semester: 2023-2024 Spring
+  summary: "Slides from two instructors (Ren Juan & Yan Bei), review questions, past exams, and assignments."
+  summary_zh: "包含两位老师（任娟 & 阎贝）的课件、复习题、期末试卷与课程作业。"
+  notes: Focus review on textbook exercises. Short answer questions may be more flexible.
+  notes_zh: 复习以课后习题为主，选填和计算基本出自习题和例题，简答题可能更灵活。
+  resources:
+    - name: Past Final Exam 2019 A
+      name_zh: 2019-2020期末试卷
+      type: exam
+      year: 2019
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/exams/past-final-exam-2019-A.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/exams/past-final-exam-2019-A.pdf"
+      updated_at: "2026-05-30"
+    - name: Past Final Exam 2024 A
+      name_zh: 2024年期末试卷
+      type: exam
+      year: 2024
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/exams/past-final-exam-2024-A.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/exams/past-final-exam-2024-A.pdf"
+      updated_at: "2026-05-30"
+    - name: Past Midterm Exam 2024
+      name_zh: 2024年期中试卷
+      type: exam
+      year: 2024
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/exams/past-midterm-exam-2024.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/exams/past-midterm-exam-2024.pdf"
+      updated_at: "2026-05-30"
+    - name: Assignments
+      name_zh: 课程作业
+      type: assignment
+      format: zip
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/assignments/assignments.zip"
+      updated_at: "2026-05-30"
+    - name: Review Questions Ocr
+      name_zh: 复习题(OCR版)
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/review/review-questions-ocr.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/review/review-questions-ocr.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch2
+      name_zh: 任娟老师-第2章
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/ch2.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/ch2.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch4 Part1
+      name_zh: 任娟老师-第4章第一次课
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/ch4-part1.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/ch4-part1.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch4 Part2
+      name_zh: 任娟老师-第4章第二次课
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/ch4-part2.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/ch4-part2.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch5
+      name_zh: 任娟老师-第5章
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/ch5.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/ch5.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch6
+      name_zh: 任娟老师-第6章
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/ch6.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/ch6.pdf"
+      updated_at: "2026-05-30"
+    - name: Chapter 1 Basic Concepts
+      name_zh: 任娟老师-第1章 测量技术基础
+      type: slides
+      format: pptx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/chapter-1-basic-concepts.pptx"
+      updated_at: "2026-05-30"
+    - name: Chapter 1 Section 4 5 Part2
+      name_zh: 任娟老师-第1章第4-5节
+      type: slides
+      format: pptx
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/chapter-1-section-4-5-part2.pptx"
+      updated_at: "2026-05-30"
+    - name: Chapter 10 Magnetoelectric Sensors
+      name_zh: 任娟老师-第10章 磁电传感器
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/chapter-10-magnetoelectric-sensors.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/chapter-10-magnetoelectric-sensors.pdf"
+      updated_at: "2026-05-30"
+    - name: Chapter 11 Photoelectric Sensors
+      name_zh: 任娟老师-第11章 光电传感器
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/chapter-11-photoelectric-sensors.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/chapter-11-photoelectric-sensors.pdf"
+      updated_at: "2026-05-30"
+    - name: Chapter 12 Thermoelectric Sensor
+      name_zh: 任娟老师-第12章 热电传感器
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/chapter-12-thermoelectric-sensor.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/chapter-12-thermoelectric-sensor.pdf"
+      updated_at: "2026-05-30"
+    - name: Chapter 7 Inductive Sensors
+      name_zh: 阎贝老师-第7章 电感传感器
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/chapter-7-inductive-sensors.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/chapter-7-inductive-sensors.pdf"
+      updated_at: "2026-05-30"
+    - name: Chapter 8 Capacitive Sensors
+      name_zh: 阎贝老师-第8章 电容传感器
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/chapter-8-capacitive-sensors.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/chapter-8-capacitive-sensors.pdf"
+      updated_at: "2026-05-30"
+    - name: Chapter 9 Piezoelectric Sensors
+      name_zh: 阎贝老师-第9章 压电传感器
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/chapter-9-piezoelectric-sensors.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/ren-juan/chapter-9-piezoelectric-sensors.pdf"
+      updated_at: "2026-05-30"
+    - name: Chapter 1 Basic Concepts
+      name_zh: 阎贝老师-第1章 测量技术基础
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/yan-bei/chapter-1-basic-concepts.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/yan-bei/chapter-1-basic-concepts.pdf"
+      updated_at: "2026-05-30"
+    - name: Chapter 2 Signal Analysis
+      name_zh: 阎贝老师-第2章 信号分析
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/yan-bei/chapter-2-signal-analysis.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/yan-bei/chapter-2-signal-analysis.pdf"
+      updated_at: "2026-05-30"
+    - name: Chapter 3 Signal Conditioning
+      name_zh: 阎贝老师-第3章 信号调理
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/yan-bei/chapter-3-signal-conditioning.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/yan-bei/chapter-3-signal-conditioning.pdf"
+      updated_at: "2026-05-30"
+    - name: Chapter 4 Measurement System Ocr
+      name_zh: 阎贝老师-第4章 测量系统特性(OCR)
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/yan-bei/chapter-4-measurement-system-ocr.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/yan-bei/chapter-4-measurement-system-ocr.pdf"
+      updated_at: "2026-05-30"
+    - name: Chapter 4 Measurement System
+      name_zh: 阎贝老师-第4章 测量系统特性
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/yan-bei/chapter-4-measurement-system.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/yan-bei/chapter-4-measurement-system.pdf"
+      updated_at: "2026-05-30"
+    - name: Chapter 5 Sensor Technologies
+      name_zh: 阎贝老师-第5章 传感器技术概论
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/yan-bei/chapter-5-sensor-technologies.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/yan-bei/chapter-5-sensor-technologies.pdf"
+      updated_at: "2026-05-30"
+    - name: Chapter 6 Resistance Strain Sensors
+      name_zh: 阎贝老师-第6章 电阻应变传感器
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/yan-bei/chapter-6-resistance-strain-sensors.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/yan-bei/chapter-6-resistance-strain-sensors.pdf"
+      updated_at: "2026-05-30"
+    - name: Chapter 7 Inductive Sensors
+      name_zh: 阎贝老师-第7章 电感传感器
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/yan-bei/chapter-7-inductive-sensors.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/yan-bei/chapter-7-inductive-sensors.pdf"
+      updated_at: "2026-05-30"
+    - name: Chapter 8 Capacitive Sensors
+      name_zh: 阎贝老师-第8章 电容传感器
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/yan-bei/chapter-8-capacitive-sensors.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/yan-bei/chapter-8-capacitive-sensors.pdf"
+      updated_at: "2026-05-30"
+    - name: Chapter 9 Piezoelectric Sensors
+      name_zh: 阎贝老师-第9章 压电传感器
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/yan-bei/chapter-9-piezoelectric-sensors.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Sensor%20and%20Testing%20Technology%20(Bilingual)/2024-spring/slides/yan-bei/chapter-9-piezoelectric-sensors.pdf"
+      updated_at: "2026-05-30"
+
+- id: chassis-theory
+  slug: chassis-theory
+  title: Chassis Theory and Performance of Engineering Machinery
+  title_zh: 工程机械底盘理论与性能
+  term: 2024 Spring
+  semester_zh: 2023-2024 春季学期
+  semester: 2023-2024 Spring
+  summary: "Exam materials, assignment answers, keypoint summaries, and practice questions."
+  summary_zh: 包含考试资料、作业答案、重点总结与练习题。
+  resources:
+    - name: Past Exam Partial Fill Blank
+      name_zh: 部分填空和简答
+      type: exam
+      format: png
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Chassis%20Theory%20and%20Performance%20of%20Engineering%20Machinery/2024-spring/exams/past-exam-partial-fill-blank.png"
+      updated_at: "2026-05-30"
+    - name: Past Exam Partial Multiple Choice
+      name_zh: 部分选填
+      type: exam
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Chassis%20Theory%20and%20Performance%20of%20Engineering%20Machinery/2024-spring/exams/past-exam-partial-multiple-choice.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Chassis%20Theory%20and%20Performance%20of%20Engineering%20Machinery/2024-spring/exams/past-exam-partial-multiple-choice.pdf"
+      updated_at: "2026-05-30"
+    - name: Past Exam Short Answer Solution
+      name_zh: 简答题答案
+      type: exam
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Chassis%20Theory%20and%20Performance%20of%20Engineering%20Machinery/2024-spring/exams/past-exam-short-answer-solution.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Chassis%20Theory%20and%20Performance%20of%20Engineering%20Machinery/2024-spring/exams/past-exam-short-answer-solution.pdf"
+      updated_at: "2026-05-30"
+    - name: Assignment Answers
+      name_zh: 作业答案
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Chassis%20Theory%20and%20Performance%20of%20Engineering%20Machinery/2024-spring/review/assignment-answers.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Chassis%20Theory%20and%20Performance%20of%20Engineering%20Machinery/2024-spring/review/assignment-answers.pdf"
+      updated_at: "2026-05-30"
+    - name: Keypoint Overview 2024
+      name_zh: 知识点概述-2024年
+      type: review
+      year: 2024
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Chassis%20Theory%20and%20Performance%20of%20Engineering%20Machinery/2024-spring/review/keypoint-overview-2024.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Chassis%20Theory%20and%20Performance%20of%20Engineering%20Machinery/2024-spring/review/keypoint-overview-2024.pdf"
+      updated_at: "2026-05-30"
+    - name: Keypoint Summary
+      name_zh: 重点总结
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Chassis%20Theory%20and%20Performance%20of%20Engineering%20Machinery/2024-spring/review/keypoint-summary.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Chassis%20Theory%20and%20Performance%20of%20Engineering%20Machinery/2024-spring/review/keypoint-summary.pdf"
+      updated_at: "2026-05-30"
+    - name: Keypoints 2023
+      name_zh: 2023年知识点
+      type: review
+      year: 2023
+      format: jpg
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Chassis%20Theory%20and%20Performance%20of%20Engineering%20Machinery/2024-spring/review/keypoints-2023.jpg"
+      updated_at: "2026-05-30"
+    - name: Practice Questions
+      name_zh: 练习题
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Chassis%20Theory%20and%20Performance%20of%20Engineering%20Machinery/2024-spring/review/practice-questions.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Chassis%20Theory%20and%20Performance%20of%20Engineering%20Machinery/2024-spring/review/practice-questions.pdf"
+      updated_at: "2026-05-30"
+    - name: Review Questions Solution
+      name_zh: 复习题答案
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Chassis%20Theory%20and%20Performance%20of%20Engineering%20Machinery/2024-spring/review/review-questions-solution.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Chassis%20Theory%20and%20Performance%20of%20Engineering%20Machinery/2024-spring/review/review-questions-solution.pdf"
+      updated_at: "2026-05-30"
+    - name: Review Questions
+      name_zh: 复习题
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Chassis%20Theory%20and%20Performance%20of%20Engineering%20Machinery/2024-spring/review/review-questions.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Chassis%20Theory%20and%20Performance%20of%20Engineering%20Machinery/2024-spring/review/review-questions.pdf"
+      updated_at: "2026-05-30"
+
+- id: mechanical-design-2
+  slug: mechanical-design-2
+  title: Fundamentals of Mechanical Design II
+  title_zh: 机械设计基础（二）
+  term: 2024 Spring
+  semester_zh: 2023-2024 春季学期
+  semester: 2023-2024 Spring
+  summary: "Textbook notes, reducer design project, review materials, and mock exams with solutions."
+  summary_zh: 包含教材笔记、减速器设计项目、复习资料与多套模拟试卷及答案。
+  resources:
+    - name: Mock Exam 1 A Solution
+      name_zh: 模拟卷1 A卷答案
+      type: exam
+      format: doc
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/exams/mock-exam-1-A-solution.doc"
+      updated_at: "2026-05-30"
+    - name: Mock Exam 1 A
+      name_zh: 模拟卷1 A卷
+      type: exam
+      format: doc
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/exams/mock-exam-1-A.doc"
+      updated_at: "2026-05-30"
+    - name: Mock Exam 2 B Solution
+      name_zh: 模拟卷2 B卷答案
+      type: exam
+      format: doc
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/exams/mock-exam-2-B-solution.doc"
+      updated_at: "2026-05-30"
+    - name: Mock Exam 2 B
+      name_zh: 模拟卷2 B卷
+      type: exam
+      format: doc
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/exams/mock-exam-2-B.doc"
+      updated_at: "2026-05-30"
+    - name: Mock Exam 3 A Solution
+      name_zh: 模拟卷3 A卷答案
+      type: exam
+      format: doc
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/exams/mock-exam-3-A-solution.doc"
+      updated_at: "2026-05-30"
+    - name: Mock Exam 3 A
+      name_zh: 模拟卷3 A卷
+      type: exam
+      format: doc
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/exams/mock-exam-3-A.doc"
+      updated_at: "2026-05-30"
+    - name: Mock Exam 4 B Solution
+      name_zh: 模拟卷4 B卷答案
+      type: exam
+      format: doc
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/exams/mock-exam-4-B-solution.doc"
+      updated_at: "2026-05-30"
+    - name: Mock Exam 4 B
+      name_zh: 模拟卷4 B卷
+      type: exam
+      format: doc
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/exams/mock-exam-4-B.doc"
+      updated_at: "2026-05-30"
+    - name: Mock Exam 5 A Solution
+      name_zh: 模拟卷5 A卷答案
+      type: exam
+      format: doc
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/exams/mock-exam-5-A-solution.doc"
+      updated_at: "2026-05-30"
+    - name: Mock Exam 5 A
+      name_zh: 模拟卷5 A卷
+      type: exam
+      format: doc
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/exams/mock-exam-5-A.doc"
+      updated_at: "2026-05-30"
+    - name: Mock Exam Solution
+      name_zh: 综合模拟卷答案
+      type: exam
+      format: doc
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/exams/mock-exam-solution.doc"
+      updated_at: "2026-05-30"
+    - name: Mock Exam
+      name_zh: 综合模拟卷
+      type: exam
+      format: doc
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/exams/mock-exam.doc"
+      updated_at: "2026-05-30"
+    - name: Past Final Exam 2018 A
+      name_zh: 2018-2019期末试卷
+      type: exam
+      year: 2018
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/exams/past-final-exam-2018-A.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/exams/past-final-exam-2018-A.pdf"
+      updated_at: "2026-05-30"
+    - name: Reducer Design Report
+      name_zh: 减速器设计说明书
+      type: project
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/project/reducer-design-report.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/project/reducer-design-report.pdf"
+      updated_at: "2026-05-30"
+    - name: Mechanical Design Fundamentals 7th Edition Notes
+      name_zh: 机械设计基础教材笔记
+      type: book
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/book/mechanical-design-fundamentals-7th-edition-notes.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/book/mechanical-design-fundamentals-7th-edition-notes.pdf"
+      updated_at: "2026-05-30"
+    - name: Bolt Classification
+      name_zh: 螺栓分类
+      type: review
+      format: png
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/review/bolt-classification.png"
+      updated_at: "2026-05-30"
+    - name: Bolt Strength Calculation
+      name_zh: 螺栓连接强度计算
+      type: review
+      format: png
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/review/bolt-strength-calculation.png"
+      updated_at: "2026-05-30"
+    - name: Design Topics Answer
+      name_zh: 专题复习答案
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/review/essay-topics/design-topics-answer.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/review/essay-topics/design-topics-answer.pdf"
+      updated_at: "2026-05-30"
+    - name: Design Topics
+      name_zh: 专题复习
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/review/essay-topics/design-topics.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/review/essay-topics/design-topics.pdf"
+      updated_at: "2026-05-30"
+    - name: Multiple Choice Summary
+      name_zh: 期末选填整理
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/review/multiple-choice-summary.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/review/multiple-choice-summary.pdf"
+      updated_at: "2026-05-30"
+    - name: Review Questions
+      name_zh: 复习题
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/review/review-questions.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/review/review-questions.pdf"
+      updated_at: "2026-05-30"
+    - name: Review Summary
+      name_zh: 复习总结
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/review/review-summary.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Fundamentals%20of%20Mechanical%20Design%20II/2024-spring/review/review-summary.pdf"
+      updated_at: "2026-05-30"
+
+- id: typical-control-systems
+  slug: typical-control-systems
+  title: Typical Control Systems of Engineering Machinery
+  title_zh: 工程机械典型控制系统
+  term: 2024 Fall
+  semester_zh: 2024-2025 秋季学期
+  semester: 2024-2025 Fall
+  summary: "Chapter slides, assignments with answers for typical control systems."
+  summary_zh: 包含各章课件与作业及答案。
+  notes: "Exam questions basically come from homework."
+  notes_zh: 考试基本上都从作业题来。
+  resources:
+    - name: Ch1-2 Slides
+      name_zh: 第1-2章课件
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Typical%20Control%20Systems%20of%20Engineering%20Machinery/2024-fall/slides/ch1-2-slides.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Typical%20Control%20Systems%20of%20Engineering%20Machinery/2024-fall/slides/ch1-2-slides.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch3 Slides
+      name_zh: 第3章课件
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Typical%20Control%20Systems%20of%20Engineering%20Machinery/2024-fall/slides/ch3-slides.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Typical%20Control%20Systems%20of%20Engineering%20Machinery/2024-fall/slides/ch3-slides.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch5 Slides
+      name_zh: 第5章课件
+      type: slides
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Typical%20Control%20Systems%20of%20Engineering%20Machinery/2024-fall/slides/ch5-slides.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Typical%20Control%20Systems%20of%20Engineering%20Machinery/2024-fall/slides/ch5-slides.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch1-2 Assignment
+      name_zh: 第1-2章作业
+      type: assignment
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Typical%20Control%20Systems%20of%20Engineering%20Machinery/2024-fall/assignments/ch1-2-assignment.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Typical%20Control%20Systems%20of%20Engineering%20Machinery/2024-fall/assignments/ch1-2-assignment.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch3 Assignment
+      name_zh: 第3章作业
+      type: assignment
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Typical%20Control%20Systems%20of%20Engineering%20Machinery/2024-fall/assignments/ch3-assignment.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Typical%20Control%20Systems%20of%20Engineering%20Machinery/2024-fall/assignments/ch3-assignment.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch3 Assignment Answer
+      name_zh: 第3章作业答案
+      type: assignment
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Typical%20Control%20Systems%20of%20Engineering%20Machinery/2024-fall/assignments/ch3-assignment-answer.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Typical%20Control%20Systems%20of%20Engineering%20Machinery/2024-fall/assignments/ch3-assignment-answer.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch4-6 Assignment Answer
+      name_zh: 第4、6章作业答案
+      type: assignment
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Typical%20Control%20Systems%20of%20Engineering%20Machinery/2024-fall/assignments/ch4-6-assignment-answer.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Typical%20Control%20Systems%20of%20Engineering%20Machinery/2024-fall/assignments/ch4-6-assignment-answer.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch5 Assignment
+      name_zh: 第5章作业
+      type: assignment
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Typical%20Control%20Systems%20of%20Engineering%20Machinery/2024-fall/assignments/ch5-assignment.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Typical%20Control%20Systems%20of%20Engineering%20Machinery/2024-fall/assignments/ch5-assignment.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch5 Assignment Answer
+      name_zh: 第5章作业答案
+      type: assignment
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Typical%20Control%20Systems%20of%20Engineering%20Machinery/2024-fall/assignments/ch5-assignment-answer.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Typical%20Control%20Systems%20of%20Engineering%20Machinery/2024-fall/assignments/ch5-assignment-answer.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch7-8 Assignment Answer
+      name_zh: 第7、8章作业答案
+      type: assignment
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Typical%20Control%20Systems%20of%20Engineering%20Machinery/2024-fall/assignments/ch7-8-assignment-answer.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Typical%20Control%20Systems%20of%20Engineering%20Machinery/2024-fall/assignments/ch7-8-assignment-answer.pdf"
+      updated_at: "2026-05-30"
+    - name: Ch11 Assignment Answer
+      name_zh: 第11章作业答案
+      type: assignment
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Typical%20Control%20Systems%20of%20Engineering%20Machinery/2024-fall/assignments/ch11-assignment-answer.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Typical%20Control%20Systems%20of%20Engineering%20Machinery/2024-fall/assignments/ch11-assignment-answer.pdf"
+      updated_at: "2026-05-30"
+- id: mechatronics
+  slug: mechatronics
+  title: Mechatronics System
+  title_zh: 机电一体化系统
+  term: 2024 Fall
+  semester_zh: 2024-2025 秋季学期
+  semester: 2024-2025 Fall
+  summary: Final review materials for Mechatronics System.
+  summary_zh: 包含机电一体化系统期末复习资料。
+  resources:
+    - name: Final Review
+      name_zh: 期末复习资料
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechatronics%20System/2024-fall/review/final-review.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Mechatronics%20System/2024-fall/review/final-review.pdf"
+      updated_at: "2026-05-30"
+
+- id: engineering-economics
+  slug: engineering-economics
+  title: Engineering Economics and Management
+  title_zh: 工程经济与管理
+  term: 2025 Spring
+  semester_zh: 2024-2025 春季学期
+  semester: 2024-2025 Spring
+  summary: "Past exam, in-class quiz, textbook exercises with answers, and assignment answers."
+  summary_zh: 包含期末试卷、随堂测试、教材试题含答案与作业答案。
+  resources:
+    - name: In Class Quiz
+      name_zh: 随堂测试
+      type: exam
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Economics%20and%20Management/2025-spring/exams/in-class-quiz.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Economics%20and%20Management/2025-spring/exams/in-class-quiz.pdf"
+      updated_at: "2026-05-30"
+    - name: Past Final Exam
+      name_zh: 期末试卷
+      type: exam
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Economics%20and%20Management/2025-spring/exams/past-final-exam.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Economics%20and%20Management/2025-spring/exams/past-final-exam.pdf"
+      updated_at: "2026-05-30"
+    - name: Textbook Exercises With Answers
+      name_zh: 教材试题含答案
+      type: exam
+      format: rar
+      preview_url: ""
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Economics%20and%20Management/2025-spring/exams/textbook-exercises-with-answers.rar"
+      updated_at: "2026-05-30"
+    - name: Assignment Answers
+      name_zh: 作业答案
+      type: review
+      format: pdf
+      preview_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Economics%20and%20Management/2025-spring/review/assignment-answers.pdf"
+      download_url: "https://cdn.jsdelivr.net/gh/YOUR_GITHUB_USERNAME/course-assets@main/Engineering%20Economics%20and%20Management/2025-spring/review/assignment-answers.pdf"
+      updated_at: "2026-05-30"

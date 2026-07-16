@@ -1,0 +1,66 @@
+{% if include.type == 'movie' %}
+  {% assign sorted_items = include.items | sort: 'watched_on' | reverse %}
+{% else %}
+  {% assign sorted_items = include.items | sort: 'started' | reverse %}
+{% endif %}
+
+{% if sorted_items and sorted_items.size > 0 %}
+  <div class="media-grid">
+    {% for item in sorted_items %}
+      {% assign display_title = item.title %}
+      {% assign display_creator = item.creator %}
+      {% if include.current_lang == 'zh' %}
+        {% assign display_title = item.title_zh | default: item.title %}
+        {% assign display_creator = item.creator_zh | default: item.creator %}
+      {% endif %}
+      {% assign status_key = item.status | downcase | strip %}
+      {% assign status_labels = include.translations.status %}
+      {% assign status_label = status_labels[status_key] | default: item.status %}
+      {% if include.type == 'movie' %}
+        {% assign creator_label = include.translations.director %}
+      {% else %}
+        {% assign creator_label = include.translations.author %}
+      {% endif %}
+
+      {% if item.external_url %}
+        <a class="media-card media-card--link" href="{{ item.external_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ display_title }}">
+      {% else %}
+        <article class="media-card">
+      {% endif %}
+
+        {% if item.cover %}
+          <img class="media-card__cover" src="{{ item.cover | relative_url }}" alt="{{ display_title }} cover" loading="lazy">
+        {% else %}
+          <div class="media-card__cover media-card__placeholder" role="img" aria-label="{{ display_title }} cover placeholder">
+            <span aria-hidden="true">{% if include.type == 'movie' %}🎞️{% else %}📖{% endif %}</span>
+          </div>
+        {% endif %}
+
+        <div class="media-card__body">
+          <h3 class="media-card__title">{{ display_title }}</h3>
+          {% if display_creator %}
+            <p class="media-card__meta"><span class="sr-only">{{ creator_label }}: </span>{{ display_creator }}</p>
+          {% endif %}
+          {% if item.year %}
+            <p class="media-card__meta"><span class="sr-only">{{ include.translations.year }}: </span>{{ item.year }}</p>
+          {% endif %}
+          {% if item.rating %}
+            <p class="media-card__rating" aria-label="{{ include.translations.rating }}: {{ item.rating }} / 5">
+              <span aria-hidden="true">★</span> {{ item.rating }}/5
+            </p>
+          {% endif %}
+          {% if item.status %}
+            <span class="media-card__status">{{ status_label }}</span>
+          {% endif %}
+        </div>
+
+      {% if item.external_url %}
+        </a>
+      {% else %}
+        </article>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="media-empty">{{ include.empty_text }}</p>
+{% endif %}

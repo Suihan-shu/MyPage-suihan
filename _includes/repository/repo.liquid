@@ -1,0 +1,26 @@
+<div class="repo">
+  {% assign repo_url = "https://github.com/" | append: include.repository.name %}
+  {% assign repo_icon = "fab fa-github fa-lg" %}
+  
+  {% if include.repository.platform == 'gitee' %}
+    {% assign repo_url = "https://gitee.com/" | append: include.repository.name %}
+    {% assign repo_icon = "fab fa-git-alt fa-lg" %}
+    <!-- FontAwesome Free doesn't have a specific Gitee icon, git-alt is a reasonable fallback or custom SVG needed -->
+  {% endif %}
+
+  <a href="{{ repo_url }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+    <div class="card repo-card repo-card--repository p-3">
+      <div class="card-body">
+        <h5 class="card-title repo-card-title">
+          <i class="{{ repo_icon }}"></i> {{ include.repository.name }}
+        </h5>
+        <div class="card-text">
+          {% for tag in include.repository.tags %}
+            {% assign tag_color = site.data.tags[tag] | default: 'secondary' %}
+            <span class="badge badge-{{ tag_color }}">{{ tag }}</span>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
