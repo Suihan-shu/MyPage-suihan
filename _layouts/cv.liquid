@@ -21,8 +21,10 @@ layout: default
         </a>
       {% endif %}
     </h1>
-    {% assign cv_desc = cv.description | default: cv.副标题 | default: page.description %}
-    {% if cv_desc and cv_desc != '' %}<p class="post-description">{{ cv_desc }}</p>{% endif %}
+    {% assign cv_desc = cv.description | default: cv.副标题 %}
+    {% if cv_desc and cv_desc != '' and cv_desc.first == nil %}
+      <p class="post-description">{{ cv_desc }}</p>
+    {% endif %}
   </header>
 
   <article>
