@@ -17,7 +17,6 @@
       entries.forEach(item => {
         yaml += `- id: "${item.id || ''}"\n`;
         yaml += `  date: "${item.date || ''}"\n`;
-        // 多行 content 转义
         const content = (item.content || '').replace(/\r\n/g, '\n');
         if (content.includes('\n')) {
           yaml += `  content: >-\n`;
@@ -93,35 +92,27 @@
   function renderMarkdown(md) {
     if (!md) return '';
     let html = md
-      // 转义原生 HTML 特殊字符
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
-      // 标题
       .replace(/^### (.*$)/gim, '<h3>$1</h3>')
       .replace(/^## (.*$)/gim, '<h2>$1</h2>')
       .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-      // 粗体、斜体、删除线
       .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
       .replace(/\*(.*?)\*/gim, '<em>$1</em>')
       .replace(/~~(.*?)~~/gim, '<del>$1</del>')
-      // 引用
       .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
-      // 代码块与行内代码
       .replace(/```([a-z]*)\n([\s\S]*?)```/gim, '<pre><code>$2</code></pre>')
       .replace(/`([^`]+)`/gim, '<code>$1</code>')
-      // 图片与链接
       .replace(/!\[([^\]]*)\]\((.*?)\)/gim, '<img alt="$1" src="$2" class="img-fluid rounded my-2" />')
       .replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-      // 无序列表
       .replace(/^\- (.*$)/gim, '<li>$1</li>')
-      // 换行段落
       .replace(/\n\n+/gim, '</p><p>')
       .replace(/\n/gim, '<br>');
     return `<p>${html}</p>`;
   }
 
-  // 格式化当前时间为 YYYY-MM-DD HH:mm:ss
+  // 格式化时间
   function formatDateTime(d = new Date()) {
     const pad = n => String(n).padStart(2, '0');
     const YYYY = d.getFullYear();
@@ -159,6 +150,108 @@
       toast.classList.remove('publisher-toast--show');
       setTimeout(() => toast.remove(), 300);
     }, 3800);
+  }
+
+  // 辅助解析 Front Matter
+  function parseFrontMatter(str) {
+    if (!str.startsWith('---')) {
+      return { data: {}, content: str };
+    }
+    const end = str.indexOf('\n---', 3);
+    if (end === -1) {
+      return { data: {}, content: str };
+    }
+    const rawYaml = str.substring(3, end);
+    const content = str.substring(end + 4).replace(/^\r?\n/, '');
+
+    const data = {};
+    rawYaml.split('\n').forEach(line => {
+      const colonIdx = line.indexOf(':');
+      if (colonIdx > 0) {
+        const key = line.substring(0, colonIdx).trim();
+        let val = line.substring(colonIdx + 1).trim();
+        if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+          val = val.substring(1, val.length - 1);
+        }
+        if (val.startsWith('[') && val.endsWith(']')) {
+          val = val.substring(1, val.length - 1).split(',').map(s => s.trim().replace(/^["']|["']$/g, '')).filter(Boolean);
+        }
+        data[key] = val;
+      }
+    });
+
+    return { data, content };
+  }
+
+  // 简单行式 Moments YAML 解析
+  function parseSimpleMomentsYaml(yamlStr) {
+    const items = [];
+    let current = null;
+    let inTags = false;
+    let inImages = false;
+
+    yamlStr.split('\n').forEach(line => {
+      const trimmed = line.trim();
+      if (trimmed.startsWith('- id:')) {
+        if (current) items.push(current);
+        current = { id: trimmed.replace('- id:', '').trim().replace(/^["']|["']$/g, ''), tags: [], images: [] };
+        inTags = false;
+        inImages = false;
+      } else if (current) {
+        if (trimmed.startsWith('date:')) {
+          current.date = trimmed.replace('date:', '').trim().replace(/^["']|["']$/g, '');
+        } else if (trimmed.startsWith('content:')) {
+          current.content = trimmed.replace('content:', '').trim().replace(/^["']|["']$/g, '');
+        } else if (trimmed.startsWith('location:')) {
+          current.location = trimmed.replace('location:', '').trim().replace(/^["']|["']$/g, '');
+        } else if (trimmed.startsWith('tags:')) {
+          inTags = true;
+          inImages = false;
+        } else if (trimmed.startsWith('images:')) {
+          inImages = true;
+          inTags = false;
+        } else if (trimmed.startsWith('- ') && inTags) {
+          current.tags.push(trimmed.replace('- ', '').trim().replace(/^["']|["']$/g, ''));
+        } else if (trimmed.startsWith('- ') && inImages) {
+          current.images.push(trimmed.replace('- ', '').trim().replace(/^["']|["']$/g, ''));
+        }
+      }
+    });
+    if (current) items.push(current);
+    return items;
+  }
+
+  // 简单 Travel YAML 解析
+  function parseTravelYaml(yamlStr) {
+    let password = '';
+    const entries = [];
+    let current = null;
+    let inPhotos = false;
+    let inTags = false;
+
+    yamlStr.split('\n').forEach(line => {
+      const trimmed = line.trim();
+      if (trimmed.startsWith('password:')) {
+        password = trimmed.replace('password:', '').trim().replace(/^["']|["']$/g, '');
+      } else if (trimmed.startsWith('- id:')) {
+        if (current) entries.push(current);
+        current = { id: trimmed.replace('- id:', '').trim().replace(/^["']|["']$/g, ''), tags: [], photos: [] };
+        inPhotos = false;
+        inTags = false;
+      } else if (current) {
+        if (trimmed.startsWith('title:')) current.title = trimmed.replace('title:', '').trim().replace(/^["']|["']$/g, '');
+        else if (trimmed.startsWith('destination:')) current.destination = trimmed.replace('destination:', '').trim().replace(/^["']|["']$/g, '');
+        else if (trimmed.startsWith('date_range:')) current.date_range = trimmed.replace('date_range:', '').trim().replace(/^["']|["']$/g, '');
+        else if (trimmed.startsWith('summary:')) current.summary = trimmed.replace('summary:', '').trim().replace(/^["']|["']$/g, '');
+        else if (trimmed.startsWith('cover_image:')) current.cover_image = trimmed.replace('cover_image:', '').trim().replace(/^["']|["']$/g, '');
+        else if (trimmed.startsWith('photos:')) { inPhotos = true; inTags = false; }
+        else if (trimmed.startsWith('tags:')) { inTags = true; inPhotos = false; }
+        else if (trimmed.startsWith('- ') && inPhotos) current.photos.push(trimmed.replace('- ', '').trim().replace(/^["']|["']$/g, ''));
+        else if (trimmed.startsWith('- ') && inTags) current.tags.push(trimmed.replace('- ', '').trim().replace(/^["']|["']$/g, ''));
+      }
+    });
+    if (current) entries.push(current);
+    return { password, entries };
   }
 
   // DOM 就绪后启动
@@ -236,31 +329,247 @@
     // Actions 部署状态
     const actionsStatusBadge = document.getElementById('publisher-actions-status');
 
-    // 初始化界面
-    function init() {
-      // 填充已存配置
-      const config = cms.config;
-      tokenInput.value = config.token || '';
-      ownerInput.value = config.owner || 'suihan-shu';
-      repoInput.value = config.repo || 'MyPage-suihan';
-      branchInput.value = config.branch || 'main';
+    // ----------------------------------------------------
+    // 博客模块方法
+    // ----------------------------------------------------
+    async function loadExistingPosts() {
+      if (!blogPostList) return;
+      blogPostList.innerHTML = '<div class="text-center py-3 text-muted"><i class="fa-solid fa-spinner fa-spin"></i> 正在加载文章列表...</div>';
+      try {
+        const files = await cms.listDirectory('_posts');
+        const mdFiles = files.filter(f => f.name.endsWith('.md') || f.name.endsWith('.markdown'));
+        if (mdFiles.length === 0) {
+          blogPostList.innerHTML = '<div class="text-muted p-2">_posts/ 目录下暂无文章。</div>';
+          return;
+        }
 
-      if (momentDateTime) {
-        momentDateTime.value = formatDateTime();
-      }
-      if (blogDate) {
-        blogDate.value = formatDateTime();
-      }
+        blogPostList.innerHTML = '';
+        mdFiles.reverse().forEach(file => {
+          const item = document.createElement('div');
+          item.className = 'blog-list-item';
+          item.innerHTML = `
+            <div class="blog-list-item-title">
+              <i class="fa-regular fa-file-lines mr-1"></i> <strong>${file.name}</strong>
+            </div>
+            <div class="blog-list-item-actions">
+              <button type="button" class="btn btn-sm btn-outline-primary load-post-btn" title="加载编辑"><i class="fa-solid fa-pen-to-square"></i> 编辑</button>
+              <button type="button" class="btn btn-sm btn-outline-danger delete-post-btn" title="删除文章"><i class="fa-solid fa-trash-can"></i></button>
+            </div>
+          `;
 
-      if (cms.isConfigured()) {
-        verifyAndShowApp();
-      } else {
-        showAuthView();
-      }
+          item.querySelector('.load-post-btn').addEventListener('click', async () => {
+            await loadPostForEdit(file.path);
+          });
 
-      bindEvents();
+          item.querySelector('.delete-post-btn').addEventListener('click', async () => {
+            if (confirm(`确定要彻底删除文章 ${file.name} 吗？`)) {
+              try {
+                await cms.deleteFile(file.path, `Delete post ${file.name}`, file.sha);
+                showToast(`文章 ${file.name} 已删除`, 'success');
+                loadExistingPosts();
+              } catch (err) {
+                showToast(`删除失败: ${err.message}`, 'error');
+              }
+            }
+          });
+
+          blogPostList.appendChild(item);
+        });
+      } catch (err) {
+        blogPostList.innerHTML = `<div class="text-danger p-2">加载文章列表失败: ${err.message}</div>`;
+      }
     }
 
+    async function loadPostForEdit(filePath) {
+      showToast(`正在加载 ${filePath}...`, 'info');
+      try {
+        const file = await cms.getFile(filePath);
+        blogCurrentSha.value = file.sha;
+        blogOriginalPath.value = file.path;
+
+        const parsed = parseFrontMatter(file.content);
+        blogTitle.value = parsed.data.title || '';
+        blogDesc.value = parsed.data.description || '';
+        blogDate.value = parsed.data.date || formatDateTime();
+        blogCategories.value = Array.isArray(parsed.data.categories) ? parsed.data.categories.join(', ') : (parsed.data.categories || '');
+        blogTags.value = Array.isArray(parsed.data.tags) ? parsed.data.tags.join(', ') : (parsed.data.tags || '');
+        blogContent.value = parsed.content;
+        blogPreview.innerHTML = renderMarkdown(parsed.content);
+
+        if (blogResetBtn) blogResetBtn.hidden = false;
+        showToast(`已载入文章：${parsed.data.title || file.name}，可直接修改并提交更新！`, 'success');
+
+        const blogTabBtn = document.querySelector('[data-publisher-tab="blog"]');
+        if (blogTabBtn) blogTabBtn.click();
+        window.scrollTo({ top: blogForm.offsetTop - 80, behavior: 'smooth' });
+      } catch (err) {
+        showToast(`加载文章失败: ${err.message}`, 'error');
+      }
+    }
+
+    function resetBlogForm() {
+      if (blogTitle) blogTitle.value = '';
+      if (blogSlug) blogSlug.value = '';
+      if (blogDate) blogDate.value = formatDateTime();
+      if (blogDesc) blogDesc.value = '';
+      if (blogCategories) blogCategories.value = '';
+      if (blogTags) blogTags.value = '';
+      if (blogContent) blogContent.value = '';
+      if (blogPreview) blogPreview.innerHTML = '';
+      if (blogCurrentSha) blogCurrentSha.value = '';
+      if (blogOriginalPath) blogOriginalPath.value = '';
+      if (blogResetBtn) blogResetBtn.hidden = true;
+    }
+
+    async function uploadAndInsertBlogImage(file) {
+      showToast('正在上传图片到仓库...', 'info');
+      try {
+        const now = new Date();
+        const year = now.getFullYear();
+        const timestamp = Date.now();
+        const ext = file.name.split('.').pop() || 'png';
+        const filename = `post-img-${timestamp}.${ext}`;
+        const path = `assets/img/posts/${year}/${filename}`;
+
+        await cms.uploadBinary(path, file, `Upload post image: ${filename}`);
+
+        const imgMarkdown = `\n![${file.name.replace(/\.[^/.]+$/, '')}](/${path})\n`;
+        const start = blogContent.selectionStart;
+        blogContent.setRangeText(imgMarkdown, start, start, 'end');
+        blogPreview.innerHTML = renderMarkdown(blogContent.value);
+        showToast('图片上传并插入成功！', 'success');
+      } catch (err) {
+        showToast(`图片上传失败: ${err.message}`, 'error');
+      }
+    }
+
+    function triggerBlogImageUpload() {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.onchange = async (e) => {
+        if (e.target.files && e.target.files[0]) {
+          await uploadAndInsertBlogImage(e.target.files[0]);
+        }
+      };
+      input.click();
+    }
+
+    function insertMarkdownAction(action) {
+      const textarea = blogContent;
+      if (!textarea) return;
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const selected = textarea.value.substring(start, end);
+      let replacement = '';
+      let cursorOffset = 0;
+
+      switch (action) {
+        case 'bold':
+          replacement = `**${selected || '粗体文字'}**`;
+          cursorOffset = selected ? replacement.length : 2;
+          break;
+        case 'italic':
+          replacement = `*${selected || '斜体文字'}*`;
+          cursorOffset = selected ? replacement.length : 1;
+          break;
+        case 'strike':
+          replacement = `~~${selected || '删除线文字'}~~`;
+          cursorOffset = selected ? replacement.length : 2;
+          break;
+        case 'h1':
+          replacement = `\n# ${selected || '一级标题'}\n`;
+          cursorOffset = replacement.length;
+          break;
+        case 'h2':
+          replacement = `\n## ${selected || '二级标题'}\n`;
+          cursorOffset = replacement.length;
+          break;
+        case 'h3':
+          replacement = `\n### ${selected || '三级标题'}\n`;
+          cursorOffset = replacement.length;
+          break;
+        case 'quote':
+          replacement = `\n> ${selected || '引用内容'}\n`;
+          cursorOffset = replacement.length;
+          break;
+        case 'code':
+          replacement = `\`${selected || '代码'}\``;
+          cursorOffset = selected ? replacement.length : 1;
+          break;
+        case 'codeblock':
+          replacement = `\n\`\`\`javascript\n${selected || '// 在此输入代码'}\n\`\`\`\n`;
+          cursorOffset = replacement.length - 5;
+          break;
+        case 'ul':
+          replacement = `\n- ${selected || '列表项目'}\n- 列表项目 2\n`;
+          cursorOffset = replacement.length;
+          break;
+        case 'ol':
+          replacement = `\n1. ${selected || '第一项'}\n2. 第二项\n`;
+          cursorOffset = replacement.length;
+          break;
+        case 'link':
+          replacement = `[${selected || '链接文本'}](https://example.com)`;
+          cursorOffset = replacement.length - 1;
+          break;
+        case 'image':
+          triggerBlogImageUpload();
+          return;
+        case 'table':
+          replacement = `\n| 列 1 | 列 2 | 列 3 |\n| :--- | :---: | ---: |\n| 文本 | 居中 | 居右 |\n`;
+          cursorOffset = replacement.length;
+          break;
+        case 'hr':
+          replacement = `\n---\n`;
+          cursorOffset = replacement.length;
+          break;
+        default:
+          return;
+      }
+
+      textarea.setRangeText(replacement, start, end, 'end');
+      textarea.focus();
+      blogPreview.innerHTML = renderMarkdown(textarea.value);
+    }
+
+    // ----------------------------------------------------
+    // 动态模块方法
+    // ----------------------------------------------------
+    function handleMomentFiles(files) {
+      files.forEach(file => {
+        if (!file.type.startsWith('image/')) return;
+        selectedMomentFiles.push(file);
+      });
+      renderMomentPreviews();
+    }
+
+    function renderMomentPreviews() {
+      if (!momentPhotoPreview) return;
+      momentPhotoPreview.innerHTML = '';
+      selectedMomentFiles.forEach((file, idx) => {
+        const card = document.createElement('div');
+        card.className = 'moment-photo-card';
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'moment-photo-remove';
+        removeBtn.innerHTML = '&times;';
+        removeBtn.title = '移除此图片';
+        removeBtn.addEventListener('click', () => {
+          selectedMomentFiles.splice(idx, 1);
+          renderMomentPreviews();
+        });
+        card.appendChild(img);
+        card.appendChild(removeBtn);
+        momentPhotoPreview.appendChild(card);
+      });
+    }
+
+    // ----------------------------------------------------
+    // 状态与界面切换方法
+    // ----------------------------------------------------
     function showAuthView() {
       authSection.hidden = false;
       mainSection.hidden = true;
@@ -297,7 +606,31 @@
       }
     }
 
-    // 绑定事件
+    async function refreshWorkflowStatus() {
+      if (!actionsStatusBadge) return;
+      try {
+        const runs = await cms.getWorkflowRuns(1);
+        if (runs && runs.length > 0) {
+          const run = runs[0];
+          let statusText = '部署完成';
+          let badgeClass = 'badge-success';
+          if (run.status === 'in_progress' || run.status === 'queued') {
+            statusText = 'GitHub Actions 正在构建部署中...';
+            badgeClass = 'badge-warning';
+          } else if (run.conclusion === 'failure') {
+            statusText = '上次部署遇到错误';
+            badgeClass = 'badge-danger';
+          }
+          actionsStatusBadge.innerHTML = `<a href="${run.html_url}" target="_blank" class="badge ${badgeClass}"><i class="fa-solid fa-arrows-rotate"></i> ${statusText}</a>`;
+        }
+      } catch (e) {
+        // ignore
+      }
+    }
+
+    // ----------------------------------------------------
+    // 事件绑定
+    // ----------------------------------------------------
     function bindEvents() {
       // 登录保存
       authForm.addEventListener('submit', async (e) => {
@@ -340,8 +673,7 @@
         });
       });
 
-      // ----------------- 动态发布逻辑 -----------------
-      // 快捷 Tag 标签点击
+      // 动态：快捷标签
       document.querySelectorAll('.moment-quick-tag').forEach(tagEl => {
         tagEl.addEventListener('click', () => {
           const tag = tagEl.getAttribute('data-tag');
@@ -358,14 +690,14 @@
         });
       });
 
-      // 图片上传选择
+      // 动态：图片选择
       if (momentPhotoInput) {
         momentPhotoInput.addEventListener('change', (e) => {
           handleMomentFiles(Array.from(e.target.files));
         });
       }
 
-      // 拖拽上传图片
+      // 动态：拖拽上传
       if (momentPhotoDropzone) {
         momentPhotoDropzone.addEventListener('dragover', (e) => {
           e.preventDefault();
@@ -383,49 +715,20 @@
         });
       }
 
-      // 粘贴图片
-      momentContent.addEventListener('paste', (e) => {
-        if (e.clipboardData && e.clipboardData.files && e.clipboardData.files.length) {
-          const files = Array.from(e.clipboardData.files).filter(f => f.type.startsWith('image/'));
-          if (files.length) {
-            handleMomentFiles(files);
-            showToast('已从剪贴板添加图片', 'info');
+      // 动态：粘贴图片
+      if (momentContent) {
+        momentContent.addEventListener('paste', (e) => {
+          if (e.clipboardData && e.clipboardData.files && e.clipboardData.files.length) {
+            const files = Array.from(e.clipboardData.files).filter(f => f.type.startsWith('image/'));
+            if (files.length) {
+              handleMomentFiles(files);
+              showToast('已从剪贴板添加图片', 'info');
+            }
           }
-        }
-      });
-
-      function handleMomentFiles(files) {
-        files.forEach(file => {
-          if (!file.type.startsWith('image/')) return;
-          selectedMomentFiles.push(file);
-        });
-        renderMomentPreviews();
-      }
-
-      function renderMomentPreviews() {
-        if (!momentPhotoPreview) return;
-        momentPhotoPreview.innerHTML = '';
-        selectedMomentFiles.forEach((file, idx) => {
-          const card = document.createElement('div');
-          card.className = 'moment-photo-card';
-          const img = document.createElement('img');
-          img.src = URL.createObjectURL(file);
-          const removeBtn = document.createElement('button');
-          removeBtn.type = 'button';
-          removeBtn.className = 'moment-photo-remove';
-          removeBtn.innerHTML = '&times;';
-          removeBtn.title = '移除此图片';
-          removeBtn.addEventListener('click', () => {
-            selectedMomentFiles.splice(idx, 1);
-            renderMomentPreviews();
-          });
-          card.appendChild(img);
-          card.appendChild(removeBtn);
-          momentPhotoPreview.appendChild(card);
         });
       }
 
-      // 发布动态提交
+      // 动态：提交发布
       if (momentForm) {
         momentForm.addEventListener('submit', async (e) => {
           e.preventDefault();
@@ -445,7 +748,6 @@
             const day = String(now.getDate()).padStart(2, '0');
             const timestamp = Date.now();
 
-            // 1. 上传图片到 assets/img/moments/YYYY/MM/
             const uploadedImgUrls = [];
             for (let i = 0; i < selectedMomentFiles.length; i++) {
               const file = selectedMomentFiles[i];
@@ -458,20 +760,16 @@
               uploadedImgUrls.push(`/${imgPath}`);
             }
 
-            // 2. 读取现有的 _data/moments.yml
             momentSubmitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 正在写入动态数据...';
             let existingEntries = [];
             let momentsSha = null;
             try {
               const fileData = await cms.getFile('_data/moments.yml');
               momentsSha = fileData.sha;
-              // 尝试解析 JSON/YAML 结构
               try {
-                // 如果是 JSON 数组直接解析
                 if (fileData.content.trim().startsWith('[')) {
                   existingEntries = JSON.parse(fileData.content);
                 } else {
-                  // 简单行式解析 moments
                   existingEntries = parseSimpleMomentsYaml(fileData.content);
                 }
               } catch (parseErr) {
@@ -479,11 +777,9 @@
                 existingEntries = [];
               }
             } catch (err) {
-              // 文件可能尚不存在
               console.log('_data/moments.yml not found, creating new.');
             }
 
-            // 3. 构造新动态数据
             const tags = momentTags.value.split(/[,，\s]+/).map(t => t.replace(/^#/, '').trim()).filter(Boolean);
             const newEntry = {
               id: `${year}${month}${day}-${timestamp.toString().slice(-4)}`,
@@ -494,16 +790,13 @@
               images: uploadedImgUrls
             };
 
-            // 前置插入
             existingEntries.unshift(newEntry);
 
-            // 4. 序列化并 Commit
             const newYaml = YAMLHelper.stringifyMoments(existingEntries);
             await cms.putFile('_data/moments.yml', newYaml, `Publish moment: ${newEntry.date}`, momentsSha);
 
             showToast('动态发布成功！GitHub Actions 正在自动构建部署。', 'success');
 
-            // 清空表单
             momentContent.value = '';
             momentTags.value = '';
             momentLocation.value = '';
@@ -522,11 +815,10 @@
         });
       }
 
-      // ----------------- 博客文章逻辑 -----------------
-      // 自动从标题生成 Slug
+      // 博客：标题联动 Slug
       if (blogTitle && blogSlug) {
         blogTitle.addEventListener('input', () => {
-          if (!blogOriginalPath.value) { // 仅新增文章时自动联动
+          if (!blogOriginalPath.value) {
             const val = blogTitle.value.trim();
             const slug = val
               .toLowerCase()
@@ -537,14 +829,14 @@
         });
       }
 
-      // Markdown 实时预览联动
+      // 博客：Markdown 实时预览
       if (blogContent && blogPreview) {
         blogContent.addEventListener('input', () => {
           blogPreview.innerHTML = renderMarkdown(blogContent.value);
         });
       }
 
-      // Markdown 工具栏按钮
+      // 博客：工具栏
       document.querySelectorAll('.md-toolbar-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           const action = btn.getAttribute('data-md-action');
@@ -552,143 +844,32 @@
         });
       });
 
-      function insertMarkdownAction(action) {
-        const textarea = blogContent;
-        if (!textarea) return;
-        const start = textarea.selectionStart;
-        const end = textarea.selectionEnd;
-        const selected = textarea.value.substring(start, end);
-        let replacement = '';
-        let cursorOffset = 0;
+      // 博客：编辑器内粘贴图片
+      if (blogContent) {
+        blogContent.addEventListener('paste', async (e) => {
+          if (e.clipboardData && e.clipboardData.files && e.clipboardData.files.length) {
+            const file = Array.from(e.clipboardData.files).find(f => f.type.startsWith('image/'));
+            if (file) {
+              e.preventDefault();
+              await uploadAndInsertBlogImage(file);
+            }
+          }
+        });
 
-        switch (action) {
-          case 'bold':
-            replacement = `**${selected || '粗体文字'}**`;
-            cursorOffset = selected ? replacement.length : 2;
-            break;
-          case 'italic':
-            replacement = `*${selected || '斜体文字'}*`;
-            cursorOffset = selected ? replacement.length : 1;
-            break;
-          case 'strike':
-            replacement = `~~${selected || '删除线文字'}~~`;
-            cursorOffset = selected ? replacement.length : 2;
-            break;
-          case 'h1':
-            replacement = `\n# ${selected || '一级标题'}\n`;
-            cursorOffset = replacement.length;
-            break;
-          case 'h2':
-            replacement = `\n## ${selected || '二级标题'}\n`;
-            cursorOffset = replacement.length;
-            break;
-          case 'h3':
-            replacement = `\n### ${selected || '三级标题'}\n`;
-            cursorOffset = replacement.length;
-            break;
-          case 'quote':
-            replacement = `\n> ${selected || '引用内容'}\n`;
-            cursorOffset = replacement.length;
-            break;
-          case 'code':
-            replacement = `\`${selected || '代码'}\``;
-            cursorOffset = selected ? replacement.length : 1;
-            break;
-          case 'codeblock':
-            replacement = `\n\`\`\`javascript\n${selected || '// 在此输入代码'}\n\`\`\`\n`;
-            cursorOffset = replacement.length - 5;
-            break;
-          case 'ul':
-            replacement = `\n- ${selected || '列表项目'}\n- 列表项目 2\n`;
-            cursorOffset = replacement.length;
-            break;
-          case 'ol':
-            replacement = `\n1. ${selected || '第一项'}\n2. 第二项\n`;
-            cursorOffset = replacement.length;
-            break;
-          case 'link':
-            replacement = `[${selected || '链接文本'}](https://example.com)`;
-            cursorOffset = replacement.length - 1;
-            break;
-          case 'image':
-            triggerBlogImageUpload();
-            return;
-          case 'table':
-            replacement = `\n| 列 1 | 列 2 | 列 3 |\n| :--- | :---: | ---: |\n| 文本 | 居中 | 居右 |\n`;
-            cursorOffset = replacement.length;
-            break;
-          case 'hr':
-            replacement = `\n---\n`;
-            cursorOffset = replacement.length;
-            break;
-          default:
-            return;
-        }
-
-        textarea.setRangeText(replacement, start, end, 'end');
-        textarea.focus();
-        blogPreview.innerHTML = renderMarkdown(textarea.value);
+        // 博客：编辑器拖拽图片
+        blogContent.addEventListener('dragover', (e) => e.preventDefault());
+        blogContent.addEventListener('drop', async (e) => {
+          if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
+            const file = Array.from(e.dataTransfer.files).find(f => f.type.startsWith('image/'));
+            if (file) {
+              e.preventDefault();
+              await uploadAndInsertBlogImage(file);
+            }
+          }
+        });
       }
 
-      // 博客编辑器插入图片（支持从系统文件选择并直接直传）
-      function triggerBlogImageUpload() {
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = 'image/*';
-        input.onchange = async (e) => {
-          if (e.target.files && e.target.files[0]) {
-            await uploadAndInsertBlogImage(e.target.files[0]);
-          }
-        };
-        input.click();
-      }
-
-      // 编辑器内粘贴图片
-      blogContent.addEventListener('paste', async (e) => {
-        if (e.clipboardData && e.clipboardData.files && e.clipboardData.files.length) {
-          const file = Array.from(e.clipboardData.files).find(f => f.type.startsWith('image/'));
-          if (file) {
-            e.preventDefault();
-            await uploadAndInsertBlogImage(file);
-          }
-        }
-      });
-
-      // 编辑器拖拽图片
-      blogContent.addEventListener('dragover', (e) => e.preventDefault());
-      blogContent.addEventListener('drop', async (e) => {
-        if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
-          const file = Array.from(e.dataTransfer.files).find(f => f.type.startsWith('image/'));
-          if (file) {
-            e.preventDefault();
-            await uploadAndInsertBlogImage(file);
-          }
-        }
-      });
-
-      async function uploadAndInsertBlogImage(file) {
-        showToast('正在上传图片到仓库...', 'info');
-        try {
-          const now = new Date();
-          const year = now.getFullYear();
-          const timestamp = Date.now();
-          const ext = file.name.split('.').pop() || 'png';
-          const filename = `post-img-${timestamp}.${ext}`;
-          const path = `assets/img/posts/${year}/${filename}`;
-
-          await cms.uploadBinary(path, file, `Upload post image: ${filename}`);
-
-          const imgMarkdown = `\n![${file.name.replace(/\.[^/.]+$/, '')}](/${path})\n`;
-          const start = blogContent.selectionStart;
-          blogContent.setRangeText(imgMarkdown, start, start, 'end');
-          blogPreview.innerHTML = renderMarkdown(blogContent.value);
-          showToast('图片上传并插入成功！', 'success');
-        } catch (err) {
-          showToast(`图片上传失败: ${err.message}`, 'error');
-        }
-      }
-
-      // 博客提交
+      // 博客：表单提交
       if (blogForm) {
         blogForm.addEventListener('submit', async (e) => {
           e.preventDefault();
@@ -713,7 +894,6 @@
           blogSubmitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 正在提交文章...';
 
           try {
-            // 生成 Front Matter
             let frontMatter = `---\n`;
             frontMatter += `layout: post\n`;
             frontMatter += `title: ${JSON.stringify(title)}\n`;
@@ -730,7 +910,6 @@
 
             const fullFileContent = frontMatter + content;
 
-            // 决定文件路径
             let targetPath = blogOriginalPath.value;
             if (!targetPath) {
               const datePrefix = dateStr.split(' ')[0] || formatDateOnly();
@@ -748,23 +927,9 @@
             showToast(`保存失败: ${err.message}`, 'error');
           } finally {
             blogSubmitBtn.disabled = false;
-            blogSubmitBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> 发布 / 保存文章';
+            blogSubmitBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> 发布 / 保存文章到 _posts/';
           }
         });
-      }
-
-      function resetBlogForm() {
-        blogTitle.value = '';
-        blogSlug.value = '';
-        blogDate.value = formatDateTime();
-        blogDesc.value = '';
-        blogCategories.value = '';
-        blogTags.value = '';
-        blogContent.value = '';
-        blogPreview.innerHTML = '';
-        blogCurrentSha.value = '';
-        blogOriginalPath.value = '';
-        if (blogResetBtn) blogResetBtn.hidden = true;
       }
 
       if (blogResetBtn) {
@@ -774,90 +939,11 @@
         });
       }
 
-      // 博客列表刷新
       if (blogReloadListBtn) {
         blogReloadListBtn.addEventListener('click', loadExistingPosts);
       }
 
-      async function loadExistingPosts() {
-        if (!blogPostList) return;
-        blogPostList.innerHTML = '<div class="text-center py-3 text-muted"><i class="fa-solid fa-spinner fa-spin"></i> 正在加载文章列表...</div>';
-        try {
-          const files = await cms.listDirectory('_posts');
-          const mdFiles = files.filter(f => f.name.endsWith('.md') || f.name.endsWith('.markdown'));
-          if (mdFiles.length === 0) {
-            blogPostList.innerHTML = '<div class="text-muted p-2">_posts/ 目录下暂无文章。</div>';
-            return;
-          }
-
-          blogPostList.innerHTML = '';
-          mdFiles.reverse().forEach(file => {
-            const item = document.createElement('div');
-            item.className = 'blog-list-item';
-            item.innerHTML = `
-              <div class="blog-list-item-title">
-                <i class="fa-regular fa-file-lines mr-1"></i> <strong>${file.name}</strong>
-              </div>
-              <div class="blog-list-item-actions">
-                <button type="button" class="btn btn-sm btn-outline-primary load-post-btn" title="加载编辑"><i class="fa-solid fa-pen-to-square"></i> 编辑</button>
-                <button type="button" class="btn btn-sm btn-outline-danger delete-post-btn" title="删除文章"><i class="fa-solid fa-trash-can"></i></button>
-              </div>
-            `;
-
-            // 编辑按钮
-            item.querySelector('.load-post-btn').addEventListener('click', async () => {
-              await loadPostForEdit(file.path);
-            });
-
-            // 删除按钮
-            item.querySelector('.delete-post-btn').addEventListener('click', async () => {
-              if (confirm(`确定要彻底删除文章 ${file.name} 吗？`)) {
-                try {
-                  await cms.deleteFile(file.path, `Delete post ${file.name}`, file.sha);
-                  showToast(`文章 ${file.name} 已删除`, 'success');
-                  loadExistingPosts();
-                } catch (err) {
-                  showToast(`删除失败: ${err.message}`, 'error');
-                }
-              }
-            });
-
-            blogPostList.appendChild(item);
-          });
-        } catch (err) {
-          blogPostList.innerHTML = `<div class="text-danger p-2">加载文章列表失败: ${err.message}</div>`;
-        }
-      }
-
-      async function loadPostForEdit(filePath) {
-        showToast(`正在加载 ${filePath}...`, 'info');
-        try {
-          const file = await cms.getFile(filePath);
-          blogCurrentSha.value = file.sha;
-          blogOriginalPath.value = file.path;
-
-          // 解析 Front Matter 和 Body
-          const parsed = parseFrontMatter(file.content);
-          blogTitle.value = parsed.data.title || '';
-          blogDesc.value = parsed.data.description || '';
-          blogDate.value = parsed.data.date || formatDateTime();
-          blogCategories.value = Array.isArray(parsed.data.categories) ? parsed.data.categories.join(', ') : (parsed.data.categories || '');
-          blogTags.value = Array.isArray(parsed.data.tags) ? parsed.data.tags.join(', ') : (parsed.data.tags || '');
-          blogContent.value = parsed.content;
-          blogPreview.innerHTML = renderMarkdown(parsed.content);
-
-          if (blogResetBtn) blogResetBtn.hidden = false;
-          showToast(`已载入文章：${parsed.data.title || file.name}，可直接修改并提交更新！`, 'success');
-
-          // 切换到博客选项卡并滚动到顶部
-          document.querySelector('[data-publisher-tab="blog"]').click();
-          window.scrollTo({ top: blogForm.offsetTop - 80, behavior: 'smooth' });
-        } catch (err) {
-          showToast(`加载文章失败: ${err.message}`, 'error');
-        }
-      }
-
-      // ----------------- 旅行日志 CMS -----------------
+      // 旅行日志：提交
       if (cmsTravelForm) {
         cmsTravelForm.addEventListener('submit', async (e) => {
           e.preventDefault();
@@ -877,7 +963,6 @@
 
           try {
             let coverImgUrl = '';
-            // 上传封面
             if (travelCoverInput && travelCoverInput.files && travelCoverInput.files[0]) {
               const file = travelCoverInput.files[0];
               const ext = file.name.split('.').pop() || 'jpg';
@@ -887,7 +972,6 @@
               coverImgUrl = `/${path}`;
             }
 
-            // 上传相册照片
             const photoUrls = [];
             if (travelPhotosInput && travelPhotosInput.files && travelPhotosInput.files.length) {
               const files = Array.from(travelPhotosInput.files);
@@ -901,13 +985,11 @@
               }
             }
 
-            // 读取 _data/travel.yml
             let travelData = { password: '', entries: [] };
             let sha = null;
             try {
               const file = await cms.getFile('_data/travel.yml');
               sha = file.sha;
-              // 简单解析 travel yaml
               travelData = parseTravelYaml(file.content);
             } catch (err) {
               console.log('Creating new _data/travel.yml');
@@ -941,10 +1023,18 @@
         });
       }
 
-      // ----------------- 万能文件编辑器 -----------------
+      // 万能文件编辑器
+      if (rawFileSelect) {
+        rawFileSelect.addEventListener('change', () => {
+          if (rawFilePath) {
+            rawFilePath.value = rawFileSelect.value;
+          }
+        });
+      }
+
       if (rawFileLoadBtn) {
         rawFileLoadBtn.addEventListener('click', async () => {
-          const path = rawFileSelect ? rawFileSelect.value : rawFilePath.value.trim();
+          const path = rawFilePath ? rawFilePath.value.trim() : (rawFileSelect ? rawFileSelect.value : '');
           if (!path) {
             showToast('请选择或输入要编辑的文件路径', 'error');
             return;
@@ -954,9 +1044,9 @@
           try {
             const file = await cms.getFile(path);
             rawCurrentSha = file.sha;
-            rawFilePath.value = file.path;
-            rawFileContent.value = file.content;
-            rawFileCommitMsg.value = `Update ${file.path}`;
+            if (rawFilePath) rawFilePath.value = file.path;
+            if (rawFileContent) rawFileContent.value = file.content;
+            if (rawFileCommitMsg) rawFileCommitMsg.value = `Update ${file.path}`;
             showToast(`已载入文件 ${file.path}，编辑后点击下方提交保存即可。`, 'success');
           } catch (err) {
             showToast(`加载文件失败: ${err.message}`, 'error');
@@ -995,130 +1085,27 @@
       }
     }
 
-    // 辅助解析 Front Matter
-    function parseFrontMatter(str) {
-      if (!str.startsWith('---')) {
-        return { data: {}, content: str };
-      }
-      const end = str.indexOf('\n---', 3);
-      if (end === -1) {
-        return { data: {}, content: str };
-      }
-      const rawYaml = str.substring(3, end);
-      const content = str.substring(end + 4).replace(/^\r?\n/, '');
+    // ----------------------------------------------------
+    // 初始化执行
+    // ----------------------------------------------------
+    function init() {
+      const config = cms.config;
+      if (tokenInput) tokenInput.value = config.token || '';
+      if (ownerInput) ownerInput.value = config.owner || 'suihan-shu';
+      if (repoInput) repoInput.value = config.repo || 'MyPage-suihan';
+      if (branchInput) branchInput.value = config.branch || 'main';
 
-      const data = {};
-      rawYaml.split('\n').forEach(line => {
-        const colonIdx = line.indexOf(':');
-        if (colonIdx > 0) {
-          const key = line.substring(0, colonIdx).trim();
-          let val = line.substring(colonIdx + 1).trim();
-          // 去除首尾引号
-          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-            val = val.substring(1, val.length - 1);
-          }
-          // 数组解析 [a, b]
-          if (val.startsWith('[') && val.endsWith(']')) {
-            val = val.substring(1, val.length - 1).split(',').map(s => s.trim().replace(/^["']|["']$/g, '')).filter(Boolean);
-          }
-          data[key] = val;
-        }
-      });
+      if (momentDateTime) momentDateTime.value = formatDateTime();
+      if (blogDate) blogDate.value = formatDateTime();
 
-      return { data, content };
-    }
+      // 先绑定所有事件监听器
+      bindEvents();
 
-    // 简单行式 Moments YAML 解析
-    function parseSimpleMomentsYaml(yamlStr) {
-      const items = [];
-      let current = null;
-      let inTags = false;
-      let inImages = false;
-
-      yamlStr.split('\n').forEach(line => {
-        const trimmed = line.trim();
-        if (trimmed.startsWith('- id:')) {
-          if (current) items.push(current);
-          current = { id: trimmed.replace('- id:', '').trim().replace(/^["']|["']$/g, ''), tags: [], images: [] };
-          inTags = false;
-          inImages = false;
-        } else if (current) {
-          if (trimmed.startsWith('date:')) {
-            current.date = trimmed.replace('date:', '').trim().replace(/^["']|["']$/g, '');
-          } else if (trimmed.startsWith('content:')) {
-            current.content = trimmed.replace('content:', '').trim().replace(/^["']|["']$/g, '');
-          } else if (trimmed.startsWith('location:')) {
-            current.location = trimmed.replace('location:', '').trim().replace(/^["']|["']$/g, '');
-          } else if (trimmed.startsWith('tags:')) {
-            inTags = true;
-            inImages = false;
-          } else if (trimmed.startsWith('images:')) {
-            inImages = true;
-            inTags = false;
-          } else if (trimmed.startsWith('- ') && inTags) {
-            current.tags.push(trimmed.replace('- ', '').trim().replace(/^["']|["']$/g, ''));
-          } else if (trimmed.startsWith('- ') && inImages) {
-            current.images.push(trimmed.replace('- ', '').trim().replace(/^["']|["']$/g, ''));
-          }
-        }
-      });
-      if (current) items.push(current);
-      return items;
-    }
-
-    // 简单 Travel YAML 解析
-    function parseTravelYaml(yamlStr) {
-      let password = '';
-      const entries = [];
-      let current = null;
-      let inPhotos = false;
-      let inTags = false;
-
-      yamlStr.split('\n').forEach(line => {
-        const trimmed = line.trim();
-        if (trimmed.startsWith('password:')) {
-          password = trimmed.replace('password:', '').trim().replace(/^["']|["']$/g, '');
-        } else if (trimmed.startsWith('- id:')) {
-          if (current) entries.push(current);
-          current = { id: trimmed.replace('- id:', '').trim().replace(/^["']|["']$/g, ''), tags: [], photos: [] };
-          inPhotos = false;
-          inTags = false;
-        } else if (current) {
-          if (trimmed.startsWith('title:')) current.title = trimmed.replace('title:', '').trim().replace(/^["']|["']$/g, '');
-          else if (trimmed.startsWith('destination:')) current.destination = trimmed.replace('destination:', '').trim().replace(/^["']|["']$/g, '');
-          else if (trimmed.startsWith('date_range:')) current.date_range = trimmed.replace('date_range:', '').trim().replace(/^["']|["']$/g, '');
-          else if (trimmed.startsWith('summary:')) current.summary = trimmed.replace('summary:', '').trim().replace(/^["']|["']$/g, '');
-          else if (trimmed.startsWith('cover_image:')) current.cover_image = trimmed.replace('cover_image:', '').trim().replace(/^["']|["']$/g, '');
-          else if (trimmed.startsWith('photos:')) { inPhotos = true; inTags = false; }
-          else if (trimmed.startsWith('tags:')) { inTags = true; inPhotos = false; }
-          else if (trimmed.startsWith('- ') && inPhotos) current.photos.push(trimmed.replace('- ', '').trim().replace(/^["']|["']$/g, ''));
-          else if (trimmed.startsWith('- ') && inTags) current.tags.push(trimmed.replace('- ', '').trim().replace(/^["']|["']$/g, ''));
-        }
-      });
-      if (current) entries.push(current);
-      return { password, entries };
-    }
-
-    // 刷新 Actions 部署状态
-    async function refreshWorkflowStatus() {
-      if (!actionsStatusBadge) return;
-      try {
-        const runs = await cms.getWorkflowRuns(1);
-        if (runs && runs.length > 0) {
-          const run = runs[0];
-          let statusText = '部署完成';
-          let badgeClass = 'badge-success';
-          if (run.status === 'in_progress' || run.status === 'queued') {
-            statusText = 'GitHub Actions 正在构建部署中...';
-            badgeClass = 'badge-warning';
-          } else if (run.conclusion === 'failure') {
-            statusText = '上次部署遇到错误';
-            badgeClass = 'badge-danger';
-          }
-          actionsStatusBadge.innerHTML = `<a href="${run.html_url}" target="_blank" class="badge ${badgeClass}"><i class="fa-solid fa-arrows-rotate"></i> ${statusText}</a>`;
-        }
-      } catch (e) {
-        // ignore
+      // 再检查配置并尝试登录加载
+      if (cms.isConfigured()) {
+        verifyAndShowApp();
+      } else {
+        showAuthView();
       }
     }
 
