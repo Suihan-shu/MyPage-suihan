@@ -4,12 +4,14 @@ repo_trophies:
   enabled: false
 
 github_repos:
-  - name: Suihan-shu/HomestayManager
+  - name: Suihan-shu/HomestayManager-PWA
     platform: github
     tags:
-      - C#
+      - TypeScript
+      - PWA
 
   - name: Suihan-shu/MyPage-suihan
     platform: github
     tags:
       - Personal
+      - Jekyll

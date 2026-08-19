@@ -3,6 +3,9 @@ ESP32: success
 Driver: warning
 ADS131M08: info
 TypeScript: primary
+PWA: success
+Personal: info
+Jekyll: warning
 Markdown: info
 CLI: warning
 Image: success
