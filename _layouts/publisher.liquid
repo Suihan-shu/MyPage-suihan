@@ -7,16 +7,16 @@ layout: default
     <div class="publisher-auth-icon">
       <i class="fa-solid fa-shield-halved"></i>
     </div>
-    <h1 class="publisher-auth-title">个人专属发布中心</h1>
-    <p class="publisher-auth-subtitle">基于 GitHub REST API 的纯前端内容管理与在线发布系统</p>
+    <h1 class="publisher-auth-title">个人专属主页管理中心</h1>
+    <p class="publisher-auth-subtitle">基于 GitHub REST API 的纯前端站点内容与图片管理系统</p>
 
     <div class="publisher-auth-guide">
       <strong><i class="fa-solid fa-lightbulb text-warning mr-1"></i> 如何获取您的 GitHub Token？</strong>
       <ol class="mt-2">
         <li>访问 GitHub 的 <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener noreferrer">Fine-grained personal access tokens</a> 页面。</li>
-        <li>点击 <strong>Generate new token</strong>，名称填写 <code>blog-publisher</code>。</li>
+        <li>点击 <strong>Generate new token</strong>，名称填写 <code>mypage-cms</code>。</li>
         <li><strong>Repository access</strong> 选择 <strong>Only select repositories</strong> 并勾选您的主页仓库（如 <code>MyPage-suihan</code>）。</li>
-        <li><strong>Permissions</strong> 下找到 <strong>Contents</strong>，设置为 <strong>Read and write</strong>，生成并复制 Token。</li>
+        <li><strong>Permissions</strong> -> <strong>Repository permissions</strong> -> 找到 <strong>Contents</strong>，设置为 <strong>Read and write</strong>，生成并复制 Token。</li>
       </ol>
       <small class="text-muted"><i class="fa-solid fa-lock"></i> 您的 Token 仅保存在当前浏览器本地，绝不经由任何第三方服务器。</small>
     </div>
@@ -43,7 +43,7 @@ layout: default
       </div>
 
       <button type="submit" class="btn btn-primary btn-block btn-lg mt-3" style="border-radius: 8px;">
-        <i class="fa-solid fa-key mr-1"></i> 解锁并进入发布中心
+        <i class="fa-solid fa-key mr-1"></i> 解锁并进入管理中心
       </button>
       <p id="publisher-auth-status" class="mt-3 mb-0" role="status" aria-live="polite"></p>
     </form>
@@ -58,11 +58,11 @@ layout: default
       </div>
       <div class="d-flex align-items-center gap-2 flex-wrap">
         <span id="publisher-actions-status"></span>
-        <a href="{{ '/moments/' | relative_url }}" class="btn btn-sm btn-outline-info" target="_blank">
-          <i class="fa-solid fa-comment-dots"></i> 预览动态
+        <a href="{{ '/' | relative_url }}" class="btn btn-sm btn-outline-info" target="_blank">
+          <i class="fa-solid fa-house"></i> 访问主页
         </a>
-        <a href="{{ '/blog/' | relative_url }}" class="btn btn-sm btn-outline-info" target="_blank">
-          <i class="fa-solid fa-newspaper"></i> 预览博客
+        <a href="{{ '/travel/' | relative_url }}" class="btn btn-sm btn-outline-info" target="_blank">
+          <i class="fa-solid fa-route"></i> 查看旅行日志
         </a>
         <button id="publisher-logout-btn" type="button" class="btn btn-sm btn-outline-danger">
           <i class="fa-solid fa-right-from-bracket"></i> 退出锁定
@@ -72,175 +72,22 @@ layout: default
 
     <!-- 功能选项卡 -->
     <div class="publisher-tabs" role="tablist">
-      <button class="publisher-tab-btn active" data-publisher-tab="moments" type="button" role="tab">
-        <i class="fa-solid fa-comment-dots"></i> 发动态 (Moments)
+      <button class="publisher-tab-btn active" data-publisher-tab="travel" type="button" role="tab">
+        <i class="fa-solid fa-route"></i> 旅行日志与相册 (Travel Log)
       </button>
-      <button class="publisher-tab-btn" data-publisher-tab="blog" type="button" role="tab">
-        <i class="fa-solid fa-pen-nib"></i> 写博客 (Blog Studio)
-      </button>
-      <button class="publisher-tab-btn" data-publisher-tab="travel" type="button" role="tab">
-        <i class="fa-solid fa-route"></i> 旅行日志 (Travel Log)
+      <button class="publisher-tab-btn" data-publisher-tab="about" type="button" role="tab">
+        <i class="fa-solid fa-user-pen"></i> 关于我与简介 (About Me)
       </button>
       <button class="publisher-tab-btn" data-publisher-tab="files" type="button" role="tab">
-        <i class="fa-solid fa-code"></i> 万能配置与文件 (Raw Editor)
+        <i class="fa-solid fa-code"></i> 万能配置与文件 (Site Editor)
       </button>
     </div>
 
-    <!-- 选项卡 1：发动态 -->
-    <div id="pane-moments" class="publisher-pane active" role="tabpanel">
+    <!-- 选项卡 1：旅行日志与相册管理 -->
+    <div id="pane-travel" class="publisher-pane active" role="tabpanel">
       <div class="publisher-card">
         <div class="publisher-card-header">
-          <h2 class="publisher-card-title"><i class="fa-solid fa-feather-pointed"></i> 随手发布图文动态</h2>
-          <small class="text-muted">自动上传图片并追加至 <code>_data/moments.yml</code></small>
-        </div>
-
-        <form id="moment-publish-form">
-          <div class="form-group mb-3">
-            <label for="moment-content" class="font-weight-bold">动态内容</label>
-            <textarea id="moment-content" class="form-control" rows="4" placeholder="记录这一刻的想法、灵感或日常..." style="border-radius: 8px; font-size: 1.05rem;"></textarea>
-          </div>
-
-          <div class="moment-quick-tags">
-            <span class="text-muted mr-1 small align-self-center">常用标签:</span>
-            <span class="moment-quick-tag" data-tag="日常">#日常</span>
-            <span class="moment-quick-tag" data-tag="随想">#随想</span>
-            <span class="moment-quick-tag" data-tag="学习">#学习</span>
-            <span class="moment-quick-tag" data-tag="旅行">#旅行</span>
-            <span class="moment-quick-tag" data-tag="折腾">#折腾</span>
-            <span class="moment-quick-tag" data-tag="读书">#读书</span>
-          </div>
-
-          <div class="row mb-3">
-            <div class="col-md-4 form-group">
-              <label for="moment-tags" class="small font-weight-bold">标签（以逗号分隔）</label>
-              <input type="text" id="moment-tags" class="form-control form-control-sm" placeholder="日常, 随想">
-            </div>
-            <div class="col-md-4 form-group">
-              <label for="moment-location" class="small font-weight-bold">地点（可选）</label>
-              <input type="text" id="moment-location" class="form-control form-control-sm" placeholder="北京 / 旅途中">
-            </div>
-            <div class="col-md-4 form-group">
-              <label for="moment-datetime" class="small font-weight-bold">发布时间</label>
-              <input type="text" id="moment-datetime" class="form-control form-control-sm" placeholder="YYYY-MM-DD HH:mm:ss">
-            </div>
-          </div>
-
-          <!-- 图片拖拽上传区 -->
-          <div class="dropzone-box" id="moment-photo-dropzone" onclick="document.getElementById('moment-photo-input').click()">
-            <div class="dropzone-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-            <div class="font-weight-bold">点击选择照片，或直接拖拽图片到这里，也可在此处粘贴（Ctrl+V）</div>
-            <div class="small text-muted mt-1">支持同时上传多张照片，自动生成缩略图</div>
-            <input type="file" id="moment-photo-input" accept="image/*" multiple style="display: none;">
-          </div>
-
-          <!-- 图片预览九宫格 -->
-          <div id="moment-photo-preview" class="moment-photo-grid mb-3"></div>
-
-          <button id="moment-submit-btn" type="submit" class="btn btn-primary btn-lg btn-block" style="border-radius: 8px;">
-            <i class="fa-solid fa-paper-plane"></i> 立即发布动态
-          </button>
-        </form>
-      </div>
-    </div>
-
-    <!-- 选项卡 2：写博客 -->
-    <div id="pane-blog" class="publisher-pane" role="tabpanel">
-      <div class="publisher-card">
-        <div class="publisher-card-header">
-          <h2 class="publisher-card-title"><i class="fa-solid fa-pen-nib"></i> Markdown 博客工作室</h2>
-          <button id="blog-reset-btn" type="button" class="btn btn-sm btn-outline-secondary" hidden>
-            <i class="fa-solid fa-plus"></i> 新建文章
-          </button>
-        </div>
-
-        <form id="blog-post-form">
-          <input type="hidden" id="blog-current-sha" value="">
-          <input type="hidden" id="blog-original-path" value="">
-
-          <div class="row mb-3">
-            <div class="col-md-8 form-group">
-              <label for="blog-title" class="font-weight-bold">文章标题 <span class="text-danger">*</span></label>
-              <input type="text" id="blog-title" class="form-control" placeholder="输入博客文章标题..." required>
-            </div>
-            <div class="col-md-4 form-group">
-              <label for="blog-slug" class="font-weight-bold">文件名标识 (Slug)</label>
-              <input type="text" id="blog-slug" class="form-control" placeholder="article-slug">
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <div class="col-md-4 form-group">
-              <label for="blog-date" class="small font-weight-bold">发布日期与时间</label>
-              <input type="text" id="blog-date" class="form-control form-control-sm">
-            </div>
-            <div class="col-md-4 form-group">
-              <label for="blog-categories" class="small font-weight-bold">分类 (以逗号分隔)</label>
-              <input type="text" id="blog-categories" class="form-control form-control-sm" placeholder="技术, 笔记">
-            </div>
-            <div class="col-md-4 form-group">
-              <label for="blog-tags" class="small font-weight-bold">标签 (以逗号分隔)</label>
-              <input type="text" id="blog-tags" class="form-control form-control-sm" placeholder="Jekyll, GitHub">
-            </div>
-          </div>
-
-          <div class="form-group mb-3">
-            <label for="blog-desc" class="small font-weight-bold">文章摘要与简介</label>
-            <input type="text" id="blog-desc" class="form-control form-control-sm" placeholder="简短总结，将展示在列表和头部预览中">
-          </div>
-
-          <!-- Markdown 工具栏 -->
-          <div class="md-toolbar">
-            <button type="button" class="md-toolbar-btn" data-md-action="bold" title="粗体"><i class="fa-solid fa-bold"></i></button>
-            <button type="button" class="md-toolbar-btn" data-md-action="italic" title="斜体"><i class="fa-solid fa-italic"></i></button>
-            <button type="button" class="md-toolbar-btn" data-md-action="strike" title="删除线"><i class="fa-solid fa-strikethrough"></i></button>
-            <button type="button" class="md-toolbar-btn" data-md-action="h1" title="一级标题">H1</button>
-            <button type="button" class="md-toolbar-btn" data-md-action="h2" title="二级标题">H2</button>
-            <button type="button" class="md-toolbar-btn" data-md-action="h3" title="三级标题">H3</button>
-            <button type="button" class="md-toolbar-btn" data-md-action="quote" title="引用"><i class="fa-solid fa-quote-left"></i></button>
-            <button type="button" class="md-toolbar-btn" data-md-action="code" title="行内代码"><i class="fa-solid fa-code"></i></button>
-            <button type="button" class="md-toolbar-btn" data-md-action="codeblock" title="代码块"><i class="fa-solid fa-file-code"></i></button>
-            <button type="button" class="md-toolbar-btn" data-md-action="ul" title="无序列表"><i class="fa-solid fa-list-ul"></i></button>
-            <button type="button" class="md-toolbar-btn" data-md-action="ol" title="有序列表"><i class="fa-solid fa-list-ol"></i></button>
-            <button type="button" class="md-toolbar-btn" data-md-action="link" title="插入链接"><i class="fa-solid fa-link"></i></button>
-            <button type="button" class="md-toolbar-btn" data-md-action="image" title="直传并插入图片"><i class="fa-regular fa-image"></i> 传图</button>
-            <button type="button" class="md-toolbar-btn" data-md-action="table" title="插入表格"><i class="fa-solid fa-table"></i></button>
-            <button type="button" class="md-toolbar-btn" data-md-action="hr" title="分割线"><i class="fa-solid fa-minus"></i></button>
-          </div>
-
-          <!-- 双栏编辑器 -->
-          <div class="blog-editor-layout">
-            <div>
-              <textarea id="blog-content" class="blog-editor-textarea" placeholder="在此撰写 Markdown 正文内容... 支持直接粘贴 (Ctrl+V) 图片，自动上传并插入 Markdown 语法！"></textarea>
-            </div>
-            <div class="blog-preview-container">
-              <div class="text-muted small mb-2 border-bottom pb-1"><i class="fa-regular fa-eye"></i> 实时渲染预览</div>
-              <div id="blog-preview-body"></div>
-            </div>
-          </div>
-
-          <button id="blog-submit-btn" type="submit" class="btn btn-primary btn-lg btn-block" style="border-radius: 8px;">
-            <i class="fa-solid fa-cloud-arrow-up"></i> 发布 / 保存文章到 _posts/
-          </button>
-        </form>
-      </div>
-
-      <!-- 已发布文章管理列表 -->
-      <div class="publisher-card">
-        <div class="publisher-card-header">
-          <h3 class="publisher-card-title"><i class="fa-solid fa-list-check"></i> 仓库已有文章列表</h3>
-          <button id="blog-reload-list-btn" type="button" class="btn btn-sm btn-outline-primary">
-            <i class="fa-solid fa-rotate"></i> 刷新列表
-          </button>
-        </div>
-        <div id="blog-post-list"></div>
-      </div>
-    </div>
-
-    <!-- 选项卡 3：旅行日志 CMS -->
-    <div id="pane-travel" class="publisher-pane" role="tabpanel">
-      <div class="publisher-card">
-        <div class="publisher-card-header">
-          <h2 class="publisher-card-title"><i class="fa-solid fa-route"></i> 旅行日志与照片管理</h2>
+          <h2 class="publisher-card-title"><i class="fa-solid fa-route"></i> 旅行日志与照片上传</h2>
           <small class="text-muted">编辑与新增旅行记录至 <code>_data/travel.yml</code></small>
         </div>
 
@@ -290,7 +137,44 @@ layout: default
       </div>
     </div>
 
-    <!-- 选项卡 4：万能配置与文件编辑器 -->
+    <!-- 选项卡 2：关于我与个人简介 -->
+    <div id="pane-about" class="publisher-pane" role="tabpanel">
+      <div class="publisher-card">
+        <div class="publisher-card-header">
+          <h2 class="publisher-card-title"><i class="fa-solid fa-user-pen"></i> 关于我与个人简介管理</h2>
+          <small class="text-muted">实时编辑并更新 <code>_pages/about.md</code></small>
+        </div>
+
+        <form id="cms-about-form">
+          <div class="row mb-3">
+            <div class="col-md-6 form-group">
+              <label for="about-display-name" class="font-weight-bold">展示姓名 / 昵称</label>
+              <input type="text" id="about-display-name" class="form-control" placeholder="何岁寒">
+            </div>
+            <div class="col-md-6 form-group">
+              <label for="about-subtitle" class="font-weight-bold">个性签名 / 副标题</label>
+              <input type="text" id="about-subtitle" class="form-control" placeholder="保持好奇，持续学习与创造。">
+            </div>
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="about-bio-content" class="font-weight-bold">主页正文简介 (Markdown 格式)</label>
+            <textarea id="about-bio-content" class="form-control" rows="8" placeholder="在此编辑您的主页简介文字..." style="font-size: 1rem; line-height: 1.6;"></textarea>
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="about-avatar-input" class="font-weight-bold">更换个人头像照片 (上传至 assets/img/profile.jpg)</label>
+            <input type="file" id="about-avatar-input" class="form-control-file" accept="image/*">
+          </div>
+
+          <button id="about-submit-btn" type="submit" class="btn btn-primary btn-lg btn-block" style="border-radius: 8px;">
+            <i class="fa-solid fa-floppy-disk"></i> 保存并更新个人简介
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- 选项卡 3：万能配置与文件编辑器 -->
     <div id="pane-files" class="publisher-pane" role="tabpanel">
       <div class="publisher-card">
         <div class="publisher-card-header">
@@ -302,17 +186,17 @@ layout: default
           <div class="col-md-5 form-group">
             <label for="raw-file-select" class="font-weight-bold">常用站点文件快捷选择</label>
             <select id="raw-file-select" class="form-control">
-              <option value="_data/moments.yml">_data/moments.yml (动态数据)</option>
-              <option value="_data/travel.yml">_data/travel.yml (旅行日志数据)</option>
-              <option value="_data/socials.yml">_data/socials.yml (社交链接与二维码)</option>
-              <option value="_data/cv.yml">_data/cv.yml (个人经历)</option>
               <option value="_pages/about.md">_pages/about.md (关于我与主页正文)</option>
+              <option value="_data/travel.yml">_data/travel.yml (旅行日志数据)</option>
+              <option value="_data/cv.yml">_data/cv.yml (个人经历与简历数据)</option>
+              <option value="_data/socials.yml">_data/socials.yml (社交链接与二维码)</option>
+              <option value="_pages/books.md">_pages/books.md (书籍与电影页面)</option>
               <option value="_config.yml">_config.yml (全站核心配置)</option>
             </select>
           </div>
           <div class="col-md-5 form-group">
             <label for="raw-file-path" class="font-weight-bold">或输入自定义文件路径</label>
-            <input type="text" id="raw-file-path" class="form-control" value="_data/moments.yml">
+            <input type="text" id="raw-file-path" class="form-control" value="_pages/about.md">
           </div>
           <div class="col-md-2 form-group d-flex align-items-end">
             <button id="raw-file-load-btn" type="button" class="btn btn-secondary btn-block">
