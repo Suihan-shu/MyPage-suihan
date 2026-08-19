@@ -92,7 +92,5 @@ cv:
           - "音乐"
 
     语言能力:
-      - name: "中文"
-        summary: "母语"
       - name: "英语"
         summary: "CET-4: 512, CET-6: 435"
