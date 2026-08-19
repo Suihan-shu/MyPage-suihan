@@ -8,4 +8,14 @@ document.addEventListener("readystatechange", () => {
       shortcutKeyElement.innerHTML = '&#x2318; k <i class="fa-solid fa-magnifying-glass"></i>';
     }
   }
+
+  // 快捷键唤醒个人发布中心 (Alt+P 或 Ctrl+Shift+P)
+  document.addEventListener("keydown", (e) => {
+    if ((e.altKey && (e.key === 'p' || e.key === 'P')) || (e.ctrlKey && e.shiftKey && (e.key === 'p' || e.key === 'P'))) {
+      const adminLink = document.querySelector('.footer-admin-link');
+      if (adminLink && adminLink.href) {
+        window.location.href = adminLink.href;
+      }
+    }
+  });
 });

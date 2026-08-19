@@ -4,7 +4,7 @@ permalink: /cv/
 title: 简历
 lang: zh
 nav: true
-nav_order: 2
+nav_order: 4
 cv_pdf: /assets/pdf/CV.pdf
 cv_format: rendercv
 description: 结构化个人简历，内容将逐步补充。

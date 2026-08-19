@@ -1,0 +1,70 @@
+---
+layout: default
+---
+{% assign year = page.date | date: '%Y' %}
+{% assign tags = page.tags | join: '' %}
+{% assign categories = page.categories | join: '' %}
+
+{% if page._styles %}
+  <!-- Page/Post style -->
+  <style type="text/css">
+    {{ page._styles }}
+  </style>
+{% endif %}
+
+<div class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <p class="post-meta">
+      <i class="fa-regular fa-calendar-days mr-1"></i> {{ page.date | date: '%Y年%m月%d日' }}
+      {% if page.author %} &bull; {{ page.author }}{% endif %}
+      {% if page.meta %} &bull; {{ page.meta }}{% endif %}
+    </p>
+    <p class="post-tags">
+      {% if page.categories and page.categories.size > 0 %}
+        <span class="mr-2">
+          <i class="fa-solid fa-folder-open"></i>
+          {% for category in page.categories %}
+            <span class="badge badge-light mr-1">{{ category }}</span>
+          {% endfor %}
+        </span>
+      {% endif %}
+      {% if page.tags and page.tags.size > 0 %}
+        <span>
+          <i class="fa-solid fa-hashtag"></i>
+          {% for tag in page.tags %}
+            <span class="badge badge-light mr-1">{{ tag }}</span>
+          {% endfor %}
+        </span>
+      {% endif %}
+    </p>
+    {% if page.description %}
+      <p class="post-description lead">{{ page.description }}</p>
+    {% endif %}
+  </header>
+
+  <article class="post-content">
+    {% if page.toc and page.toc.beginning %}
+      <div id="table-of-contents">
+        {% toc %}
+      </div>
+      <hr>
+    {% endif %}
+    <div id="markdown-content">
+      {{ content }}
+    </div>
+  </article>
+
+  {% if page.related_publications %}
+    <h2>参考文献</h2>
+    <div class="publications">
+      {% bibliography --cited_in_order %}
+    </div>
+  {% endif %}
+
+  {% if site.giscus and page.giscus_comments %}
+    <div class="mt-5">
+      {% include giscus.liquid %}
+    </div>
+  {% endif %}
+</div>

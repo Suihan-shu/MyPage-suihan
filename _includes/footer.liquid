@@ -12,6 +12,7 @@
     {% assign footer_date_format = t.footer.date_format | default: '%Y年%m月%d日' %}
     {{ t.footer.last_updated_prefix | default: '最后更新于' }} {{ 'now' | date: footer_date_format }}。
   {% endif %}
+  <a href="{{ '/admin/' | relative_url }}" class="footer-admin-link" title="站长管理与发布" aria-label="管理后台"><i class="fa-solid fa-lock"></i></a>
 {% endcapture %}
 
 {% if site.footer_fixed %}
