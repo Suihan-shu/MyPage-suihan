@@ -28,15 +28,45 @@ layout: default
     <div class="cv">
       {% if cv_name or cv_label or cv_location or cv_email or cv_phone or cv_website %}
         <div class="card mt-3 p-3">
-          <h3 class="card-title font-weight-medium">联系方式</h3>
-          <table class="table table-cv table-sm table-borderless">
-            {% if cv_name and cv_name != '' %}<tr><td class="p-1 pr-2 font-weight-bold"><b>姓名</b></td><td class="p-1 pl-2 font-weight-light">{{ cv_name }}</td></tr>{% endif %}
-            {% if cv_label and cv_label != '' %}<tr><td class="p-1 pr-2 font-weight-bold"><b>职位 / 方向</b></td><td class="p-1 pl-2 font-weight-light">{{ cv_label }}</td></tr>{% endif %}
-            {% if cv_email and cv_email != '' %}<tr><td class="p-1 pr-2 font-weight-bold"><b>邮箱</b></td><td class="p-1 pl-2 font-weight-light"><a href="mailto:{{ cv_email }}">{{ cv_email }}</a></td></tr>{% endif %}
-            {% if cv_phone and cv_phone != '' %}<tr><td class="p-1 pr-2 font-weight-bold"><b>电话</b></td><td class="p-1 pl-2 font-weight-light">{{ cv_phone }}</td></tr>{% endif %}
-            {% if cv_location and cv_location != '' %}<tr><td class="p-1 pr-2 font-weight-bold"><b>现居地点</b></td><td class="p-1 pl-2 font-weight-light">{{ cv_location }}</td></tr>{% endif %}
-            {% if cv_website and cv_website != '' %}<tr><td class="p-1 pr-2 font-weight-bold"><b>个人主页</b></td><td class="p-1 pl-2 font-weight-light"><a href="{{ cv_website }}" target="_blank" rel="noopener noreferrer">{{ cv_website }}</a></td></tr>{% endif %}
-          </table>
+          <h3 class="card-title font-weight-medium mb-3">联系方式</h3>
+          <div class="row">
+            {% if cv_name and cv_name != '' %}
+              <div class="col-md-6 col-12 mb-2">
+                <span class="font-weight-bold text-secondary mr-2"><i class="fa-solid fa-user mr-1 text-primary"></i> 姓名：</span>
+                <span>{{ cv_name }}</span>
+              </div>
+            {% endif %}
+            {% if cv_label and cv_label != '' %}
+              <div class="col-md-6 col-12 mb-2">
+                <span class="font-weight-bold text-secondary mr-2"><i class="fa-solid fa-graduation-cap mr-1 text-primary"></i> 方向：</span>
+                <span>{{ cv_label }}</span>
+              </div>
+            {% endif %}
+            {% if cv_email and cv_email != '' %}
+              <div class="col-md-6 col-12 mb-2">
+                <span class="font-weight-bold text-secondary mr-2"><i class="fa-solid fa-envelope mr-1 text-primary"></i> 邮箱：</span>
+                <span>{{ cv_email }}</span>
+              </div>
+            {% endif %}
+            {% if cv_phone and cv_phone != '' %}
+              <div class="col-md-6 col-12 mb-2">
+                <span class="font-weight-bold text-secondary mr-2"><i class="fa-solid fa-phone mr-1 text-primary"></i> 电话：</span>
+                <span>{{ cv_phone }}</span>
+              </div>
+            {% endif %}
+            {% if cv_location and cv_location != '' %}
+              <div class="col-md-6 col-12 mb-2">
+                <span class="font-weight-bold text-secondary mr-2"><i class="fa-solid fa-location-dot mr-1 text-primary"></i> 现居：</span>
+                <span>{{ cv_location }}</span>
+              </div>
+            {% endif %}
+            {% if cv_website and cv_website != '' %}
+              <div class="col-md-6 col-12 mb-2">
+                <span class="font-weight-bold text-secondary mr-2"><i class="fa-solid fa-globe mr-1 text-primary"></i> 主页：</span>
+                <a href="{{ cv_website }}" target="_blank" rel="noopener noreferrer">{{ cv_website }}</a>
+              </div>
+            {% endif %}
+          </div>
         </div>
       {% endif %}
 
