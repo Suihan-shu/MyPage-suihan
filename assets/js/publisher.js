@@ -18,8 +18,7 @@
       yaml += `  label: ${JSON.stringify(cvData.label || '')}\n`;
       yaml += `  email: ${JSON.stringify(cvData.email || '')}\n`;
       yaml += `  phone: ${JSON.stringify(cvData.phone || '')}\n`;
-      yaml += `  location: ${JSON.stringify(cvData.location || '')}\n`;
-      yaml += `  website: ${JSON.stringify(cvData.website || '')}\n\n`;
+      yaml += `  location: ${JSON.stringify(cvData.location || '')}\n\n`;
       yaml += `  summary: ${JSON.stringify(cvData.summary || '')}\n\n`;
       yaml += `  sections:\n`;
 
@@ -693,13 +692,12 @@
             });
 
             const cvData = {
-              name: cvName.value.trim(),
-              label: cvLabel.value.trim(),
-              email: cvEmail.value.trim(),
-              phone: cvPhone.value.trim(),
-              location: cvLocation.value.trim(),
-              website: cvWebsite.value.trim(),
-              summary: cvSummary.value.trim(),
+              name: cvName ? cvName.value.trim() : '',
+              label: cvLabel ? cvLabel.value.trim() : '',
+              email: cvEmail ? cvEmail.value.trim() : '',
+              phone: cvPhone ? cvPhone.value.trim() : '',
+              location: cvLocation ? cvLocation.value.trim() : '',
+              summary: cvSummary ? cvSummary.value.trim() : '',
               education,
               experience,
               skills
