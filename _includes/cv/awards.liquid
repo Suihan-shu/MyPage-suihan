@@ -1,15 +1,50 @@
 {% comment %}
-  Unified awards entry renderer with bilingual Chinese/English key support
+  Unified awards entry renderer with clean styling and robust field extraction
 {% endcomment %}
 
 <ul class="card-text font-weight-light list-group list-group-flush">
   {% for entry in entries %}
     {% if entry and entry != '' %}
-      {% assign award_title = entry.title | default: entry.name | default: entry.奖项 | default: entry.奖项名称 %}
-      {% assign awarder = entry.awarder | default: entry.institution | default: entry.organization | default: entry.颁发单位 | default: entry.颁发机构 | default: entry.赛事 %}
-      {% assign award_date = entry.date | default: entry.year | default: entry.获奖时间 | default: entry.时间 | default: entry.年份 %}
-      {% assign award_summary = entry.summary | default: entry.description | default: entry.说明 | default: entry.简介 %}
-      {% assign award_highlights = entry.highlights | default: entry.亮点 %}
+      {% assign award_title = entry.title %}
+      {% if award_title == nil or award_title == '' %}
+        {% assign award_title = entry.奖项 %}
+      {% endif %}
+      {% if award_title == nil or award_title == '' %}
+        {% assign award_title = entry.奖项名称 %}
+      {% endif %}
+      {% if award_title == nil or award_title == '' %}
+        {% assign award_title = entry.name %}
+      {% endif %}
+
+      {% assign awarder = entry.awarder %}
+      {% if awarder == nil or awarder == '' %}
+        {% assign awarder = entry.institution %}
+      {% endif %}
+      {% if awarder == nil or awarder == '' %}
+        {% assign awarder = entry.颁发单位 %}
+      {% endif %}
+      {% if awarder == nil or awarder == '' %}
+        {% assign awarder = entry.颁发机构 %}
+      {% endif %}
+
+      {% assign award_date = entry.date %}
+      {% if award_date == nil or award_date == '' %}
+        {% assign award_date = entry.year %}
+      {% endif %}
+      {% if award_date == nil or award_date == '' %}
+        {% assign award_date = entry.获奖时间 %}
+      {% endif %}
+      {% if award_date == nil or award_date == '' %}
+        {% assign award_date = entry.时间 %}
+      {% endif %}
+
+      {% assign award_summary = entry.summary %}
+      {% if award_summary == nil or award_summary == '' %}
+        {% assign award_summary = entry.说明 %}
+      {% endif %}
+      {% if award_summary == nil or award_summary == '' %}
+        {% assign award_summary = entry.简介 %}
+      {% endif %}
 
       {% if award_title and award_title != '' %}
         <li class="list-group-item">
@@ -44,13 +79,19 @@
                   <h6 class="ml-1 ml-md-4 text-muted" style="font-size: 0.92rem">{{ awarder }}</h6>
                 {% endif %}
 
-                {% if award_summary and award_summary != '' %}
-                  <p class="ml-1 ml-md-4 mb-1" style="font-size: 0.92rem">{{ award_summary | markdownify | remove: '<p>' | remove: '</p>' }}</p>
+                {% if award_summary and award_summary != '' and award_summary.first == nil %}
+                  <p class="ml-1 ml-md-4 mb-1" style="font-size: 0.92rem">{{ award_summary }}</p>
                 {% endif %}
 
-                {% if award_highlights and award_highlights.size > 0 %}
+                {% if entry.highlights and entry.highlights.first %}
                   <ul class="items ml-1 ml-md-4 mb-0">
-                    {% for item in award_highlights %}
+                    {% for item in entry.highlights %}
+                      <li><span class="item">{{ item }}</span></li>
+                    {% endfor %}
+                  </ul>
+                {% elsif entry.亮点 and entry.亮点.first %}
+                  <ul class="items ml-1 ml-md-4 mb-0">
+                    {% for item in entry.亮点 %}
                       <li><span class="item">{{ item }}</span></li>
                     {% endfor %}
                   </ul>

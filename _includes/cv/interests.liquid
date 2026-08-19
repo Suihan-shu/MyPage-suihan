@@ -1,32 +1,60 @@
 {% comment %}
-  Unified interests & hobbies entry renderer with Chinese/English support
+  Unified interests & hobbies entry renderer - clean and consistent with skills styling
 {% endcomment %}
 
 <div class="card-text font-weight-light">
   {% for entry in entries %}
     {% if entry and entry != '' %}
-      <div class="interest-item py-1">
-        {% if entry.name or entry.分类 or entry.名称 %}
-          {% assign cat_name = entry.name | default: entry.分类 | default: entry.名称 %}
-          <strong><i class="fa-solid fa-heart mr-1 text-danger"></i> {{ cat_name }}：</strong>
+      <div class="interest-item">
+        {% assign cat_name = entry.name %}
+        {% if cat_name == nil or cat_name == '' %}
+          {% assign cat_name = entry.分类 %}
+        {% endif %}
+        {% if cat_name == nil or cat_name == '' %}
+          {% assign cat_name = entry.名称 %}
         {% endif %}
 
-        {% assign kw_raw = entry.keywords | default: entry.items | default: entry.爱好 | default: entry.内容 %}
-        {% if kw_raw %}
-          {% if kw_raw.first %}
-            {% for kw in kw_raw %}
-              <span class="badge badge-light border mr-1">{{ kw }}</span>
+        {% if cat_name and cat_name != '' %}
+          <strong>{{ cat_name }}:</strong>
+        {% endif %}
+
+        {% assign kw_list = entry.keywords %}
+        {% if kw_list == nil %}
+          {% assign kw_list = entry.items %}
+        {% endif %}
+        {% if kw_list == nil %}
+          {% assign kw_list = entry.爱好 %}
+        {% endif %}
+
+        {% if kw_list %}
+          {% if kw_list.first %}
+            {% for kw in kw_list %}
+              {% if forloop.last %}
+                {{ kw | strip }}
+              {% else %}
+                {{ kw | strip }},
+              {% endif %}
             {% endfor %}
           {% else %}
-            {% assign kws = kw_raw | split: ',' %}
+            {% assign kws = kw_list | split: ',' %}
             {% for kw in kws %}
-              <span class="badge badge-light border mr-1">{{ kw | strip }}</span>
+              {% if forloop.last %}
+                {{ kw | strip }}
+              {% else %}
+                {{ kw | strip }},
+              {% endif %}
             {% endfor %}
           {% endif %}
-        {% elsif entry and entry != '' and entry.name == nil %}
-          <span class="badge badge-light border mr-1">{{ entry }}</span>
+        {% elsif entry.first == nil %}
+          {{ entry }}
         {% endif %}
       </div>
     {% endif %}
   {% endfor %}
 </div>
+
+<style>
+  .interest-item {
+    padding: 0.5rem 0;
+  }
+</style>
