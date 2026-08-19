@@ -1,8 +1,8 @@
 {% comment %}
-  Unified awards entry renderer with clean styling and robust field extraction
+  Unified awards entry renderer matching the requested card list layout
 {% endcomment %}
 
-<ul class="card-text font-weight-light list-group list-group-flush">
+<ul class="card-text font-weight-light list-group list-group-flush p-0 m-0">
   {% for entry in entries %}
     {% if entry and entry != '' %}
       {% assign award_title = entry.title %}
@@ -26,6 +26,9 @@
       {% if awarder == nil or awarder == '' %}
         {% assign awarder = entry.颁发机构 %}
       {% endif %}
+      {% if awarder == nil or awarder == '' %}
+        {% assign awarder = entry.organization %}
+      {% endif %}
 
       {% assign award_date = entry.date %}
       {% if award_date == nil or award_date == '' %}
@@ -38,63 +41,37 @@
         {% assign award_date = entry.时间 %}
       {% endif %}
 
-      {% assign award_summary = entry.summary %}
-      {% if award_summary == nil or award_summary == '' %}
-        {% assign award_summary = entry.说明 %}
-      {% endif %}
-      {% if award_summary == nil or award_summary == '' %}
-        {% assign award_summary = entry.简介 %}
-      {% endif %}
-
       {% if award_title and award_title != '' %}
-        <li class="list-group-item">
-          <div class="row">
+        <li class="list-group-item px-0 py-3 border-bottom">
+          <div class="row align-items-center">
             {% if award_date and award_date != '' %}
-              <div class="col-xs-2 col-sm-2 col-md-2 text-center date-column">
-                <table class="table-cv">
-                  <tbody>
-                    <tr>
-                      <td>
-                        <span class="badge font-weight-bold danger-color-dark text-uppercase align-middle" style="min-width: 75px">
-                          {{ award_date }}
-                        </span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+              <div class="col-auto text-center" style="min-width: 85px;">
+                <span class="badge font-weight-bold danger-color-dark text-uppercase align-middle shadow-sm py-2 px-3" style="font-size: 0.85rem; border-radius: 4px;">
+                  {{ award_date }}
+                </span>
               </div>
-              <div class="col-xs-10 col-sm-10 col-md-10 mt-2 mt-md-0">
+              <div class="col pl-md-3">
             {% else %}
               <div class="col-12">
             {% endif %}
-                {% if entry.url %}
-                  <h6 class="title font-weight-bold ml-1 ml-md-4">
+                <h6 class="title font-weight-bold mb-1" style="font-size: 1.05rem; line-height: 1.4;">
+                  {% if entry.url %}
                     <a href="{{ entry.url }}" target="_blank" rel="noopener noreferrer">{{ award_title }}</a>
-                  </h6>
-                {% else %}
-                  <h6 class="title font-weight-bold ml-1 ml-md-4">{{ award_title }}</h6>
-                {% endif %}
+                  {% else %}
+                    {{ award_title }}
+                  {% endif %}
+                </h6>
 
                 {% if awarder and awarder != '' %}
-                  <h6 class="ml-1 ml-md-4 text-muted" style="font-size: 0.92rem">{{ awarder }}</h6>
+                  <div class="text-secondary" style="font-size: 0.95rem; line-height: 1.4;">
+                    {{ awarder }}
+                  </div>
                 {% endif %}
 
-                {% if award_summary and award_summary != '' and award_summary.first == nil %}
-                  <p class="ml-1 ml-md-4 mb-1" style="font-size: 0.92rem">{{ award_summary }}</p>
-                {% endif %}
-
-                {% if entry.highlights and entry.highlights.first %}
-                  <ul class="items ml-1 ml-md-4 mb-0">
-                    {% for item in entry.highlights %}
-                      <li><span class="item">{{ item }}</span></li>
-                    {% endfor %}
-                  </ul>
-                {% elsif entry.亮点 and entry.亮点.first %}
-                  <ul class="items ml-1 ml-md-4 mb-0">
-                    {% for item in entry.亮点 %}
-                      <li><span class="item">{{ item }}</span></li>
-                    {% endfor %}
-                  </ul>
+                {% if entry.summary and entry.summary != '' and entry.summary.first == nil %}
+                  <div class="text-muted mt-1" style="font-size: 0.88rem;">
+                    {{ entry.summary }}
+                  </div>
                 {% endif %}
               </div>
           </div>
