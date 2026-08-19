@@ -1,33 +1,32 @@
 {% comment %}
-  Unified interests entry renderer for both formats
+  Unified interests & hobbies entry renderer with Chinese/English support
 {% endcomment %}
 
 <div class="card-text font-weight-light">
   {% for entry in entries %}
-    <div class="interest-item">
-      {% if entry.icon %}
-        <i class="{{ entry.icon }}"></i>
-      {% endif %}
-      <strong>{{ entry.name }}:</strong>
-      {% if entry.keywords %}
-        {% assign keyword_list = entry.keywords %}
-        {% if entry.keywords contains ',' %}
-          {% assign keyword_list = entry.keywords | split: ',' %}
+    {% if entry and entry != '' %}
+      <div class="interest-item py-1">
+        {% if entry.name or entry.分类 or entry.名称 %}
+          {% assign cat_name = entry.name | default: entry.分类 | default: entry.名称 %}
+          <strong><i class="fa-solid fa-heart mr-1 text-danger"></i> {{ cat_name }}：</strong>
         {% endif %}
-        {% for keyword in keyword_list %}
-          {% if forloop.last %}
-            {{ keyword | strip }}
+
+        {% assign kw_raw = entry.keywords | default: entry.items | default: entry.爱好 | default: entry.内容 %}
+        {% if kw_raw %}
+          {% if kw_raw.first %}
+            {% for kw in kw_raw %}
+              <span class="badge badge-light border mr-1">{{ kw }}</span>
+            {% endfor %}
           {% else %}
-            {{ keyword | strip }},
+            {% assign kws = kw_raw | split: ',' %}
+            {% for kw in kws %}
+              <span class="badge badge-light border mr-1">{{ kw | strip }}</span>
+            {% endfor %}
           {% endif %}
-        {% endfor %}
-      {% endif %}
-    </div>
+        {% elsif entry and entry != '' and entry.name == nil %}
+          <span class="badge badge-light border mr-1">{{ entry }}</span>
+        {% endif %}
+      </div>
+    {% endif %}
   {% endfor %}
 </div>
-
-<style>
-  .interest-item {
-    padding: 0.5rem 0;
-  }
-</style>

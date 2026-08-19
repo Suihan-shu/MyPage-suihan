@@ -125,6 +125,13 @@ layout: default
             </div>
           </div>
 
+          <div class="row mb-3">
+            <div class="col-12 form-group">
+              <label for="cv-desc" class="font-weight-bold">简历副标题 / 描述文字 <small class="text-muted">(留空则不显示)</small></label>
+              <input type="text" id="cv-desc" class="form-control" placeholder="留空则不显示副标题，例如：保持好奇，持续探索与创造。">
+            </div>
+          </div>
+
           <!-- 个人简介 -->
           <h5 class="border-bottom pb-2 mb-3 mt-4 text-primary"><i class="fa-solid fa-comment-dots"></i> 2. 个人简介 (Summary)</h5>
           <div class="form-group mb-3">
@@ -153,15 +160,48 @@ layout: default
             <!-- 动态注入经历条目 -->
           </div>
 
+          <!-- 获奖经历 -->
+          <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3 mt-4">
+            <h5 class="mb-0 text-primary"><i class="fa-solid fa-trophy"></i> 5. 获奖经历 / 荣誉</h5>
+            <button id="cv-add-award-btn" type="button" class="btn btn-sm btn-outline-primary">
+              <i class="fa-solid fa-plus"></i> 添加一条获奖经历
+            </button>
+          </div>
+          <div id="cv-award-container" class="mb-3">
+            <!-- 动态注入获奖条目 -->
+          </div>
+
           <!-- 专业技能 -->
           <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3 mt-4">
-            <h5 class="mb-0 text-primary"><i class="fa-solid fa-screwdriver-wrench"></i> 5. 专业技能</h5>
+            <h5 class="mb-0 text-primary"><i class="fa-solid fa-screwdriver-wrench"></i> 6. 专业技能</h5>
             <button id="cv-add-skill-btn" type="button" class="btn btn-sm btn-outline-primary">
               <i class="fa-solid fa-plus"></i> 添加技能分类
             </button>
           </div>
           <div id="cv-skill-container" class="mb-3">
             <!-- 动态注入技能条目 -->
+          </div>
+
+          <!-- 兴趣爱好 -->
+          <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3 mt-4">
+            <h5 class="mb-0 text-primary"><i class="fa-solid fa-heart"></i> 7. 兴趣爱好</h5>
+            <button id="cv-add-interest-btn" type="button" class="btn btn-sm btn-outline-primary">
+              <i class="fa-solid fa-plus"></i> 添加兴趣分类
+            </button>
+          </div>
+          <div id="cv-interest-container" class="mb-3">
+            <!-- 动态注入兴趣条目 -->
+          </div>
+
+          <!-- 语言能力 -->
+          <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3 mt-4">
+            <h5 class="mb-0 text-primary"><i class="fa-solid fa-language"></i> 8. 语言能力</h5>
+            <button id="cv-add-lang-btn" type="button" class="btn btn-sm btn-outline-primary">
+              <i class="fa-solid fa-plus"></i> 添加语言能力
+            </button>
+          </div>
+          <div id="cv-lang-container" class="mb-3">
+            <!-- 动态注入语言条目 -->
           </div>
 
           <button id="cv-submit-btn" type="submit" class="btn btn-primary btn-lg btn-block mt-4" style="border-radius: 8px;">

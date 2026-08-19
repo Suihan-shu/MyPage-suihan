@@ -21,7 +21,8 @@ layout: default
         </a>
       {% endif %}
     </h1>
-    {% if page.description %}<p class="post-description">{{ page.description }}</p>{% endif %}
+    {% assign cv_desc = cv.description | default: cv.副标题 | default: page.description %}
+    {% if cv_desc and cv_desc != '' %}<p class="post-description">{{ cv_desc }}</p>{% endif %}
   </header>
 
   <article>
@@ -71,7 +72,7 @@ layout: default
         </div>
       {% endif %}
 
-      {% assign section_order = '教育经历|项目经历|专业技能|获奖情况|语言能力|兴趣爱好' | split: '|' %}
+      {% assign section_order = '教育经历|项目经历|专业技能|获奖经历|获奖情况|语言能力|兴趣爱好' | split: '|' %}
       {% assign has_any_section = false %}
 
       {% for section_title in section_order %}
@@ -88,7 +89,7 @@ layout: default
                 {% assign entries = section_entries %}{% include cv/experience.liquid %}
               {% elsif section_title == '专业技能' %}
                 {% assign entries = section_entries %}{% include cv/skills.liquid %}
-              {% elsif section_title == '获奖情况' %}
+              {% elsif section_title == '获奖经历' or section_title == '获奖情况' %}
                 {% assign entries = section_entries %}{% include cv/awards.liquid %}
               {% elsif section_title == '语言能力' %}
                 {% assign entries = section_entries %}{% include cv/languages.liquid %}

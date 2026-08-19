@@ -18,7 +18,8 @@
       yaml += `  label: ${JSON.stringify(cvData.label || '')}\n`;
       yaml += `  email: ${JSON.stringify(cvData.email || '')}\n`;
       yaml += `  phone: ${JSON.stringify(cvData.phone || '')}\n`;
-      yaml += `  location: ${JSON.stringify(cvData.location || '')}\n\n`;
+      yaml += `  location: ${JSON.stringify(cvData.location || '')}\n`;
+      yaml += `  description: ${JSON.stringify(cvData.description || '')}\n\n`;
       yaml += `  summary: ${JSON.stringify(cvData.summary || '')}\n\n`;
       yaml += `  sections:\n`;
 
@@ -60,6 +61,19 @@
         });
       }
 
+      // 获奖经历
+      yaml += `\n    获奖经历:\n`;
+      if (!cvData.awards || cvData.awards.length === 0) {
+        yaml += `      []\n`;
+      } else {
+        cvData.awards.forEach(aw => {
+          yaml += `      - title: ${JSON.stringify(aw.title || '')}\n`;
+          if (aw.awarder) yaml += `        awarder: ${JSON.stringify(aw.awarder)}\n`;
+          if (aw.date) yaml += `        date: ${JSON.stringify(aw.date)}\n`;
+          if (aw.summary) yaml += `        summary: ${JSON.stringify(aw.summary)}\n`;
+        });
+      }
+
       // 专业技能
       yaml += `\n    专业技能:\n`;
       if (!cvData.skills || cvData.skills.length === 0) {
@@ -74,13 +88,30 @@
         });
       }
 
-      yaml += `\n    获奖情况: []\n`;
-      yaml += `    语言能力:\n`;
-      yaml += `      - name: "中文"\n`;
-      yaml += `        summary: "母语"\n`;
-      yaml += `      - name: "英语"\n`;
-      yaml += `        summary: "读写熟练"\n`;
-      yaml += `    兴趣爱好: []\n`;
+      // 兴趣爱好
+      yaml += `\n    兴趣爱好:\n`;
+      if (!cvData.interests || cvData.interests.length === 0) {
+        yaml += `      []\n`;
+      } else {
+        cvData.interests.forEach(it => {
+          yaml += `      - name: ${JSON.stringify(it.name || '')}\n`;
+          if (it.keywords && it.keywords.length) {
+            yaml += `        keywords:\n`;
+            it.keywords.forEach(k => yaml += `          - ${JSON.stringify(k)}\n`);
+          }
+        });
+      }
+
+      // 语言能力
+      yaml += `\n    语言能力:\n`;
+      if (!cvData.languages || cvData.languages.length === 0) {
+        yaml += `      []\n`;
+      } else {
+        cvData.languages.forEach(lang => {
+          yaml += `      - name: ${JSON.stringify(lang.name || '')}\n`;
+          if (lang.summary) yaml += `        summary: ${JSON.stringify(lang.summary)}\n`;
+        });
+      }
 
       return yaml;
     },
@@ -237,14 +268,20 @@
     const cvEmail = document.getElementById('cv-email');
     const cvPhone = document.getElementById('cv-phone');
     const cvLocation = document.getElementById('cv-location');
-    const cvWebsite = document.getElementById('cv-website');
+    const cvDesc = document.getElementById('cv-desc');
     const cvSummary = document.getElementById('cv-summary');
     const cvEduContainer = document.getElementById('cv-edu-container');
     const cvExpContainer = document.getElementById('cv-exp-container');
+    const cvAwardContainer = document.getElementById('cv-award-container');
     const cvSkillContainer = document.getElementById('cv-skill-container');
+    const cvInterestContainer = document.getElementById('cv-interest-container');
+    const cvLangContainer = document.getElementById('cv-lang-container');
     const cvAddEduBtn = document.getElementById('cv-add-edu-btn');
     const cvAddExpBtn = document.getElementById('cv-add-exp-btn');
+    const cvAddAwardBtn = document.getElementById('cv-add-award-btn');
     const cvAddSkillBtn = document.getElementById('cv-add-skill-btn');
+    const cvAddInterestBtn = document.getElementById('cv-add-interest-btn');
+    const cvAddLangBtn = document.getElementById('cv-add-lang-btn');
     const cvSubmitBtn = document.getElementById('cv-submit-btn');
     let cvFileSha = null;
 
@@ -388,7 +425,84 @@
           </div>
           <div class="col-md-8 form-group mb-0">
             <label class="small font-weight-bold">技能列表 (以逗号或空格分隔)</label>
-            <input type="text" class="form-control form-control-sm skill-keywords" value="${(data.keywords || []).join(', ')}" placeholder="TypeScript, JavaScript, React, PWA">
+            <input type="text" class="form-control form-control-sm skill-keywords" value="${Array.isArray(data.keywords) ? data.keywords.join(', ') : (data.keywords || '')}" placeholder="TypeScript, JavaScript, React, PWA">
+          </div>
+        </div>
+      `;
+      card.querySelector('.cv-item-remove-btn').addEventListener('click', () => card.remove());
+      return card;
+    }
+
+    function createAwardCard(data = {}) {
+      const card = document.createElement('div');
+      card.className = 'card p-3 mb-2 bg-light border';
+      card.innerHTML = `
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <strong class="text-secondary"><i class="fa-solid fa-trophy text-warning"></i> 获奖条目</strong>
+          <button type="button" class="btn btn-sm btn-outline-danger cv-item-remove-btn">&times; 删除</button>
+        </div>
+        <div class="row">
+          <div class="col-md-5 form-group mb-2">
+            <label class="small font-weight-bold">奖项 / 荣誉名称</label>
+            <input type="text" class="form-control form-control-sm award-title" value="${data.title || data.name || ''}" placeholder="例如：研究生一等奖学金 / 竞赛一等奖">
+          </div>
+          <div class="col-md-4 form-group mb-2">
+            <label class="small font-weight-bold">颁发单位 / 机构 / 赛事</label>
+            <input type="text" class="form-control form-control-sm award-awarder" value="${data.awarder || data.institution || ''}" placeholder="例如：西北工业大学">
+          </div>
+          <div class="col-md-3 form-group mb-2">
+            <label class="small font-weight-bold">获奖时间 / 年份</label>
+            <input type="text" class="form-control form-control-sm award-date" value="${data.date || data.year || ''}" placeholder="例如：2025">
+          </div>
+        </div>
+        <div class="form-group mb-0">
+          <label class="small font-weight-bold">说明 / 获奖详情 (可选)</label>
+          <input type="text" class="form-control form-control-sm award-summary" value="${data.summary || ''}" placeholder="例如：专业成绩前 5% / 团队负责人">
+        </div>
+      `;
+      card.querySelector('.cv-item-remove-btn').addEventListener('click', () => card.remove());
+      return card;
+    }
+
+    function createInterestCard(data = {}) {
+      const card = document.createElement('div');
+      card.className = 'card p-3 mb-2 bg-light border';
+      card.innerHTML = `
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <strong class="text-secondary"><i class="fa-solid fa-heart text-danger"></i> 兴趣分类</strong>
+          <button type="button" class="btn btn-sm btn-outline-danger cv-item-remove-btn">&times; 删除</button>
+        </div>
+        <div class="row">
+          <div class="col-md-4 form-group mb-0">
+            <label class="small font-weight-bold">分类名称</label>
+            <input type="text" class="form-control form-control-sm interest-name" value="${data.name || ''}" placeholder="例如：运动与户外">
+          </div>
+          <div class="col-md-8 form-group mb-0">
+            <label class="small font-weight-bold">爱好列表 (以逗号或空格分隔)</label>
+            <input type="text" class="form-control form-control-sm interest-keywords" value="${Array.isArray(data.keywords) ? data.keywords.join(', ') : (data.keywords || '')}" placeholder="例如：徒步, 跑步, 羽毛球">
+          </div>
+        </div>
+      `;
+      card.querySelector('.cv-item-remove-btn').addEventListener('click', () => card.remove());
+      return card;
+    }
+
+    function createLangCard(data = {}) {
+      const card = document.createElement('div');
+      card.className = 'card p-3 mb-2 bg-light border';
+      card.innerHTML = `
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <strong class="text-secondary"><i class="fa-solid fa-language text-info"></i> 语言能力</strong>
+          <button type="button" class="btn btn-sm btn-outline-danger cv-item-remove-btn">&times; 删除</button>
+        </div>
+        <div class="row">
+          <div class="col-md-4 form-group mb-0">
+            <label class="small font-weight-bold">语言名称</label>
+            <input type="text" class="form-control form-control-sm lang-name" value="${data.name || ''}" placeholder="例如：英语">
+          </div>
+          <div class="col-md-8 form-group mb-0">
+            <label class="small font-weight-bold">水平说明 / 考试分数</label>
+            <input type="text" class="form-control form-control-sm lang-summary" value="${data.summary || ''}" placeholder="例如：CET-4: 512, CET-6: 435">
           </div>
         </div>
       `;
@@ -471,7 +585,10 @@
         let currentItem = null;
         const education = [];
         const experience = [];
+        const awards = [];
         const skills = [];
+        const interests = [];
+        const languages = [];
 
         lines.forEach(line => {
           const trimmed = line.trim();
@@ -486,18 +603,28 @@
             cvPhone.value = trimmed.replace('phone:', '').trim().replace(/^["']|["']$/g, '');
           } else if (trimmed.startsWith('location:') && !currentSection && cvLocation) {
             cvLocation.value = trimmed.replace('location:', '').trim().replace(/^["']|["']$/g, '');
-          } else if (trimmed.startsWith('website:') && !currentSection && cvWebsite) {
-            cvWebsite.value = trimmed.replace('website:', '').trim().replace(/^["']|["']$/g, '');
+          } else if (trimmed.startsWith('description:') && !currentSection && cvDesc) {
+            cvDesc.value = trimmed.replace('description:', '').trim().replace(/^["']|["']$/g, '');
           } else if (trimmed.startsWith('summary:') && !currentSection && cvSummary) {
             cvSummary.value = trimmed.replace('summary:', '').trim().replace(/^["']|["']$/g, '');
           } else if (trimmed.startsWith('教育经历:')) {
             currentSection = 'edu';
+            currentItem = null;
           } else if (trimmed.startsWith('项目经历:')) {
             currentSection = 'exp';
+            currentItem = null;
+          } else if (trimmed.startsWith('获奖经历:') || trimmed.startsWith('获奖情况:')) {
+            currentSection = 'award';
+            currentItem = null;
           } else if (trimmed.startsWith('专业技能:')) {
             currentSection = 'skill';
-          } else if (trimmed.startsWith('获奖情况:') || trimmed.startsWith('语言能力:')) {
-            currentSection = 'other';
+            currentItem = null;
+          } else if (trimmed.startsWith('兴趣爱好:')) {
+            currentSection = 'interest';
+            currentItem = null;
+          } else if (trimmed.startsWith('语言能力:')) {
+            currentSection = 'lang';
+            currentItem = null;
           } else if (currentSection === 'edu') {
             if (trimmed.startsWith('- institution:')) {
               currentItem = { institution: trimmed.replace('- institution:', '').trim().replace(/^["']|["']$/g, ''), highlights: [] };
@@ -522,12 +649,35 @@
               else if (trimmed.startsWith('summary:')) currentItem.summary = trimmed.replace('summary:', '').trim().replace(/^["']|["']$/g, '');
               else if (trimmed.startsWith('- ')) currentItem.highlights.push(trimmed.replace('- ', '').trim().replace(/^["']|["']$/g, ''));
             }
+          } else if (currentSection === 'award') {
+            if (trimmed.startsWith('- title:')) {
+              currentItem = { title: trimmed.replace('- title:', '').trim().replace(/^["']|["']$/g, '') };
+              awards.push(currentItem);
+            } else if (currentItem) {
+              if (trimmed.startsWith('awarder:')) currentItem.awarder = trimmed.replace('awarder:', '').trim().replace(/^["']|["']$/g, '');
+              else if (trimmed.startsWith('date:')) currentItem.date = trimmed.replace('date:', '').trim().replace(/^["']|["']$/g, '');
+              else if (trimmed.startsWith('summary:')) currentItem.summary = trimmed.replace('summary:', '').trim().replace(/^["']|["']$/g, '');
+            }
           } else if (currentSection === 'skill') {
             if (trimmed.startsWith('- name:')) {
               currentItem = { name: trimmed.replace('- name:', '').trim().replace(/^["']|["']$/g, ''), keywords: [] };
               skills.push(currentItem);
             } else if (currentItem && trimmed.startsWith('- ')) {
               currentItem.keywords.push(trimmed.replace('- ', '').trim().replace(/^["']|["']$/g, ''));
+            }
+          } else if (currentSection === 'interest') {
+            if (trimmed.startsWith('- name:')) {
+              currentItem = { name: trimmed.replace('- name:', '').trim().replace(/^["']|["']$/g, ''), keywords: [] };
+              interests.push(currentItem);
+            } else if (currentItem && trimmed.startsWith('- ')) {
+              currentItem.keywords.push(trimmed.replace('- ', '').trim().replace(/^["']|["']$/g, ''));
+            }
+          } else if (currentSection === 'lang') {
+            if (trimmed.startsWith('- name:')) {
+              currentItem = { name: trimmed.replace('- name:', '').trim().replace(/^["']|["']$/g, '') };
+              languages.push(currentItem);
+            } else if (currentItem && trimmed.startsWith('summary:')) {
+              currentItem.summary = trimmed.replace('summary:', '').trim().replace(/^["']|["']$/g, '');
             }
           }
         });
@@ -546,11 +696,32 @@
           if (experience.length === 0) cvExpContainer.appendChild(createExpCard());
         }
 
+        // 渲染获奖经历
+        if (cvAwardContainer) {
+          cvAwardContainer.innerHTML = '';
+          awards.forEach(a => cvAwardContainer.appendChild(createAwardCard(a)));
+          if (awards.length === 0) cvAwardContainer.appendChild(createAwardCard());
+        }
+
         // 渲染专业技能
         if (cvSkillContainer) {
           cvSkillContainer.innerHTML = '';
           skills.forEach(s => cvSkillContainer.appendChild(createSkillCard(s)));
           if (skills.length === 0) cvSkillContainer.appendChild(createSkillCard());
+        }
+
+        // 渲染兴趣爱好
+        if (cvInterestContainer) {
+          cvInterestContainer.innerHTML = '';
+          interests.forEach(it => cvInterestContainer.appendChild(createInterestCard(it)));
+          if (interests.length === 0) cvInterestContainer.appendChild(createInterestCard());
+        }
+
+        // 渲染语言能力
+        if (cvLangContainer) {
+          cvLangContainer.innerHTML = '';
+          languages.forEach(l => cvLangContainer.appendChild(createLangCard(l)));
+          if (languages.length === 0) cvLangContainer.appendChild(createLangCard());
         }
       } catch (e) {
         console.warn('Could not load _data/cv.yml:', e);
@@ -628,9 +799,24 @@
           cvExpContainer.appendChild(createExpCard());
         });
       }
+      if (cvAddAwardBtn && cvAwardContainer) {
+        cvAddAwardBtn.addEventListener('click', () => {
+          cvAwardContainer.appendChild(createAwardCard());
+        });
+      }
       if (cvAddSkillBtn && cvSkillContainer) {
         cvAddSkillBtn.addEventListener('click', () => {
           cvSkillContainer.appendChild(createSkillCard());
+        });
+      }
+      if (cvAddInterestBtn && cvInterestContainer) {
+        cvAddInterestBtn.addEventListener('click', () => {
+          cvInterestContainer.appendChild(createInterestCard());
+        });
+      }
+      if (cvAddLangBtn && cvLangContainer) {
+        cvAddLangBtn.addEventListener('click', () => {
+          cvLangContainer.appendChild(createLangCard());
         });
       }
 
@@ -678,7 +864,21 @@
               }
             });
 
-            // 收集技能
+            // 收集获奖经历
+            const awards = [];
+            document.querySelectorAll('#cv-award-container .card').forEach(card => {
+              const tit = card.querySelector('.award-title')?.value.trim();
+              if (tit) {
+                awards.push({
+                  title: tit,
+                  awarder: card.querySelector('.award-awarder')?.value.trim() || '',
+                  date: card.querySelector('.award-date')?.value.trim() || '',
+                  summary: card.querySelector('.award-summary')?.value.trim() || ''
+                });
+              }
+            });
+
+            // 收集专业技能
             const skills = [];
             document.querySelectorAll('#cv-skill-container .card').forEach(card => {
               const skName = card.querySelector('.skill-name')?.value.trim();
@@ -691,16 +891,45 @@
               }
             });
 
+            // 收集兴趣爱好
+            const interests = [];
+            document.querySelectorAll('#cv-interest-container .card').forEach(card => {
+              const itName = card.querySelector('.interest-name')?.value.trim();
+              if (itName) {
+                const kws = (card.querySelector('.interest-keywords')?.value || '').split(/[,，\s]+/).map(s => s.trim()).filter(Boolean);
+                interests.push({
+                  name: itName,
+                  keywords: kws
+                });
+              }
+            });
+
+            // 收集语言能力
+            const languages = [];
+            document.querySelectorAll('#cv-lang-container .card').forEach(card => {
+              const lName = card.querySelector('.lang-name')?.value.trim();
+              if (lName) {
+                languages.push({
+                  name: lName,
+                  summary: card.querySelector('.lang-summary')?.value.trim() || ''
+                });
+              }
+            });
+
             const cvData = {
               name: cvName ? cvName.value.trim() : '',
               label: cvLabel ? cvLabel.value.trim() : '',
               email: cvEmail ? cvEmail.value.trim() : '',
               phone: cvPhone ? cvPhone.value.trim() : '',
               location: cvLocation ? cvLocation.value.trim() : '',
+              description: cvDesc ? cvDesc.value.trim() : '',
               summary: cvSummary ? cvSummary.value.trim() : '',
               education,
               experience,
-              skills
+              awards,
+              skills,
+              interests,
+              languages
             };
 
             const yamlContent = YAMLHelper.stringifyCV(cvData);
