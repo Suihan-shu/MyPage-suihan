@@ -3,6 +3,14 @@ layout: default
 ---
 {% assign cv = site.data.cv.cv %}
 
+{% assign cv_name = cv.name | default: cv.姓名 %}
+{% assign cv_label = cv.label | default: cv.职位 | default: cv.专业 | default: cv.研究方向 %}
+{% assign cv_email = cv.email | default: cv.邮箱 %}
+{% assign cv_phone = cv.phone | default: cv.电话 %}
+{% assign cv_location = cv.location | default: cv.地址 | default: cv.现居地点 | default: cv.城市 %}
+{% assign cv_website = cv.website | default: cv.网站 | default: cv.个人主页 %}
+{% assign cv_summary = cv.summary | default: cv.个人简介 | default: cv.简介 %}
+
 <div class="post">
   <header class="post-header">
     <h1 class="post-title">
@@ -18,56 +26,62 @@ layout: default
 
   <article>
     <div class="cv">
-      <div class="card mt-3 p-3">
-        <h3 class="card-title font-weight-medium">联系方式</h3>
-        {% if cv.name or cv.label or cv.location or cv.email or cv.phone or cv.website %}
+      {% if cv_name or cv_label or cv_location or cv_email or cv_phone or cv_website %}
+        <div class="card mt-3 p-3">
+          <h3 class="card-title font-weight-medium">联系方式</h3>
           <table class="table table-cv table-sm table-borderless">
-            {% if cv.name %}<tr><td class="p-1 pr-2 font-weight-bold"><b>姓名</b></td><td class="p-1 pl-2 font-weight-light">{{ cv.name }}</td></tr>{% endif %}
-            {% if cv.label %}<tr><td class="p-1 pr-2 font-weight-bold"><b>专业</b></td><td class="p-1 pl-2 font-weight-light">{{ cv.label }}</td></tr>{% endif %}
-            {% if cv.email %}<tr><td class="p-1 pr-2 font-weight-bold"><b>邮箱</b></td><td class="p-1 pl-2 font-weight-light">{{ cv.email }}</td></tr>{% endif %}
-            {% if cv.phone %}<tr><td class="p-1 pr-2 font-weight-bold"><b>电话</b></td><td class="p-1 pl-2 font-weight-light">{{ cv.phone }}</td></tr>{% endif %}
-            {% if cv.location %}<tr><td class="p-1 pr-2 font-weight-bold"><b>地址</b></td><td class="p-1 pl-2 font-weight-light">{{ cv.location }}</td></tr>{% endif %}
-            {% if cv.website %}<tr><td class="p-1 pr-2 font-weight-bold"><b>网站</b></td><td class="p-1 pl-2 font-weight-light"><a href="{{ cv.website }}" target="_blank" rel="noopener noreferrer">{{ cv.website }}</a></td></tr>{% endif %}
+            {% if cv_name and cv_name != '' %}<tr><td class="p-1 pr-2 font-weight-bold"><b>姓名</b></td><td class="p-1 pl-2 font-weight-light">{{ cv_name }}</td></tr>{% endif %}
+            {% if cv_label and cv_label != '' %}<tr><td class="p-1 pr-2 font-weight-bold"><b>职位 / 方向</b></td><td class="p-1 pl-2 font-weight-light">{{ cv_label }}</td></tr>{% endif %}
+            {% if cv_email and cv_email != '' %}<tr><td class="p-1 pr-2 font-weight-bold"><b>邮箱</b></td><td class="p-1 pl-2 font-weight-light"><a href="mailto:{{ cv_email }}">{{ cv_email }}</a></td></tr>{% endif %}
+            {% if cv_phone and cv_phone != '' %}<tr><td class="p-1 pr-2 font-weight-bold"><b>电话</b></td><td class="p-1 pl-2 font-weight-light">{{ cv_phone }}</td></tr>{% endif %}
+            {% if cv_location and cv_location != '' %}<tr><td class="p-1 pr-2 font-weight-bold"><b>现居地点</b></td><td class="p-1 pl-2 font-weight-light">{{ cv_location }}</td></tr>{% endif %}
+            {% if cv_website and cv_website != '' %}<tr><td class="p-1 pr-2 font-weight-bold"><b>个人主页</b></td><td class="p-1 pl-2 font-weight-light"><a href="{{ cv_website }}" target="_blank" rel="noopener noreferrer">{{ cv_website }}</a></td></tr>{% endif %}
           </table>
-        {% else %}
-          <p class="text-muted font-italic mb-0">待填写</p>
-        {% endif %}
-      </div>
+        </div>
+      {% endif %}
 
-      <div class="card mt-3 p-3">
-        <h3 class="card-title font-weight-medium">个人简介</h3>
-        {% if cv.summary %}
-          <p>{{ cv.summary | markdownify | remove: '<p>' | remove: '</p>' }}</p>
-        {% else %}
-          <p class="text-muted font-italic mb-0">待填写</p>
-        {% endif %}
-      </div>
+      {% if cv_summary and cv_summary != '' %}
+        <div class="card mt-3 p-3">
+          <h3 class="card-title font-weight-medium">个人简介</h3>
+          <p>{{ cv_summary | markdownify | remove: '<p>' | remove: '</p>' }}</p>
+        </div>
+      {% endif %}
 
-      {% assign section_order = '项目经历|教育经历|获奖情况|专业技能|语言能力|兴趣爱好' | split: '|' %}
+      {% assign section_order = '教育经历|项目经历|专业技能|获奖情况|语言能力|兴趣爱好' | split: '|' %}
+      {% assign has_any_section = false %}
+
       {% for section_title in section_order %}
         {% assign section_entries = cv.sections[section_title] %}
-        <a class="anchor" id="{{ section_title | slugify }}"></a>
-        <div class="card mt-3 p-3">
-          <h3 class="card-title font-weight-medium">{{ section_title }}</h3>
-          <div>
-            {% if section_entries == nil or section_entries.size == 0 %}
-              <p class="text-muted font-italic mb-0">待填写</p>
-            {% elsif section_title == '项目经历' %}
-              {% assign entries = section_entries %}{% include cv/experience.liquid %}
-            {% elsif section_title == '教育经历' %}
-              {% assign entries = section_entries %}{% include cv/education.liquid %}
-            {% elsif section_title == '获奖情况' %}
-              {% assign entries = section_entries %}{% include cv/awards.liquid %}
-            {% elsif section_title == '专业技能' %}
-              {% assign entries = section_entries %}{% include cv/skills.liquid %}
-            {% elsif section_title == '语言能力' %}
-              {% assign entries = section_entries %}{% include cv/languages.liquid %}
-            {% elsif section_title == '兴趣爱好' %}
-              {% assign entries = section_entries %}{% include cv/interests.liquid %}
-            {% endif %}
+        {% if section_entries and section_entries.size > 0 %}
+          {% assign has_any_section = true %}
+          <a class="anchor" id="{{ section_title | slugify }}"></a>
+          <div class="card mt-3 p-3">
+            <h3 class="card-title font-weight-medium">{{ section_title }}</h3>
+            <div>
+              {% if section_title == '教育经历' %}
+                {% assign entries = section_entries %}{% include cv/education.liquid %}
+              {% elsif section_title == '项目经历' %}
+                {% assign entries = section_entries %}{% include cv/experience.liquid %}
+              {% elsif section_title == '专业技能' %}
+                {% assign entries = section_entries %}{% include cv/skills.liquid %}
+              {% elsif section_title == '获奖情况' %}
+                {% assign entries = section_entries %}{% include cv/awards.liquid %}
+              {% elsif section_title == '语言能力' %}
+                {% assign entries = section_entries %}{% include cv/languages.liquid %}
+              {% elsif section_title == '兴趣爱好' %}
+                {% assign entries = section_entries %}{% include cv/interests.liquid %}
+              {% endif %}
+            </div>
           </div>
-        </div>
+        {% endif %}
       {% endfor %}
+
+      {% unless cv_name or cv_label or cv_summary or has_any_section %}
+        <div class="text-center text-muted py-5">
+          <i class="fa-regular fa-file-lines fa-2x mb-3"></i>
+          <p>简历内容正在整理中，敬请期待。</p>
+        </div>
+      {% endunless %}
     </div>
   </article>
 </div>

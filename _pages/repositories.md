@@ -10,7 +10,7 @@ nav_order: 1
 
 {% if site.data.repositories.github_users %}
 
-## GitHub users
+## 个人主页概览
 
 <div class="repositories d-flex flex-wrap flex-md-row flex-column justify-content-between align-items-center">
   {% for user in site.data.repositories.github_users %}
@@ -23,7 +23,7 @@ nav_order: 1
 
 {% if site.data.repositories.github_repos %}
 
-## GitHub repositories
+## 开源项目与仓库
 
 <div class="repositories">
   {% for repo in site.data.repositories.github_repos %}

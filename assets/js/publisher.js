@@ -1,13 +1,91 @@
 /**
  * Site Content CMS UI Controller
- * 个人专用主页内容与图片管理后台控制逻辑
+ * 个人专用主页内容、简历与图片管理后台控制逻辑
  */
 
 (function () {
   'use strict';
 
-  // 辅助 YAML 解析与序列化（轻量无依赖实现）
+  // 辅助 YAML 解析与序列化
   const YAMLHelper = {
+    // 序列化简历对象为 YAML 字符串
+    stringifyCV(cvData) {
+      let yaml = `# ==============================================================================\n`;
+      yaml += `# 个人简历数据文件 (Resume Data)\n`;
+      yaml += `# ==============================================================================\n\n`;
+      yaml += `cv:\n`;
+      yaml += `  name: ${JSON.stringify(cvData.name || '')}\n`;
+      yaml += `  label: ${JSON.stringify(cvData.label || '')}\n`;
+      yaml += `  email: ${JSON.stringify(cvData.email || '')}\n`;
+      yaml += `  phone: ${JSON.stringify(cvData.phone || '')}\n`;
+      yaml += `  location: ${JSON.stringify(cvData.location || '')}\n`;
+      yaml += `  website: ${JSON.stringify(cvData.website || '')}\n\n`;
+      yaml += `  summary: ${JSON.stringify(cvData.summary || '')}\n\n`;
+      yaml += `  sections:\n`;
+
+      // 教育经历
+      yaml += `    教育经历:\n`;
+      if (!cvData.education || cvData.education.length === 0) {
+        yaml += `      []\n`;
+      } else {
+        cvData.education.forEach(edu => {
+          yaml += `      - institution: ${JSON.stringify(edu.institution || '')}\n`;
+          if (edu.degree) yaml += `        degree: ${JSON.stringify(edu.degree)}\n`;
+          if (edu.area) yaml += `        area: ${JSON.stringify(edu.area)}\n`;
+          if (edu.start_date) yaml += `        start_date: ${JSON.stringify(edu.start_date)}\n`;
+          if (edu.end_date) yaml += `        end_date: ${JSON.stringify(edu.end_date)}\n`;
+          if (edu.location) yaml += `        location: ${JSON.stringify(edu.location)}\n`;
+          if (edu.highlights && edu.highlights.length) {
+            yaml += `        highlights:\n`;
+            edu.highlights.forEach(h => yaml += `          - ${JSON.stringify(h)}\n`);
+          }
+        });
+      }
+
+      // 项目经历
+      yaml += `\n    项目经历:\n`;
+      if (!cvData.experience || cvData.experience.length === 0) {
+        yaml += `      []\n`;
+      } else {
+        cvData.experience.forEach(exp => {
+          yaml += `      - company: ${JSON.stringify(exp.company || '')}\n`;
+          if (exp.position) yaml += `        position: ${JSON.stringify(exp.position)}\n`;
+          if (exp.start_date) yaml += `        start_date: ${JSON.stringify(exp.start_date)}\n`;
+          if (exp.end_date) yaml += `        end_date: ${JSON.stringify(exp.end_date)}\n`;
+          if (exp.location) yaml += `        location: ${JSON.stringify(exp.location)}\n`;
+          if (exp.summary) yaml += `        summary: ${JSON.stringify(exp.summary)}\n`;
+          if (exp.highlights && exp.highlights.length) {
+            yaml += `        highlights:\n`;
+            exp.highlights.forEach(h => yaml += `          - ${JSON.stringify(h)}\n`);
+          }
+        });
+      }
+
+      // 专业技能
+      yaml += `\n    专业技能:\n`;
+      if (!cvData.skills || cvData.skills.length === 0) {
+        yaml += `      []\n`;
+      } else {
+        cvData.skills.forEach(sk => {
+          yaml += `      - name: ${JSON.stringify(sk.name || '')}\n`;
+          if (sk.keywords && sk.keywords.length) {
+            yaml += `        keywords:\n`;
+            sk.keywords.forEach(k => yaml += `          - ${JSON.stringify(k)}\n`);
+          }
+        });
+      }
+
+      yaml += `\n    获奖情况: []\n`;
+      yaml += `    语言能力:\n`;
+      yaml += `      - name: "中文"\n`;
+      yaml += `        summary: "母语"\n`;
+      yaml += `      - name: "英语"\n`;
+      yaml += `        summary: "读写熟练"\n`;
+      yaml += `    兴趣爱好: []\n`;
+
+      return yaml;
+    },
+
     // 格式化 Travel Log 列表为 YAML 字符串
     stringifyTravel(password, entries) {
       let yaml = `# Front-end-only travel journal settings.\n`;
@@ -153,6 +231,24 @@
     const tabButtons = document.querySelectorAll('[data-publisher-tab]');
     const tabPanes = document.querySelectorAll('.publisher-pane');
 
+    // 简历表单元素
+    const cmsCvForm = document.getElementById('cms-cv-form');
+    const cvName = document.getElementById('cv-name');
+    const cvLabel = document.getElementById('cv-label');
+    const cvEmail = document.getElementById('cv-email');
+    const cvPhone = document.getElementById('cv-phone');
+    const cvLocation = document.getElementById('cv-location');
+    const cvWebsite = document.getElementById('cv-website');
+    const cvSummary = document.getElementById('cv-summary');
+    const cvEduContainer = document.getElementById('cv-edu-container');
+    const cvExpContainer = document.getElementById('cv-exp-container');
+    const cvSkillContainer = document.getElementById('cv-skill-container');
+    const cvAddEduBtn = document.getElementById('cv-add-edu-btn');
+    const cvAddExpBtn = document.getElementById('cv-add-exp-btn');
+    const cvAddSkillBtn = document.getElementById('cv-add-skill-btn');
+    const cvSubmitBtn = document.getElementById('cv-submit-btn');
+    let cvFileSha = null;
+
     // 旅行日志相关元素
     const cmsTravelForm = document.getElementById('cms-travel-form');
     const travelTitle = document.getElementById('travel-entry-title');
@@ -186,6 +282,122 @@
     const actionsStatusBadge = document.getElementById('publisher-actions-status');
 
     // ----------------------------------------------------
+    // 动态添加条目卡片
+    // ----------------------------------------------------
+    function createEduCard(data = {}) {
+      const card = document.createElement('div');
+      card.className = 'card p-3 mb-2 bg-light border';
+      card.innerHTML = `
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <strong class="text-secondary"><i class="fa-solid fa-school"></i> 教育条目</strong>
+          <button type="button" class="btn btn-sm btn-outline-danger cv-item-remove-btn">&times; 删除</button>
+        </div>
+        <div class="row">
+          <div class="col-md-4 form-group mb-2">
+            <label class="small font-weight-bold">学校 / 院校名称</label>
+            <input type="text" class="form-control form-control-sm edu-institution" value="${data.institution || ''}" placeholder="例如：某某大学">
+          </div>
+          <div class="col-md-4 form-group mb-2">
+            <label class="small font-weight-bold">专业方向</label>
+            <input type="text" class="form-control form-control-sm edu-area" value="${data.area || ''}" placeholder="例如：计算机科学与技术">
+          </div>
+          <div class="col-md-4 form-group mb-2">
+            <label class="small font-weight-bold">学位 / 学历</label>
+            <input type="text" class="form-control form-control-sm edu-degree" value="${data.degree || ''}" placeholder="例如：学士 / 硕士">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 form-group mb-2">
+            <label class="small font-weight-bold">入学年份</label>
+            <input type="text" class="form-control form-control-sm edu-start" value="${data.start_date || ''}" placeholder="例如：2020">
+          </div>
+          <div class="col-md-4 form-group mb-2">
+            <label class="small font-weight-bold">毕业年份</label>
+            <input type="text" class="form-control form-control-sm edu-end" value="${data.end_date || ''}" placeholder="例如：2024 或 至今">
+          </div>
+          <div class="col-md-4 form-group mb-2">
+            <label class="small font-weight-bold">城市</label>
+            <input type="text" class="form-control form-control-sm edu-loc" value="${data.location || ''}" placeholder="例如：北京">
+          </div>
+        </div>
+        <div class="form-group mb-0">
+          <label class="small font-weight-bold">亮点或主修课程 (以换行或逗号分隔)</label>
+          <input type="text" class="form-control form-control-sm edu-highlights" value="${(data.highlights || []).join('，')}" placeholder="例如：数据结构，算法，优秀毕业生">
+        </div>
+      `;
+      card.querySelector('.cv-item-remove-btn').addEventListener('click', () => card.remove());
+      return card;
+    }
+
+    function createExpCard(data = {}) {
+      const card = document.createElement('div');
+      card.className = 'card p-3 mb-2 bg-light border';
+      card.innerHTML = `
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <strong class="text-secondary"><i class="fa-solid fa-briefcase"></i> 项目 / 工作条目</strong>
+          <button type="button" class="btn btn-sm btn-outline-danger cv-item-remove-btn">&times; 删除</button>
+        </div>
+        <div class="row">
+          <div class="col-md-6 form-group mb-2">
+            <label class="small font-weight-bold">项目或公司名称</label>
+            <input type="text" class="form-control form-control-sm exp-company" value="${data.company || ''}" placeholder="例如：HomestayManager-PWA">
+          </div>
+          <div class="col-md-6 form-group mb-2">
+            <label class="small font-weight-bold">担任角色 / 职位</label>
+            <input type="text" class="form-control form-control-sm exp-position" value="${data.position || ''}" placeholder="例如：核心开发者 / 架构师">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 form-group mb-2">
+            <label class="small font-weight-bold">起始时间</label>
+            <input type="text" class="form-control form-control-sm exp-start" value="${data.start_date || ''}" placeholder="例如：2026">
+          </div>
+          <div class="col-md-4 form-group mb-2">
+            <label class="small font-weight-bold">结束时间</label>
+            <input type="text" class="form-control form-control-sm exp-end" value="${data.end_date || ''}" placeholder="例如：至今">
+          </div>
+          <div class="col-md-4 form-group mb-2">
+            <label class="small font-weight-bold">地点 / 类型</label>
+            <input type="text" class="form-control form-control-sm exp-loc" value="${data.location || ''}" placeholder="例如：开源项目 / 远程">
+          </div>
+        </div>
+        <div class="form-group mb-2">
+          <label class="small font-weight-bold">项目简介</label>
+          <input type="text" class="form-control form-control-sm exp-summary" value="${data.summary || ''}" placeholder="简明扼要地介绍该项目或工作内容">
+        </div>
+        <div class="form-group mb-0">
+          <label class="small font-weight-bold">主要职责与成果亮点 (以中文逗号或英文分号分隔)</label>
+          <input type="text" class="form-control form-control-sm exp-highlights" value="${(data.highlights || []).join('；')}" placeholder="职责一；职责二">
+        </div>
+      `;
+      card.querySelector('.cv-item-remove-btn').addEventListener('click', () => card.remove());
+      return card;
+    }
+
+    function createSkillCard(data = {}) {
+      const card = document.createElement('div');
+      card.className = 'card p-3 mb-2 bg-light border';
+      card.innerHTML = `
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <strong class="text-secondary"><i class="fa-solid fa-tags"></i> 技能分类</strong>
+          <button type="button" class="btn btn-sm btn-outline-danger cv-item-remove-btn">&times; 删除</button>
+        </div>
+        <div class="row">
+          <div class="col-md-4 form-group mb-0">
+            <label class="small font-weight-bold">分类名称</label>
+            <input type="text" class="form-control form-control-sm skill-name" value="${data.name || ''}" placeholder="例如：前端技术 / 工具">
+          </div>
+          <div class="col-md-8 form-group mb-0">
+            <label class="small font-weight-bold">技能列表 (以逗号或空格分隔)</label>
+            <input type="text" class="form-control form-control-sm skill-keywords" value="${(data.keywords || []).join(', ')}" placeholder="TypeScript, JavaScript, React, PWA">
+          </div>
+        </div>
+      `;
+      card.querySelector('.cv-item-remove-btn').addEventListener('click', () => card.remove());
+      return card;
+    }
+
+    // ----------------------------------------------------
     // 界面与鉴权方法
     // ----------------------------------------------------
     function showAuthView() {
@@ -214,6 +426,7 @@
 
         showToast(`欢迎回来，${info.user.name || info.user.login}！已成功连接仓库。`, 'success');
         refreshWorkflowStatus();
+        loadCvContent();
         loadAboutContent();
       } catch (err) {
         authSection.hidden = false;
@@ -243,6 +456,105 @@
         }
       } catch (e) {
         // ignore
+      }
+    }
+
+    // 加载简历内容
+    async function loadCvContent() {
+      if (!cmsCvForm) return;
+      try {
+        const file = await cms.getFile('_data/cv.yml');
+        cvFileSha = file.sha;
+
+        // 简易抽取基础字段
+        const lines = file.content.split('\n');
+        let currentSection = '';
+        let currentItem = null;
+        const education = [];
+        const experience = [];
+        const skills = [];
+
+        lines.forEach(line => {
+          const trimmed = line.trim();
+          if (trimmed.startsWith('name:')) {
+            const v = trimmed.replace('name:', '').trim().replace(/^["']|["']$/g, '');
+            if (!currentSection && cvName) cvName.value = v;
+          } else if (trimmed.startsWith('label:') && !currentSection && cvLabel) {
+            cvLabel.value = trimmed.replace('label:', '').trim().replace(/^["']|["']$/g, '');
+          } else if (trimmed.startsWith('email:') && !currentSection && cvEmail) {
+            cvEmail.value = trimmed.replace('email:', '').trim().replace(/^["']|["']$/g, '');
+          } else if (trimmed.startsWith('phone:') && !currentSection && cvPhone) {
+            cvPhone.value = trimmed.replace('phone:', '').trim().replace(/^["']|["']$/g, '');
+          } else if (trimmed.startsWith('location:') && !currentSection && cvLocation) {
+            cvLocation.value = trimmed.replace('location:', '').trim().replace(/^["']|["']$/g, '');
+          } else if (trimmed.startsWith('website:') && !currentSection && cvWebsite) {
+            cvWebsite.value = trimmed.replace('website:', '').trim().replace(/^["']|["']$/g, '');
+          } else if (trimmed.startsWith('summary:') && !currentSection && cvSummary) {
+            cvSummary.value = trimmed.replace('summary:', '').trim().replace(/^["']|["']$/g, '');
+          } else if (trimmed.startsWith('教育经历:')) {
+            currentSection = 'edu';
+          } else if (trimmed.startsWith('项目经历:')) {
+            currentSection = 'exp';
+          } else if (trimmed.startsWith('专业技能:')) {
+            currentSection = 'skill';
+          } else if (trimmed.startsWith('获奖情况:') || trimmed.startsWith('语言能力:')) {
+            currentSection = 'other';
+          } else if (currentSection === 'edu') {
+            if (trimmed.startsWith('- institution:')) {
+              currentItem = { institution: trimmed.replace('- institution:', '').trim().replace(/^["']|["']$/g, ''), highlights: [] };
+              education.push(currentItem);
+            } else if (currentItem) {
+              if (trimmed.startsWith('degree:')) currentItem.degree = trimmed.replace('degree:', '').trim().replace(/^["']|["']$/g, '');
+              else if (trimmed.startsWith('area:')) currentItem.area = trimmed.replace('area:', '').trim().replace(/^["']|["']$/g, '');
+              else if (trimmed.startsWith('start_date:')) currentItem.start_date = trimmed.replace('start_date:', '').trim().replace(/^["']|["']$/g, '');
+              else if (trimmed.startsWith('end_date:')) currentItem.end_date = trimmed.replace('end_date:', '').trim().replace(/^["']|["']$/g, '');
+              else if (trimmed.startsWith('location:')) currentItem.location = trimmed.replace('location:', '').trim().replace(/^["']|["']$/g, '');
+              else if (trimmed.startsWith('- ')) currentItem.highlights.push(trimmed.replace('- ', '').trim().replace(/^["']|["']$/g, ''));
+            }
+          } else if (currentSection === 'exp') {
+            if (trimmed.startsWith('- company:')) {
+              currentItem = { company: trimmed.replace('- company:', '').trim().replace(/^["']|["']$/g, ''), highlights: [] };
+              experience.push(currentItem);
+            } else if (currentItem) {
+              if (trimmed.startsWith('position:')) currentItem.position = trimmed.replace('position:', '').trim().replace(/^["']|["']$/g, '');
+              else if (trimmed.startsWith('start_date:')) currentItem.start_date = trimmed.replace('start_date:', '').trim().replace(/^["']|["']$/g, '');
+              else if (trimmed.startsWith('end_date:')) currentItem.end_date = trimmed.replace('end_date:', '').trim().replace(/^["']|["']$/g, '');
+              else if (trimmed.startsWith('location:')) currentItem.location = trimmed.replace('location:', '').trim().replace(/^["']|["']$/g, '');
+              else if (trimmed.startsWith('summary:')) currentItem.summary = trimmed.replace('summary:', '').trim().replace(/^["']|["']$/g, '');
+              else if (trimmed.startsWith('- ')) currentItem.highlights.push(trimmed.replace('- ', '').trim().replace(/^["']|["']$/g, ''));
+            }
+          } else if (currentSection === 'skill') {
+            if (trimmed.startsWith('- name:')) {
+              currentItem = { name: trimmed.replace('- name:', '').trim().replace(/^["']|["']$/g, ''), keywords: [] };
+              skills.push(currentItem);
+            } else if (currentItem && trimmed.startsWith('- ')) {
+              currentItem.keywords.push(trimmed.replace('- ', '').trim().replace(/^["']|["']$/g, ''));
+            }
+          }
+        });
+
+        // 渲染教育经历
+        if (cvEduContainer) {
+          cvEduContainer.innerHTML = '';
+          education.forEach(e => cvEduContainer.appendChild(createEduCard(e)));
+          if (education.length === 0) cvEduContainer.appendChild(createEduCard());
+        }
+
+        // 渲染项目经历
+        if (cvExpContainer) {
+          cvExpContainer.innerHTML = '';
+          experience.forEach(e => cvExpContainer.appendChild(createExpCard(e)));
+          if (experience.length === 0) cvExpContainer.appendChild(createExpCard());
+        }
+
+        // 渲染专业技能
+        if (cvSkillContainer) {
+          cvSkillContainer.innerHTML = '';
+          skills.forEach(s => cvSkillContainer.appendChild(createSkillCard(s)));
+          if (skills.length === 0) cvSkillContainer.appendChild(createSkillCard());
+        }
+      } catch (e) {
+        console.warn('Could not load _data/cv.yml:', e);
       }
     }
 
@@ -305,6 +617,107 @@
           if (pane) pane.classList.add('active');
         });
       });
+
+      // 简历动态添加条目
+      if (cvAddEduBtn && cvEduContainer) {
+        cvAddEduBtn.addEventListener('click', () => {
+          cvEduContainer.appendChild(createEduCard());
+        });
+      }
+      if (cvAddExpBtn && cvExpContainer) {
+        cvAddExpBtn.addEventListener('click', () => {
+          cvExpContainer.appendChild(createExpCard());
+        });
+      }
+      if (cvAddSkillBtn && cvSkillContainer) {
+        cvAddSkillBtn.addEventListener('click', () => {
+          cvSkillContainer.appendChild(createSkillCard());
+        });
+      }
+
+      // 简历保存
+      if (cmsCvForm) {
+        cmsCvForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          cvSubmitBtn.disabled = true;
+          cvSubmitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 正在保存简历...';
+
+          try {
+            // 收集教育经历
+            const education = [];
+            document.querySelectorAll('#cv-edu-container .card').forEach(card => {
+              const inst = card.querySelector('.edu-institution')?.value.trim();
+              if (inst) {
+                const hl = (card.querySelector('.edu-highlights')?.value || '').split(/[,，\n]+/).map(s => s.trim()).filter(Boolean);
+                education.push({
+                  institution: inst,
+                  area: card.querySelector('.edu-area')?.value.trim() || '',
+                  degree: card.querySelector('.edu-degree')?.value.trim() || '',
+                  start_date: card.querySelector('.edu-start')?.value.trim() || '',
+                  end_date: card.querySelector('.edu-end')?.value.trim() || '',
+                  location: card.querySelector('.edu-loc')?.value.trim() || '',
+                  highlights: hl
+                });
+              }
+            });
+
+            // 收集项目经历
+            const experience = [];
+            document.querySelectorAll('#cv-exp-container .card').forEach(card => {
+              const comp = card.querySelector('.exp-company')?.value.trim();
+              if (comp) {
+                const hl = (card.querySelector('.exp-highlights')?.value || '').split(/[;；\n]+/).map(s => s.trim()).filter(Boolean);
+                experience.push({
+                  company: comp,
+                  position: card.querySelector('.exp-position')?.value.trim() || '',
+                  start_date: card.querySelector('.exp-start')?.value.trim() || '',
+                  end_date: card.querySelector('.exp-end')?.value.trim() || '',
+                  location: card.querySelector('.exp-loc')?.value.trim() || '',
+                  summary: card.querySelector('.exp-summary')?.value.trim() || '',
+                  highlights: hl
+                });
+              }
+            });
+
+            // 收集技能
+            const skills = [];
+            document.querySelectorAll('#cv-skill-container .card').forEach(card => {
+              const skName = card.querySelector('.skill-name')?.value.trim();
+              if (skName) {
+                const kws = (card.querySelector('.skill-keywords')?.value || '').split(/[,，\s]+/).map(s => s.trim()).filter(Boolean);
+                skills.push({
+                  name: skName,
+                  keywords: kws
+                });
+              }
+            });
+
+            const cvData = {
+              name: cvName.value.trim(),
+              label: cvLabel.value.trim(),
+              email: cvEmail.value.trim(),
+              phone: cvPhone.value.trim(),
+              location: cvLocation.value.trim(),
+              website: cvWebsite.value.trim(),
+              summary: cvSummary.value.trim(),
+              education,
+              experience,
+              skills
+            };
+
+            const yamlContent = YAMLHelper.stringifyCV(cvData);
+            await cms.putFile('_data/cv.yml', yamlContent, 'Update resume cv.yml', cvFileSha);
+
+            showToast('简历已成功保存并提交到 GitHub！', 'success');
+            refreshWorkflowStatus();
+          } catch (err) {
+            showToast(`简历保存失败: ${err.message}`, 'error');
+          } finally {
+            cvSubmitBtn.disabled = false;
+            cvSubmitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> 保存并更新简历到 GitHub';
+          }
+        });
+      }
 
       // 旅行日志：提交
       if (cmsTravelForm) {

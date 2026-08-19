@@ -8,7 +8,7 @@ layout: default
       <i class="fa-solid fa-shield-halved"></i>
     </div>
     <h1 class="publisher-auth-title">个人专属主页管理中心</h1>
-    <p class="publisher-auth-subtitle">基于 GitHub REST API 的纯前端站点内容与图片管理系统</p>
+    <p class="publisher-auth-subtitle">基于 GitHub REST API 的纯前端站点内容、简历与图片管理系统</p>
 
     <div class="publisher-auth-guide">
       <strong><i class="fa-solid fa-lightbulb text-warning mr-1"></i> 如何获取您的 GitHub Token？</strong>
@@ -61,6 +61,9 @@ layout: default
         <a href="{{ '/' | relative_url }}" class="btn btn-sm btn-outline-info" target="_blank">
           <i class="fa-solid fa-house"></i> 访问主页
         </a>
+        <a href="{{ '/cv/' | relative_url }}" class="btn btn-sm btn-outline-info" target="_blank">
+          <i class="fa-solid fa-file-lines"></i> 查看简历
+        </a>
         <a href="{{ '/travel/' | relative_url }}" class="btn btn-sm btn-outline-info" target="_blank">
           <i class="fa-solid fa-route"></i> 查看旅行日志
         </a>
@@ -72,7 +75,10 @@ layout: default
 
     <!-- 功能选项卡 -->
     <div class="publisher-tabs" role="tablist">
-      <button class="publisher-tab-btn active" data-publisher-tab="travel" type="button" role="tab">
+      <button class="publisher-tab-btn active" data-publisher-tab="cv" type="button" role="tab">
+        <i class="fa-solid fa-file-lines"></i> 简历可视化编辑 (Resume)
+      </button>
+      <button class="publisher-tab-btn" data-publisher-tab="travel" type="button" role="tab">
         <i class="fa-solid fa-route"></i> 旅行日志与相册 (Travel Log)
       </button>
       <button class="publisher-tab-btn" data-publisher-tab="about" type="button" role="tab">
@@ -83,8 +89,94 @@ layout: default
       </button>
     </div>
 
-    <!-- 选项卡 1：旅行日志与相册管理 -->
-    <div id="pane-travel" class="publisher-pane active" role="tabpanel">
+    <!-- 选项卡 1：简历可视化编辑 -->
+    <div id="pane-cv" class="publisher-pane active" role="tabpanel">
+      <div class="publisher-card">
+        <div class="publisher-card-header">
+          <h2 class="publisher-card-title"><i class="fa-solid fa-file-pen"></i> 个人简历在线编辑</h2>
+          <small class="text-muted">填写表单直接同步并更新 <code>_data/cv.yml</code></small>
+        </div>
+
+        <form id="cms-cv-form">
+          <!-- 基础信息 -->
+          <h5 class="border-bottom pb-2 mb-3 text-primary"><i class="fa-solid fa-id-card"></i> 1. 基本信息与联系方式</h5>
+          <div class="row mb-3">
+            <div class="col-md-4 form-group">
+              <label for="cv-name" class="font-weight-bold">姓名</label>
+              <input type="text" id="cv-name" class="form-control" placeholder="何岁寒">
+            </div>
+            <div class="col-md-4 form-group">
+              <label for="cv-label" class="font-weight-bold">职位 / 专业方向</label>
+              <input type="text" id="cv-label" class="form-control" placeholder="全栈开发者 / 计算机专业">
+            </div>
+            <div class="col-md-4 form-group">
+              <label for="cv-email" class="font-weight-bold">电子邮箱</label>
+              <input type="email" id="cv-email" class="form-control" placeholder="your-email@example.com">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-4 form-group">
+              <label for="cv-phone" class="font-weight-bold">联系电话</label>
+              <input type="text" id="cv-phone" class="form-control" placeholder="手机号码（可选）">
+            </div>
+            <div class="col-md-4 form-group">
+              <label for="cv-location" class="font-weight-bold">现居城市 / 地区</label>
+              <input type="text" id="cv-location" class="form-control" placeholder="如：北京 / 上海 / 中国">
+            </div>
+            <div class="col-md-4 form-group">
+              <label for="cv-website" class="font-weight-bold">个人网站 / 链接</label>
+              <input type="text" id="cv-website" class="form-control" placeholder="https://...">
+            </div>
+          </div>
+
+          <!-- 个人简介 -->
+          <h5 class="border-bottom pb-2 mb-3 mt-4 text-primary"><i class="fa-solid fa-comment-dots"></i> 2. 个人简介 (Summary)</h5>
+          <div class="form-group mb-3">
+            <textarea id="cv-summary" class="form-control" rows="3" placeholder="一段简短的自我评价或职业方向描述..."></textarea>
+          </div>
+
+          <!-- 教育经历 -->
+          <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3 mt-4">
+            <h5 class="mb-0 text-primary"><i class="fa-solid fa-graduation-cap"></i> 3. 教育经历</h5>
+            <button id="cv-add-edu-btn" type="button" class="btn btn-sm btn-outline-primary">
+              <i class="fa-solid fa-plus"></i> 添加一条教育经历
+            </button>
+          </div>
+          <div id="cv-edu-container" class="mb-3">
+            <!-- 动态注入教育条目 -->
+          </div>
+
+          <!-- 项目经历 -->
+          <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3 mt-4">
+            <h5 class="mb-0 text-primary"><i class="fa-solid fa-diagram-project"></i> 4. 项目 / 工作经历</h5>
+            <button id="cv-add-exp-btn" type="button" class="btn btn-sm btn-outline-primary">
+              <i class="fa-solid fa-plus"></i> 添加一条经历
+            </button>
+          </div>
+          <div id="cv-exp-container" class="mb-3">
+            <!-- 动态注入经历条目 -->
+          </div>
+
+          <!-- 专业技能 -->
+          <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3 mt-4">
+            <h5 class="mb-0 text-primary"><i class="fa-solid fa-screwdriver-wrench"></i> 5. 专业技能</h5>
+            <button id="cv-add-skill-btn" type="button" class="btn btn-sm btn-outline-primary">
+              <i class="fa-solid fa-plus"></i> 添加技能分类
+            </button>
+          </div>
+          <div id="cv-skill-container" class="mb-3">
+            <!-- 动态注入技能条目 -->
+          </div>
+
+          <button id="cv-submit-btn" type="submit" class="btn btn-primary btn-lg btn-block mt-4" style="border-radius: 8px;">
+            <i class="fa-solid fa-floppy-disk"></i> 保存并更新简历到 GitHub
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- 选项卡 2：旅行日志与相册管理 -->
+    <div id="pane-travel" class="publisher-pane" role="tabpanel">
       <div class="publisher-card">
         <div class="publisher-card-header">
           <h2 class="publisher-card-title"><i class="fa-solid fa-route"></i> 旅行日志与照片上传</h2>
@@ -137,7 +229,7 @@ layout: default
       </div>
     </div>
 
-    <!-- 选项卡 2：关于我与个人简介 -->
+    <!-- 选项卡 3：关于我与个人简介 -->
     <div id="pane-about" class="publisher-pane" role="tabpanel">
       <div class="publisher-card">
         <div class="publisher-card-header">
@@ -174,7 +266,7 @@ layout: default
       </div>
     </div>
 
-    <!-- 选项卡 3：万能配置与文件编辑器 -->
+    <!-- 选项卡 4：万能配置与文件编辑器 -->
     <div id="pane-files" class="publisher-pane" role="tabpanel">
       <div class="publisher-card">
         <div class="publisher-card-header">
@@ -186,16 +278,17 @@ layout: default
           <div class="col-md-5 form-group">
             <label for="raw-file-select" class="font-weight-bold">常用站点文件快捷选择</label>
             <select id="raw-file-select" class="form-control">
+              <option value="_data/cv.yml">_data/cv.yml (个人经历与简历数据)</option>
               <option value="_pages/about.md">_pages/about.md (关于我与主页正文)</option>
               <option value="_data/travel.yml">_data/travel.yml (旅行日志数据)</option>
-              <option value="_data/cv.yml">_data/cv.yml (个人经历与简历数据)</option>
               <option value="_data/socials.yml">_data/socials.yml (社交链接与二维码)</option>
+              <option value="_data/repositories.yml">_data/repositories.yml (代码库展示仓库)</option>
               <option value="_config.yml">_config.yml (全站核心配置)</option>
             </select>
           </div>
           <div class="col-md-5 form-group">
             <label for="raw-file-path" class="font-weight-bold">或输入自定义文件路径</label>
-            <input type="text" id="raw-file-path" class="form-control" value="_pages/about.md">
+            <input type="text" id="raw-file-path" class="form-control" value="_data/cv.yml">
           </div>
           <div class="col-md-2 form-group d-flex align-items-end">
             <button id="raw-file-load-btn" type="button" class="btn btn-secondary btn-block">
@@ -211,7 +304,7 @@ layout: default
 
         <div class="row">
           <div class="col-md-9 form-group">
-            <input type="text" id="raw-file-commit-msg" class="form-control" placeholder="Commit message (如 Update config)">
+            <input type="text" id="raw-file-commit-msg" class="form-control" placeholder="Commit message (如 Update cv)">
           </div>
           <div class="col-md-3 form-group">
             <button id="raw-file-save-btn" type="button" class="btn btn-primary btn-block">
