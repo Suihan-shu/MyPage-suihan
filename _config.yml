@@ -14,7 +14,7 @@ footer_text: >
   基于 <a href="https://jekyllrb.com/" target="_blank" rel="noopener noreferrer">Jekyll</a> 和
   <a href="https://github.com/alshedivat/al-folio" target="_blank" rel="noopener noreferrer">al-folio</a> 构建，
   由 <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a> 托管。
-keywords: personal-website, portfolio, projects, cv, books, movies
+keywords: personal-website, portfolio, projects, cv, travel
 lang: zh # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: 🩵 # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 
@@ -115,10 +115,6 @@ newsletter:
 # -----------------------------------------------------------------------------
 
 collections:
-  books:
-    output: true
-  movies:
-    output: false
   projects:
     output: true
 
@@ -189,11 +185,6 @@ plugins:
 # Sitemap settings
 defaults:
   - scope:
-      path: ""
-      type: books
-    values:
-      giscus_comments: true
-  - scope:
       path: "assets"
     values:
       sitemap: false
@@ -221,9 +212,7 @@ terser:
 # Jekyll Archives
 # -----------------------------------------------------------------------------
 
-jekyll-archives:
-  books:
-    enabled: [year, tags, categories] # enables year, tag and category archives (remove if you need to disable one of them).
+jekyll-archives: {}
 
 
 # -----------------------------------------------------------------------------
