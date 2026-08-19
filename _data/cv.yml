@@ -1,14 +1,13 @@
 cv:
   # 联系方式；准备公开某项信息后再填写对应字段。
-  name:
-  label:
-  email:
-  phone:
-  location:
-  website:
+  姓名:何岁寒
+  邮箱:suihan_shu@163.com
+  电话:15282399475
+  地址:西安，中国
+  
 
   # 个人简介，支持 Markdown。
-  summary:
+  summary:西北工业大学航空工程研究生，研究方向为基于电磁加载技术的工程应用
 
   sections:
     # 示例：
