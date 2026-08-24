@@ -36,12 +36,23 @@ cv:
       - company: "HomestayManager-PWA"
         position: "核心开发者"
         start_date: "2026"
-        end_date: "至今"
+        end_date: "2026"
         location: "开源项目"
         summary: "基于 TypeScript 构建的民宿离线房态管理 PWA 应用。"
         highlights:
           - "离线优先架构设计，支持本地数据缓存与无网操作"
           - "响应式交互与轻量化状态管理"
+      - company: "基于 Arduino 的磁约束平衡装置"
+        position: "核心成员"
+        start_date: "2023"
+        end_date: "2023"
+        summary: "负责探究磁约束平衡装置不确定度和鲁棒性实验的总体设计，实验数据测量以及数据处理"
+        highlights:
+          - "基于 Arduino 与电磁线圈实现非接触约束控制，完成传感与执行链路搭建"
+          - "设计并整定 PID 控制器，显著提升平衡稳定性并抑制外部冲击振动"
+          - "探究磁约束平衡装置不确定度并进行实验设计和数据处理"
+          - "成果：全国大学生物理实验竞赛（创新）一等奖"
+          - "西北地区大学生物理实验竞赛二等奖"
 
     获奖经历:
       - title: "第九届中国大学生物理实验竞赛一等奖"
