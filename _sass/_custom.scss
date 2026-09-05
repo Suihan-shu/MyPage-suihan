@@ -749,3 +749,76 @@ footer a {
     overflow: hidden;
   }
 }
+
+
+/* Moments-style travel stream and visual publishing workspace. */
+.publisher-token-input { resize: none; font-family: var(--custom-font-code); -webkit-text-security: disc; }
+.publisher-token-input.is-visible { -webkit-text-security: none; }
+.travel-log-page { max-width: 48rem; }
+.travel-journal { max-width: 44rem; margin: 0 auto; }
+.moments-profile { display: flex; gap: 1rem; align-items: center; padding: 1.5rem 0 2rem; }
+.moments-profile img { border-radius: 1rem; object-fit: cover; }
+.moments-profile h2 { margin: 0 0 .35rem; font-size: 1.25rem; }
+.moments-profile p { margin: 0; color: var(--global-text-color-light); font-size: .9rem; }
+.travel-entry-grid { display: block; }
+.moment-card { display: flex; align-items: flex-start; gap: .9rem; padding: 1.5rem 0; border: 0; border-bottom: 1px solid var(--global-divider-color); border-radius: 0; box-shadow: none; background: transparent; overflow-wrap: anywhere; }
+.moment-card__avatar { flex: 0 0 42px; width: 42px; height: 42px; object-fit: cover; border-radius: .6rem; }
+.moment-card__body { flex: 1; min-width: 0; }
+.moment-card__author { margin: 0 0 .5rem; color: var(--global-theme-color); font-size: .98rem; font-weight: 700; }
+.moment-card .travel-entry__text { margin: 0 0 .8rem; white-space: pre-wrap; color: var(--global-text-color); line-height: 1.75; font-size: .98rem; }
+.moment-card .travel-photo-grid { max-width: 30rem; padding: 0; gap: .3rem; margin: .25rem 0 .8rem; }
+.moment-card .travel-photo-grid[data-count="1"] { max-width: 23rem; }
+.moment-card .travel-photo-grid[data-count="4"] { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 25rem; }
+.moment-card .travel-photo { border-radius: .3rem; }
+.moment-card .travel-entry__location { margin: .7rem 0 .35rem; color: var(--global-theme-color); line-height: 1.5; font-size: .85rem; }
+.moment-card .travel-entry__date { margin: .5rem 0 0; color: var(--global-text-color-light); font-size: .78rem; font-weight: 400; }
+.moments-manager__heading, .moments-editor-heading, .moments-photo-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.moments-manager__heading { margin: 1rem 0; flex-wrap: wrap; }
+.moments-manager__heading h2 { font-size: 1.6rem; margin: 0 0 .5rem; }
+.moments-manager__heading h3, .moments-editor-heading h3 { font-size: 1.15rem; margin: 0; }
+.moments-manager__heading p { margin-bottom: .5rem; }
+.moments-workspace { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 1.4rem; align-items: start; }
+.moments-composer { padding: 1.4rem; margin: 0; }
+.moments-composer fieldset { min-width: 0; }
+.moments-composer label { font-size: .92rem; font-weight: 600; }
+.moments-editor-heading { margin-bottom: 1.2rem; }
+#travel-edit-badge { color: var(--global-theme-color); font-size: .8rem; }
+.moments-photo-heading { margin: 1.2rem 0 .6rem; }
+#travel-photo-count { color: var(--global-text-color-light); font-size: .8rem; }
+.moments-photo-editor { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .55rem; }
+.moments-photo-tile { min-width: 0; position: relative; }
+.moments-photo-tile img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: .5rem; cursor: zoom-in; }
+.moments-photo-tools { display: flex; justify-content: space-between; gap: .2rem; padding: .25rem 0; }
+.moments-photo-tools button { flex: 1; border: 1px solid var(--global-divider-color); border-radius: .3rem; min-height: 30px; color: var(--global-text-color); background: var(--global-bg-color); }
+.moments-photo-tools button:disabled { opacity: .35; }
+.moments-upload { display: flex; align-items: center; justify-content: center; gap: .6rem; min-height: 3.5rem; padding: .6rem; margin-top: .6rem; border: 1px dashed var(--global-theme-color); border-radius: .6rem; color: var(--global-theme-color); cursor: pointer; position: relative; overflow: hidden; }
+.moments-upload span { font-size: 1.5rem; }
+.moments-upload input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+.moments-upload:focus-within { outline: 2px solid var(--global-theme-color); outline-offset: 2px; }
+.moments-date-options { margin-top: 1rem; font-size: .85rem; color: var(--global-text-color-light); }
+.moments-date-options summary { cursor: pointer; padding: .35rem 0; }
+.moments-editor-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.3rem; }
+.moments-editor-actions .btn { margin: 0; }
+.moments-preview { position: sticky; top: 6rem; padding: 1.2rem; background: var(--global-bg-color); border: 1px solid var(--global-divider-color); border-radius: 1rem; }
+.moments-preview__label { color: var(--global-text-color-light); font-size: .8rem; margin: 0; }
+.moments-preview .moment-card { border: 0; padding-bottom: .2rem; gap: .65rem; }
+.moments-preview .moment-card__avatar { flex-basis: 34px; width: 34px; height: 34px; }
+.moments-history { margin-top: 2rem; }
+#travel-management-list { max-width: 46rem; }
+.moments-record-actions { display: flex; justify-content: flex-end; gap: 1rem; margin-top: .6rem; }
+.moments-record-actions button { border: 0; background: transparent; color: var(--global-theme-color); font-size: .85rem; min-height: 36px; padding: .25rem .5rem; }
+.moments-record-actions .moment-delete { color: #b84a4a; }
+#travel-manager-status { min-height: 1.5rem; color: var(--global-theme-color); font-size: .9rem; }
+#travel-manager-status.is-error { color: #b84a4a; }
+.moments-photo-dialog { max-width: 94vw; max-height: 94vh; padding: 1rem; border: 0; border-radius: .75rem; background: var(--global-bg-color); }
+.moments-photo-dialog::backdrop { background: rgba(0,0,0,.8); }
+.moments-photo-dialog img { display: block; max-width: 85vw; max-height: 78vh; object-fit: contain; margin-top: .7rem; }
+.moments-photo-dialog button { border: 1px solid var(--global-divider-color); border-radius: .35rem; padding: .4rem .7rem; color: var(--global-text-color); background: var(--global-bg-color); }
+@media (max-width: 767.98px) {
+  .moments-workspace { grid-template-columns: minmax(0, 1fr); }
+  .moments-preview { position: static; }
+  .moments-composer { padding: 1rem; }
+  .moment-card { gap: .7rem; padding: 1.25rem 0; }
+  .moment-card__avatar { flex-basis: 36px; width: 36px; height: 36px; }
+  .moments-profile { padding-top: 1rem; }
+}

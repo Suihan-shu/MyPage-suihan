@@ -30,43 +30,6 @@
     entries = [];
   }
 
-  const makeElement = (tag, className, text) => {
-    const element = document.createElement(tag);
-    if (className) element.className = className;
-    if (text !== undefined && text !== null) element.textContent = text;
-    return element;
-  };
-
-  const localized = (value) => {
-    if (value === undefined || value === null) return "";
-    if (typeof value === "string" || typeof value === "number") return String(value);
-    if (typeof value === "object") {
-      return String(value.zh ?? Object.values(value).find((item) => typeof item === "string") ?? "");
-    }
-    return "";
-  };
-
-  const dateFormatter = new Intl.DateTimeFormat("zh-CN", {
-    year: "numeric", month: "long", day: "numeric",
-  });
-  const formatDate = (value) => {
-    if (!value) return "";
-    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value));
-    if (!match) return String(value);
-    const date = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
-    return dateFormatter.format(date);
-  };
-
-  const resolvePhotoPath = (path) => {
-    try {
-      const value = String(path);
-      if (value.startsWith("/assets/")) return new URL(`${baseUrl}${value}`, window.location.origin).href;
-      return new URL(value, document.baseURI).href;
-    } catch (error) {
-      return "";
-    }
-  };
-
   const openLightbox = (source, alt, caption, trigger) => {
     if (!source) return;
     lightboxTrigger = trigger;
@@ -89,65 +52,9 @@
     lightboxTrigger = null;
   };
 
-  const renderPhoto = (photo, photoIndex) => {
-    const button = makeElement("button", "travel-photo");
-    button.type = "button";
-    button.setAttribute("aria-label", `${root.dataset.photoLabel} ${photoIndex + 1}`);
-    const source = resolvePhotoPath(photo?.file || photo?.src || photo?.url || photo);
-    const alt = localized(photo?.alt) || root.dataset.photoLabel;
-    const caption = localized(photo?.caption);
-    const image = makeElement("img", "travel-photo__image");
-    image.src = source;
-    image.alt = alt;
-    image.loading = "lazy";
-    image.decoding = "async";
-    image.addEventListener("error", () => {
-      button.disabled = true;
-      button.classList.add("travel-photo--error");
-      button.replaceChildren(makeElement("span", "", root.dataset.photoError));
-    });
-    button.append(image);
-    button.addEventListener("click", () => openLightbox(source, alt, caption, button));
-    return button;
-  };
-
-  const renderEntry = (entry) => {
-    const card = makeElement("article", "travel-entry");
-    const header = makeElement("header", "travel-entry__header");
-    const dateLine = makeElement("div", "travel-entry__date");
-    const dateText = formatDate(entry.date || entry.date_range);
-    if (dateText) dateLine.append(makeElement("span", "", dateText));
-    if (entry.time) dateLine.append(makeElement("span", "travel-entry__time", String(entry.time)));
-    if (dateLine.childElementCount) header.append(dateLine);
-
-    const location = localized(entry.location || entry.destination);
-    if (location) {
-      const locationLine = makeElement("p", "travel-entry__location");
-      const icon = makeElement("i", "fa-solid fa-location-dot");
-      icon.setAttribute("aria-hidden", "true");
-      locationLine.append(icon, document.createTextNode(` ${location}`));
-      header.append(locationLine);
-    }
-    if (header.childElementCount) card.append(header);
-
-    const title = localized(entry.title);
-    if (title) card.append(makeElement("h2", "travel-entry__title", title));
-    const text = localized(entry.text || entry.summary);
-    if (text) card.append(makeElement("p", "travel-entry__text", text));
-
-    const photos = Array.isArray(entry.photos) ? [...entry.photos] : [];
-    if (entry.cover_image && !photos.some(photo => (photo?.file || photo?.src || photo?.url || photo) === entry.cover_image)) {
-      photos.unshift(entry.cover_image);
-    }
-    if (photos.length) {
-      const photoGrid = makeElement("div", "travel-photo-grid");
-      photoGrid.dataset.count = String(Math.min(photos.length, 4));
-      photoGrid.append(...photos.map((photo, index) => renderPhoto(photo, index)));
-      card.append(photoGrid);
-    }
-
-    return card;
-  };
+  const renderEntry = entry => window.TravelData.render(entry, {
+    author: root.dataset.author, avatar: root.dataset.avatar, baseUrl, onPhoto: openLightbox,
+  });
 
   const releaseDecryptedContent = () => {
     closeLightbox();
@@ -155,7 +62,7 @@
   };
 
   const showJournal = () => {
-    const sortedEntries = [...entries].sort((left, right) => String(right.date || right.date_range || "").localeCompare(String(left.date || left.date_range || "")));
+    const sortedEntries = [...entries].sort((left, right) => window.TravelData.sortKey(right).localeCompare(window.TravelData.sortKey(left)));
     entryGrid.replaceChildren(...sortedEntries.map((entry) => renderEntry(entry)));
     emptyState.hidden = sortedEntries.length > 0;
     gate.hidden = true;

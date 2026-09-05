@@ -115,6 +115,7 @@ async function serve(root) {
       } else req.continue();
     });
     await visit(optimized.url + '/travel/');
+    assert.equal(await page.$eval('#travel-password', el => el.autocomplete), 'section-travel current-password');
     await page.type('#travel-password', 'wrong');
     await page.click('#travel-unlock-button');
     await page.waitForFunction(() => document.querySelector('#travel-gate-status').classList.contains('is-error'));
@@ -124,7 +125,7 @@ async function serve(root) {
     await page.click('#travel-unlock-button');
     await page.waitForFunction(() => !document.querySelector('#travel-journal').hidden);
     assert.equal(await page.$$eval('.travel-entry', els => els.length), 2);
-    assert.equal(await page.$eval('.travel-entry__title', el => el.textContent), 'CMS format');
+    assert.ok((await page.$eval('.travel-entry__text', el => el.textContent)).startsWith('CMS format'));
     assert.ok((await page.$eval('#travel-entry-grid', el => el.textContent)).includes('成都'));
     await page.click('.travel-photo');
     assert.equal(await page.$eval('#travel-lightbox', el => el.hidden), false);
@@ -140,7 +141,7 @@ async function serve(root) {
     cvFixture.cv.sections['其他'] = [{ name: '保留条目' }];
     cvFixture.cv.sections['教育经历'][0].institution = '<img id="injected" src="x"> & school';
     const originalTravel = { password: 'test-password', custom: 'keep', entries: [{
-      date: '2026-09-01', location: { zh: '西安' }, text: '原内容\n第二行', photos: [{ file: '/assets/photo.jpg', caption: '保留' }]
+      date: '2026-09-01', location: { zh: '西安' }, text: '原内容\n第二行', photos: [{ file: '/assets/img/profile.jpg', caption: '保留' }]
     }] };
     const files = {
       '_data/cv.yml': { sha: 'cv-old', content: yaml.dump(cvFixture) },
@@ -185,6 +186,8 @@ async function serve(root) {
     assert.equal(await admin.$eval('.edu-institution', el => el.value), cvFixture.cv.sections['教育经历'][0].institution);
     assert.equal(await admin.$('#injected'), null);
     assert.equal(await admin.$('#unsafe-user'), null);
+    assert.equal(await admin.$eval('#input-github-token', el => el.tagName), 'TEXTAREA');
+    assert.equal(await admin.$eval('#input-github-token', el => el.autocomplete), 'off');
     for (let i = 1; i <= 2; i++) {
       await admin.$eval('#cms-cv-form', el => el.requestSubmit());
       await admin.waitForFunction(() => !document.querySelector('#cv-submit-btn').disabled);
@@ -194,7 +197,8 @@ async function serve(root) {
     assert.equal(savedCv.cv.summary, cvFixture.cv.summary);
     assert.equal(savedCv.cv.website, cvFixture.cv.website);
     assert.deepEqual(savedCv.cv.sections['其他'], cvFixture.cv.sections['其他']);
-    await admin.$eval('#travel-entry-title', el => { el.value = '新旅行'; });
+    await admin.waitForFunction(() => !document.querySelector('#travel-editor-fields').disabled);
+    await admin.$eval('#travel-entry-summary', el => { el.value = '新旅行'; });
     await admin.$eval('#travel-entry-dest', el => { el.value = '成都'; });
     await admin.$eval('#travel-entry-dates', el => { el.value = '2026-09-05'; });
     await admin.$eval('#cms-travel-form', el => el.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true })));
@@ -205,14 +209,71 @@ async function serve(root) {
     assert.deepEqual(savedTravel.entries[1], originalTravel.entries[0]);
     assert.equal(savedTravel.custom, originalTravel.custom);
     assert.equal(savedTravel.password, originalTravel.password);
-    failTravelRead = true;
-    await admin.$eval('#travel-entry-title', el => { el.value = '读取失败'; });
-    await admin.$eval('#travel-entry-dest', el => { el.value = '成都'; });
-    await admin.$eval('#cms-travel-form', el => el.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true })));
+    // Edit an existing moment visually, add/reorder/remove photos, and preserve identity.
+    await admin.click('[data-publisher-tab="travel"]');
+    await admin.click('#travel-management-list .moment-edit');
+    const firstId = savedTravel.entries[0].id;
+    await admin.$eval('#travel-entry-summary', el => { el.value = '修改后的文案'; el.dispatchEvent(new Event('input')); });
+    await admin.$eval('#travel-entry-dest', el => { el.value = ''; el.dispatchEvent(new Event('input')); });
+    const upload = await admin.$('#travel-photos-input');
+    await upload.uploadFile(path.resolve('assets/img/profile.jpg'), path.resolve('assets/img/wechat-qr.jpg'));
+    assert.equal(await admin.$$eval('.moments-photo-tile', els => els.length), 2);
+    const beforeOrder = await admin.$$eval('.moments-photo-tile img', els => els.map(el => el.src));
+    await admin.click('[aria-label="向后移动 1"]');
+    assert.deepEqual(await admin.$$eval('.moments-photo-tile img', els => els.map(el => el.src)), beforeOrder.toReversed());
+    await admin.click('[aria-label="移除照片 1"]');
+    assert.equal(await admin.$$eval('.moments-photo-tile', els => els.length), 1);
+    assert.ok((await admin.$eval('#travel-live-preview', el => el.textContent)).includes('修改后的文案'));
+    await admin.$eval('#cms-travel-form', el => el.requestSubmit());
     await admin.waitForFunction(() => !document.querySelector('#travel-submit-btn').disabled);
-    assert.equal(writes.length, 3, 'A failed travel read must never overwrite the document');
+    assert.equal(writes.length, 5, 'One photo upload and one metadata save');
+    const editedTravel = yaml.load(files['_data/travel.yml'].content, { schema: yaml.JSON_SCHEMA });
+    assert.equal(editedTravel.entries.length, 2);
+    assert.equal(editedTravel.entries[0].id, firstId);
+    assert.equal(editedTravel.entries[0].text, '修改后的文案');
+    assert.equal(editedTravel.entries[0].location, '');
+    assert.equal(editedTravel.entries[0].photos.length, 1);
+    assert.deepEqual(editedTravel.entries[1], originalTravel.entries[0]);
+    // Newly published photos can be previewed before Pages deploys them.
+    await admin.$eval('#travel-management-list .travel-photo', el => el.scrollIntoView({ behavior: 'instant', block: 'center' }));
+    await admin.click('#travel-management-list .travel-photo');
+    assert.equal(await admin.$eval('.moments-photo-dialog', el => el.open), true);
+    await admin.click('.moments-photo-dialog button');
+    await admin.setViewport({ width: 390, height: 844 });
+    assert.equal(await admin.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), true);
+    await admin.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+    await admin.screenshot({ path: path.join(artifacts, 'moments-admin-mobile.png'), fullPage: true });
+    await admin.setViewport({ width: 1280, height: 1000 });
+    await admin.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+    await admin.screenshot({ path: path.join(artifacts, 'moments-admin-desktop.png'), fullPage: true });
+    // A remote update cannot be overwritten; the draft survives until the user refreshes.
+    await admin.click('#travel-management-list .moment-edit');
+    await admin.$eval('#travel-entry-summary', el => { el.value = '冲突时保留的草稿'; el.dispatchEvent(new Event('input')); });
+    files['_data/travel.yml'].sha = 'remote-change';
+    await admin.$eval('#cms-travel-form', el => el.requestSubmit());
+    await admin.waitForFunction(() => !document.querySelector('#travel-submit-btn').disabled);
+    assert.equal(writes.length, 5);
+    assert.equal(await admin.$eval('#travel-entry-summary', el => el.value), '冲突时保留的草稿');
+    assert.ok((await admin.$eval('#travel-manager-status', el => el.textContent)).includes('另一处更新'));
+    admin.on('dialog', dialog => dialog.accept());
+    await admin.$eval('#travel-refresh-btn', el => el.click());
+    await admin.waitForFunction(() => document.querySelector('#travel-manager-status').textContent.startsWith('已读取') && !document.querySelector('#travel-editor-fields').disabled);
+    // Deleting a post does not delete shared image files or other posts.
+    await admin.$eval('#travel-management-list .moment-delete', el => el.scrollIntoView({ behavior: 'instant', block: 'center' }));
+    await admin.$eval('#travel-management-list .moment-delete', el => el.click());
+    await admin.waitForFunction(() => document.querySelector('#travel-manager-status').textContent.includes('动态已删除'));
+    assert.equal(writes.length, 6);
+    assert.equal(yaml.load(files['_data/travel.yml'].content).entries.length, 1);
+    assert.equal(writes.filter(write => write.filePath.startsWith('assets/img/')).length, 1);
+    failTravelRead = true;
+    await admin.$eval('#travel-entry-summary', el => { el.value = '读取失败'; el.dispatchEvent(new Event('input')); });
+    await admin.$eval('#cms-travel-form', el => el.requestSubmit());
+    await admin.waitForFunction(() => !document.querySelector('#travel-submit-btn').disabled);
+    assert.equal(writes.length, 6, 'A failed travel read must never overwrite the document');
+    // Clear the local test draft before closing the page.
+    await admin.$eval('#travel-cancel-btn', el => el.click());
     await admin.close();
-    console.log('PASS CMS YAML values, HTML escaping, consecutive saves, preserved travel data and failed-read protection');
+    console.log('PASS CMS credentials, moment CRUD, photo previews/reorder/remove, mobile layout, conflict and failed-read protection');
     assert.deepEqual(errors, [], 'Unexpected runtime errors during interaction');
   } finally {
     if (browser) await browser.close();

@@ -44,6 +44,8 @@ try {
         "_pages/travel.md",
         "_layouts/travel-log.liquid",
         "assets/js/travel-log.js",
+        "assets/js/travel-data.js",
+        "assets/js/travel-cms.js",
         "_scripts/search.liquid.js"
     )
     foreach ($file in $requiredFiles) { Assert-FileExists $file }

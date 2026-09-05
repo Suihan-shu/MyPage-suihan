@@ -6,7 +6,7 @@
 (function () {
   'use strict';
 
-  const { parse: parseYaml, dump: dumpYaml, parseTravel: parseTravelYaml, escapeHtml } = window.CMSData;
+  const { parse: parseYaml, dump: dumpYaml, escapeHtml } = window.CMSData;
 
   // 辅助 YAML 解析与序列化
   const YAMLHelper = {
@@ -209,17 +209,6 @@
     let cvFileSha = null;
     let cvDocument = null;
 
-    // 旅行日志相关元素
-    const cmsTravelForm = document.getElementById('cms-travel-form');
-    const travelTitle = document.getElementById('travel-entry-title');
-    const travelDest = document.getElementById('travel-entry-dest');
-    const travelDates = document.getElementById('travel-entry-dates');
-    const travelSummary = document.getElementById('travel-entry-summary');
-    const travelTags = document.getElementById('travel-entry-tags');
-    const travelCoverInput = document.getElementById('travel-cover-input');
-    const travelPhotosInput = document.getElementById('travel-photos-input');
-    const travelSubmitBtn = document.getElementById('travel-submit-btn');
-
     // 关于我相关元素
     const cmsAboutForm = document.getElementById('cms-about-form');
     const aboutDisplayName = document.getElementById('about-display-name');
@@ -240,6 +229,7 @@
 
     // Actions 部署状态
     const actionsStatusBadge = document.getElementById('publisher-actions-status');
+    const travelManager = window.TravelCMS.create({ cms, app: appEl, notify: showToast, onSaved: refreshWorkflowStatus });
 
     // ----------------------------------------------------
     // 动态添加条目卡片
@@ -465,12 +455,15 @@
         refreshWorkflowStatus();
         loadCvContent();
         loadAboutContent();
+        travelManager.load();
+        return true;
       } catch (err) {
         authSection.hidden = false;
         mainSection.hidden = true;
         authStatus.textContent = `验证失败：${err.message}`;
         authStatus.className = 'publisher-status-text publisher-status-text--error';
         showToast(err.message, 'error');
+        return false;
       }
     }
 
@@ -588,6 +581,12 @@
     // 事件绑定
     // ----------------------------------------------------
     function bindEvents() {
+      const tokenToggle = document.getElementById('github-token-toggle');
+      tokenToggle.addEventListener('click', () => {
+        const visible = tokenInput.classList.toggle('is-visible');
+        tokenToggle.setAttribute('aria-pressed', String(visible));
+        tokenToggle.textContent = visible ? '隐藏 Token' : '显示 Token';
+      });
       // 登录表单
       authForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -601,14 +600,20 @@
           return;
         }
 
-        cms.saveConfig({ token, owner, repo, branch });
-        await verifyAndShowApp();
+        // Only persist a new credential after GitHub accepts it. Autofill mistakes
+        // must not replace a previously working token in localStorage.
+        const previousConfig = { ...cms.config };
+        cms.config = { ...cms.config, token, owner, repo, branch };
+        if (await verifyAndShowApp()) { cms.saveConfig(cms.config); tokenInput.value = ''; }
+        else cms.config = previousConfig;
       });
 
       // 退出登录
       if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {
-          if (confirm('确定要退出当前登录并清除本地 Token 吗？')) {
+          if (travelManager.isBusy()) { showToast('正在保存动态，请稍候再退出。', 'info'); return; }
+          if (confirm('退出会清除本地 Token 和未保存的旅行编辑，继续吗？')) {
+            travelManager.reset();
             cms.clearConfig();
             tokenInput.value = '';
             showAuthView();
@@ -798,87 +803,6 @@
         });
       }
 
-      // 旅行日志：提交
-      if (cmsTravelForm) {
-        cmsTravelForm.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          const title = travelTitle.value.trim();
-          const dest = travelDest.value.trim();
-          const dates = travelDates.value.trim();
-          const summary = travelSummary.value.trim();
-          const tags = travelTags.value.split(/[,，\s]+/).filter(Boolean);
-
-          if (!title || !dest) {
-            showToast('请填写旅行标题与目的地', 'error');
-            return;
-          }
-
-          travelSubmitBtn.disabled = true;
-          travelSubmitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 正在处理旅行记录...';
-
-          try {
-            let coverImgUrl = '';
-            if (travelCoverInput && travelCoverInput.files && travelCoverInput.files[0]) {
-              const file = travelCoverInput.files[0];
-              const ext = file.name.split('.').pop() || 'jpg';
-              const filename = `travel-cover-${Date.now()}.${ext}`;
-              const path = `assets/img/travel/${filename}`;
-              await cms.uploadBinary(path, file, `Upload travel cover: ${filename}`);
-              coverImgUrl = `/${path}`;
-            }
-
-            const photoUrls = [];
-            if (travelPhotosInput && travelPhotosInput.files && travelPhotosInput.files.length) {
-              const files = Array.from(travelPhotosInput.files);
-              for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                const ext = file.name.split('.').pop() || 'jpg';
-                const filename = `travel-photo-${Date.now()}-${i + 1}.${ext}`;
-                const path = `assets/img/travel/${filename}`;
-                await cms.uploadBinary(path, file, `Upload travel photo: ${filename}`);
-                photoUrls.push(`/${path}`);
-              }
-            }
-
-            let travelData = { password: '', entries: [] };
-            let sha = null;
-            try {
-              const file = await cms.getFile('_data/travel.yml');
-              sha = file.sha;
-              travelData = parseTravelYaml(file.content);
-            } catch (err) {
-              if (err.status !== 404) throw err;
-              console.log('Creating new _data/travel.yml');
-            }
-
-            const newEntry = {
-              id: `trip-${Date.now()}`,
-              title: title,
-              destination: dest,
-              date_range: dates,
-              summary: summary,
-              cover_image: coverImgUrl,
-              tags: tags,
-              photos: photoUrls
-            };
-
-            travelData.entries.unshift(newEntry);
-
-            const newYaml = dumpYaml(travelData);
-            await cms.putFile('_data/travel.yml', newYaml, `Add travel log: ${title}`, sha);
-
-            showToast('旅行日志已添加并更新到 _data/travel.yml！', 'success');
-            cmsTravelForm.reset();
-            refreshWorkflowStatus();
-          } catch (err) {
-            showToast(`旅行日志保存失败: ${err.message}`, 'error');
-          } finally {
-            travelSubmitBtn.disabled = false;
-            travelSubmitBtn.innerHTML = '<i class="fa-solid fa-route"></i> 保存并添加到旅行日志';
-          }
-        });
-      }
-
       // 关于我：提交修改
       if (cmsAboutForm) {
         cmsAboutForm.addEventListener('submit', async (e) => {
@@ -996,7 +920,7 @@
     // ----------------------------------------------------
     function init() {
       const config = cms.config;
-      if (tokenInput) tokenInput.value = config.token || '';
+      if (tokenInput) tokenInput.value = '';
       if (ownerInput) ownerInput.value = config.owner || 'suihan-shu';
       if (repoInput) repoInput.value = config.repo || 'MyPage-suihan';
       if (branchInput) branchInput.value = config.branch || 'main';

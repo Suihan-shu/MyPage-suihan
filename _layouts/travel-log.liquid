@@ -4,14 +4,16 @@ layout: default
 <div
   class="post travel-log-page"
   id="travel-log"
+  data-author="{{ site.first_name | escape }}"
+  data-avatar="{{ '/assets/img/profile.jpg' | relative_url }}"
   data-travel-log
   data-baseurl="{{ site.baseurl }}"
   data-password="{{ site.data.travel.password | default: '' | escape }}"
   data-unlocking="正在验证密码…"
   data-wrong-password="密码不正确。"
-  data-config-missing="请先在 _data/travel.yml 中设置密码。"
+  data-config-missing="旅行空间尚未设置访问密码。"
   data-password-required="请输入密码。"
-  data-empty="还没有旅行记录。"
+  data-empty="还没有动态，把下一段旅途留在这里。"
   data-photo-error="照片无法加载"
   data-photo-label="查看旅行照片"
   data-show-password="显示密码"
@@ -27,12 +29,13 @@ layout: default
     <section class="travel-gate" id="travel-gate" aria-labelledby="travel-gate-title">
       <div class="travel-gate__icon" aria-hidden="true"><i class="fa-solid fa-lock"></i></div>
       <h2 id="travel-gate-title">这本旅行日志需要密码</h2>
-      <p>输入密码后，在当前浏览器页面中查看旅行文字和照片。</p>
+      <p>解锁后，看看旅途里的照片、心情和小片刻。</p>
 
-      <form class="travel-gate__form" id="travel-unlock-form" novalidate>
+      <form class="travel-gate__form" id="travel-unlock-form" name="travel-journal-access" novalidate>
+        <input type="hidden" name="travel-viewer-account" value="travel-journal-viewer" autocomplete="section-travel username">
         <label for="travel-password">访问密码</label>
         <div class="travel-password-field">
-          <input id="travel-password" name="password" type="password" autocomplete="current-password" minlength="12" required placeholder="请输入密码">
+          <input id="travel-password" name="travel-access-password" type="password" autocomplete="section-travel current-password" required placeholder="请输入密码">
           <button type="button" id="travel-password-toggle" class="travel-password-toggle" aria-label="显示密码" aria-pressed="false">
             <i class="fa-solid fa-eye" aria-hidden="true"></i>
           </button>
@@ -51,8 +54,9 @@ layout: default
         <p><i class="fa-solid fa-lock-open" aria-hidden="true"></i> 已在当前页面解锁</p>
         <button type="button" id="travel-lock-button"><i class="fa-solid fa-lock" aria-hidden="true"></i> 重新锁定</button>
       </div>
+      <div class="moments-profile"><img src="{{ '/assets/img/profile.jpg' | relative_url }}" alt="" width="64" height="64"><div><h2>{{ site.first_name }}</h2><p>走过的地方，想记住的日常。</p></div></div>
       <div class="travel-entry-grid" id="travel-entry-grid"></div>
-      <p class="travel-journal__empty" id="travel-journal-empty" hidden>还没有旅行记录。</p>
+      <p class="travel-journal__empty" id="travel-journal-empty" hidden>还没有动态，把下一段旅途留在这里。</p>
     </section>
 
     <noscript><p class="travel-noscript">需要启用 JavaScript 才能查看旅行日志。</p></noscript>
@@ -66,4 +70,5 @@ layout: default
   <figure><img id="travel-lightbox-image" alt=""><figcaption id="travel-lightbox-caption"></figcaption></figure>
 </div>
 
+<script defer src="{{ '/assets/js/travel-data.js' | relative_url | bust_file_cache }}"></script>
 <script defer src="{{ '/assets/js/travel-log.js' | relative_url | bust_file_cache }}"></script>

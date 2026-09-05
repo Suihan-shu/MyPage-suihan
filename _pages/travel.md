@@ -5,6 +5,6 @@ title: 旅行日志
 lang: zh
 nav: true
 nav_order: 3
-description: 收藏旅途中的时间、地点、片刻与照片。
+description: 像朋友圈一样，记下旅途与生活的小片刻。
 sitemap: false
 ---

@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-<div class="post publisher-container" id="publisher-app">
+<div class="post publisher-container" id="publisher-app" data-baseurl="{{ site.baseurl | escape }}" data-author="{{ site.first_name | escape }}" data-avatar="{{ '/assets/img/profile.jpg' | relative_url }}">
   <!-- 认证与登录界面（未输入 Token 时展示） -->
   <section id="publisher-auth-section" class="publisher-auth-card">
     <div class="publisher-auth-icon">
@@ -21,16 +21,18 @@ layout: default
       <small class="text-muted"><i class="fa-solid fa-lock"></i> 您的 Token 仅保存在当前浏览器本地，绝不经由任何第三方服务器。</small>
     </div>
 
-    <form id="publisher-auth-form">
+    <form id="publisher-auth-form" autocomplete="off">
       <div class="form-group text-left mb-3">
         <label for="input-github-token" class="font-weight-bold">GitHub Personal Access Token (PAT) <span class="text-danger">*</span></label>
-        <input type="password" id="input-github-token" class="form-control" placeholder="github_pat_..." required autocomplete="current-password">
+        <textarea id="input-github-token" name="github-api-token" class="form-control publisher-token-input" rows="2" placeholder="粘贴 GitHub Token" required autocomplete="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore aria-describedby="github-token-help"></textarea>
+        <button type="button" id="github-token-toggle" class="btn btn-sm btn-outline-secondary mt-2" aria-pressed="false">显示 Token</button>
+        <small id="github-token-help" class="d-block text-muted mt-2">这是管理凭证，与旅行访问密码分开保存。连接成功后，本浏览器会记住它。</small>
       </div>
 
       <div class="row">
         <div class="col-md-5 form-group text-left mb-3">
           <label for="input-github-owner" class="font-weight-bold">GitHub 用户名</label>
-          <input type="text" id="input-github-owner" class="form-control" value="suihan-shu" required>
+          <input type="text" id="input-github-owner" name="github-repository-owner" autocomplete="off" class="form-control" value="suihan-shu" required>
         </div>
         <div class="col-md-5 form-group text-left mb-3">
           <label for="input-github-repo" class="font-weight-bold">仓库名</label>
@@ -79,7 +81,7 @@ layout: default
         <i class="fa-solid fa-file-lines"></i> 简历可视化编辑 (Resume)
       </button>
       <button class="publisher-tab-btn" data-publisher-tab="travel" type="button" role="tab">
-        <i class="fa-solid fa-route"></i> 旅行日志与相册 (Travel Log)
+        <i class="fa-solid fa-route"></i> 我的旅行动态
       </button>
       <button class="publisher-tab-btn" data-publisher-tab="about" type="button" role="tab">
         <i class="fa-solid fa-user-pen"></i> 关于我与简介 (About Me)
@@ -211,57 +213,39 @@ layout: default
       </div>
     </div>
 
-    <!-- 选项卡 2：旅行日志与相册管理 -->
+    <!-- 旅行动态：编辑器与已发布列表共用同一数据来源 -->
     <div id="pane-travel" class="publisher-pane" role="tabpanel">
-      <div class="publisher-card">
-        <div class="publisher-card-header">
-          <h2 class="publisher-card-title"><i class="fa-solid fa-route"></i> 旅行日志与照片上传</h2>
-          <small class="text-muted">编辑与新增旅行记录至 <code>_data/travel.yml</code></small>
+      <div id="travel-manager" class="moments-manager">
+        <div class="moments-manager__heading">
+          <div><p class="travel-log-eyebrow">记录生活里的小片刻</p><h2>我的旅行动态</h2><p class="text-muted">写几句话，选几张照片，留一个地点。</p></div>
+          <button type="button" id="travel-new-btn" class="btn btn-primary">＋ 写一条动态</button>
         </div>
-
-        <form id="cms-travel-form">
-          <div class="row mb-3">
-            <div class="col-md-6 form-group">
-              <label for="travel-entry-title" class="font-weight-bold">旅行主题 / 标题 <span class="text-danger">*</span></label>
-              <input type="text" id="travel-entry-title" class="form-control" placeholder="例如：川西秘境秋日巡礼" required>
-            </div>
-            <div class="col-md-6 form-group">
-              <label for="travel-entry-dest" class="font-weight-bold">目的地 <span class="text-danger">*</span></label>
-              <input type="text" id="travel-entry-dest" class="form-control" placeholder="例如：四川 · 稻城亚丁" required>
-            </div>
+        <p id="travel-manager-status" role="status" aria-live="polite"></p>
+        <div class="moments-workspace">
+          <div class="publisher-card moments-composer">
+            <form id="cms-travel-form" autocomplete="off">
+              <fieldset id="travel-editor-fields" disabled>
+                <div class="moments-editor-heading"><h3 id="travel-editor-title">写一条动态</h3><span id="travel-edit-badge" hidden>正在编辑</span></div>
+                <label for="travel-entry-summary">这一刻，想说些什么？</label>
+                <textarea id="travel-entry-summary" class="form-control" rows="5" placeholder="风景、心情，或一个值得记住的瞬间…"></textarea>
+                <div class="moments-photo-heading"><label for="travel-photos-input">照片</label><span id="travel-photo-count">0 / 9</span></div>
+                <div id="travel-photo-editor" class="moments-photo-editor" aria-label="照片预览与排序"></div>
+                <label class="moments-upload" for="travel-photos-input"><span aria-hidden="true">＋</span> 添加照片<input type="file" id="travel-photos-input" accept="image/jpeg,image/png,image/webp,image/gif" multiple></label>
+                <small class="text-muted d-block">最多添加 9 张照片，可调整顺序。也可以只发文字或照片。</small>
+                <label for="travel-entry-dest" class="mt-3"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> 在哪里 <span class="text-muted">（选填）</span></label>
+                <input id="travel-entry-dest" type="text" class="form-control" placeholder="例如：四川 · 四姑娘山" autocomplete="off">
+                <details class="moments-date-options"><summary>记录时间</summary><label for="travel-entry-dates">日期或时间段</label><input id="travel-entry-dates" type="text" class="form-control" placeholder="默认今天，也可以补记过去的旅行"></details>
+                <div class="moments-editor-actions"><button id="travel-submit-btn" type="submit" class="btn btn-primary">发布动态</button><button id="travel-cancel-btn" type="button" class="btn btn-outline-secondary">清空</button></div>
+              </fieldset>
+            </form>
           </div>
-
-          <div class="row mb-3">
-            <div class="col-md-6 form-group">
-              <label for="travel-entry-dates" class="font-weight-bold">旅行时间段</label>
-              <input type="text" id="travel-entry-dates" class="form-control" placeholder="例如：2026年10月1日 - 10月7日">
-            </div>
-            <div class="col-md-6 form-group">
-              <label for="travel-entry-tags" class="font-weight-bold">标签 (以逗号分隔)</label>
-              <input type="text" id="travel-entry-tags" class="form-control" placeholder="雪山, 徒步, 摄影">
-            </div>
-          </div>
-
-          <div class="form-group mb-3">
-            <label for="travel-entry-summary" class="font-weight-bold">旅途故事 / 描述</label>
-            <textarea id="travel-entry-summary" class="form-control" rows="3" placeholder="记录旅途中的风景、心境与难忘片段..."></textarea>
-          </div>
-
-          <div class="row mb-3">
-            <div class="col-md-6 form-group">
-              <label for="travel-cover-input" class="font-weight-bold">上传封面图</label>
-              <input type="file" id="travel-cover-input" class="form-control-file" accept="image/*">
-            </div>
-            <div class="col-md-6 form-group">
-              <label for="travel-photos-input" class="font-weight-bold">上传相册照片 (可多选)</label>
-              <input type="file" id="travel-photos-input" class="form-control-file" accept="image/*" multiple>
-            </div>
-          </div>
-
-          <button id="travel-submit-btn" type="submit" class="btn btn-primary btn-lg btn-block" style="border-radius: 8px;">
-            <i class="fa-solid fa-route"></i> 保存并添加到旅行日志
-          </button>
-        </form>
+          <aside class="moments-preview"><p class="moments-preview__label">朋友看到的样子 · 实时预览</p><div id="travel-live-preview"></div></aside>
+        </div>
+        <section class="moments-history" aria-labelledby="travel-history-heading">
+          <div class="moments-manager__heading"><h3 id="travel-history-heading">已发布 <span id="travel-entry-count">0</span></h3><button type="button" id="travel-refresh-btn" class="btn btn-sm btn-outline-secondary">刷新列表</button></div>
+          <div id="travel-management-list"></div>
+          <p id="travel-management-empty" class="travel-journal__empty" hidden>还没有动态。把第一段旅途留在这里吧。</p>
+        </section>
       </div>
     </div>
 
@@ -357,4 +341,6 @@ layout: default
 <script src="{{ '/assets/js/lib/js-yaml.min.js' | relative_url | bust_file_cache }}"></script>
 <script src="{{ '/assets/js/cms-data.js' | relative_url | bust_file_cache }}"></script>
 <script src="{{ '/assets/js/github-cms.js' | relative_url | bust_file_cache }}"></script>
+<script src="{{ '/assets/js/travel-data.js' | relative_url | bust_file_cache }}"></script>
+<script src="{{ '/assets/js/travel-cms.js' | relative_url | bust_file_cache }}"></script>
 <script src="{{ '/assets/js/publisher.js' | relative_url | bust_file_cache }}"></script>
