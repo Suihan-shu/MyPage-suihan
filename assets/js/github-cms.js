@@ -17,7 +17,14 @@ class GitHubCMS {
     try {
       const data = localStorage.getItem(this.storageKey);
       if (data) {
-        return JSON.parse(data);
+        const saved = JSON.parse(data);
+        if (saved && typeof saved === 'object' && !Array.isArray(saved)) {
+          const defaults = { token: '', owner: 'suihan-shu', repo: 'MyPage-suihan', branch: 'main' };
+          for (const key of Object.keys(defaults)) {
+            if (typeof saved[key] === 'string') defaults[key] = saved[key];
+          }
+          return defaults;
+        }
       }
     } catch (e) {
       console.warn('Failed to load GitHub CMS config from localStorage:', e);
@@ -99,16 +106,17 @@ class GitHubCMS {
       }
 
       if (response.status === 401) {
-        throw new Error('GitHub Token 无效或已过期，请检查 Token 是否正确。');
+        errorMsg = 'GitHub Token 无效或已过期，请检查 Token 是否正确。';
       } else if (response.status === 404) {
-        throw new Error(`请求的资源不存在 (${response.status})，请检查仓库名、分支或文件路径。`);
+        errorMsg = `请求的资源不存在 (${response.status})，请检查仓库名、分支或文件路径。`;
       } else if (response.status === 409) {
-        throw new Error('文件产生冲突 (409 Conflict)，可能远端已被修改，请刷新后重试。');
+        errorMsg = '文件产生冲突 (409 Conflict)，可能远端已被修改，请刷新后重试。';
       } else if (response.status === 422) {
-        throw new Error(`提交验证失败 (422): ${errorMsg}`);
+        errorMsg = `提交验证失败 (422): ${errorMsg}`;
       }
-
-      throw new Error(errorMsg);
+      const error = new Error(errorMsg);
+      error.status = response.status;
+      throw error;
     }
 
     // 某些 204 No Content 请求没有响应体
@@ -123,10 +131,10 @@ class GitHubCMS {
    * 验证 Token 并获取用户信息及仓库权限
    */
   async verifyAuth() {
-    // 1. 获取用户信息
-    const user = await this.request('/user');
-    // 2. 检查仓库是否存在且具备写权限
-    const repo = await this.request(`/repos/${this.config.owner}/${this.config.repo}`);
+    const [user, repo] = await Promise.all([
+      this.request('/user'),
+      this.request(`/repos/${this.config.owner}/${this.config.repo}`)
+    ]);
     return {
       user: {
         login: user.login,
@@ -173,13 +181,17 @@ class GitHubCMS {
     return decoder.decode(bytes);
   }
 
+  encodePath(path) {
+    return path.split('/').map(encodeURIComponent).join('/');
+  }
+
   /**
    * 获取指定文件信息与内容
    * @param {string} path 文件相对路径，如 _data/moments.yml
    */
   async getFile(path) {
     const cleanPath = path.replace(/^\/+/, '');
-    const endpoint = `/repos/${this.config.owner}/${this.config.repo}/contents/${cleanPath}?ref=${this.config.branch || 'main'}`;
+    const endpoint = `/repos/${this.config.owner}/${this.config.repo}/contents/${this.encodePath(cleanPath)}?ref=${encodeURIComponent(this.config.branch || 'main')}`;
     const data = await this.request(endpoint);
     
     let content = '';
@@ -206,7 +218,8 @@ class GitHubCMS {
       const file = await this.getFile(path);
       return file.sha;
     } catch (e) {
-      return null;
+      if (e.status === 404) return null;
+      throw e;
     }
   }
 
@@ -236,7 +249,7 @@ class GitHubCMS {
       payload.sha = sha;
     }
 
-    const endpoint = `/repos/${this.config.owner}/${this.config.repo}/contents/${cleanPath}`;
+    const endpoint = `/repos/${this.config.owner}/${this.config.repo}/contents/${this.encodePath(cleanPath)}`;
     return await this.request(endpoint, {
       method: 'PUT',
       headers: {
@@ -279,7 +292,7 @@ class GitHubCMS {
       payload.sha = sha;
     }
 
-    const endpoint = `/repos/${this.config.owner}/${this.config.repo}/contents/${cleanPath}`;
+    const endpoint = `/repos/${this.config.owner}/${this.config.repo}/contents/${this.encodePath(cleanPath)}`;
     return await this.request(endpoint, {
       method: 'PUT',
       headers: {
@@ -307,7 +320,7 @@ class GitHubCMS {
       branch: this.config.branch || 'main'
     };
 
-    const endpoint = `/repos/${this.config.owner}/${this.config.repo}/contents/${cleanPath}`;
+    const endpoint = `/repos/${this.config.owner}/${this.config.repo}/contents/${this.encodePath(cleanPath)}`;
     return await this.request(endpoint, {
       method: 'DELETE',
       headers: {
@@ -322,7 +335,7 @@ class GitHubCMS {
    */
   async listDirectory(path = '') {
     const cleanPath = path.replace(/^\/+/, '');
-    const endpoint = `/repos/${this.config.owner}/${this.config.repo}/contents/${cleanPath}?ref=${this.config.branch || 'main'}`;
+    const endpoint = `/repos/${this.config.owner}/${this.config.repo}/contents/${this.encodePath(cleanPath)}?ref=${encodeURIComponent(this.config.branch || 'main')}`;
     const data = await this.request(endpoint);
     if (!Array.isArray(data)) {
       throw new Error(`路径 ${cleanPath} 不是一个目录。`);
@@ -341,7 +354,7 @@ class GitHubCMS {
    * 获取最近的 Commit 记录
    */
   async getRecentCommits(limit = 5) {
-    const endpoint = `/repos/${this.config.owner}/${this.config.repo}/commits?sha=${this.config.branch || 'main'}&per_page=${limit}`;
+    const endpoint = `/repos/${this.config.owner}/${this.config.repo}/commits?sha=${encodeURIComponent(this.config.branch || 'main')}&per_page=${limit}`;
     const commits = await this.request(endpoint);
     return commits.map(c => ({
       sha: c.sha.substring(0, 7),

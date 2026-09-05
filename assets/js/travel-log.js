@@ -46,16 +46,15 @@
     return "";
   };
 
+  const dateFormatter = new Intl.DateTimeFormat("zh-CN", {
+    year: "numeric", month: "long", day: "numeric",
+  });
   const formatDate = (value) => {
     if (!value) return "";
     const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value));
     if (!match) return String(value);
     const date = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
-    return new Intl.DateTimeFormat("zh-CN", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    }).format(date);
+    return dateFormatter.format(date);
   };
 
   const resolvePhotoPath = (path) => {
@@ -94,7 +93,7 @@
     const button = makeElement("button", "travel-photo");
     button.type = "button";
     button.setAttribute("aria-label", `${root.dataset.photoLabel} ${photoIndex + 1}`);
-    const source = resolvePhotoPath(photo?.file || photo?.src || photo);
+    const source = resolvePhotoPath(photo?.file || photo?.src || photo?.url || photo);
     const alt = localized(photo?.alt) || root.dataset.photoLabel;
     const caption = localized(photo?.caption);
     const image = makeElement("img", "travel-photo__image");
@@ -116,12 +115,12 @@
     const card = makeElement("article", "travel-entry");
     const header = makeElement("header", "travel-entry__header");
     const dateLine = makeElement("div", "travel-entry__date");
-    const dateText = formatDate(entry.date);
+    const dateText = formatDate(entry.date || entry.date_range);
     if (dateText) dateLine.append(makeElement("span", "", dateText));
     if (entry.time) dateLine.append(makeElement("span", "travel-entry__time", String(entry.time)));
     if (dateLine.childElementCount) header.append(dateLine);
 
-    const location = localized(entry.location);
+    const location = localized(entry.location || entry.destination);
     if (location) {
       const locationLine = makeElement("p", "travel-entry__location");
       const icon = makeElement("i", "fa-solid fa-location-dot");
@@ -133,10 +132,13 @@
 
     const title = localized(entry.title);
     if (title) card.append(makeElement("h2", "travel-entry__title", title));
-    const text = localized(entry.text);
+    const text = localized(entry.text || entry.summary);
     if (text) card.append(makeElement("p", "travel-entry__text", text));
 
-    const photos = Array.isArray(entry.photos) ? entry.photos : [];
+    const photos = Array.isArray(entry.photos) ? [...entry.photos] : [];
+    if (entry.cover_image && !photos.some(photo => (photo?.file || photo?.src || photo?.url || photo) === entry.cover_image)) {
+      photos.unshift(entry.cover_image);
+    }
     if (photos.length) {
       const photoGrid = makeElement("div", "travel-photo-grid");
       photoGrid.dataset.count = String(Math.min(photos.length, 4));
@@ -153,7 +155,7 @@
   };
 
   const showJournal = () => {
-    const sortedEntries = [...entries].sort((left, right) => String(right.date || "").localeCompare(String(left.date || "")));
+    const sortedEntries = [...entries].sort((left, right) => String(right.date || right.date_range || "").localeCompare(String(left.date || left.date_range || "")));
     entryGrid.replaceChildren(...sortedEntries.map((entry) => renderEntry(entry)));
     emptyState.hidden = sortedEntries.length > 0;
     gate.hidden = true;

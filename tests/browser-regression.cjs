@@ -1,0 +1,221 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const http = require('node:http');
+const assert = require('node:assert/strict');
+const puppeteer = require('puppeteer');
+const siteDir = path.resolve(process.env.SITE_DIR || '_site');
+const baselineDir = process.env.BASELINE_DIR && path.resolve(process.env.BASELINE_DIR);
+const basePath = process.env.SITE_BASEURL ?? '/MyPage-suihan';
+const artifacts = path.resolve('_site/review-artifacts');
+const mime = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.jpg': 'image/jpeg', '.png': 'image/png', '.woff2': 'font/woff2' };
+async function serve(root) {
+  const server = http.createServer((req, res) => {
+    try {
+      let url = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
+      if (!url.startsWith(basePath + '/')) { res.writeHead(404).end(); return; }
+      url = url.slice(basePath.length);
+      const target = path.resolve(root, '.' + url, url.endsWith('/') ? 'index.html' : '');
+      if (!target.startsWith(root + path.sep) || !fs.existsSync(target) || !fs.statSync(target).isFile()) {
+        res.writeHead(404).end(); return;
+      }
+      res.writeHead(200, { 'Content-Type': mime[path.extname(target)] || 'application/octet-stream' });
+      fs.createReadStream(target).pipe(res);
+    } catch { res.writeHead(400).end(); }
+  });
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  return { server, url: `http://127.0.0.1:${server.address().port}${basePath}` };
+}
+(async () => {
+  assert.ok(fs.existsSync(path.join(siteDir, 'index.html')), 'Build the site before browser tests');
+  fs.mkdirSync(artifacts, { recursive: true });
+  const optimized = await serve(siteDir);
+  const baseline = baselineDir ? await serve(baselineDir) : null;
+  const executablePath = process.env.CHROME_PATH || [
+    'C:/Program Files/Google/Chrome/Application/chrome.exe',
+    'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'
+  ].find(file => fs.existsSync(file));
+  let browser;
+  const errors = [];
+  try {
+    browser = await puppeteer.launch({ executablePath, headless: true });
+    const page = await browser.newPage();
+    page.on('pageerror', error => errors.push(error.message));
+    await page.setViewport({ width: 1440, height: 1000 });
+    const mainText = () => page.$eval('[role="main"]', el => { const clone = el.cloneNode(true); clone.querySelectorAll('script, style').forEach(node => node.remove()); return clone.textContent.replace(/\s+/g, ' ').trim(); });
+    async function visit(url) {
+      await page.goto(url, { waitUntil: 'load', timeout: 45000 });
+      await page.waitForFunction(() => window.jQuery && window.jQuery.isReady);
+    }
+    for (const route of ['/', '/cv/', '/repositories/', '/projects/', '/travel/', '/admin/']) {
+      let before;
+      if (baseline) { await visit(baseline.url + route); before = await mainText(); }
+      errors.length = 0;
+      await visit(optimized.url + route);
+      if (baseline) assert.equal(await mainText(), before, `Visible page content changed at ${route}`);
+      assert.deepEqual(errors, [], `Runtime errors at ${route}`);
+      console.log(`PASS page ${route}${baseline ? ' matches baseline content' : ''}`);
+    }
+    await visit(optimized.url + '/');
+    await page.waitForFunction(() => typeof document.querySelector('ninja-keys')?.open === 'function');
+    assert.ok(await page.$eval('ninja-keys', el => el.data.some(item => item.id === 'nav-home')));
+    await page.evaluate(() => window.openSearchModal());
+    assert.equal(await page.$eval('ninja-keys', el => el.visible), true);
+    await page.keyboard.press('Escape');
+    await page.click('#light-toggle');
+    assert.equal(await page.$eval('html', el => el.dataset.theme), 'light');
+    await page.click('#light-toggle');
+    assert.equal(await page.$eval('html', el => el.dataset.theme), 'dark');
+    await page.click('#light-toggle');
+    await page.screenshot({ path: path.join(artifacts, 'home-desktop.png'), fullPage: true });
+    console.log('PASS search and three-state theme switch');
+    // An image error must affect only that picture, even before jQuery is available.
+    assert.equal(await page.evaluate(() => {
+      const image = document.querySelector('picture img');
+      const first = image.parentElement;
+      const copy = first.cloneNode(true);
+      document.body.append(copy);
+      const handler = image.getAttribute('onerror');
+      Function(handler).call(image);
+      const ok = first.querySelectorAll('source').length === 0 && copy.querySelectorAll('source').length > 0;
+      copy.remove();
+      return ok;
+    }), true);
+    console.log('PASS per-picture responsive image fallback');
+    await page.setViewport({ width: 390, height: 844, isMobile: true, hasTouch: true });
+    await visit(optimized.url + '/cv/');
+    await page.waitForFunction(() => getComputedStyle(document.getElementById('mobile-toc-toggle')).bottom !== 'auto');
+    await page.click('#mobile-toc-toggle');
+    assert.equal(await page.$eval('#mobile-toc-drawer', el => el.classList.contains('open')), true);
+    await page.waitForFunction(() => document.getElementById('mobile-toc-drawer').getBoundingClientRect().right <= window.innerWidth + 1);
+    await page.click('#mobile-toc-close');
+    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+    await page.waitForFunction(() => {
+      const p = document.getElementById('progress'); return p.max > 1 && Math.abs(p.value - p.max) <= 2;
+    });
+    const oldMax = await page.$eval('#progress', el => el.max);
+    await page.evaluate(() => {
+      const extra = document.createElement('div'); extra.style.height = '700px'; document.body.append(extra);
+    });
+    await page.waitForFunction(previous => document.getElementById('progress').max >= previous + 600, {}, oldMax);
+    await page.evaluate(() => { document.body.lastElementChild.remove(); window.scrollTo(0, 0); });
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), true);
+    await page.screenshot({ path: path.join(artifacts, 'cv-mobile.png'), fullPage: true });
+    console.log('PASS mobile TOC, scroll progress and dynamic content growth');
+    // Populate travel data only inside this local test page, never in source content.
+    await page.setRequestInterception(true);
+    page.on('request', req => {
+      if (req.url().endsWith('/travel/')) {
+        let html = fs.readFileSync(path.join(siteDir, 'travel/index.html'), 'utf8');
+        const trips = [
+          { title: 'Original format', date: '2026-09-04', location: '西安', text: '原格式', photos: [{ file: `${basePath}/assets/img/profile.jpg` }] },
+          { title: 'CMS format', date_range: '2026-09-05', destination: '成都', summary: '后台格式', photos: [{ url: `${basePath}/assets/img/profile.jpg` }] }
+        ];
+        html = html.replace(/(<script[^>]*id="travel-log-data"[^>]*>)[\s\S]*?(<\/script>)/, '$1' + JSON.stringify(trips) + '$2');
+        req.respond({ status: 200, contentType: 'text/html', body: html });
+      } else req.continue();
+    });
+    await visit(optimized.url + '/travel/');
+    await page.type('#travel-password', 'wrong');
+    await page.click('#travel-unlock-button');
+    await page.waitForFunction(() => document.querySelector('#travel-gate-status').classList.contains('is-error'));
+    assert.equal(await page.$eval('#travel-journal', el => el.hidden), true);
+    const password = await page.$eval('[data-travel-log]', el => el.dataset.password);
+    await page.type('#travel-password', password);
+    await page.click('#travel-unlock-button');
+    await page.waitForFunction(() => !document.querySelector('#travel-journal').hidden);
+    assert.equal(await page.$$eval('.travel-entry', els => els.length), 2);
+    assert.equal(await page.$eval('.travel-entry__title', el => el.textContent), 'CMS format');
+    assert.ok((await page.$eval('#travel-entry-grid', el => el.textContent)).includes('成都'));
+    await page.click('.travel-photo');
+    assert.equal(await page.$eval('#travel-lightbox', el => el.hidden), false);
+    await page.keyboard.press('Escape');
+    await page.click('#travel-lock-button');
+    assert.equal(await page.$$eval('.travel-entry', els => els.length), 0);
+    console.log('PASS travel password, both data formats, photo preview and lock');
+    // All CMS traffic is intercepted. No real token, commit, or remote write is used.
+    const yaml = require('../assets/js/lib/js-yaml.min.js');
+    const cvFixture = yaml.load(fs.readFileSync('_data/cv.yml', 'utf8'), { schema: yaml.JSON_SCHEMA });
+    cvFixture.cv.summary = '第一行 "引用"\n第二行';
+    cvFixture.cv.website = 'https://example.com';
+    cvFixture.cv.sections['其他'] = [{ name: '保留条目' }];
+    cvFixture.cv.sections['教育经历'][0].institution = '<img id="injected" src="x"> & school';
+    const originalTravel = { password: 'test-password', custom: 'keep', entries: [{
+      date: '2026-09-01', location: { zh: '西安' }, text: '原内容\n第二行', photos: [{ file: '/assets/photo.jpg', caption: '保留' }]
+    }] };
+    const files = {
+      '_data/cv.yml': { sha: 'cv-old', content: yaml.dump(cvFixture) },
+      '_data/travel.yml': { sha: 'travel-old', content: yaml.dump(originalTravel) },
+      '_pages/about.md': { sha: 'about-old', content: fs.readFileSync('_pages/about.md', 'utf8') }
+    };
+    const writes = [];
+    let failTravelRead = false;
+    const admin = await browser.newPage();
+    admin.on('pageerror', error => errors.push(error.message));
+    await admin.setViewport({ width: 1280, height: 1000 });
+    await admin.evaluateOnNewDocument(() => localStorage.setItem('site_github_cms_config', JSON.stringify({
+      token: 'local-fixture-only', owner: 'tester', repo: 'site', branch: 'main'
+    })));
+    await admin.setRequestInterception(true);
+    admin.on('request', request => {
+      const url = new URL(request.url());
+      if (url.hostname !== 'api.github.com') { request.continue(); return; }
+      const headers = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': '*', 'Access-Control-Allow-Methods': 'GET, PUT, DELETE, OPTIONS' };
+      const reply = (status, body) => request.respond({ status, headers, contentType: 'application/json', body: JSON.stringify(body) });
+      if (request.method() === 'OPTIONS') return reply(204, null);
+      if (url.pathname === '/user') return reply(200, { login: 'tester', name: '<b id="unsafe-user">tester</b>' });
+      if (url.pathname.endsWith('/actions/runs')) return reply(200, { workflow_runs: [] });
+      if (!url.pathname.includes('/contents/')) return reply(200, { full_name: 'tester/site', permissions: { push: true } });
+      const filePath = decodeURIComponent(url.pathname.split('/contents/')[1]);
+      if (request.method() === 'GET') {
+        if (failTravelRead && filePath === '_data/travel.yml') return reply(403, { message: 'Forbidden' });
+        const file = files[filePath];
+        return file ? reply(200, { ...file, encoding: 'base64', content: Buffer.from(file.content).toString('base64') }) : reply(404, {});
+      }
+      const payload = JSON.parse(request.postData());
+      if (payload.sha !== files[filePath]?.sha) return reply(409, {});
+      writes.push({ filePath, payload });
+      files[filePath] = { sha: `new-${writes.length}`, content: Buffer.from(payload.content, 'base64').toString() };
+      return reply(200, { content: { sha: files[filePath].sha } });
+    });
+    await admin.goto(optimized.url + '/admin/', { waitUntil: 'load' });
+    await admin.waitForFunction(() => document.querySelector('#cv-summary').value.includes('第二行')).catch(async error => {
+      console.error(await admin.$eval('#publisher-auth-status', el => el.textContent), errors);
+      throw error;
+    });
+    assert.equal(await admin.$eval('.edu-institution', el => el.value), cvFixture.cv.sections['教育经历'][0].institution);
+    assert.equal(await admin.$('#injected'), null);
+    assert.equal(await admin.$('#unsafe-user'), null);
+    for (let i = 1; i <= 2; i++) {
+      await admin.$eval('#cms-cv-form', el => el.requestSubmit());
+      await admin.waitForFunction(() => !document.querySelector('#cv-submit-btn').disabled);
+      assert.equal(writes.length, i, 'Consecutive saves must use the updated SHA');
+    }
+    const savedCv = yaml.load(files['_data/cv.yml'].content, { schema: yaml.JSON_SCHEMA });
+    assert.equal(savedCv.cv.summary, cvFixture.cv.summary);
+    assert.equal(savedCv.cv.website, cvFixture.cv.website);
+    assert.deepEqual(savedCv.cv.sections['其他'], cvFixture.cv.sections['其他']);
+    await admin.$eval('#travel-entry-title', el => { el.value = '新旅行'; });
+    await admin.$eval('#travel-entry-dest', el => { el.value = '成都'; });
+    await admin.$eval('#travel-entry-dates', el => { el.value = '2026-09-05'; });
+    await admin.$eval('#cms-travel-form', el => el.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true })));
+    await admin.waitForFunction(() => !document.querySelector('#travel-submit-btn').disabled);
+    assert.equal(writes.length, 3);
+    const savedTravel = yaml.load(files['_data/travel.yml'].content, { schema: yaml.JSON_SCHEMA });
+    assert.equal(savedTravel.entries.length, 2);
+    assert.deepEqual(savedTravel.entries[1], originalTravel.entries[0]);
+    assert.equal(savedTravel.custom, originalTravel.custom);
+    assert.equal(savedTravel.password, originalTravel.password);
+    failTravelRead = true;
+    await admin.$eval('#travel-entry-title', el => { el.value = '读取失败'; });
+    await admin.$eval('#travel-entry-dest', el => { el.value = '成都'; });
+    await admin.$eval('#cms-travel-form', el => el.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true })));
+    await admin.waitForFunction(() => !document.querySelector('#travel-submit-btn').disabled);
+    assert.equal(writes.length, 3, 'A failed travel read must never overwrite the document');
+    await admin.close();
+    console.log('PASS CMS YAML values, HTML escaping, consecutive saves, preserved travel data and failed-read protection');
+    assert.deepEqual(errors, [], 'Unexpected runtime errors during interaction');
+  } finally {
+    if (browser) await browser.close();
+    optimized.server.close(); baseline?.server.close();
+  }
+})().catch(error => { console.error(error); process.exitCode = 1; });

@@ -22,7 +22,7 @@ services:
       - .:/srv/jekyll
       - gems:/usr/local/bundle
     environment:
-      - JEKYLL_ENV=development
+      - JEKYLL_ENV=${JEKYLL_ENV:-development}
     command: bash -c "bundle install && bundle exec jekyll serve --watch --host 0.0.0.0 --port 4000 --livereload --livereload-port 35729 --trace"
 
 volumes:

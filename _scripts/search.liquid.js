@@ -3,10 +3,10 @@ permalink: /assets/js/search-data.js
 ---
 const ninja = document.querySelector('ninja-keys');
 const sectionLabels = {
-  navigation: "{{ site.data.i18n.zh.search.section_navigation | default: '导航' }}",
-  dropdown: "{{ site.data.i18n.zh.search.section_dropdown | default: '下拉菜单' }}",
-  socials: "{{ site.data.i18n.zh.search.section_socials | default: '社交' }}",
-  theme: "{{ site.data.i18n.zh.search.section_theme | default: '主题' }}",
+  navigation: {{ site.data.i18n.zh.search.section_navigation | default: '导航' | jsonify }},
+  dropdown: {{ site.data.i18n.zh.search.section_dropdown | default: '下拉菜单' | jsonify }},
+  socials: {{ site.data.i18n.zh.search.section_socials | default: '社交' | jsonify }},
+  theme: {{ site.data.i18n.zh.search.section_theme | default: '主题' | jsonify }},
 };
 
 const allNinjaItems = [
@@ -15,9 +15,9 @@ const allNinjaItems = [
   {%- endfor -%}
   {
     id: "nav-home",
-    title: "{{ about_title | truncatewords: 13 }}",
+    title: {{ about_title | truncatewords: 13 | jsonify }},
     section: sectionLabels.navigation,
-    handler: () => { window.location.href = "{{ '/' | relative_url }}"; },
+    handler: () => { window.location.href = {{ '/' | relative_url | jsonify }}; },
   },
   {%- assign sorted_pages = site.pages | sort: "nav_order" -%}
   {%- for p in sorted_pages -%}
@@ -26,21 +26,21 @@ const allNinjaItems = [
         {%- for child in p.children -%}
           {%- unless child.title == 'divider' -%}
             {
-              id: "dropdown-{{ child.title | slugify }}",
-              title: "{{ child.title | escape | truncatewords: 13 }}",
-              description: "{{ child.description | strip_html | strip_newlines | escape | strip }}",
+              id: {{ child.title | slugify | prepend: 'dropdown-' | jsonify }},
+              title: {{ child.title | truncatewords: 13 | jsonify }},
+              description: {{ child.description | strip_html | strip_newlines | strip | jsonify }},
               section: sectionLabels.dropdown,
-              handler: () => { window.location.href = "{{ child.permalink | relative_url }}"; },
+              handler: () => { window.location.href = {{ child.permalink | relative_url | jsonify }}; },
             },
           {%- endunless -%}
         {%- endfor -%}
       {%- else -%}
         {
-          id: "nav-{{ p.title | slugify }}",
-          title: "{{ p.title | escape | truncatewords: 13 }}",
-          description: "{{ p.description | strip_html | strip_newlines | escape | strip }}",
+          id: {{ p.title | slugify | prepend: 'nav-' | jsonify }},
+          title: {{ p.title | truncatewords: 13 | jsonify }},
+          description: {{ p.description | strip_html | strip_newlines | strip | jsonify }},
           section: sectionLabels.navigation,
-          handler: () => { window.location.href = "{{ p.url | relative_url }}"; },
+          handler: () => { window.location.href = {{ p.url | relative_url | jsonify }}; },
         },
       {%- endif -%}
     {%- endif -%}
@@ -48,11 +48,12 @@ const allNinjaItems = [
   {%- for collection in site.collections -%}
     {%- for item in collection.docs -%}
       {
-        id: "{{ collection.label }}-{{ item.title | slugify }}",
-        title: "{{ item.title | escape | truncatewords: 13 }}",
-        description: "{{ item.description | strip_html | strip_newlines | escape | strip }}",
-        section: "{{ collection.label | capitalize }}",
-        handler: () => { window.location.href = "{{ item.url | relative_url }}"; },
+        {% capture item_id %}{{ collection.label }}-{{ item.title | slugify }}{% endcapture %}
+        id: {{ item_id | jsonify }},
+        title: {{ item.title | truncatewords: 13 | jsonify }},
+        description: {{ item.description | strip_html | strip_newlines | strip | jsonify }},
+        section: {{ collection.label | capitalize | jsonify }},
+        handler: () => { window.location.href = {{ item.url | relative_url | jsonify }}; },
       },
     {%- endfor -%}
   {%- endfor -%}
@@ -71,7 +72,7 @@ const allNinjaItems = [
       id: "social-github",
       title: "GitHub",
       section: sectionLabels.socials,
-      handler: () => { window.open("https://github.com/{{ github_username }}", "_blank"); },
+      handler: () => { window.open({{ github_username | prepend: 'https://github.com/' | jsonify }}, "_blank"); },
     },
   {% endif %}
   {% assign qr_social_keys = 'wechat_qr,qq_qr' | split: ',' %}
@@ -79,10 +80,10 @@ const allNinjaItems = [
     {% assign social = site.data.socials[social_key] %}
     {% if social %}
       {
-        id: "social-{{ social_key }}",
-        title: "{{ social.title }}",
+        id: {{ social_key | prepend: 'social-' | jsonify }},
+        title: {{ social.title | jsonify }},
         section: sectionLabels.socials,
-        handler: () => { document.querySelector('a[href="{{ social.url }}"]')?.click(); },
+        handler: () => { Array.from(document.querySelectorAll('a[href]')).find(link => link.getAttribute('href') === {{ social.url | jsonify }})?.click(); },
       },
     {% endif %}
   {% endfor %}

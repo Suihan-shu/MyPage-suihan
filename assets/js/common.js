@@ -196,7 +196,7 @@ $(document).ready(function () {
     var $headings = getTocHeadings($scope).filter(':not([data-toc-skip])');
     if (!$headings.length) return false;
 
-    var usedIds = {};
+    var usedIds = Object.create(null);
     var $root = $('<ul class="toc-nav-list"></ul>');
     
     var dummyLi = $('<li></li>').append($root);
@@ -231,13 +231,8 @@ $(document).ready(function () {
         $parentLi.append($ul);
       }
 
-      var $item = $(
-        '<li class="toc-nav-item"><a class="toc-nav-link" href="#' +
-          id +
-          '">' +
-          $heading.text() +
-          "</a></li>"
-      );
+      var $item = $('<li class="toc-nav-item"></li>');
+      $('<a class="toc-nav-link"></a>').attr('href', '#' + id).text($heading.text()).appendTo($item);
       $ul.append($item);
       stack.push({ level: level, $li: $item });
     });
@@ -282,11 +277,13 @@ $(document).ready(function () {
     $closeButton.text(closeLabel);
 
     var $scope = getTocScope();
-    var $headings = getTocHeadings($scope);
+    var $headings = getTocHeadings($scope).filter(':not([data-toc-skip])');
 
     function syncDrawerToc() {
       $drawerContent.empty().append($tocSidebar.children().clone(true, true));
     }
+
+    var lastDisplayText = null;
 
     function updateCurrentSectionLabel() {
       var currentTextFromTracker =
@@ -298,20 +295,11 @@ $(document).ready(function () {
         currentText = currentHeading ? $(currentHeading).text().trim() : "";
       }
 
-      if (!currentText) {
-        $toggleCurrent.text("");
-        $toggleDot.hide();
-        return;
-      }
-
-      if (currentText) {
-        var currentDisplayText = currentPrefix ? currentPrefix + ": " + currentText : currentText;
-        $toggleCurrent.text(currentDisplayText);
-        $toggleDot.show();
-      } else {
-        $toggleCurrent.text("");
-        $toggleDot.hide();
-      }
+      var displayText = currentText && currentPrefix ? currentPrefix + ": " + currentText : currentText;
+      if (displayText === lastDisplayText) return;
+      lastDisplayText = displayText;
+      $toggleCurrent.text(displayText);
+      $toggleDot.toggle(Boolean(currentText));
     }
 
     function openDrawer() {
@@ -350,11 +338,19 @@ $(document).ready(function () {
       }
     });
 
+    var mobileUpdatePending = false;
+    var mobileViewport = window.matchMedia("(max-width: 991.98px)");
     $(window).off("scroll.mobileToc resize.mobileToc").on("scroll.mobileToc resize.mobileToc", function () {
-      if (!window.matchMedia("(max-width: 991.98px)").matches) {
-        closeDrawer();
-      }
-      updateCurrentSectionLabel();
+      if (mobileUpdatePending) return;
+      mobileUpdatePending = true;
+      window.requestAnimationFrame(function () {
+        mobileUpdatePending = false;
+        if (!mobileViewport.matches) {
+          if ($drawer.hasClass("open")) closeDrawer();
+          return;
+        }
+        updateCurrentSectionLabel();
+      });
     });
 
     updateCurrentSectionLabel();
@@ -388,7 +384,7 @@ $(document).ready(function () {
       var customTocBuilt = buildCustomToc($tocSidebar);
       if (customTocBuilt) {
         var $scope = getTocScope();
-        var $headings = getTocHeadings($scope);
+        var $headings = getTocHeadings($scope).filter(':not([data-toc-skip])');
         getCurrentHeadingText = initCustomTocState($tocSidebar, $headings);
       }
     } else {

@@ -1,0 +1,63 @@
+# 项目审查与维护记录
+
+审查日期：2026-09-05。范围包括 Jekyll 配置、页面与模板、站点自有 JavaScript、Ruby 插件、样式组织、构建脚本和 GitHub Actions。第三方压缩库保持原实现；未修改个人内容数据、页面地址、导航结构或视觉样式。
+
+## 本次优化
+
+- 阅读进度：滚动事件合并到每个动画帧，缓存页面高度；图片加载、折叠区变化和内容高度变化后重新测量；短页面不会产生无效进度值，也不覆盖其他 `load` 监听器。
+- 手机目录：合并滚动更新，标题不变时不重复写入 DOM；桌面滚动不更新隐藏的手机目录。目录文字通过文本节点写入，保留标题中的特殊字符。
+- 图片回退：某张响应式图片失败时，仅移除该图片所在 `picture` 的 `source`，不影响其他图片，也不依赖 jQuery 加载时机。
+- 搜索：动态字段使用 Liquid `jsonify` 生成 JavaScript 字符串，覆盖中文、引号、反斜杠和换行；保留原有导航、社交和主题操作。
+- 简历模板：中文备用字段改为方括号访问，消除 Liquid 语法警告。`file_exists` 插件修正 `strip!` 无变化时返回空值的问题。
+- GitHub 客户端：独立鉴权请求并发；路径和分支参数编码；保留 HTTP 状态，仅将 404 作为不存在，其余读取错误中止后续写入；损坏的本地配置回退到默认值。
+- 发布后台：以标准 YAML 解析替代逐行解析，支持引号、多行文本、数组和嵌套对象。旅行日志保存保留已有条目与额外字段；简历保留顶层额外字段和未由表单管理的章节。连续保存更新 SHA；加载失败时禁止覆盖简历。表单与消息中的文字转义后再写入 HTML。
+- 旅行页：保留 `date/location/text/photos.file` 格式，同时支持后台使用的 `date_range/destination/summary/cover_image/photos.url`；复用日期格式化器。
+- CSS：由 Sass 单次压缩，关闭生产环境中会破坏 `calc(env(safe-area-inset-bottom, 0px) + 1rem)` 的重复压缩，保持手机目录的安全区定位。
+- 构建：排除开发脚本、文档、测试和 Node 依赖；Docker Compose 正确接收 `JEKYLL_ENV`。PowerShell 构建检查 Docker 退出码，清理前校验目标目录且拒绝目录链接，使用原生命令清理，不跨 shell 拼接删除命令。
+- 校验：修正结构检查对已删除书单页面的要求，补充后台必要文件。GitHub Actions 在构建前执行结构与逻辑回归检查。
+
+## 数据与依赖约定
+
+`assets/js/cms-data.js` 集中提供 YAML 解析、序列化和文本转义。日期按字符串处理，避免隐式时区转换。保存会重新排版 YAML，不保留注释；未知章节可保留，但表单管理的条目仍以表单字段为准，复杂自定义条目使用原文件编辑入口维护。
+
+后台专用的 `assets/js/lib/js-yaml.min.js` 来自现有 `package-lock.json` 中的 js-yaml 4.1.1，随仓库提交，仅在 `/admin/` 加载；许可证见同目录 `js-yaml.LICENSE`。升级时从已校验版本的 `dist/js-yaml.min.js` 同步文件和许可证，并执行 YAML 往返及后台浏览器测试。[对应版本源码与说明](https://github.com/nodeca/js-yaml/tree/4.1.1)。
+
+站点仍是静态站点：旅行口令的前端访问方式和后台凭证保存方式保持原有设计。外部统计卡片、字体、数学排版等第三方能力保持启用；此次没有通过停用功能缩小页面。
+
+`.github/copilot-instructions.md` 中部分双语与博客说明已过时；现有中文页面和 `scripts/validate_structure.ps1` 是本次核对依据。
+
+## 日常验证
+
+```powershell
+./scripts/validate_structure.ps1
+npm test
+docker compose run --rm --no-deps -e JEKYLL_ENV=production jekyll bundle exec jekyll build
+```
+
+`npm test` 使用 Node 自带测试运行器，无需下载测试框架。浏览器检查复用项目已有 Puppeteer 和本机 Chrome/Edge：
+
+```powershell
+npm ci --ignore-scripts
+npm run test:browser
+```
+
+可通过 `CHROME_PATH` 指定浏览器，通过 `SITE_DIR` 指定构建目录，`SITE_BASEURL` 默认 `/MyPage-suihan`（根站点设置为空字符串）。设置 `BASELINE_DIR` 可逐页比对优化前后的正文。测试使用临时本地 HTTP 服务，GitHub 写操作全部拦截为测试响应。
+
+模板专项验证：
+
+```powershell
+docker compose run --rm --no-deps jekyll bundle exec ruby tests/jekyll-regression.rb
+node --check _site/review-search-fixture.js
+```
+
+Windows/Docker 重复写入某些只读产物可能出现 `EACCES`。`scripts/build.ps1` 会在确认 Docker 正常后清理 `_site`；该目录仅用于构建产物，请勿保存手写源文件。需要保留对照产物时可向新的 `_site/review-*` 子目录构建。
+
+## 本次验证记录
+
+- 逻辑回归：21 项通过，涵盖存储配置、中文路径、UTF-8、HTTP 错误、YAML 往返、文本转义、滚动事件合并和动态页面高度。
+- 结构检查、严格 Liquid 模板渲染和生成搜索 JavaScript 语法检查通过。
+- Docker 生产构建通过，简历模板原有 Liquid 警告已消除。
+- Chrome 浏览器回归通过：首页、简历、仓库、项目、旅行、后台六个页面正文与基线一致；搜索、三态主题、图片局部回退、手机目录、动态进度条、旅行口令及照片预览通过。
+- 后台模拟回归通过：特殊字符与多行内容正确显示；连续保存使用新 SHA；旅行新增后原条目与额外字段不丢失；403 读取失败不会发送覆盖请求。所有 GitHub 写操作均由本地测试拦截。
+- 构建脚本在独立临时目录模拟验证通过：只清理构建目标、生产模式正确传入、结束后恢复调用者环境、Docker 不可用时保留已有产物。
+- 本次优化后的生产预览产物位于 `_site/review-verified/`，截图位于 `_site/review-artifacts/`。构建耗时受缓存、图片转换和环境影响，本次不将单次构建时间差解释为稳定性能收益。

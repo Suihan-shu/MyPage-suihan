@@ -22,6 +22,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Validate project structure
+        shell: pwsh
+        run: ./scripts/validate_structure.ps1
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Test frontend logic
+        run: npm test
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5

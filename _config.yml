@@ -139,6 +139,10 @@ kramdown:
 # Includes & excludes
 include: ["_pages", "_scripts", ".well-known"]
 exclude:
+  - node_modules/
+  - tests/
+  - scripts/
+  - docs/
   - bin/
   - CONTRIBUTING.md
   - customize.md
@@ -196,6 +200,7 @@ sass:
 # -----------------------------------------------------------------------------
 
 jekyll-minifier:
+  compress_css: false # Sass already compresses CSS; preserve calc()/env() expressions
   compress_javascript: false # set to false since we are using terser as the js minifier
   exclude: ["robots.txt", "assets/js/search/*.js"]
 

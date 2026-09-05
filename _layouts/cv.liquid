@@ -3,13 +3,13 @@ layout: default
 ---
 {% assign cv = site.data.cv.cv %}
 
-{% assign cv_name = cv.name | default: cv.姓名 %}
-{% assign cv_label = cv.label | default: cv.职位 | default: cv.专业 | default: cv.研究方向 %}
-{% assign cv_email = cv.email | default: cv.邮箱 %}
-{% assign cv_phone = cv.phone | default: cv.电话 %}
-{% assign cv_location = cv.location | default: cv.地址 | default: cv.现居地点 | default: cv.城市 %}
-{% assign cv_website = cv.website | default: cv.网站 | default: cv.个人主页 %}
-{% assign cv_summary = cv.summary | default: cv.个人简介 | default: cv.简介 %}
+{% assign cv_name = cv.name | default: cv['姓名'] %}
+{% assign cv_label = cv.label | default: cv['职位'] | default: cv['专业'] | default: cv['研究方向'] %}
+{% assign cv_email = cv.email | default: cv['邮箱'] %}
+{% assign cv_phone = cv.phone | default: cv['电话'] %}
+{% assign cv_location = cv.location | default: cv['地址'] | default: cv['现居地点'] | default: cv['城市'] %}
+{% assign cv_website = cv.website | default: cv['网站'] | default: cv['个人主页'] %}
+{% assign cv_summary = cv.summary | default: cv['个人简介'] | default: cv['简介'] %}
 
 <div class="post">
   <header class="post-header">
@@ -21,7 +21,7 @@ layout: default
         </a>
       {% endif %}
     </h1>
-    {% assign cv_desc = cv.description | default: cv.副标题 %}
+    {% assign cv_desc = cv.description | default: cv['副标题'] %}
     {% if cv_desc and cv_desc != '' and cv_desc.first == nil %}
       <p class="post-description">{{ cv_desc }}</p>
     {% endif %}

@@ -69,3 +69,9 @@ docker compose run --rm jekyll bundle exec jekyll build
 ## 📄 许可证
 
 本项目基于 [al-folio](https://github.com/alshedivat/al-folio) 主题二次定制开发，遵循 [MIT License](LICENSE)。
+
+## 开发检查
+
+修改后运行 `./scripts/validate_structure.ps1` 与 `npm test`。页面或模板修改还应执行 Docker 构建，再运行 `npm run test:browser`。
+
+[项目审查、维护约定与回归验证说明](docs/MAINTENANCE_RUNBOOK.md)。

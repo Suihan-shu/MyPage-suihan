@@ -1,73 +1,63 @@
-/*
- * This JavaScript code has been adapted from the article
- * https://css-tricks.com/reading-position-indicator/ authored by Pankaj Parashar,
- * published on the website https://css-tricks.com on the 7th of May, 2014.
- * Couple of changes were made to the original code to make it compatible
- * with the `al-foio` theme.
+/* Reading position indicator, adapted from Pankaj Parashar's
+ * https://css-tricks.com/reading-position-indicator/ (May 7, 2014).
+ * Batch scroll updates and remeasure when content changes size.
  */
-const progressBar = $("#progress");
-/*
- * We set up the bar after all elements are done loading.
- * In some cases, if the images in the page are larger than the intended
- * size they'll have on the page, they'll be resized via CSS to accomodate
- * the desired size. This mistake, however, breaks the computations as the
- * scroll size is computed as soon as the elements finish loading.
- * To account for this, a minimal delay was introduced before computing the
- * values.
- */
-window.onload = function () {
-  setTimeout(progressBarSetup, 50);
-};
-/*
- * We set up the bar according to the browser.
- * If the browser supports the progress element we use that.
- * Otherwise, we resize the bar thru CSS styling
- */
-function progressBarSetup() {
-  if ("max" in document.createElement("progress")) {
-    initializeProgressElement();
-    $(document).on("scroll", function () {
-      progressBar.attr({ value: getCurrentScrollPosition() });
-    });
-    $(window).on("resize", initializeProgressElement);
-  } else {
-    resizeProgressBar();
-    $(document).on("scroll", resizeProgressBar);
-    $(window).on("resize", resizeProgressBar);
+(() => {
+  const progressBar = document.getElementById("progress");
+  if (!progressBar) return;
+  const navbar = document.getElementById("navbar");
+  const supportsProgress = "max" in document.createElement("progress");
+  let framePending = false;
+  let layoutDirty = true;
+  let distance = 0;
+
+  function setStyle(element, property, value) {
+    if (element && element.style[property] !== value) element.style[property] = value;
   }
-}
-/*
- * The vertical scroll position is the same as the number of pixels that
- * are hidden from view above the scrollable area. Thus, a value > 0 is
- * how much the user has scrolled from the top
- */
-function getCurrentScrollPosition() {
-  return $(window).scrollTop();
-}
 
-function initializeProgressElement() {
-  let navbarHeight = $("#navbar").outerHeight(true);
-  $("body").css({ "padding-top": navbarHeight });
-  $("progress-container").css({ "padding-top": navbarHeight });
-  progressBar.css({ top: navbarHeight });
-  progressBar.attr({
-    max: getDistanceToScroll(),
-    value: getCurrentScrollPosition(),
-  });
-}
-/*
- * The offset between the html document height and the browser viewport
- * height will be greater than zero if vertical scroll is possible.
- * This is the distance the user can scroll
- */
-function getDistanceToScroll() {
-  return $(document).height() - $(window).height();
-}
+  function update() {
+    framePending = false;
+    if (layoutDirty) {
+      layoutDirty = false;
+      if (navbar) {
+        const style = getComputedStyle(navbar);
+        const height = navbar.getBoundingClientRect().height +
+          (parseFloat(style.marginTop) || 0) + (parseFloat(style.marginBottom) || 0);
+        const offset = style.position === "fixed" ? height + "px" : "0px";
+        setStyle(document.body, "paddingTop", offset);
+        setStyle(progressBar, "top", offset);
+      }
+      distance = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      if (supportsProgress) progressBar.max = Math.max(1, distance);
+    }
+    const position = Math.min(distance, Math.max(0, window.scrollY || 0));
+    if (supportsProgress) {
+      if (progressBar.value !== position) progressBar.value = position;
+    } else {
+      setStyle(progressBar, "width", (distance ? position / distance * 100 : 0) + "%");
+    }
+  }
 
-function resizeProgressBar() {
-  progressBar.css({ width: getWidthPercentage() + "%" });
-}
-// The scroll ratio equals the percentage to resize the bar
-function getWidthPercentage() {
-  return (getCurrentScrollPosition() / getDistanceToScroll()) * 100;
-}
+  function scheduleUpdate() {
+    if (framePending) return;
+    framePending = true;
+    window.requestAnimationFrame(update);
+  }
+
+  function invalidateLayout() {
+    layoutDirty = true;
+    scheduleUpdate();
+  }
+
+  document.addEventListener("scroll", scheduleUpdate, { passive: true });
+  window.addEventListener("resize", invalidateLayout, { passive: true });
+  window.addEventListener("load", invalidateLayout);
+  document.addEventListener("load", invalidateLayout, true);
+  document.addEventListener("toggle", invalidateLayout, true);
+  if (typeof ResizeObserver !== "undefined") {
+    const observer = new ResizeObserver(invalidateLayout);
+    observer.observe(document.body);
+    if (navbar) observer.observe(navbar);
+  }
+  invalidateLayout();
+})();

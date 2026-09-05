@@ -6,6 +6,8 @@
 (function () {
   'use strict';
 
+  const { parse: parseYaml, dump: dumpYaml, parseTravel: parseTravelYaml, escapeHtml } = window.CMSData;
+
   // 辅助 YAML 解析与序列化
   const YAMLHelper = {
     // 序列化简历对象为 YAML 字符串
@@ -116,42 +118,6 @@
       return yaml;
     },
 
-    // 格式化 Travel Log 列表为 YAML 字符串
-    stringifyTravel(password, entries) {
-      let yaml = `# Front-end-only travel journal settings.\n`;
-      yaml += `password: ${JSON.stringify(password || '')}\n\n`;
-      yaml += `entries:\n`;
-      if (!entries || entries.length === 0) {
-        yaml += `  []\n`;
-        return yaml;
-      }
-      entries.forEach(entry => {
-        yaml += `  - id: ${JSON.stringify(entry.id || '')}\n`;
-        yaml += `    title: ${JSON.stringify(entry.title || '')}\n`;
-        yaml += `    destination: ${JSON.stringify(entry.destination || '')}\n`;
-        yaml += `    date_range: ${JSON.stringify(entry.date_range || '')}\n`;
-        if (entry.category) yaml += `    category: ${JSON.stringify(entry.category)}\n`;
-        if (entry.summary) yaml += `    summary: ${JSON.stringify(entry.summary)}\n`;
-        if (entry.cover_image) yaml += `    cover_image: ${JSON.stringify(entry.cover_image)}\n`;
-        if (entry.tags && entry.tags.length) {
-          yaml += `    tags:\n`;
-          entry.tags.forEach(t => yaml += `      - ${JSON.stringify(t)}\n`);
-        }
-        if (entry.photos && entry.photos.length) {
-          yaml += `    photos:\n`;
-          entry.photos.forEach(p => {
-            if (typeof p === 'string') {
-              yaml += `      - ${JSON.stringify(p)}\n`;
-            } else {
-              yaml += `      - url: ${JSON.stringify(p.url || '')}\n`;
-              if (p.caption) yaml += `        caption: ${JSON.stringify(p.caption)}\n`;
-            }
-          });
-        }
-        yaml += '\n';
-      });
-      return yaml;
-    }
   };
 
   // 统一 Toast 提示
@@ -166,7 +132,8 @@
     const toast = document.createElement('div');
     toast.className = `publisher-toast publisher-toast--${type}`;
     const icon = type === 'success' ? 'fa-circle-check' : type === 'error' ? 'fa-circle-xmark' : 'fa-circle-info';
-    toast.innerHTML = `<i class="fa-solid ${icon}"></i><span>${msg}</span>`;
+    toast.innerHTML = `<i class="fa-solid ${icon}"></i><span></span>`;
+    toast.querySelector("span").textContent = msg;
     container.appendChild(toast);
     setTimeout(() => {
       toast.classList.add('publisher-toast--show');
@@ -175,39 +142,6 @@
       toast.classList.remove('publisher-toast--show');
       setTimeout(() => toast.remove(), 300);
     }, 3800);
-  }
-
-  // 简单 Travel YAML 解析
-  function parseTravelYaml(yamlStr) {
-    let password = '';
-    const entries = [];
-    let current = null;
-    let inPhotos = false;
-    let inTags = false;
-
-    yamlStr.split('\n').forEach(line => {
-      const trimmed = line.trim();
-      if (trimmed.startsWith('password:')) {
-        password = trimmed.replace('password:', '').trim().replace(/^["']|["']$/g, '');
-      } else if (trimmed.startsWith('- id:')) {
-        if (current) entries.push(current);
-        current = { id: trimmed.replace('- id:', '').trim().replace(/^["']|["']$/g, ''), tags: [], photos: [] };
-        inPhotos = false;
-        inTags = false;
-      } else if (current) {
-        if (trimmed.startsWith('title:')) current.title = trimmed.replace('title:', '').trim().replace(/^["']|["']$/g, '');
-        else if (trimmed.startsWith('destination:')) current.destination = trimmed.replace('destination:', '').trim().replace(/^["']|["']$/g, '');
-        else if (trimmed.startsWith('date_range:')) current.date_range = trimmed.replace('date_range:', '').trim().replace(/^["']|["']$/g, '');
-        else if (trimmed.startsWith('summary:')) current.summary = trimmed.replace('summary:', '').trim().replace(/^["']|["']$/g, '');
-        else if (trimmed.startsWith('cover_image:')) current.cover_image = trimmed.replace('cover_image:', '').trim().replace(/^["']|["']$/g, '');
-        else if (trimmed.startsWith('photos:')) { inPhotos = true; inTags = false; }
-        else if (trimmed.startsWith('tags:')) { inTags = true; inPhotos = false; }
-        else if (trimmed.startsWith('- ') && inPhotos) current.photos.push(trimmed.replace('- ', '').trim().replace(/^["']|["']$/g, ''));
-        else if (trimmed.startsWith('- ') && inTags) current.tags.push(trimmed.replace('- ', '').trim().replace(/^["']|["']$/g, ''));
-      }
-    });
-    if (current) entries.push(current);
-    return { password, entries };
   }
 
   // 辅助解析 Front Matter
@@ -222,18 +156,7 @@
     const rawYaml = str.substring(3, end);
     const content = str.substring(end + 4).replace(/^\r?\n/, '');
 
-    const data = {};
-    rawYaml.split('\n').forEach(line => {
-      const colonIdx = line.indexOf(':');
-      if (colonIdx > 0) {
-        const key = line.substring(0, colonIdx).trim();
-        let val = line.substring(colonIdx + 1).trim();
-        if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-          val = val.substring(1, val.length - 1);
-        }
-        data[key] = val;
-      }
-    });
+    const data = parseYaml(rawYaml) || {};
 
     return { data, content, rawYaml };
   }
@@ -284,6 +207,7 @@
     const cvAddLangBtn = document.getElementById('cv-add-lang-btn');
     const cvSubmitBtn = document.getElementById('cv-submit-btn');
     let cvFileSha = null;
+    let cvDocument = null;
 
     // 旅行日志相关元素
     const cmsTravelForm = document.getElementById('cms-travel-form');
@@ -331,34 +255,34 @@
         <div class="row">
           <div class="col-md-4 form-group mb-2">
             <label class="small font-weight-bold">学校 / 院校名称</label>
-            <input type="text" class="form-control form-control-sm edu-institution" value="${data.institution || ''}" placeholder="例如：某某大学">
+            <input type="text" class="form-control form-control-sm edu-institution" value="${escapeHtml(data.institution || '')}" placeholder="例如：某某大学">
           </div>
           <div class="col-md-4 form-group mb-2">
             <label class="small font-weight-bold">专业方向</label>
-            <input type="text" class="form-control form-control-sm edu-area" value="${data.area || ''}" placeholder="例如：计算机科学与技术">
+            <input type="text" class="form-control form-control-sm edu-area" value="${escapeHtml(data.area || '')}" placeholder="例如：计算机科学与技术">
           </div>
           <div class="col-md-4 form-group mb-2">
             <label class="small font-weight-bold">学位 / 学历</label>
-            <input type="text" class="form-control form-control-sm edu-degree" value="${data.degree || ''}" placeholder="例如：学士 / 硕士">
+            <input type="text" class="form-control form-control-sm edu-degree" value="${escapeHtml(data.degree || '')}" placeholder="例如：学士 / 硕士">
           </div>
         </div>
         <div class="row">
           <div class="col-md-4 form-group mb-2">
             <label class="small font-weight-bold">入学年份</label>
-            <input type="text" class="form-control form-control-sm edu-start" value="${data.start_date || ''}" placeholder="例如：2020">
+            <input type="text" class="form-control form-control-sm edu-start" value="${escapeHtml(data.start_date || '')}" placeholder="例如：2020">
           </div>
           <div class="col-md-4 form-group mb-2">
             <label class="small font-weight-bold">毕业年份</label>
-            <input type="text" class="form-control form-control-sm edu-end" value="${data.end_date || ''}" placeholder="例如：2024 或 至今">
+            <input type="text" class="form-control form-control-sm edu-end" value="${escapeHtml(data.end_date || '')}" placeholder="例如：2024 或 至今">
           </div>
           <div class="col-md-4 form-group mb-2">
             <label class="small font-weight-bold">城市</label>
-            <input type="text" class="form-control form-control-sm edu-loc" value="${data.location || ''}" placeholder="例如：北京">
+            <input type="text" class="form-control form-control-sm edu-loc" value="${escapeHtml(data.location || '')}" placeholder="例如：北京">
           </div>
         </div>
         <div class="form-group mb-0">
           <label class="small font-weight-bold">亮点或主修课程 (以换行或逗号分隔)</label>
-          <input type="text" class="form-control form-control-sm edu-highlights" value="${(data.highlights || []).join('，')}" placeholder="例如：数据结构，算法，优秀毕业生">
+          <input type="text" class="form-control form-control-sm edu-highlights" value="${escapeHtml((data.highlights || []).join('，'))}" placeholder="例如：数据结构，算法，优秀毕业生">
         </div>
       `;
       card.querySelector('.cv-item-remove-btn').addEventListener('click', () => card.remove());
@@ -376,34 +300,34 @@
         <div class="row">
           <div class="col-md-6 form-group mb-2">
             <label class="small font-weight-bold">项目或公司名称</label>
-            <input type="text" class="form-control form-control-sm exp-company" value="${data.company || ''}" placeholder="例如：HomestayManager-PWA">
+            <input type="text" class="form-control form-control-sm exp-company" value="${escapeHtml(data.company || '')}" placeholder="例如：HomestayManager-PWA">
           </div>
           <div class="col-md-6 form-group mb-2">
             <label class="small font-weight-bold">担任角色 / 职位</label>
-            <input type="text" class="form-control form-control-sm exp-position" value="${data.position || ''}" placeholder="例如：核心开发者 / 架构师">
+            <input type="text" class="form-control form-control-sm exp-position" value="${escapeHtml(data.position || '')}" placeholder="例如：核心开发者 / 架构师">
           </div>
         </div>
         <div class="row">
           <div class="col-md-4 form-group mb-2">
             <label class="small font-weight-bold">起始时间</label>
-            <input type="text" class="form-control form-control-sm exp-start" value="${data.start_date || ''}" placeholder="例如：2026">
+            <input type="text" class="form-control form-control-sm exp-start" value="${escapeHtml(data.start_date || '')}" placeholder="例如：2026">
           </div>
           <div class="col-md-4 form-group mb-2">
             <label class="small font-weight-bold">结束时间</label>
-            <input type="text" class="form-control form-control-sm exp-end" value="${data.end_date || ''}" placeholder="例如：至今">
+            <input type="text" class="form-control form-control-sm exp-end" value="${escapeHtml(data.end_date || '')}" placeholder="例如：至今">
           </div>
           <div class="col-md-4 form-group mb-2">
             <label class="small font-weight-bold">地点 / 类型</label>
-            <input type="text" class="form-control form-control-sm exp-loc" value="${data.location || ''}" placeholder="例如：开源项目 / 远程">
+            <input type="text" class="form-control form-control-sm exp-loc" value="${escapeHtml(data.location || '')}" placeholder="例如：开源项目 / 远程">
           </div>
         </div>
         <div class="form-group mb-2">
           <label class="small font-weight-bold">项目简介</label>
-          <input type="text" class="form-control form-control-sm exp-summary" value="${data.summary || ''}" placeholder="简明扼要地介绍该项目或工作内容">
+          <input type="text" class="form-control form-control-sm exp-summary" value="${escapeHtml(data.summary || '')}" placeholder="简明扼要地介绍该项目或工作内容">
         </div>
         <div class="form-group mb-0">
           <label class="small font-weight-bold">主要职责与成果亮点 (以中文逗号或英文分号分隔)</label>
-          <input type="text" class="form-control form-control-sm exp-highlights" value="${(data.highlights || []).join('；')}" placeholder="职责一；职责二">
+          <input type="text" class="form-control form-control-sm exp-highlights" value="${escapeHtml((data.highlights || []).join('；'))}" placeholder="职责一；职责二">
         </div>
       `;
       card.querySelector('.cv-item-remove-btn').addEventListener('click', () => card.remove());
@@ -421,11 +345,11 @@
         <div class="row">
           <div class="col-md-4 form-group mb-0">
             <label class="small font-weight-bold">分类名称</label>
-            <input type="text" class="form-control form-control-sm skill-name" value="${data.name || ''}" placeholder="例如：前端技术 / 工具">
+            <input type="text" class="form-control form-control-sm skill-name" value="${escapeHtml(data.name || '')}" placeholder="例如：前端技术 / 工具">
           </div>
           <div class="col-md-8 form-group mb-0">
             <label class="small font-weight-bold">技能列表 (以逗号或空格分隔)</label>
-            <input type="text" class="form-control form-control-sm skill-keywords" value="${Array.isArray(data.keywords) ? data.keywords.join(', ') : (data.keywords || '')}" placeholder="TypeScript, JavaScript, React, PWA">
+            <input type="text" class="form-control form-control-sm skill-keywords" value="${escapeHtml(Array.isArray(data.keywords) ? data.keywords.join(', ') : (data.keywords || ''))}" placeholder="TypeScript, JavaScript, React, PWA">
           </div>
         </div>
       `;
@@ -444,20 +368,20 @@
         <div class="row">
           <div class="col-md-5 form-group mb-2">
             <label class="small font-weight-bold">奖项 / 荣誉名称</label>
-            <input type="text" class="form-control form-control-sm award-title" value="${data.title || data.name || ''}" placeholder="例如：研究生一等奖学金 / 竞赛一等奖">
+            <input type="text" class="form-control form-control-sm award-title" value="${escapeHtml(data.title || data.name || '')}" placeholder="例如：研究生一等奖学金 / 竞赛一等奖">
           </div>
           <div class="col-md-4 form-group mb-2">
             <label class="small font-weight-bold">颁发单位 / 机构 / 赛事</label>
-            <input type="text" class="form-control form-control-sm award-awarder" value="${data.awarder || data.institution || ''}" placeholder="例如：西北工业大学">
+            <input type="text" class="form-control form-control-sm award-awarder" value="${escapeHtml(data.awarder || data.institution || '')}" placeholder="例如：西北工业大学">
           </div>
           <div class="col-md-3 form-group mb-2">
             <label class="small font-weight-bold">获奖时间 / 年份</label>
-            <input type="text" class="form-control form-control-sm award-date" value="${data.date || data.year || ''}" placeholder="例如：2025">
+            <input type="text" class="form-control form-control-sm award-date" value="${escapeHtml(data.date || data.year || '')}" placeholder="例如：2025">
           </div>
         </div>
         <div class="form-group mb-0">
           <label class="small font-weight-bold">说明 / 获奖详情 (可选)</label>
-          <input type="text" class="form-control form-control-sm award-summary" value="${data.summary || ''}" placeholder="例如：专业成绩前 5% / 团队负责人">
+          <input type="text" class="form-control form-control-sm award-summary" value="${escapeHtml(data.summary || '')}" placeholder="例如：专业成绩前 5% / 团队负责人">
         </div>
       `;
       card.querySelector('.cv-item-remove-btn').addEventListener('click', () => card.remove());
@@ -475,11 +399,11 @@
         <div class="row">
           <div class="col-md-4 form-group mb-0">
             <label class="small font-weight-bold">分类名称</label>
-            <input type="text" class="form-control form-control-sm interest-name" value="${data.name || ''}" placeholder="例如：运动与户外">
+            <input type="text" class="form-control form-control-sm interest-name" value="${escapeHtml(data.name || '')}" placeholder="例如：运动与户外">
           </div>
           <div class="col-md-8 form-group mb-0">
             <label class="small font-weight-bold">爱好列表 (以逗号或空格分隔)</label>
-            <input type="text" class="form-control form-control-sm interest-keywords" value="${Array.isArray(data.keywords) ? data.keywords.join(', ') : (data.keywords || '')}" placeholder="例如：徒步, 跑步, 羽毛球">
+            <input type="text" class="form-control form-control-sm interest-keywords" value="${escapeHtml(Array.isArray(data.keywords) ? data.keywords.join(', ') : (data.keywords || ''))}" placeholder="例如：徒步, 跑步, 羽毛球">
           </div>
         </div>
       `;
@@ -498,11 +422,11 @@
         <div class="row">
           <div class="col-md-4 form-group mb-0">
             <label class="small font-weight-bold">语言名称</label>
-            <input type="text" class="form-control form-control-sm lang-name" value="${data.name || ''}" placeholder="例如：英语">
+            <input type="text" class="form-control form-control-sm lang-name" value="${escapeHtml(data.name || '')}" placeholder="例如：英语">
           </div>
           <div class="col-md-8 form-group mb-0">
             <label class="small font-weight-bold">水平说明 / 考试分数</label>
-            <input type="text" class="form-control form-control-sm lang-summary" value="${data.summary || ''}" placeholder="例如：CET-4: 512, CET-6: 435">
+            <input type="text" class="form-control form-control-sm lang-summary" value="${escapeHtml(data.summary || '')}" placeholder="例如：CET-4: 512, CET-6: 435">
           </div>
         </div>
       `;
@@ -529,10 +453,10 @@
 
         if (userBadge) {
           userBadge.innerHTML = `
-            <img src="${info.user.avatar_url}" class="publisher-avatar" alt="${info.user.login}">
+            <img src="${escapeHtml(info.user.avatar_url)}" class="publisher-avatar" alt="${escapeHtml(info.user.login)}">
             <div class="publisher-user-info">
-              <strong>${info.user.name || info.user.login}</strong>
-              <small>${info.repo.full_name} (${cms.config.branch})</small>
+              <strong>${escapeHtml(info.user.name || info.user.login)}</strong>
+              <small>${escapeHtml(info.repo.full_name)} (${escapeHtml(cms.config.branch)})</small>
             </div>
           `;
         }
@@ -579,108 +503,22 @@
         const file = await cms.getFile('_data/cv.yml');
         cvFileSha = file.sha;
 
-        // 简易抽取基础字段
-        const lines = file.content.split('\n');
-        let currentSection = '';
-        let currentItem = null;
-        const education = [];
-        const experience = [];
-        const awards = [];
-        const skills = [];
-        const interests = [];
-        const languages = [];
-
-        lines.forEach(line => {
-          const trimmed = line.trim();
-          if (trimmed.startsWith('name:')) {
-            const v = trimmed.replace('name:', '').trim().replace(/^["']|["']$/g, '');
-            if (!currentSection && cvName) cvName.value = v;
-          } else if (trimmed.startsWith('label:') && !currentSection && cvLabel) {
-            cvLabel.value = trimmed.replace('label:', '').trim().replace(/^["']|["']$/g, '');
-          } else if (trimmed.startsWith('email:') && !currentSection && cvEmail) {
-            cvEmail.value = trimmed.replace('email:', '').trim().replace(/^["']|["']$/g, '');
-          } else if (trimmed.startsWith('phone:') && !currentSection && cvPhone) {
-            cvPhone.value = trimmed.replace('phone:', '').trim().replace(/^["']|["']$/g, '');
-          } else if (trimmed.startsWith('location:') && !currentSection && cvLocation) {
-            cvLocation.value = trimmed.replace('location:', '').trim().replace(/^["']|["']$/g, '');
-          } else if (trimmed.startsWith('description:') && !currentSection && cvDesc) {
-            cvDesc.value = trimmed.replace('description:', '').trim().replace(/^["']|["']$/g, '');
-          } else if (trimmed.startsWith('summary:') && !currentSection && cvSummary) {
-            cvSummary.value = trimmed.replace('summary:', '').trim().replace(/^["']|["']$/g, '');
-          } else if (trimmed.startsWith('教育经历:')) {
-            currentSection = 'edu';
-            currentItem = null;
-          } else if (trimmed.startsWith('项目经历:')) {
-            currentSection = 'exp';
-            currentItem = null;
-          } else if (trimmed.startsWith('获奖经历:') || trimmed.startsWith('获奖情况:')) {
-            currentSection = 'award';
-            currentItem = null;
-          } else if (trimmed.startsWith('专业技能:')) {
-            currentSection = 'skill';
-            currentItem = null;
-          } else if (trimmed.startsWith('兴趣爱好:')) {
-            currentSection = 'interest';
-            currentItem = null;
-          } else if (trimmed.startsWith('语言能力:')) {
-            currentSection = 'lang';
-            currentItem = null;
-          } else if (currentSection === 'edu') {
-            if (trimmed.startsWith('- institution:')) {
-              currentItem = { institution: trimmed.replace('- institution:', '').trim().replace(/^["']|["']$/g, ''), highlights: [] };
-              education.push(currentItem);
-            } else if (currentItem) {
-              if (trimmed.startsWith('degree:')) currentItem.degree = trimmed.replace('degree:', '').trim().replace(/^["']|["']$/g, '');
-              else if (trimmed.startsWith('area:')) currentItem.area = trimmed.replace('area:', '').trim().replace(/^["']|["']$/g, '');
-              else if (trimmed.startsWith('start_date:')) currentItem.start_date = trimmed.replace('start_date:', '').trim().replace(/^["']|["']$/g, '');
-              else if (trimmed.startsWith('end_date:')) currentItem.end_date = trimmed.replace('end_date:', '').trim().replace(/^["']|["']$/g, '');
-              else if (trimmed.startsWith('location:')) currentItem.location = trimmed.replace('location:', '').trim().replace(/^["']|["']$/g, '');
-              else if (trimmed.startsWith('- ')) currentItem.highlights.push(trimmed.replace('- ', '').trim().replace(/^["']|["']$/g, ''));
-            }
-          } else if (currentSection === 'exp') {
-            if (trimmed.startsWith('- company:')) {
-              currentItem = { company: trimmed.replace('- company:', '').trim().replace(/^["']|["']$/g, ''), highlights: [] };
-              experience.push(currentItem);
-            } else if (currentItem) {
-              if (trimmed.startsWith('position:')) currentItem.position = trimmed.replace('position:', '').trim().replace(/^["']|["']$/g, '');
-              else if (trimmed.startsWith('start_date:')) currentItem.start_date = trimmed.replace('start_date:', '').trim().replace(/^["']|["']$/g, '');
-              else if (trimmed.startsWith('end_date:')) currentItem.end_date = trimmed.replace('end_date:', '').trim().replace(/^["']|["']$/g, '');
-              else if (trimmed.startsWith('location:')) currentItem.location = trimmed.replace('location:', '').trim().replace(/^["']|["']$/g, '');
-              else if (trimmed.startsWith('summary:')) currentItem.summary = trimmed.replace('summary:', '').trim().replace(/^["']|["']$/g, '');
-              else if (trimmed.startsWith('- ')) currentItem.highlights.push(trimmed.replace('- ', '').trim().replace(/^["']|["']$/g, ''));
-            }
-          } else if (currentSection === 'award') {
-            if (trimmed.startsWith('- title:')) {
-              currentItem = { title: trimmed.replace('- title:', '').trim().replace(/^["']|["']$/g, '') };
-              awards.push(currentItem);
-            } else if (currentItem) {
-              if (trimmed.startsWith('awarder:')) currentItem.awarder = trimmed.replace('awarder:', '').trim().replace(/^["']|["']$/g, '');
-              else if (trimmed.startsWith('date:')) currentItem.date = trimmed.replace('date:', '').trim().replace(/^["']|["']$/g, '');
-              else if (trimmed.startsWith('summary:')) currentItem.summary = trimmed.replace('summary:', '').trim().replace(/^["']|["']$/g, '');
-            }
-          } else if (currentSection === 'skill') {
-            if (trimmed.startsWith('- name:')) {
-              currentItem = { name: trimmed.replace('- name:', '').trim().replace(/^["']|["']$/g, ''), keywords: [] };
-              skills.push(currentItem);
-            } else if (currentItem && trimmed.startsWith('- ')) {
-              currentItem.keywords.push(trimmed.replace('- ', '').trim().replace(/^["']|["']$/g, ''));
-            }
-          } else if (currentSection === 'interest') {
-            if (trimmed.startsWith('- name:')) {
-              currentItem = { name: trimmed.replace('- name:', '').trim().replace(/^["']|["']$/g, ''), keywords: [] };
-              interests.push(currentItem);
-            } else if (currentItem && trimmed.startsWith('- ')) {
-              currentItem.keywords.push(trimmed.replace('- ', '').trim().replace(/^["']|["']$/g, ''));
-            }
-          } else if (currentSection === 'lang') {
-            if (trimmed.startsWith('- name:')) {
-              currentItem = { name: trimmed.replace('- name:', '').trim().replace(/^["']|["']$/g, '') };
-              languages.push(currentItem);
-            } else if (currentItem && trimmed.startsWith('summary:')) {
-              currentItem.summary = trimmed.replace('summary:', '').trim().replace(/^["']|["']$/g, '');
-            }
-          }
+        cvDocument = parseYaml(file.content);
+        const data = cvDocument?.cv;
+        if (!data || typeof data !== 'object') throw new Error('简历 YAML 缺少 cv 对象。');
+        const fields = { name: cvName, label: cvLabel, email: cvEmail, phone: cvPhone,
+          location: cvLocation, description: cvDesc, summary: cvSummary };
+        Object.entries(fields).forEach(([key, input]) => {
+          if (input) input.value = data[key] ?? '';
         });
+        const sections = data.sections || {};
+        const list = key => Array.isArray(sections[key]) ? sections[key] : [];
+        const education = list('教育经历');
+        const experience = list('项目经历');
+        const awards = sections['获奖经历'] ? list('获奖经历') : list('获奖情况');
+        const skills = list('专业技能');
+        const interests = list('兴趣爱好');
+        const languages = list('语言能力');
 
         // 渲染教育经历
         if (cvEduContainer) {
@@ -724,6 +562,9 @@
           if (languages.length === 0) cvLangContainer.appendChild(createLangCard());
         }
       } catch (e) {
+        cvFileSha = null;
+        cvDocument = null;
+        showToast('简历读取失败，请重新登录后再保存：' + e.message, 'error');
         console.warn('Could not load _data/cv.yml:', e);
       }
     }
@@ -932,8 +773,19 @@
               languages
             };
 
-            const yamlContent = YAMLHelper.stringifyCV(cvData);
-            await cms.putFile('_data/cv.yml', yamlContent, 'Update resume cv.yml', cvFileSha);
+            if (!cvDocument || !cvFileSha) throw new Error('请等待简历成功读取后再保存。');
+            const edited = parseYaml(YAMLHelper.stringifyCV(cvData));
+            const updated = { ...cvDocument, cv: { ...cvDocument.cv, ...edited.cv,
+              sections: { ...cvDocument.cv.sections, ...edited.cv.sections } } };
+            // Replace a legacy awards section instead of displaying two copies.
+            if (!cvDocument.cv.sections?.['获奖经历'] && cvDocument.cv.sections?.['获奖情况']) {
+              updated.cv.sections['获奖情况'] = edited.cv.sections['获奖经历'];
+              delete updated.cv.sections['获奖经历'];
+            }
+            const yamlContent = dumpYaml(updated);
+            const saved = await cms.putFile('_data/cv.yml', yamlContent, 'Update resume cv.yml', cvFileSha);
+            cvFileSha = saved.content.sha;
+            cvDocument = updated;
 
             showToast('简历已成功保存并提交到 GitHub！', 'success');
             refreshWorkflowStatus();
@@ -995,6 +847,7 @@
               sha = file.sha;
               travelData = parseTravelYaml(file.content);
             } catch (err) {
+              if (err.status !== 404) throw err;
               console.log('Creating new _data/travel.yml');
             }
 
@@ -1011,7 +864,7 @@
 
             travelData.entries.unshift(newEntry);
 
-            const newYaml = YAMLHelper.stringifyTravel(travelData.password, travelData.entries);
+            const newYaml = dumpYaml(travelData);
             await cms.putFile('_data/travel.yml', newYaml, `Add travel log: ${title}`, sha);
 
             showToast('旅行日志已添加并更新到 _data/travel.yml！', 'success');

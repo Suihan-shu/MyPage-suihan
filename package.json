@@ -8,5 +8,9 @@
   "dependencies": {
     "marked": "^18.0.3",
     "puppeteer": "^24.43.0"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.cjs",
+    "test:browser": "node tests/browser-regression.cjs"
   }
 }

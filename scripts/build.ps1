@@ -22,12 +22,14 @@ try {
         exit 1
     }
     docker info | Out-Null
+    if ($LASTEXITCODE -ne 0) { throw "Docker Desktop is not running." }
 }
 catch {
     Write-Host "[ERROR] Docker Desktop is not running. Please start Docker Desktop." -ForegroundColor Red
     exit 1
 }
 
+$previousJekyllEnv = $env:JEKYLL_ENV
 Push-Location $ProjectRoot
 
 try {
@@ -36,23 +38,23 @@ try {
         Write-Host "[INFO] Visit http://localhost:8040 to view the site" -ForegroundColor Yellow
         Write-Host "[INFO] Press Ctrl+C to stop the server`n" -ForegroundColor Yellow
         docker compose up
+        if ($LASTEXITCODE -ne 0) { throw "Preview failed." }
     }
     else {
         Write-Host "`n[INFO] Starting static site build..." -ForegroundColor Green
         
-        # Clean up old build artifacts. Use a fallback path for Windows lock/IO quirks.
-        if (Test-Path "_site") {
-            try {
-                Remove-Item -Recurse -Force "_site" -ErrorAction Stop
+        # Remove stale output (including read-only files copied through Docker).
+        $siteDir = [System.IO.Path]::GetFullPath((Join-Path $ProjectRoot '_site'))
+        $expectedSiteDir = [System.IO.Path]::GetFullPath($ProjectRoot) + [System.IO.Path]::DirectorySeparatorChar + '_site'
+        if ($siteDir -ne $expectedSiteDir) { throw "Unexpected build directory: $siteDir" }
+        if (Test-Path -LiteralPath $siteDir) {
+            $siteItem = Get-Item -LiteralPath $siteDir -Force
+            if ($siteItem.Attributes -band [System.IO.FileAttributes]::ReparsePoint) {
+                throw "Refusing to clean a linked build directory: $siteDir"
             }
-            catch {
-                cmd /c "rmdir /s /q _site" | Out-Null
-                if (Test-Path "_site") {
-                    throw "Failed to clean _site before build. Please close file explorers/editors locking _site and retry."
-                }
-            }
+            Remove-Item -LiteralPath $siteDir -Recurse -Force -ErrorAction Stop
         }
-        
+
         # Build using Docker
         $env:JEKYLL_ENV = if ($Production) { "production" } else { "development" }
 
@@ -70,5 +72,6 @@ try {
     }
 }
 finally {
+    $env:JEKYLL_ENV = $previousJekyllEnv
     Pop-Location
 }
