@@ -18,3 +18,10 @@ vendor
 
 # Git worktree for gh-pages
 _gh-pages/
+
+# 电影管理工具的本机配置、备份与临时文件
+tools/movie-manager/.env
+tools/movie-manager/backups/
+tools/movie-manager/.lock
+_data/.movies-*.tmp
+assets/img/movies/.poster-*.tmp

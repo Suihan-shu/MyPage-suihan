@@ -89,3 +89,17 @@ Windows/Docker 重复写入某些只读产物可能出现 `EACCES`。`scripts/bu
 - 本轮现有 6 张照片总计 1,306,623 字节，列表缩略图为 423,364 字节，减少 67.6%。这表示图片传输体积变化，实际加载耗时还受网络和缓存影响。
 
 验证结果：28 项 Node 测试、结构检查、Docker Jekyll 生产构建以及完整 Chrome 回归均通过。浏览器使用实际 6 张照片验证：手机与桌面各只请求 6 个缩略图，图片响应体合计 423,364 字节，未提前请求原图，页面无横向溢出。模拟后台验证缩略图上传失败后重试不重复上传原图。生产构建输出位于 `_site/travel-optimized/`，发布时由 GitHub Pages 工作流重新执行结构检查、测试和构建。
+
+## 电影板块（2026-09-30）
+
+电影入口由 `_pages/movies.html` 的导航元数据接入，使用现有 page/default 布局。数据唯一来源为 `_data/movies.json`，公开 JSON 由 `assets/movies.json` 在 Jekyll 构建时生成；浏览器只读取已保存资料，不访问 TMDB API。卡片初始内容由 `_includes/movie-card.liquid` 渲染，交互和管理预览复用 `assets/js/movie-data.js`。电影样式限定于板块语义类并引用主题颜色变量。
+
+本机工具在 `tools/movie-manager/`，用 `npm.cmd run movies` 启动。凭据在被忽略的 `.env` 或环境变量，整个 tools 目录不进入 Jekyll 输出；备份、锁和临时文件不提交。管理工具仅监听回环地址，并检查 Host、Origin、会话令牌和固定路径，串行写入、冲突检测和备份恢复保护记录。使用说明见 `tools/movie-manager/README.md`。
+
+检查：结构验证、`npm.cmd test`、Jekyll 生产构建（优先 Docker，也可使用完整本机 Ruby/ImageMagick 环境）、`npm.cmd run test:movies:browser`（电影及管理工具）、`npm.cmd run test:browser`（原有页面）。开发样例仅放入隔离测试目录或浏览器响应，不写入真实电影数据。未配置 TMDB 凭据时不能宣称真实搜索联通；本地保存、构建、部署状态分别验证。
+
+本次环境：Node.js 24.15.0；Docker Desktop 启动报错，改用本机 Ruby 4.0.5 构建。Ruby 依赖与官方便携 ImageMagick 位于被忽略的 vendor 目录，仅在构建进程中设置路径。备用预览命令见管理工具 README。初次未授权请求返回 HTTP 401；随后完成凭据配置与真实接口联调，结果见下文。官方 TMDB 标志原文件保存在 `assets/img/movies/tmdb.svg`，来自官方 logos-attribution 页面所列素材。
+
+开发验收结果：36 项 Node 测试、结构检查、完整 Jekyll 生产构建、原有页面/后台 Chrome 回归，以及电影工具完整操作与 1440/390/320px 电影页适配通过。`tests/movies-render.rb` 使用管理工具实际保存的隔离样例，在内存注入数据后独立构建至 `_site/movie-fixtures/`，检查静态卡片中的 ID、个人零分、日期、人工清空字段和文本转义；不会修改真实记录。正式构建位于 `_site/movie-review/`。开发测试时真实列表为空；之后用户已通过管理工具保存《控方证人》，发布时使用真实数据，不添加测试样例。
+
+后续实网联调（2026-09-30）：凭据已配置于被 Git 忽略的本机 `.env`，重启管理工具后，真实搜索“霸王别姬”及年份 1993 返回 TMDB ID 10997；详情与导演资料、50 个海报候选读取成功，源海报请求返回 HTTP 200。本次仅执行只读验证，电影数据文件哈希保持不变，未添加观影记录。凭据内容不写入文档。

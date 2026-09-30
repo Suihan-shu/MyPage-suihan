@@ -10,6 +10,8 @@
     "puppeteer": "^24.43.0"
   },
   "scripts": {
+    "movies": "node tools/movie-manager/server.mjs",
+    "test:movies:browser": "node tests/movies-browser.cjs",
     "test": "node --test tests/*.test.cjs",
     "test:browser": "node tests/browser-regression.cjs"
   }

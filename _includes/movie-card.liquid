@@ -1,0 +1,26 @@
+{% assign m = include.movie %}
+{% assign s = m.source %}
+{% assign o = m.overrides %}
+{% assign title = s.title | default: s.original_title %}{% if o contains 'title' %}{% assign title = o.title %}{% endif %}
+{% assign poster = o.poster_path | default: m.poster.local_path %}
+{% assign remote_poster = o.poster_source_path | default: m.poster.source_path %}
+<article class="movie-card">
+  <div class="movie-card__poster">
+    <img src="{% if poster %}{{ poster | relative_url }}{% elsif remote_poster %}https://image.tmdb.org/t/p/w500{{ remote_poster | escape }}{% else %}{{ '/assets/img/movies/placeholder.svg' | relative_url }}{% endif %}" alt="{{ title | escape }}海报" loading="lazy" width="200" height="300" data-movie-poster>
+  </div>
+  <div class="movie-card__body">
+    <h2>{{ title | escape }}{% assign year = s.year %}{% if o contains 'year' %}{% assign year = o.year %}{% endif %}{% if year %} <span class="movie-muted">（{{ year | escape }}）</span>{% endif %}</h2>
+    {% assign original_title = s.original_title %}{% if o contains 'original_title' %}{% assign original_title = o.original_title %}{% endif %}{% if original_title != '' %}<p class="movie-muted">{{ original_title | escape }}</p>{% endif %}
+    <p class="movie-ratings">{% if s.provider == 'tmdb' %}<span>TMDB {% if s.rating != nil %}{{ s.rating | round: 1 }} / 10{% else %}暂无评分{% endif %}</span>{% endif %}<span>我的评分 {% if m.personal.rating != nil %}{{ m.personal.rating }} / 10{% else %}未评分{% endif %}</span></p>
+    {% assign countries = s.countries %}{% if o contains 'countries' %}{% assign countries = o.countries %}{% endif %}
+    {% assign genres = s.genres %}{% if o contains 'genres' %}{% assign genres = o.genres %}{% endif %}
+    {% assign runtime = s.runtime_minutes %}{% if o contains 'runtime_minutes' %}{% assign runtime = o.runtime_minutes %}{% endif %}
+    {% if countries.size > 0 or genres.size > 0 or runtime %}<p>{{ countries | join: ' / ' | escape }}{% if genres.size > 0 %}{% if countries.size > 0 %} · {% endif %}{{ genres | join: ' / ' | escape }}{% endif %}{% if runtime %}{% if countries.size > 0 or genres.size > 0 %} · {% endif %}{{ runtime | escape }} 分钟{% endif %}</p>{% endif %}
+    {% assign directors = s.directors %}{% if o contains 'directors' %}{% assign directors = o.directors %}{% endif %}{% if directors.size > 0 %}<p>导演：{{ directors | join: '、' | escape }}</p>{% endif %}
+    {% assign cast = s.cast %}{% if o contains 'cast' %}{% assign cast = o.cast %}{% endif %}{% if cast.size > 0 %}<details><summary>主演：{{ cast | slice: 0, 3 | join: '、' | escape }}</summary><p>{{ cast | join: '、' | escape }}</p></details>{% endif %}
+    <p class="movie-muted">{% if m.personal.watched_on %}观影 {{ m.personal.watched_on | escape }}{% endif %}{% for tag in m.personal.tags %}<span class="movie-tag">{{ tag | escape }}</span>{% endfor %}</p>
+    {% if m.personal.review != '' %}<p class="movie-review">{{ m.personal.review | escape }}</p>{% endif %}
+    {% assign overview = s.overview %}{% if o contains 'overview' %}{% assign overview = o.overview %}{% endif %}{% if overview != '' %}<details><summary>电影简介</summary><p class="movie-review">{{ overview | escape }}</p></details>{% endif %}
+    {% if s.tmdb_id %}<a class="movie-source" href="https://www.themoviedb.org/movie/{{ s.tmdb_id }}" target="_blank" rel="noopener noreferrer">TMDB 资料 ↗</a>{% endif %}
+  </div>
+</article>

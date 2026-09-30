@@ -139,6 +139,10 @@ kramdown:
 # Includes & excludes
 include: ["_pages", "_scripts", ".well-known"]
 exclude:
+  - tools/
+  - 电影板块开发方案.md
+  - GEMINI.md
+  - social_share_images/
   - node_modules/
   - tests/
   - scripts/
