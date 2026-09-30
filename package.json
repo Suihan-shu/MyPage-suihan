@@ -12,6 +12,7 @@
   "scripts": {
     "movies": "node tools/movie-manager/server.mjs",
     "test:movies:browser": "node tests/movies-browser.cjs",
+    "test:movies:cms": "node tests/movie-cms-browser.cjs",
     "test": "node --test tests/*.test.cjs",
     "test:browser": "node tests/browser-regression.cjs"
   }

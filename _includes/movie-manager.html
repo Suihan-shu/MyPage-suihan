@@ -1,0 +1,220 @@
+<div id="movie-manager-root" class="movie-manager">
+  <header>
+    <p class="eyebrow" id="manager-eyebrow">我的电影手记 · 本地管理</p>
+    <h2 class="manager-title">把看过的电影留下来</h2>
+    <p id="manager-intro">
+      选好电影，写下感受。保存到本机项目后，再按原有流程发布网站。
+    </p>
+  </header>
+  <section class="panel" data-online-settings hidden>
+    <h2>电影资料连接</h2>
+    <form id="tmdb-config-form" autocomplete="off">
+      <label
+        >TMDB API 读取访问令牌<input
+          id="tmdb-token"
+          type="password"
+          autocomplete="off"
+          spellcheck="false"
+          placeholder="粘贴 TMDB 读取令牌" /></label
+      ><label class="check"
+        ><input id="tmdb-remember" type="checkbox" />在当前浏览器记住令牌</label
+      >
+      <div class="row actions">
+        <button type="submit">连接 TMDB</button
+        ><button id="tmdb-clear" type="button" class="secondary">
+          清除令牌</button
+        ><label class="file-label"
+          >从本机配置导入<input
+            id="tmdb-config-file"
+            type="file"
+            accept=".env,.txt"
+        /></label>
+      </div>
+      <p class="muted">
+        令牌只用于读取 TMDB，不会写入电影数据或提交到
+        GitHub。可选择本机电影工具的 .env 文件导入；不连接也能手动添加。
+      </p>
+    </form>
+  </section>
+  <p id="status" role="status" aria-live="polite">正在读取…</p>
+  <section class="panel">
+    <h2>添加电影</h2>
+    <form id="search-form">
+      <div class="row">
+        <label class="grow"
+          >中文或英文片名<input
+            name="query"
+            id="query"
+            placeholder="输入片名搜索"
+            maxlength="200"
+            required /></label
+        ><label
+          >上映年份（可选）<input
+            name="year"
+            id="year"
+            inputmode="numeric"
+            pattern="[0-9]{4}"
+            maxlength="4"
+            placeholder="例如 2024" /></label
+        ><button type="submit">搜索候选</button>
+      </div>
+    </form>
+    <div class="row actions">
+      <label
+        >TMDB ID<input
+          id="tmdb-id"
+          inputmode="numeric"
+          placeholder="按 ID 查找" /></label
+      ><button id="lookup" type="button">获取电影</button
+      ><button id="manual" type="button" class="secondary">手动添加</button>
+    </div>
+    <div id="candidates" class="candidates"></div>
+  </section>
+  <section id="editor" class="panel" hidden>
+    <div class="row">
+      <h2 id="editor-title" class="grow">电影记录</h2>
+      <button id="cancel" type="button" class="secondary">关闭表单</button>
+    </div>
+    <form id="movie-form">
+      <fieldset id="fields">
+        <div class="row">
+          <label class="grow"
+            >展示片名<input id="title" maxlength="500" required /></label
+          ><label class="grow"
+            >原名<input id="original_title" maxlength="500" /></label
+          ><label
+            >上映年份<input id="movie-year" type="number" min="0" max="9999"
+          /></label>
+        </div>
+        <div class="row">
+          <label class="grow"
+            >国家 / 地区<input id="countries" placeholder="用逗号分隔" /></label
+          ><label class="grow"
+            >类型<input id="genres" placeholder="用逗号分隔" /></label
+          ><label
+            >片长（分钟）<input
+              id="runtime_minutes"
+              type="number"
+              min="0"
+              max="10000"
+          /></label>
+        </div>
+        <div class="row">
+          <label class="grow"
+            >导演<input id="directors" placeholder="用逗号分隔" /></label
+          ><label class="grow"
+            >主演<input id="cast" placeholder="用逗号分隔"
+          /></label>
+        </div>
+        <label
+          >电影简介<textarea
+            id="overview"
+            rows="3"
+            maxlength="20000"
+          ></textarea>
+        </label>
+        <div class="row">
+          <label class="grow"
+            >观影日期<input id="watched_on" type="date" /></label
+          ><label class="grow"
+            >我的评分（0–10）<input
+              id="rating"
+              type="number"
+              min="0"
+              max="10"
+              step="0.5"
+              placeholder="留空表示未评分" /></label
+          ><label class="grow"
+            >标签<input id="tags" placeholder="用逗号分隔"
+          /></label>
+        </div>
+        <label
+          >我的短评<textarea
+            id="review"
+            rows="4"
+            maxlength="20000"
+            placeholder="写下这部电影留给你的感受"
+          ></textarea>
+        </label>
+        <div class="row actions">
+          <button id="refresh-source" type="button" class="secondary">
+            预览资料更新</button
+          ><button id="clear-overrides" type="button" class="secondary">
+            清除人工修订</button
+          ><button id="posters" type="button" class="secondary">
+            选择其他海报</button
+          ><label class="file-label"
+            >上传海报<input
+              id="poster-upload"
+              type="file"
+              accept="image/jpeg,image/png,image/webp" /></label
+          ><button id="reset-poster" type="button" class="secondary">
+            恢复源海报
+          </button>
+        </div>
+        <div id="poster-candidates" class="candidates"></div>
+        <label class="check"
+          ><input id="cache" type="checkbox" />保存时缓存 TMDB
+          海报到本站（下载失败时保留表单）</label
+        >
+        <h3>卡片预览</h3>
+        <div id="preview"></div>
+        <div class="row actions">
+          <button id="save-movie" type="submit">保存到本机</button
+          ><span id="save-help" class="muted">保存不会自动发布网站。</span>
+        </div>
+      </fieldset>
+    </form>
+  </section>
+  <section class="panel">
+    <div class="row">
+      <h2 class="grow">已记录的电影</h2>
+      <button id="reload" type="button" class="secondary">重新读取</button>
+    </div>
+    <input
+      id="list-query"
+      type="search"
+      aria-label="查找已记录的电影"
+      placeholder="搜索已记录的电影"
+    />
+    <div id="records"></div>
+  </section>
+  <section class="panel">
+    <h2>备份恢复</h2>
+    <p id="backup-help" class="muted">
+      每次保存、删除或恢复前都会备份当前数据。恢复会替换整份电影列表，海报文件会保留。
+    </p>
+    <div class="row">
+      <label class="grow"
+        >数据备份<select id="backups">
+          <option value="">尚无备份</option>
+        </select></label
+      ><button id="restore" class="secondary" type="button">
+        恢复选中备份
+      </button>
+    </div>
+  </section>
+  <footer class="movie-attribution">
+    <a
+      href="https://www.themoviedb.org"
+      target="_blank"
+      rel="noopener noreferrer"
+      ><img data-manager-logo alt="TMDB" width="100" height="13"
+    /></a>
+    <p>资料与图片来源：TMDB。评分为资料快照。</p>
+    <p lang="en">
+      This product uses the TMDB API but is not endorsed or certified by TMDB.
+    </p>
+  </footer>
+  <dialog id="refresh-dialog">
+    <h2>资料更新预览</h2>
+    <p>
+      只更新源资料；个人评分、短评、日期和人工修订都会保留。确认后仍需点击保存。
+    </p>
+    <div id="refresh-changes"></div>
+    <div class="row actions">
+      <button id="apply-refresh">采用更新</button
+      ><button id="dismiss-refresh" class="secondary">取消</button>
+    </div>
+  </dialog>
+</div>

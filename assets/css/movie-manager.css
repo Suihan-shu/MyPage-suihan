@@ -1,0 +1,198 @@
+.movie-manager {
+  color: var(--global-text-color, #1f2d3d);
+  line-height: 1.65;
+}
+.movie-manager [hidden] {
+  display: none !important;
+}
+.movie-manager * {
+  box-sizing: border-box;
+}
+.movie-manager h2 {
+  font-size: 1.25rem;
+  margin: 0.3rem 0 1rem;
+}
+.movie-manager .manager-title {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  letter-spacing: -0.03em;
+}
+.movie-manager h3 {
+  font-size: 1rem;
+}
+.movie-manager .eyebrow {
+  color: var(--global-theme-color, #1f6fae);
+  letter-spacing: 0.1em;
+}
+.movie-manager header {
+  margin-bottom: 2rem;
+}
+.movie-manager .panel {
+  padding: 1.5rem;
+  margin: 1.25rem 0;
+  background: var(--global-card-bg-color, white);
+  border: 1px solid var(--global-divider-color, #d7eaf7);
+  border-radius: 14px;
+}
+.movie-manager .row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 1rem;
+  margin: 0;
+}
+.movie-manager .grow {
+  flex: 1 1 180px;
+  min-width: 0;
+}
+.movie-manager label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.86rem;
+  margin-bottom: 0.8rem;
+  min-width: 0;
+}
+.movie-manager input,
+.movie-manager textarea,
+.movie-manager select {
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--global-divider-color, #ccdfed);
+  border-radius: 7px;
+  font: inherit;
+  color: inherit;
+  background: var(--global-card-bg-color, white);
+  width: 100%;
+  min-width: 0;
+}
+.movie-manager textarea {
+  resize: vertical;
+}
+.movie-manager input:focus,
+.movie-manager textarea:focus,
+.movie-manager select:focus {
+  outline: 2px solid #7fbce7;
+  outline-offset: 2px;
+}
+.movie-manager button {
+  border: 1px solid #1f6fae;
+  border-radius: 7px;
+  padding: 0.65rem 1rem;
+  font: inherit;
+  cursor: pointer;
+  background: #1f6fae;
+  color: white;
+  margin-bottom: 0.8rem;
+}
+.movie-manager button.secondary {
+  background: var(--global-card-bg-color, white);
+  color: var(--global-theme-color, #1f6fae);
+  border-color: var(--global-divider-color, #ccdfed);
+}
+.movie-manager button.danger {
+  color: #b03838;
+  background: var(--global-card-bg-color, white);
+  border-color: #eccaca;
+}
+.movie-manager button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+.movie-manager .actions {
+  align-items: center;
+  margin-top: 0.8rem;
+}
+.movie-manager .muted {
+  color: var(--global-text-color-light, #5e7184);
+  font-size: 0.85rem;
+}
+.movie-manager #status {
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  background: var(--global-code-bg-color, #e5f2fc);
+  overflow-wrap: anywhere;
+}
+.movie-manager #status.error {
+  background: #fff0ed;
+  color: #a33224;
+}
+.movie-manager fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.movie-manager .check {
+  flex-direction: row;
+  align-items: center;
+}
+.movie-manager .check input {
+  width: auto;
+}
+.movie-manager .file-label {
+  max-width: 240px;
+}
+.movie-manager .candidates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+.movie-manager .candidate {
+  width: 145px;
+  text-align: left;
+  padding: 0.6rem;
+  background: var(--global-card-bg-color, #f4faff);
+  color: inherit;
+  border: 1px solid var(--global-divider-color, #d7eaf7);
+  overflow-wrap: anywhere;
+}
+.movie-manager .candidate img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.movie-manager .candidate span {
+  display: block;
+  font-size: 0.8rem;
+}
+.movie-manager .record {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--global-divider-color, #e5edf3);
+}
+.movie-manager .record .row {
+  align-items: center;
+}
+.movie-manager .record strong {
+  overflow-wrap: anywhere;
+}
+.movie-manager dialog {
+  max-width: 750px;
+  width: 90%;
+  max-height: 85vh;
+  overflow: auto;
+  border: 1px solid var(--global-divider-color, #ccdfed);
+  border-radius: 12px;
+  padding: 1.5rem;
+  color: inherit;
+  background: var(--global-card-bg-color, white);
+}
+.movie-manager dialog::backdrop {
+  background: #172f4970;
+}
+.movie-manager .change {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--global-divider-color, #e5edf3);
+  padding: 0.5rem 0;
+}
+@media (max-width: 600px) {
+  .movie-manager .panel {
+    padding: 1rem;
+  }
+  .movie-manager .row > label {
+    flex: 1 1 140px;
+  }
+  .movie-manager .candidate {
+    width: 120px;
+  }
+}

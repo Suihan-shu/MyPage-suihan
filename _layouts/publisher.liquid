@@ -1,6 +1,8 @@
 ---
 layout: default
 ---
+<link rel="stylesheet" href="{{ '/assets/css/movies.css' | relative_url | bust_file_cache }}">
+<link rel="stylesheet" href="{{ '/assets/css/movie-manager.css' | relative_url | bust_file_cache }}">
 <div class="post publisher-container" id="publisher-app" data-baseurl="{{ site.baseurl | escape }}" data-author="{{ site.first_name | escape }}" data-avatar="{{ '/assets/img/profile.jpg' | relative_url }}">
   <!-- 认证与登录界面（未输入 Token 时展示） -->
   <section id="publisher-auth-section" class="publisher-auth-card">
@@ -69,6 +71,7 @@ layout: default
         <a href="{{ '/travel/' | relative_url }}" class="btn btn-sm btn-outline-info" target="_blank">
           <i class="fa-solid fa-route"></i> 查看旅行日志
         </a>
+        <a href="{{ '/movies/' | relative_url }}" class="btn btn-sm btn-outline-info" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-film"></i> 查看电影</a>
         <button id="publisher-logout-btn" type="button" class="btn btn-sm btn-outline-danger">
           <i class="fa-solid fa-right-from-bracket"></i> 退出锁定
         </button>
@@ -83,6 +86,7 @@ layout: default
       <button class="publisher-tab-btn" data-publisher-tab="travel" type="button" role="tab">
         <i class="fa-solid fa-route"></i> 我的旅行动态
       </button>
+      <button class="publisher-tab-btn" data-publisher-tab="movies" type="button" role="tab"><i class="fa-solid fa-film"></i> 电影管理</button>
       <button class="publisher-tab-btn" data-publisher-tab="about" type="button" role="tab">
         <i class="fa-solid fa-user-pen"></i> 关于我与简介 (About Me)
       </button>
@@ -286,7 +290,9 @@ layout: default
       </div>
     </div>
 
-    <!-- 选项卡 4：万能配置与文件编辑器 -->
+    <!-- 电影管理：与本机工具共用表单，保存通过现有 GitHub CMS -->
+    <div id="pane-movies" class="publisher-pane" role="tabpanel">{% include movie-manager.html %}</div>
+    <!-- 万能配置与文件编辑器 -->
     <div id="pane-files" class="publisher-pane" role="tabpanel">
       <div class="publisher-card">
         <div class="publisher-card-header">
@@ -300,6 +306,7 @@ layout: default
             <select id="raw-file-select" class="form-control">
               <option value="_data/cv.yml">_data/cv.yml (个人经历与简历数据)</option>
               <option value="_pages/about.md">_pages/about.md (关于我与主页正文)</option>
+              <option value="_data/movies.json">_data/movies.json (电影记录数据)</option>
               <option value="_data/travel.yml">_data/travel.yml (旅行日志数据)</option>
               <option value="_data/socials.yml">_data/socials.yml (社交链接与二维码)</option>
               <option value="_data/repositories.yml">_data/repositories.yml (代码库展示仓库)</option>
@@ -344,4 +351,9 @@ layout: default
 <script src="{{ '/assets/js/travel-data.js' | relative_url | bust_file_cache }}"></script>
 <script src="{{ '/assets/js/travel-images.js' | relative_url | bust_file_cache }}"></script>
 <script src="{{ '/assets/js/travel-cms.js' | relative_url | bust_file_cache }}"></script>
+<script src="{{ '/assets/js/movie-model.js' | relative_url | bust_file_cache }}"></script>
+<script src="{{ '/assets/js/movie-tmdb.js' | relative_url | bust_file_cache }}"></script>
+<script src="{{ '/assets/js/movie-data.js' | relative_url | bust_file_cache }}"></script>
+<script src="{{ '/assets/js/movie-manager.js' | relative_url | bust_file_cache }}"></script>
+<script src="{{ '/assets/js/movie-cms.js' | relative_url | bust_file_cache }}"></script>
 <script src="{{ '/assets/js/publisher.js' | relative_url | bust_file_cache }}"></script>

@@ -92,6 +92,16 @@ Windows/Docker 重复写入某些只读产物可能出现 `EACCES`。`scripts/bu
 
 ## 电影板块（2026-09-30）
 
+后台扩展：`_layouts/publisher.liquid` 的 `/admin/` 管理中心新增“电影管理”选项卡；首次打开才读取电影数据，其他后台板块保持原有加载流程。共享表单为 `_includes/movie-manager.html`，共享编辑器为 `assets/js/movie-manager.js`，字段白名单和资料转换为 `movie-model.js` / `movie-tmdb.js`。本机服务直接使用同一份表单、校验和 TMDB 客户端，避免两处维护功能产生差异。样式限定于 `.movie-manager`。
+
+在线保存由 `assets/js/movie-cms.js` 接入已有 GitHubCMS：电影 JSON 使用最新文件 SHA 和串行请求保护，远端改动或读取失败会保留表单并阻止覆盖。海报在浏览器真实解码、检查格式/大小/像素后上传至固定目录，部署前用 Blob URL 预览；缓存海报上传成功后 JSON 写入失败，重试复用上传结果。每次记录保存、删除、恢复都是 GitHub 提交，历史恢复从指定提交读取有效电影数据再生成新提交，不删除海报文件。
+
+TMDB 读取令牌通过后台输入或导入本机 `.env` 连接；校验成功后才替换已有连接，默认在内存，用户勾选后才保存当前浏览器。退出后台清除 GitHub/TMDB 凭据和草稿；电影操作处理中禁止退出。公开电影页依旧读取静态数据，不携带凭据。在线后台不依赖本机 Node 服务；后台修改之后使用本机工具前同步远端，注意保留本地未提交修改。
+
+后台专项回归：`npm.cmd run test:movies:cms`（设置 `SITE_DIR` 为当前完整构建目录）。GitHub 与 TMDB 请求使用测试拦截验证搜索选片、重复保存、新 SHA、刷新保留个人记录/修订、海报解码上传与即时预览、删除和历史恢复、失败/冲突保留表单、手机布局、旅行板块及退出清除凭据。测试不得调用真实 GitHub 写入或修改真实 `_data/movies.json`。
+
+整合验收：41 项 Node 测试、结构检查、本机完整 Jekyll 生产构建、本地电影管理及公开页面回归、原有页面/后台回归、集成电影后台专项浏览器测试通过。桌面及 390/320px 电影编辑区检查无横向溢出。使用已有本机凭据在后台页面发起真实浏览器只读请求，搜索“霸王别姬”及年份 1993，返回 ID 10997，详情与 50 个海报候选读取成功；没有将令牌写入页面存储或 GitHub，真实电影数据未改变。
+
 电影入口由 `_pages/movies.html` 的导航元数据接入，使用现有 page/default 布局。数据唯一来源为 `_data/movies.json`，公开 JSON 由 `assets/movies.json` 在 Jekyll 构建时生成；浏览器只读取已保存资料，不访问 TMDB API。卡片初始内容由 `_includes/movie-card.liquid` 渲染，交互和管理预览复用 `assets/js/movie-data.js`。电影样式限定于板块语义类并引用主题颜色变量。
 
 本机工具在 `tools/movie-manager/`，用 `npm.cmd run movies` 启动。凭据在被忽略的 `.env` 或环境变量，整个 tools 目录不进入 Jekyll 输出；备份、锁和临时文件不提交。管理工具仅监听回环地址，并检查 Host、Origin、会话令牌和固定路径，串行写入、冲突检测和备份恢复保护记录。使用说明见 `tools/movie-manager/README.md`。

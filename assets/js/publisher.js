@@ -230,6 +230,8 @@
     // Actions 部署状态
     const actionsStatusBadge = document.getElementById('publisher-actions-status');
     const travelManager = window.TravelCMS.create({ cms, app: appEl, notify: showToast, onSaved: refreshWorkflowStatus });
+    const movieManager = window.MovieCMS.create({ cms, app: appEl, onSaved: refreshWorkflowStatus });
+    let moviesLoaded = false;
 
     // ----------------------------------------------------
     // 动态添加条目卡片
@@ -456,6 +458,7 @@
         loadCvContent();
         loadAboutContent();
         travelManager.load();
+        if (document.getElementById('pane-movies').classList.contains('active')) { moviesLoaded = true; movieManager.load(); }
         return true;
       } catch (err) {
         authSection.hidden = false;
@@ -611,9 +614,11 @@
       // 退出登录
       if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {
-          if (travelManager.isBusy()) { showToast('正在保存动态，请稍候再退出。', 'info'); return; }
-          if (confirm('退出会清除本地 Token 和未保存的旅行编辑，继续吗？')) {
+          if (travelManager.isBusy() || movieManager.isBusy()) { showToast('正在处理编辑操作，请稍候再退出。', 'info'); return; }
+          if (confirm('退出会清除本地 Token、TMDB 令牌和未保存的旅行及电影编辑，继续吗？')) {
             travelManager.reset();
+            movieManager.reset();
+            moviesLoaded = false;
             cms.clearConfig();
             tokenInput.value = '';
             showAuthView();
@@ -631,6 +636,7 @@
           btn.classList.add('active');
           const pane = document.getElementById(`pane-${targetTab}`);
           if (pane) pane.classList.add('active');
+          if (targetTab === 'movies' && !moviesLoaded && cms.isConfigured()) { moviesLoaded = true; movieManager.load(); }
         });
       });
 
