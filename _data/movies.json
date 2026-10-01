@@ -624,6 +624,70 @@
       },
       "created_at": "2026-10-01T08:36:06.491Z",
       "updated_at": "2026-10-01T08:36:06.491Z"
+    },
+    {
+      "id": "5d7420e2-6127-4bb2-8824-f24ff03b4743",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 365045,
+        "title": "海蒂和爷爷",
+        "original_title": "Heidi",
+        "overview": "自幼失去双亲的海蒂一直由姨妈照顾，后来姨妈因工作无法继续照料她，便将她送到阿尔卑斯山，与独居在山上的爷爷一起生活。爷爷性格孤僻古怪，与村民鲜少往来，但活泼纯真的海蒂逐渐融化了他的心，也在山间结识了牧童彼得，开始了一段自由快乐的生活。然而不久后，姨妈突然将海蒂带离阿尔卑斯山，送往法兰克福的泽塞曼家，成为无法行走的富家女孩克拉拉的玩伴。两个身世与生活截然不同的女孩很快建立起深厚的友谊，但身处陌生城市的海蒂始终思念着阿尔卑斯山上的爷爷、彼得以及曾经自由自在的生活……",
+        "countries": [
+          "Germany",
+          "Switzerland"
+        ],
+        "genres": [
+          "冒险",
+          "家庭",
+          "剧情"
+        ],
+        "directors": [
+          "阿兰·葛斯彭纳"
+        ],
+        "cast": [
+          "阿努克·斯特芬",
+          "布鲁诺·甘茨",
+          "昆林·艾格匹",
+          "伊莎贝尔·奥特曼",
+          "凯瑟琳娜·舒特勒",
+          "马克西姆·梅米特",
+          "汉娜洛蕾·赫格",
+          "杰拉·哈斯",
+          "安娜·申斯",
+          "Peter Lohmeyer",
+          "Lilian Naef",
+          "Monica Gubser",
+          "Peter Jecklin",
+          "Christoph Gaugler",
+          "Rebecca Indermaur",
+          "Marietta Jemmi",
+          "Michael Kranz",
+          "Markus Hering",
+          "Arthur Bühler",
+          "Laura Parker"
+        ],
+        "release_date": "2015-12-10",
+        "year": 2015,
+        "runtime_minutes": 111,
+        "rating": 7.3,
+        "vote_count": 449,
+        "url": "https://www.themoviedb.org/movie/365045",
+        "fetched_at": "2026-10-01T08:36:27.808Z"
+      },
+      "poster": {
+        "source_path": "/uMM9ovN6L2lL2iPbcrQ8mwLMtRg.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2024-06-06",
+        "rating": 8.5,
+        "review": "瑞士的阿尔卑斯山真的很美\n以前总觉得bad ending回味冗长，但治愈的happy ending也是令人心旷神怡",
+        "tags": []
+      },
+      "created_at": "2026-10-01T08:39:18.758Z",
+      "updated_at": "2026-10-01T08:39:18.758Z"
     }
   ]
 }
