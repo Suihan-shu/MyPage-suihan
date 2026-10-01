@@ -1064,6 +1064,69 @@
       },
       "created_at": "2026-10-01T09:02:05.528Z",
       "updated_at": "2026-10-01T09:02:05.528Z"
+    },
+    {
+      "id": "fbca5dff-80f4-44b1-9558-f75289208c13",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 242,
+        "title": "教父3",
+        "original_title": "The Godfather Part III",
+        "overview": "转眼间已经是 1979 年，第二代教父麦克·柯里昂到了垂暮之年，为了灵魂的救赎，麦克慢慢结束家族的黑道事业，转投正当生意。麦克的儿子托尼酷爱艺术，无意接手家族事业，迈克尔决定让大哥逊尼的私生子，火爆好色的文森继承家业，当第三代教父。麦克的爱女玛丽和文森相恋，遭到父亲的反对，父女渐渐疏远。为了使家族资产合法化，麦克通过在梵蒂冈教廷的关系网，准备投资“屹立”集团，却遭到敌人的暗中阻挠，教皇的去世也让事情更加扑朔迷离。麦克无奈之下，只能重新选择用暴力解决问题，他的亲人也被卷入了这场血雨腥风。",
+        "countries": [
+          "United States of America"
+        ],
+        "genres": [
+          "犯罪",
+          "剧情",
+          "惊悚"
+        ],
+        "directors": [
+          "弗朗西斯·科波拉"
+        ],
+        "cast": [
+          "阿尔·帕西诺",
+          "黛安·基顿",
+          "塔莉亚·夏尔",
+          "安迪·加西亚",
+          "埃里·瓦拉赫",
+          "乔·曼特尼亚",
+          "乔治·汉密尔顿",
+          "布莉姬·方达",
+          "索菲亚·科波拉",
+          "拉斐尔·瓦隆",
+          "Franc D'Ambrosio",
+          "Donal Donnelly",
+          "理查德·布莱特",
+          "赫尔穆特·贝格",
+          "Don Novello",
+          "约翰·萨维奇",
+          "Franco Citti",
+          "Mario Donatone",
+          "Vittorio Duse",
+          "Enzo Robutti"
+        ],
+        "release_date": "1990-12-25",
+        "year": 1990,
+        "runtime_minutes": 162,
+        "rating": 7.415,
+        "vote_count": 7087,
+        "url": "https://www.themoviedb.org/movie/242",
+        "fetched_at": "2026-10-01T09:03:34.444Z"
+      },
+      "poster": {
+        "source_path": "/p72l3ooMr3FWACrVxMJ1nXqWYr6.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2024-04-15",
+        "rating": 9,
+        "review": "",
+        "tags": []
+      },
+      "created_at": "2026-10-01T09:03:53.082Z",
+      "updated_at": "2026-10-01T09:03:53.082Z"
     }
   ]
 }
