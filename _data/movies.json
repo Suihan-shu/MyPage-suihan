@@ -1002,6 +1002,68 @@
       },
       "created_at": "2026-10-01T09:00:30.870Z",
       "updated_at": "2026-10-01T09:00:30.870Z"
+    },
+    {
+      "id": "23f69aa2-d471-446a-94e7-70c763368c3a",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 240,
+        "title": "教父2",
+        "original_title": "The Godfather Part II",
+        "overview": "作为《教父》的续篇，影片延续了科莱昂家族两代权力交替的史诗。科波拉在第二部分中讲述了两条故事线：由罗伯特·德尼罗以非凡演技演绎的年轻教父维托的根源与崛起，以及迈克尔（阿尔·帕西诺饰）作为新任教父的上位之路。",
+        "countries": [
+          "United States of America"
+        ],
+        "genres": [
+          "剧情",
+          "犯罪"
+        ],
+        "directors": [
+          "弗朗西斯·科波拉"
+        ],
+        "cast": [
+          "阿尔·帕西诺",
+          "罗伯特·杜瓦尔",
+          "黛安·基顿",
+          "罗伯特·德尼罗",
+          "约翰·卡扎尔",
+          "塔莉亚·夏尔",
+          "李·斯特拉斯伯格",
+          "迈克尔·V·格佐",
+          "格瓦斯·杜安·斯普拉德林",
+          "理查德·布莱特",
+          "加斯通·莫辛",
+          "Tom Rosqui",
+          "布鲁诺·柯比",
+          "弗兰克·西维罗",
+          "Francesca De Sapio",
+          "Morgana King",
+          "Marianna Hill",
+          "里奧普爾多·特里斯特",
+          "多米尼克·契安尼斯",
+          "Amerigo Tot"
+        ],
+        "release_date": "1974-12-20",
+        "year": 1974,
+        "runtime_minutes": 200,
+        "rating": 8.573,
+        "vote_count": 14395,
+        "url": "https://www.themoviedb.org/movie/240",
+        "fetched_at": "2026-10-01T09:00:38.270Z"
+      },
+      "poster": {
+        "source_path": "/4J8jUmjgKPggRPJqqdkjWCj2k0D.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2024-04-10",
+        "rating": 9.5,
+        "review": "",
+        "tags": []
+      },
+      "created_at": "2026-10-01T09:02:05.528Z",
+      "updated_at": "2026-10-01T09:02:05.528Z"
     }
   ]
 }
