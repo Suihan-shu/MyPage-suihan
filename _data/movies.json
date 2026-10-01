@@ -188,6 +188,69 @@
       },
       "created_at": "2026-10-01T08:12:19.293Z",
       "updated_at": "2026-10-01T08:12:19.293Z"
+    },
+    {
+      "id": "44f5b2bc-195f-476a-aefb-0ae5536cfee7",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 313369,
+        "title": "爱乐之城",
+        "original_title": "La La Land",
+        "overview": "心怀演员梦想的米娅在试镜间隙为电影明星端送拿铁，而执着于爵士乐的塞巴斯汀则在昏暗酒吧靠弹奏钢琴曲勉强度日。然而当事业渐有起色，两人不得不做出抉择，这些决定逐渐磨损着他们如薄纱般的恋情，那些曾奋力彼此守护的梦想，此刻却可能将彼此撕裂。",
+        "countries": [
+          "United States of America"
+        ],
+        "genres": [
+          "喜剧",
+          "剧情",
+          "爱情"
+        ],
+        "directors": [
+          "达米恩·查泽雷"
+        ],
+        "cast": [
+          "瑞恩·高斯林",
+          "艾玛·斯通",
+          "约翰•传奇",
+          "罗丝玛丽·德薇特",
+          "芬恩·维特洛克",
+          "卡莉·埃尔南德斯",
+          "水野索诺娅",
+          "杰西卡·罗德",
+          "托马斯·埃弗雷特·斯科特",
+          "乔什·平茨",
+          "J·K·西蒙斯",
+          "阿米·康恩",
+          "特里·沃尔特斯",
+          "汤姆·谢尔顿",
+          "辛达·亚当斯",
+          "Claudine Claudio",
+          "贾森·福克斯",
+          "D.A. Wallach",
+          "Trevor Lissauer",
+          "奥莉维亚·汉密尔顿"
+        ],
+        "release_date": "2016-12-01",
+        "year": 2016,
+        "runtime_minutes": 128,
+        "rating": 7.895,
+        "vote_count": 18536,
+        "url": "https://www.themoviedb.org/movie/313369",
+        "fetched_at": "2026-10-01T08:13:36.078Z"
+      },
+      "poster": {
+        "source_path": "/wEOWf7ahe1yeDkng1AxIcuIXcB.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2026-01-20",
+        "rating": 5.5,
+        "review": "这个电影可能是很多人的人生电影，很多人欣赏其中的舞蹈和配乐，但我是有点看不太懂，我感觉剧情很奇怪，情感曲线也很莫名其妙",
+        "tags": []
+      },
+      "created_at": "2026-10-01T08:15:44.295Z",
+      "updated_at": "2026-10-01T08:15:44.295Z"
     }
   ]
 }
