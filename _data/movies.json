@@ -375,6 +375,64 @@
       },
       "created_at": "2026-10-01T08:21:18.102Z",
       "updated_at": "2026-10-01T08:21:18.102Z"
+    },
+    {
+      "id": "bfd23491-1a8d-4089-857f-7e1210f90b74",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 615453,
+        "title": "哪吒之魔童降世",
+        "original_title": "哪吒之魔童降世",
+        "overview": "天劫之后，哪吒和敖丙的灵魂虽然得以保全，却因失去肉身而面临魂飞魄散的危险。为了救下二人，太乙真人决定借助七色宝莲为他们重塑肉身。然而重塑的过程并不顺利，一场新的危机也随之而来。经历天劫后本应迎来新生的哪吒与敖丙，再次站在命运的十字路口，他们又将面对怎样的考验……",
+        "countries": [
+          "China"
+        ],
+        "genres": [
+          "动画",
+          "奇幻",
+          "冒险"
+        ],
+        "directors": [
+          "饺子"
+        ],
+        "cast": [
+          "吕艳婷",
+          "囧森瑟夫",
+          "瀚墨",
+          "陈浩",
+          "绿绮",
+          "张珈铭",
+          "杨卫",
+          "何禹祥",
+          "任俊鹏",
+          "大海",
+          "雨辰",
+          "刘霖竺",
+          "陶渊",
+          "李南",
+          "杏林儿"
+        ],
+        "release_date": "2019-07-26",
+        "year": 2019,
+        "runtime_minutes": 110,
+        "rating": 7.909,
+        "vote_count": 970,
+        "url": "https://www.themoviedb.org/movie/615453",
+        "fetched_at": "2026-10-01T08:21:56.684Z"
+      },
+      "poster": {
+        "source_path": "/zb8xejiaNR0snSJgDepwFQUIi2e.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2019-08-03",
+        "rating": 7.5,
+        "review": "作品是用心的，在当时动漫电影的环境下，这是一部很优秀的电影了",
+        "tags": []
+      },
+      "created_at": "2026-10-01T08:23:44.307Z",
+      "updated_at": "2026-10-01T08:23:44.307Z"
     }
   ]
 }
