@@ -940,6 +940,68 @@
       },
       "created_at": "2026-10-01T08:59:27.113Z",
       "updated_at": "2026-10-01T08:59:27.113Z"
+    },
+    {
+      "id": "d1caaaee-4b3c-421b-996b-5ad7db706ec7",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 238,
+        "title": "教父",
+        "original_title": "The Godfather",
+        "overview": "40年代的美国，“教父”维托·唐·柯里昂是黑手党柯里昂家族的首领，带领家族从事非法的勾当，但同时他也是许多弱小平民的保护神，深得人们爱戴。因为拒绝了毒枭索洛索的毒品交易要求，柯里昂家族和纽约其他几个黑手党家族的矛盾激化、圣诞前夕，索洛索劫持了“教父”的参谋汤姆，并派人暗杀“教父”；因为内奸的出卖，“教父”的大儿子逊尼被仇家杀害；小儿子麦克也被卷了进来，失去爱妻。黑手党家族之间的矛盾越来越白热化。年老的“教父”面对丧子之痛怎样统领全局？黑手党之间的仇杀如何落幕？谁是家族的内奸？谁又能够成为新一代的“教父”？血雨腥风和温情脉脉，在这部里程碑式的黑帮史诗巨片里真实上演。",
+        "countries": [
+          "United States of America"
+        ],
+        "genres": [
+          "剧情",
+          "犯罪"
+        ],
+        "directors": [
+          "弗朗西斯·科波拉"
+        ],
+        "cast": [
+          "马龙·白兰度",
+          "阿尔·帕西诺",
+          "詹姆斯·凯恩",
+          "罗伯特·杜瓦尔",
+          "理查德·萨尔瓦托雷·卡斯特拉诺",
+          "黛安·基顿",
+          "塔莉亚·夏尔",
+          "詹尼·鲁索",
+          "斯特林·海登",
+          "约翰·马利",
+          "理查德·康特",
+          "Al Lettieri",
+          "阿贝·维高达",
+          "约翰·卡扎尔",
+          "Rudy Bond",
+          "Al Martino",
+          "Morgana King",
+          "Lenny Montana",
+          "John Martino",
+          "Salvatore Corsitto"
+        ],
+        "release_date": "1972-03-14",
+        "year": 1972,
+        "runtime_minutes": 175,
+        "rating": 8.688,
+        "vote_count": 23665,
+        "url": "https://www.themoviedb.org/movie/238",
+        "fetched_at": "2026-10-01T09:00:00.060Z"
+      },
+      "poster": {
+        "source_path": "/y03tzUKvkRCYwJ5NWys4W4bnS9m.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2024-04-07",
+        "rating": 9.5,
+        "review": "",
+        "tags": []
+      },
+      "created_at": "2026-10-01T09:00:30.870Z",
+      "updated_at": "2026-10-01T09:00:30.870Z"
     }
   ]
 }
