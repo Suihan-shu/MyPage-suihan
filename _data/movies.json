@@ -1752,6 +1752,70 @@
       },
       "created_at": "2026-10-02T06:55:20.401Z",
       "updated_at": "2026-10-02T06:55:20.401Z"
+    },
+    {
+      "id": "cbdc9b38-9440-45d6-b65f-83325c4c4b4b",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 5528,
+        "title": "放牛班的春天",
+        "original_title": "Les Choristes",
+        "overview": "1949年的法国乡村，音乐家克莱门特·马修来到一所名为“池塘之底”的男子寄宿学校担任助理教师。这里的学生大多顽皮难管，体罚和高压管教更是司空见惯。性格温和的马修不认同校长的教育方式，决定尝试用音乐改变这些孩子。他重新创作合唱曲，组织起一支合唱团，希望用歌声打开学生们封闭的心灵。在这个过程中，马修发现性格敏感孤僻的皮埃尔拥有非同一般的歌唱天赋，也开始尝试引导这个难以接近的少年找到属于自己的声音。随着歌声在校园中响起，这群曾被视为“问题儿童”的孩子，也逐渐发生着意想不到的变化……",
+        "countries": [
+          "France",
+          "Switzerland"
+        ],
+        "genres": [
+          "剧情",
+          "喜剧",
+          "音乐"
+        ],
+        "directors": [
+          "克里斯托夫·巴哈蒂"
+        ],
+        "cast": [
+          "热拉尔·朱尼奥",
+          "弗朗索瓦·贝莱昂",
+          "凯德·麦拉德",
+          "让-保罗·博奈雷",
+          "玛丽·布奈尔",
+          "让-巴蒂斯特·莫尼耶",
+          "马克森斯·佩兰",
+          "格雷戈里·加蒂尼奥尔",
+          "托马斯·布卢门撒尔",
+          "Cyril Bernicot",
+          "菲利普·杜·詹纳兰德",
+          "Carole Weiss",
+          "Erick Desmarestz",
+          "迪迪埃·弗拉曼德",
+          "雅克·贝汉",
+          "Simon Fargeot",
+          "Théodule Carré-Cassaigne",
+          "Armen Godel",
+          "Steve Gadler",
+          "Paul Chariéras"
+        ],
+        "release_date": "2004-03-17",
+        "year": 2004,
+        "runtime_minutes": 97,
+        "rating": 7.746,
+        "vote_count": 2671,
+        "url": "https://www.themoviedb.org/movie/5528",
+        "fetched_at": "2026-10-02T06:55:52.435Z"
+      },
+      "poster": {
+        "source_path": "/d623rdQLxw7QhdP7ECsz1UkJrHl.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2023-04-22",
+        "rating": 8,
+        "review": "",
+        "tags": []
+      },
+      "created_at": "2026-10-02T06:57:16.088Z",
+      "updated_at": "2026-10-02T06:57:16.088Z"
     }
   ]
 }
