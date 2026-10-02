@@ -1628,6 +1628,68 @@
       },
       "created_at": "2026-10-02T06:50:37.665Z",
       "updated_at": "2026-10-02T06:50:37.665Z"
+    },
+    {
+      "id": "de13eaf8-acbf-4ee9-86a5-c4da6f7008d9",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 10376,
+        "title": "海上钢琴师",
+        "original_title": "La leggenda del pianista sull'oceano",
+        "overview": "1900年，一个被遗弃的婴儿出现在往返欧美的弗吉尼亚号上，被船上的锅炉工丹尼收养，并以新世纪的年份取名为“1900”。丹尼意外去世后，1900继续在船上长大，并逐渐展现出无师自通的惊人钢琴天赋，成为弗吉尼亚号上的钢琴师。他的演奏吸引着来自世界各地的乘客，也让他与小号手麦克斯结下深厚友谊。然而无论船只多少次靠岸，1900始终没有真正踏上陆地，对他而言，这艘船和八十八个琴键就是自己熟悉的整个世界。直到一次偶然的邂逅，让从未离开过大海的他第一次认真考虑走下弗吉尼亚号，面对那个没有边界的陌生世界……",
+        "countries": [
+          "Italy"
+        ],
+        "genres": [
+          "剧情",
+          "音乐"
+        ],
+        "directors": [
+          "朱塞佩·托纳多雷"
+        ],
+        "cast": [
+          "蒂姆·罗斯",
+          "普路特·泰勒·文斯",
+          "梅兰尼·蒂埃里",
+          "比尔·努恩",
+          "加布里埃尔·拉维亚",
+          "克兰伦斯·威廉姆斯三世",
+          "彼得·沃恩",
+          "尼尔·奥布赖恩",
+          "阿尔贝托·巴斯克斯",
+          "Luca De Luigi",
+          "Femi Elufowoju Jr.",
+          "Nigel Fan",
+          "Roger Monk",
+          "Leonid Zaslavski",
+          "Bernard Padden",
+          "Piero Gimondo",
+          "Adriano Wajskol",
+          "Nicola Di Pinto",
+          "安妮塔·扎加里亚",
+          "Katy Monique Cuomo"
+        ],
+        "release_date": "1998-10-28",
+        "year": 1998,
+        "runtime_minutes": 170,
+        "rating": 8.23,
+        "vote_count": 2502,
+        "url": "https://www.themoviedb.org/movie/10376",
+        "fetched_at": "2026-10-02T06:50:58.939Z"
+      },
+      "poster": {
+        "source_path": "/bXk1kSDSiVPj06LtpESZK7C8HsL.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2022-12-09",
+        "rating": 7.5,
+        "review": "整体感受是孤独，是束缚\n每个人都是“宅男（女）”，我们都渴望留在自己的舒适圈",
+        "tags": []
+      },
+      "created_at": "2026-10-02T06:52:32.525Z",
+      "updated_at": "2026-10-02T06:52:32.525Z"
     }
   ]
 }
