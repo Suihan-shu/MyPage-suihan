@@ -1816,6 +1816,69 @@
       },
       "created_at": "2026-10-02T06:57:16.088Z",
       "updated_at": "2026-10-02T06:57:16.088Z"
+    },
+    {
+      "id": "967191f4-060f-470e-996e-0ac8847ca196",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 77338,
+        "title": "触不可及",
+        "original_title": "Intouchables",
+        "overview": "富有的菲利普因一场滑翔伞事故导致高位瘫痪，需要招聘一名全职陪护。前来应聘的人络绎不绝，却始终无法让他满意。直到刚刚出狱的德希斯出现，他本无意得到这份工作，只想拿到一张求职被拒的证明，却意外被菲利普选中，开始了一个月的试用期。一个生活优渥、行动不便，一个出身底层、自由不羁，两人的生活方式和价值观截然不同。在日复一日的相处中，德希斯用毫无顾忌的方式打破了菲利普沉闷的生活，而菲利普也让德希斯接触到一个从未了解过的世界。两个原本毫无交集的人，逐渐建立起一段超越身份与阶层的友谊……",
+        "countries": [
+          "France"
+        ],
+        "genres": [
+          "剧情",
+          "喜剧"
+        ],
+        "directors": [
+          "埃里克·托莱达诺",
+          "奥利维埃·纳卡什"
+        ],
+        "cast": [
+          "弗朗索瓦·克鲁塞",
+          "奥玛·希",
+          "安娜·勒尼",
+          "奥黛丽·弗洛罗",
+          "Joséphine de Meaux",
+          "克洛蒂尔德·莫莱特",
+          "阿尔巴·盖亚·贝鲁吉",
+          "西里尔·门迪",
+          "Salimata Kamate",
+          "Absa Diatou Toure",
+          "Grégoire Oestermann",
+          "Dominique Daguier",
+          "François Caron",
+          "克里斯蒂安·阿梅里",
+          "Thomas Solivérès",
+          "Dorothée Brière",
+          "玛丽-洛尔·德库洛",
+          "Émilie Caen",
+          "Sylvain Lazard",
+          "Jean-François Cayrey"
+        ],
+        "release_date": "2011-11-02",
+        "year": 2011,
+        "runtime_minutes": 112,
+        "rating": 8.272,
+        "vote_count": 18877,
+        "url": "https://www.themoviedb.org/movie/77338",
+        "fetched_at": "2026-10-02T06:57:40.840Z"
+      },
+      "poster": {
+        "source_path": "/dqPRhuTFkSNEg3oOmE1CVBNYRkA.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2019-09-05",
+        "rating": 8,
+        "review": "",
+        "tags": []
+      },
+      "created_at": "2026-10-02T06:58:24.362Z",
+      "updated_at": "2026-10-02T06:58:24.362Z"
     }
   ]
 }
