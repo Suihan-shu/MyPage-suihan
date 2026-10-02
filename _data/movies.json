@@ -1879,6 +1879,68 @@
       },
       "created_at": "2026-10-02T06:58:24.362Z",
       "updated_at": "2026-10-02T06:58:24.362Z"
+    },
+    {
+      "id": "9403ee09-a564-4f98-8a8a-2b9bca45009f",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 43949,
+        "title": "怦然心动",
+        "original_title": "Flipped",
+        "overview": "1957年，布莱斯·罗斯基一家搬到小镇，与邻家女孩朱丽·贝克成为邻居。第一次见到布莱斯，朱丽便对他怦然心动，此后总想方设法接近他，而布莱斯却一直对这个过分热情的女孩避之不及。随着两人渐渐长大，一棵朱丽深爱的梧桐树以及生活中接连发生的小事，让他们开始用不同的眼光重新认识彼此。曾经深信布莱斯就是自己心中那个特别之人的朱丽逐渐产生动摇，而一直想要摆脱她的布莱斯，却开始发现这个邻家女孩身上从未留意过的美好。两颗原本错开方向的心，也在成长中悄然发生着变化……",
+        "countries": [
+          "United States of America"
+        ],
+        "genres": [
+          "爱情",
+          "剧情"
+        ],
+        "directors": [
+          "罗伯·莱纳"
+        ],
+        "cast": [
+          "玛德琳·卡罗尔",
+          "卡兰·麦克奥利菲",
+          "丽贝卡·德·莫奈",
+          "安东尼·爱德华兹",
+          "约翰·马奥尼",
+          "佩内洛普·安·米勒",
+          "艾丹·奎因",
+          "凯文·韦斯曼",
+          "摩根·莉莉",
+          "Ryan Ketzner",
+          "Gillian Pfaff",
+          "Michael Boza",
+          "Beau Lerner",
+          "Jacquelyn Evola",
+          "Taylor Groothuis",
+          "Elly Bryant",
+          "Ashley Taylor",
+          "伊瑟尔·布罗萨德",
+          "Cody H. Carolin",
+          "Frankie Barbaro"
+        ],
+        "release_date": "2010-08-06",
+        "year": 2010,
+        "runtime_minutes": 90,
+        "rating": 8.021,
+        "vote_count": 3428,
+        "url": "https://www.themoviedb.org/movie/43949",
+        "fetched_at": "2026-10-02T06:58:43.878Z"
+      },
+      "poster": {
+        "source_path": "/tOp4DkdonY1a1AS5ESWDia8JP63.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2021-08-08",
+        "rating": 9,
+        "review": "有人金玉其外，有人败絮其中\n斯人若彩虹，遇上方知有",
+        "tags": []
+      },
+      "created_at": "2026-10-02T06:59:40.290Z",
+      "updated_at": "2026-10-02T06:59:40.290Z"
     }
   ]
 }
