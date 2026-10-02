@@ -2315,6 +2315,67 @@
       },
       "created_at": "2026-10-02T07:08:27.661Z",
       "updated_at": "2026-10-02T07:08:27.661Z"
+    },
+    {
+      "id": "dfc028a5-b8ab-4c34-9d2b-74b084120259",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 489,
+        "title": "心灵捕手",
+        "original_title": "Good Will Hunting",
+        "overview": "麻省理工学院的数学教授蓝波在席上公布了一道困难的数学题，却被年轻的清洁工威尔（马特·戴蒙 饰）解了出来。可是威尔却是个问题少年，成天和好朋友查克（本·阿弗莱特 饰）等人四处闲逛，打架滋事。当蓝波找到这个天才的时候，他正因为打架袭警被法庭宣判送进看守所。蓝波向法官求情保释，才使他免于牢狱之灾。蓝波为了让威尔找到自己的人生目标，不浪费他的数学天赋，请了很多心理学专家为威尔做辅导，但是威尔十分抗拒，专家们都束手无策。无计可施之下，蓝波求助于他大学的好友，心理学教授尚恩（罗宾·威廉姆斯 饰），希望能够帮助威尔打开心房。经过蓝波和尚恩的不懈努力，威尔渐渐敞开心胸，而好友查克的一席话，更是让他豁然开朗。",
+        "countries": [
+          "United States of America"
+        ],
+        "genres": [
+          "剧情"
+        ],
+        "directors": [
+          "格斯·范桑特"
+        ],
+        "cast": [
+          "马特·达蒙",
+          "罗宾·威廉姆斯",
+          "本·阿弗莱克",
+          "斯特兰·斯卡斯加德",
+          "明妮·德里弗",
+          "卡西·阿弗莱克",
+          "科尔·豪瑟",
+          "维克·萨海",
+          "约翰·米顿",
+          "Rachel Majorowski",
+          "Colleen McCauley",
+          "Matt Mercier",
+          "Ralph St. George",
+          "Rob Lynds",
+          "Dan Washington",
+          "艾莉森·福兰",
+          "Derrick Bridgeman",
+          "Shannon Egleson",
+          "Rob Lyons",
+          "Steven Kozlowski"
+        ],
+        "release_date": "1997-12-05",
+        "year": 1997,
+        "runtime_minutes": 126,
+        "rating": 8.165,
+        "vote_count": 14367,
+        "url": "https://www.themoviedb.org/movie/489",
+        "fetched_at": "2026-10-02T07:09:11.142Z"
+      },
+      "poster": {
+        "source_path": "/oAZXx2Zt8Ikrm3BpLMsXYHRabWM.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2024-01-08",
+        "rating": 8.5,
+        "review": "天才需要伯乐",
+        "tags": []
+      },
+      "created_at": "2026-10-02T07:09:35.987Z",
+      "updated_at": "2026-10-02T07:09:35.987Z"
     }
   ]
 }
