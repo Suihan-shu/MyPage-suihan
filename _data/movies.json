@@ -3040,6 +3040,71 @@
       },
       "created_at": "2026-10-02T07:29:42.204Z",
       "updated_at": "2026-10-02T07:29:42.204Z"
+    },
+    {
+      "id": "a01448cd-e3a6-4d65-adac-eed016a7bc74",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 116745,
+        "title": "白日梦想家",
+        "original_title": "The Secret Life of Walter Mitty",
+        "overview": "沃尔特在《生活》杂志的底片资产部工作多年，性格内向的他习惯把自己藏在平凡的生活中，并时常陷入白日梦，幻想自己成为无所不能的英雄。他甚至始终没有勇气向心仪的同事谢莉尔表达心意。直到公司被并购，杂志即将推出最后一期，摄影师尚恩寄来的底片中，用作封面的第25号底片却神秘失踪。为了找到这张至关重要的照片，沃尔特不得不走出熟悉的生活，踏上一段真正的冒险旅程，而那些曾经只存在于幻想中的经历，也开始一步步成为现实……",
+        "countries": [
+          "United Kingdom",
+          "United States of America"
+        ],
+        "genres": [
+          "冒险",
+          "喜剧",
+          "剧情",
+          "奇幻"
+        ],
+        "directors": [
+          "本·斯蒂勒"
+        ],
+        "cast": [
+          "本·斯蒂勒",
+          "克丽丝滕·威格",
+          "西恩·潘",
+          "雪莉·麦克雷恩",
+          "亚当·斯科特",
+          "凯瑟琳·哈恩",
+          "帕顿·奥斯瓦尔特",
+          "阿德里安·马丁内斯",
+          "奥拉弗·达里·奥拉弗森",
+          "Gunnar Helgason",
+          "Terence Bernie Hines",
+          "Alex Anfanger",
+          "Gary Wilmes",
+          "Jon Daly",
+          "古尔迪普·辛格",
+          "Paul Fitzgerald",
+          "格蕾丝·雷克斯",
+          "Amanda Naughton",
+          "Nolan Carley",
+          "乔伊·斯洛特尼克"
+        ],
+        "release_date": "2013-12-18",
+        "year": 2013,
+        "runtime_minutes": 114,
+        "rating": 7.231,
+        "vote_count": 8503,
+        "url": "https://www.themoviedb.org/movie/116745",
+        "fetched_at": "2026-10-02T07:30:12.996Z"
+      },
+      "poster": {
+        "source_path": "/xUvcmKgDFRy79LqTibh7bpu1R5r.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2023-12-07",
+        "rating": 8.5,
+        "review": "镜头之美胜过一切",
+        "tags": []
+      },
+      "created_at": "2026-10-02T07:30:41.007Z",
+      "updated_at": "2026-10-02T07:30:41.007Z"
     }
   ]
 }
