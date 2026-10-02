@@ -2616,6 +2616,53 @@
       },
       "created_at": "2026-10-02T07:15:17.476Z",
       "updated_at": "2026-10-02T07:15:17.476Z"
+    },
+    {
+      "id": "989f10c9-3ea2-428c-abe2-2ca98b57dc26",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 336026,
+        "title": "小森林：冬春篇",
+        "original_title": "リトル・フォレスト 冬・春",
+        "overview": "　　该片根据漫画家五十岚大介的同名人气漫画改编，桥本饰演从都市回到乡村的主人公市子，描绘了在严酷大自然中过上自给自足生活的市子，为了每天的食材不得不学习种田的故事。全片在岩手县取景拍摄，当地春冬的美景尽收眼底。",
+        "countries": [
+          "Japan"
+        ],
+        "genres": [
+          "剧情"
+        ],
+        "directors": [
+          "森淳一"
+        ],
+        "cast": [
+          "桥本爱",
+          "三浦贵大",
+          "松冈茉优",
+          "温水洋一",
+          "桐岛加恋",
+          "筱川桃音"
+        ],
+        "release_date": "2015-01-28",
+        "year": 2015,
+        "runtime_minutes": 120,
+        "rating": 7.818,
+        "vote_count": 107,
+        "url": "https://www.themoviedb.org/movie/336026",
+        "fetched_at": "2026-10-02T07:15:32.955Z"
+      },
+      "poster": {
+        "source_path": "/sYDTJoqegWT0LrSf5FQ2OB8SZVt.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2022-01-22",
+        "rating": 9.5,
+        "review": "",
+        "tags": []
+      },
+      "created_at": "2026-10-02T07:16:20.386Z",
+      "updated_at": "2026-10-02T07:16:20.386Z"
     }
   ]
 }
