@@ -2790,6 +2790,69 @@
       },
       "created_at": "2026-10-02T07:20:29.949Z",
       "updated_at": "2026-10-02T07:20:29.949Z"
+    },
+    {
+      "id": "7da2cc5f-c500-43c1-aeb4-b94a1220a5c7",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 137,
+        "title": "土拨鼠之日",
+        "original_title": "Groundhog Day",
+        "overview": "　　菲尔（Bill Murray饰）是个气象播报员，每天除了在摄像机前给观众做风趣幽默的天气预报外，每年的2月2日他还要前往一个名为普苏塔尼的边境小镇，报导当地的土拨鼠日庆典。事实上，菲尔对这一节日相当嗤之以鼻并开始对工作感到厌倦，当他例行公事完成今年的报导后，便急不可待地想重返家园，却因为一场突如其来的暴风雪耽搁了。第2天醒来后，菲尔意外地发现时间仍然停留在前一天土拨鼠日，昨日的一切重新上演。惊讶、不信、刺激、狂喜、烦闷、焦虑、不安、绝望、倦怠等各种情绪轮流侵占菲尔的感官领域，可无论他如何选择度过这一天，他都始终无法再前进一步，开始了他重复的人生。",
+        "countries": [
+          "United States of America"
+        ],
+        "genres": [
+          "爱情",
+          "奇幻",
+          "喜剧"
+        ],
+        "directors": [
+          "哈罗德·拉米斯"
+        ],
+        "cast": [
+          "比尔·默瑞",
+          "安迪·麦克道尔",
+          "克里斯·艾略特",
+          "斯蒂芬·托布罗斯基",
+          "布赖恩·道尔",
+          "马瑞塔·杰拉蒂",
+          "安吉拉·帕顿",
+          "里克·杜科蒙",
+          "里克·奥弗顿",
+          "罗宾·杜克",
+          "Carol Bivins",
+          "Willie Garson",
+          "Ken Hudson Campbell",
+          "Les Podewell",
+          "Rod Sell",
+          "Tom Milanovich",
+          "John M. Watson Sr.",
+          "Peggy Roeder",
+          "哈罗德·拉米斯",
+          "大卫·帕斯奎西"
+        ],
+        "release_date": "1993-02-11",
+        "year": 1993,
+        "runtime_minutes": 101,
+        "rating": 7.636,
+        "vote_count": 9214,
+        "url": "https://www.themoviedb.org/movie/137",
+        "fetched_at": "2026-10-02T07:20:47.215Z"
+      },
+      "poster": {
+        "source_path": "/kr9Ec4Sxk2zj3AfbaMtLsxKozkh.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2024-04-07",
+        "rating": 7.5,
+        "review": "如果我也能选一天重复经历那就好了",
+        "tags": []
+      },
+      "created_at": "2026-10-02T07:21:37.489Z",
+      "updated_at": "2026-10-02T07:21:37.489Z"
     }
   ]
 }
