@@ -3167,6 +3167,67 @@
       },
       "created_at": "2026-10-02T07:31:39.458Z",
       "updated_at": "2026-10-02T07:31:39.458Z"
+    },
+    {
+      "id": "5a70d1f9-d86f-424c-a8b4-8d0a5a25e4dc",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 334541,
+        "title": "海边的曼彻斯特",
+        "original_title": "Manchester by the Sea",
+        "overview": "在兄长猝然离世后，李·钱德勒震惊地得知自己被指定为侄子帕特里克的唯一监护人。李不得不暂停工作，勉强回到故乡曼彻斯特照顾这个十五岁的活泼少年，同时也被迫直面那段令他与妻子兰迪分离、与成长之地决裂的往事。曾被兄长凝聚的家庭纽带如今断裂，李与帕特里克在失去至亲的阴影下，艰难地摸索着与世界和解的方式。",
+        "countries": [
+          "United States of America"
+        ],
+        "genres": [
+          "剧情"
+        ],
+        "directors": [
+          "肯尼思·洛纳根"
+        ],
+        "cast": [
+          "卡西·阿弗莱克",
+          "卢卡斯·赫奇斯",
+          "米歇尔·威廉姆斯",
+          "凯尔·钱德勒",
+          "C·J·威尔逊",
+          "格瑞辰·摩尔",
+          "马修·布罗德里克",
+          "安娜·巴里什尼科夫",
+          "希瑟·伯恩斯",
+          "Ivy O'Brien",
+          "卡拉·海沃德",
+          "Tom Kemp",
+          "乔什·汉弥尔顿",
+          "泰特·多诺万",
+          "钱睿博",
+          "Robert Sella",
+          "Susan Pourfar",
+          "斯蒂芬·亨德森",
+          "Chloe Dixon",
+          "Ellie Teves"
+        ],
+        "release_date": "2016-11-17",
+        "year": 2016,
+        "runtime_minutes": 137,
+        "rating": 7.549,
+        "vote_count": 6594,
+        "url": "https://www.themoviedb.org/movie/334541",
+        "fetched_at": "2026-10-02T07:32:01.336Z"
+      },
+      "poster": {
+        "source_path": "/tZ3cAEoLRJp4ebVzIef7y8xzHlx.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2022-10-08",
+        "rating": 9.5,
+        "review": "每个人都有不和自己和解的权利",
+        "tags": []
+      },
+      "created_at": "2026-10-02T07:33:39.959Z",
+      "updated_at": "2026-10-02T07:33:39.959Z"
     }
   ]
 }
