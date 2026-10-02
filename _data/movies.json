@@ -2068,6 +2068,68 @@
       },
       "created_at": "2026-10-02T07:03:42.750Z",
       "updated_at": "2026-10-02T07:03:42.750Z"
+    },
+    {
+      "id": "e4a1e7a0-3966-4e40-a5cb-223da125ddba",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 640,
+        "title": "猫鼠游戏",
+        "original_title": "Catch Me If You Can",
+        "overview": "父母婚姻破裂后，尚未成年的弗兰克·阿巴内尔离家出走，并凭借过人的伪装能力和伪造支票的手段四处行骗。他先后冒充飞行员、医生和律师，在不同身份之间游刃有余，并骗取了数百万美元。与此同时，FBI探员卡尔·汉拉蒂逐渐锁定了这个年轻而狡猾的骗子，并对他展开锲而不舍的追捕。一次次逃脱与追踪之间，两人由此展开了一场旷日持久的“猫鼠游戏”……",
+        "countries": [
+          "United States of America"
+        ],
+        "genres": [
+          "剧情",
+          "犯罪"
+        ],
+        "directors": [
+          "史蒂文·斯皮尔伯格"
+        ],
+        "cast": [
+          "莱昂纳多·迪卡普里奥",
+          "汤姆·汉克斯",
+          "克里斯托弗·沃肯",
+          "马丁·辛",
+          "纳塔莉·贝伊",
+          "艾米·亚当斯",
+          "詹姆斯·布洛林",
+          "布莱恩·豪威",
+          "弗兰克·约翰·休斯",
+          "史蒂夫·伊斯汀",
+          "克里斯·埃里斯",
+          "约翰·芬恩",
+          "詹妮弗·加纳",
+          "南希·莱内汉",
+          "艾莲·朋佩欧",
+          "伊丽莎白·班克斯",
+          "Guy Thauvette",
+          "Candice Azzara",
+          "Matthew Kimbrough",
+          "Joshua Boyd"
+        ],
+        "release_date": "2002-12-16",
+        "year": 2002,
+        "runtime_minutes": 141,
+        "rating": 7.978,
+        "vote_count": 17638,
+        "url": "https://www.themoviedb.org/movie/640",
+        "fetched_at": "2026-10-02T07:04:07.774Z"
+      },
+      "poster": {
+        "source_path": "/eRMYJtVjs34hBu2fsNfCaOto4Af.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2023-09-05",
+        "rating": 7.5,
+        "review": "",
+        "tags": []
+      },
+      "created_at": "2026-10-02T07:04:46.121Z",
+      "updated_at": "2026-10-02T07:04:46.121Z"
     }
   ]
 }
