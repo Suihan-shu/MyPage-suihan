@@ -3291,6 +3291,69 @@
       },
       "created_at": "2026-10-02T07:35:13.293Z",
       "updated_at": "2026-10-02T07:35:13.293Z"
+    },
+    {
+      "id": "0ec99297-f1d8-4594-8468-df2cdeee467a",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 244786,
+        "title": "爆裂鼓手",
+        "original_title": "Whiplash",
+        "overview": "年轻的爵士鼓手安德鲁·奈曼就读于全国顶尖的音乐学院，师从令人畏惧的爵士乐导师特伦斯·弗莱彻，在成为顶尖爵士鼓手的道路上奋力挣扎。",
+        "countries": [
+          "United States of America"
+        ],
+        "genres": [
+          "剧情",
+          "音乐",
+          "惊悚"
+        ],
+        "directors": [
+          "达米恩·查泽雷"
+        ],
+        "cast": [
+          "迈尔斯·特勒",
+          "J·K·西蒙斯",
+          "保罗·雷瑟",
+          "梅莉莎·班诺伊",
+          "奥斯汀·斯托维尔",
+          "内特·朗",
+          "克里斯·穆基",
+          "达蒙·古普顿",
+          "苏安妮·斯波克",
+          "马克斯·卡什",
+          "查理·伊恩",
+          "杰森·布莱尔",
+          "科菲·斯里博伊",
+          "卡维塔·帕蒂尔",
+          "C.J.瓦娜",
+          "塔里克·洛威",
+          "泰勒·金博尔",
+          "小罗赫利奥·道格拉斯",
+          "阿德里安·伯克斯",
+          "卡尔文·C·温布什"
+        ],
+        "release_date": "2014-10-10",
+        "year": 2014,
+        "runtime_minutes": 107,
+        "rating": 8.376,
+        "vote_count": 17156,
+        "url": "https://www.themoviedb.org/movie/244786",
+        "fetched_at": "2026-10-02T07:36:05.016Z"
+      },
+      "poster": {
+        "source_path": "/wOBIYg8cJUNumlBGyUk47Sw4olf.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2024-01-12",
+        "rating": 8,
+        "review": "",
+        "tags": []
+      },
+      "created_at": "2026-10-02T07:36:26.768Z",
+      "updated_at": "2026-10-02T07:36:26.768Z"
     }
   ]
 }
