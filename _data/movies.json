@@ -1941,6 +1941,71 @@
       },
       "created_at": "2026-10-02T06:59:40.290Z",
       "updated_at": "2026-10-02T06:59:40.290Z"
+    },
+    {
+      "id": "dc9953cd-552e-4780-88fa-52f0ca203baa",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 423,
+        "title": "钢琴家",
+        "original_title": "The Pianist",
+        "overview": "第二次世界大战爆发前夕，波兰犹太裔钢琴家瓦迪斯瓦夫·什皮尔曼仍在华沙电台演奏钢琴。随着德军占领波兰，针对犹太人的迫害不断升级，他和家人被迫迁入华沙犹太区，原本平静的生活也彻底崩塌。在饥饿、暴力与死亡的阴影下，什皮尔曼与家人艰难求生，却又在战争中被迫分离。侥幸逃过驱逐后，他只能依靠朋友的帮助辗转藏身，并在逐渐沦为废墟的华沙中独自躲避搜捕。曾经陪伴他的音乐几乎从生活中消失，而活下去成为他唯一能够坚持的事情……",
+        "countries": [
+          "France",
+          "Germany",
+          "Poland",
+          "United Kingdom"
+        ],
+        "genres": [
+          "剧情",
+          "战争"
+        ],
+        "directors": [
+          "罗曼·波兰斯基"
+        ],
+        "cast": [
+          "阿德里安·布罗迪",
+          "托马斯·克莱舒曼",
+          "弗兰克·芬莱",
+          "穆琳·利普曼",
+          "艾米莉娅·福克斯",
+          "埃德·斯托帕德",
+          "朱莉娅·雷纳",
+          "杰西卡·凯特·迈耶",
+          "米哈乌·热布罗夫斯基",
+          "Wanja Mues",
+          "理查德·里丁斯",
+          "Nomi Sharron",
+          "Anthony Milner",
+          "Lucy Skeaping",
+          "Roddy Skeaping",
+          "Ben Harlan",
+          "Thomas Lawinky",
+          "Joachim Paul Assböck",
+          "Roy Smiles",
+          "Paul Bradley"
+        ],
+        "release_date": "2002-09-17",
+        "year": 2002,
+        "runtime_minutes": 150,
+        "rating": 8.371,
+        "vote_count": 10485,
+        "url": "https://www.themoviedb.org/movie/423",
+        "fetched_at": "2026-10-02T07:01:39.844Z"
+      },
+      "poster": {
+        "source_path": "/1J3yRdmlBF3a5l3GLqBScRBdhJr.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2022-11-12",
+        "rating": 9,
+        "review": "战争无关人种，每个个体都不堪承受一个群体施于的罪孽。他只是他，正如我只是我，就像我没见过海，大不可把污染海洋之罪加之我身。但对于战争，我们有话要说，这是人性的邪恶与野蛮，战争面前，生命如草芥。残酷的时代，人如尘土，我们无法拯救自己，更不能左右他人。一切痛惜都无力，一切语言都苍白，愿世界和平",
+        "tags": []
+      },
+      "created_at": "2026-10-02T07:02:28.483Z",
+      "updated_at": "2026-10-02T07:02:28.483Z"
     }
   ]
 }
