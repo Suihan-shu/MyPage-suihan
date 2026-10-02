@@ -1127,6 +1127,68 @@
       },
       "created_at": "2026-10-01T09:03:53.082Z",
       "updated_at": "2026-10-01T09:03:53.082Z"
+    },
+    {
+      "id": "4323a64f-5f98-4070-8206-a2fef15a6307",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 278,
+        "title": "肖申克的救赎",
+        "original_title": "The Shawshank Redemption",
+        "overview": "1947年，银行家安迪·杜佛兰因被控杀害妻子及其情人，尽管始终坚称清白，仍被判处两项无期徒刑，送入缅因州的肖申克监狱服刑。在残酷而压抑的监狱生活中，安迪凭借冷静、智慧和始终未曾熄灭的希望逐渐赢得狱友们的尊重，并与能够在狱中弄到各种物品的瑞德建立起深厚的友谊。漫长的岁月里，他始终没有让高墙彻底改变自己，也开始用自己的方式影响身边的人，以及这座看似牢不可破的监狱……",
+        "countries": [
+          "United States of America"
+        ],
+        "genres": [
+          "剧情",
+          "犯罪"
+        ],
+        "directors": [
+          "弗兰克·德拉邦特"
+        ],
+        "cast": [
+          "蒂姆·罗宾斯",
+          "摩根·弗里曼",
+          "鲍勃·冈顿",
+          "威廉姆·赛德勒",
+          "克兰西·布朗",
+          "吉尔·贝罗斯",
+          "小詹姆斯·艾伦·惠特莫尔",
+          "马克·罗斯顿",
+          "杰弗里·德蒙",
+          "拉里·勃兰登堡",
+          "尼尔·吉恩托利",
+          "Brian Libby",
+          "大卫·普罗瓦尔",
+          "Joseph Ragno",
+          "裘德·西科莱拉",
+          "Paul McCrane",
+          "Renee Blaine",
+          "Scott Mann",
+          "John Horton",
+          "Gordon Greene"
+        ],
+        "release_date": "1994-09-23",
+        "year": 1994,
+        "runtime_minutes": 142,
+        "rating": 8.731,
+        "vote_count": 31471,
+        "url": "https://www.themoviedb.org/movie/278",
+        "fetched_at": "2026-10-02T06:35:01.116Z"
+      },
+      "poster": {
+        "source_path": "/aAdnwqwkKX5PPcr8EdtaiA8AZVl.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2020-04-22",
+        "rating": 9,
+        "review": "这个依稀记得是高中在教室里面看的。",
+        "tags": []
+      },
+      "created_at": "2026-10-02T06:36:37.286Z",
+      "updated_at": "2026-10-02T06:36:37.286Z"
     }
   ]
 }
