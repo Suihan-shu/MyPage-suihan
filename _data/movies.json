@@ -2191,6 +2191,69 @@
       },
       "created_at": "2026-10-02T07:06:05.346Z",
       "updated_at": "2026-10-02T07:06:05.346Z"
+    },
+    {
+      "id": "f8d9726e-4940-4467-934b-0ae982b3b457",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 490132,
+        "title": "绿皮书",
+        "original_title": "Green Book",
+        "overview": "1962年，纽约。夜总会因装修暂时停业后，托尼·利普急需寻找一份新工作，并受雇成为知名黑人钢琴家唐·雪利的司机兼保镖。唐·雪利即将展开为期八周的美国南方巡演，而在当时种族隔离与歧视依然严重的南部地区，两人不得不依靠一本为黑人旅行者提供安全食宿信息的“绿皮书”一路前行。性格、出身和生活方式截然不同的两人在旅途中冲突不断，却也在共同面对偏见与危险的过程中逐渐了解彼此，建立起一段跨越种族与阶层的友谊……",
+        "countries": [
+          "United States of America"
+        ],
+        "genres": [
+          "剧情",
+          "喜剧",
+          "历史"
+        ],
+        "directors": [
+          "彼得·法雷利"
+        ],
+        "cast": [
+          "维果·莫特森",
+          "马赫沙拉·阿里",
+          "琳达·卡德里尼",
+          "塞巴斯蒂安·马尼斯科",
+          "迪米特·D·马里诺夫",
+          "迈克·哈顿",
+          "P·J·伯恩",
+          "约瑟夫·科尔特斯",
+          "Mary Agnes Nixon",
+          "Von Lewis",
+          "Jon Sortland",
+          "Don Stark",
+          "Anthony Mangano",
+          "Paul Sloan",
+          "Quinn Duffy",
+          "Seth Hurwitz",
+          "Hudson Galloway",
+          "Gavin Foley",
+          "伊克巴尔·塞巴",
+          "Ricky Muse"
+        ],
+        "release_date": "2018-11-16",
+        "year": 2018,
+        "runtime_minutes": 130,
+        "rating": 8.224,
+        "vote_count": 13308,
+        "url": "https://www.themoviedb.org/movie/490132",
+        "fetched_at": "2026-10-02T07:06:29.528Z"
+      },
+      "poster": {
+        "source_path": "/um1Tc0238x1II2u33FPHbMj3GBE.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2023-11-12",
+        "rating": 8.5,
+        "review": "",
+        "tags": []
+      },
+      "created_at": "2026-10-02T07:07:16.498Z",
+      "updated_at": "2026-10-02T07:07:16.498Z"
     }
   ]
 }
