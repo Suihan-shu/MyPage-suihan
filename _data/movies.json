@@ -1377,6 +1377,68 @@
       },
       "created_at": "2026-10-02T06:42:57.835Z",
       "updated_at": "2026-10-02T06:42:57.835Z"
+    },
+    {
+      "id": "1e5e1530-70b4-46ee-aab6-6ecac85559a5",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 637,
+        "title": "美丽人生",
+        "original_title": "La vita è bella",
+        "overview": "1939年的意大利，乐观幽默的犹太青年圭多邂逅了女教师多拉。经过一连串阴差阳错，两人相爱成家，并有了儿子乔舒亚。然而随着战争的阴影逼近，圭多和儿子因犹太身份被强行送往集中营，没有犹太血统的多拉也毅然选择同行。为了保护年幼的乔舒亚免受残酷现实的伤害，圭多把集中营里的生活编成一场游戏，并告诉他获胜的奖品是一辆真正的坦克。在恐惧与苦难之中，圭多用幽默、想象和父爱守护着儿子的童真，也始终怀抱着一家人再次团聚的希望……",
+        "countries": [
+          "Italy"
+        ],
+        "genres": [
+          "喜剧",
+          "剧情"
+        ],
+        "directors": [
+          "罗伯托·贝尼尼"
+        ],
+        "cast": [
+          "罗伯托·贝尼尼",
+          "尼可莱塔·布拉斯基",
+          "乔治·坎塔里尼",
+          "朱斯蒂诺·杜拉诺",
+          "赛尔乔·比尼·布斯特里克",
+          "玛丽萨·帕雷德斯",
+          "豪斯特·巴奇霍兹",
+          "莉迪亚·阿方西",
+          "朱利亚娜·洛约迪切",
+          "Amerigo Fontani",
+          "Pietro De Silva",
+          "Francesco Guzzo",
+          "Raffaella Lebboroni",
+          "Claudio Alfonsi",
+          "Gil Baroni",
+          "Massimo Bianchi",
+          "Jürgen Bohn",
+          "Verena Buratti",
+          "Robert Camero",
+          "Ennio Consalvi"
+        ],
+        "release_date": "1997-12-20",
+        "year": 1997,
+        "runtime_minutes": 116,
+        "rating": 8.436,
+        "vote_count": 14280,
+        "url": "https://www.themoviedb.org/movie/637",
+        "fetched_at": "2026-10-02T06:43:26.749Z"
+      },
+      "poster": {
+        "source_path": "/84PPFpTTMO83bPy19v7JgdNklDp.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2020-05-13",
+        "rating": 9,
+        "review": "这个是高中语文老师直接发在我们平板上的让我们看的\n一部切入点小但意义深厚的战争片，战争与“喜剧”结合，更可见战争带来的悲伤",
+        "tags": []
+      },
+      "created_at": "2026-10-02T06:45:16.802Z",
+      "updated_at": "2026-10-02T06:45:16.802Z"
     }
   ]
 }
