@@ -1690,6 +1690,68 @@
       },
       "created_at": "2026-10-02T06:52:32.525Z",
       "updated_at": "2026-10-02T06:52:32.525Z"
+    },
+    {
+      "id": "54e2596a-4eac-43ef-8014-f901087adaa1",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 20453,
+        "title": "三傻大闹宝莱坞",
+        "original_title": "3 Idiots",
+        "overview": "十年前，法兰、拉杜与兰乔在印度顶尖的皇家工程学院相识并成为好友。面对竞争激烈、崇尚成绩与服从的教育环境，特立独行的兰乔始终坚持真正的学习来自兴趣与理解，并一次次挑战校长“病毒”的教育理念。他的想法也逐渐影响着背负家庭期待的法兰和拉杜，鼓励两人重新思考自己真正想要的人生。与此同时，兰乔与信奉死记硬背的模范生“消音器”针锋相对，两人甚至立下十年后再论成败的约定。十年过去，当法兰和拉杜再次踏上寻找这位昔日好友的旅程，那段关于友情、梦想与选择的大学往事也随之重新浮现……",
+        "countries": [
+          "India"
+        ],
+        "genres": [
+          "剧情",
+          "喜剧"
+        ],
+        "directors": [
+          "拉吉库马尔·希拉尼"
+        ],
+        "cast": [
+          "阿米尔·汗",
+          "马达范 R",
+          "沙尔曼·乔什",
+          "卡琳娜·卡普",
+          "博曼·伊拉尼",
+          "奥米·瓦依达",
+          "莫娜·辛哈",
+          "拉胡尔·库马尔",
+          "帕里卡沙特.萨赫尼",
+          "Farida Dadi",
+          "Amardeep Jha",
+          "Mukund Bhatt",
+          "贾维德·杰弗里",
+          "阿里·扎勒",
+          "Olivier Lafont",
+          "Arun Bali",
+          "Achyut Potdar",
+          "Akhil Mishra",
+          "Dushyant Wagh",
+          "Supriya Shukla"
+        ],
+        "release_date": "2009-12-23",
+        "year": 2009,
+        "runtime_minutes": 171,
+        "rating": 8.012,
+        "vote_count": 2848,
+        "url": "https://www.themoviedb.org/movie/20453",
+        "fetched_at": "2026-10-02T06:53:04.509Z"
+      },
+      "poster": {
+        "source_path": "/3Kdkci7FE36fWcsuoeGFYApBBE1.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2017-08-09",
+        "rating": 8.5,
+        "review": "很早很早之前看的了，当时还好莱坞宝莱坞傻傻分不清，这也算是被名字耽误的一部电影，虽然是喜剧，但我记得我当时看哭了",
+        "tags": []
+      },
+      "created_at": "2026-10-02T06:55:20.401Z",
+      "updated_at": "2026-10-02T06:55:20.401Z"
     }
   ]
 }
