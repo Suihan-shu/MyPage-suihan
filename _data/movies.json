@@ -2977,6 +2977,69 @@
       },
       "created_at": "2026-10-02T07:26:38.159Z",
       "updated_at": "2026-10-02T07:26:38.159Z"
+    },
+    {
+      "id": "b3a5a8fb-13df-4ce4-8154-a969619f9c88",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 770,
+        "title": "乱世佳人",
+        "original_title": "Gone with the Wind",
+        "overview": "这部史诗巨制描绘了一位南方佳丽在美国内战与重建时期的命运浮沉。影片荣获八项奥斯卡金像奖，其中包括最佳影片奖。",
+        "countries": [
+          "United States of America"
+        ],
+        "genres": [
+          "剧情",
+          "战争",
+          "爱情"
+        ],
+        "directors": [
+          "维克多·弗莱明"
+        ],
+        "cast": [
+          "费雯·丽",
+          "克拉克·盖博",
+          "奥利维亚·玛丽·德·哈维兰",
+          "莱斯利·霍华德",
+          "哈蒂·麦克丹尼尔",
+          "托马斯·米切尔",
+          "芭芭拉·奥尼尔",
+          "伊芙琳·凯斯",
+          "安·卢瑟福",
+          "乔治·里弗斯",
+          "Fred Crane",
+          "Oscar Polk",
+          "Butterfly McQueen",
+          "Victor Jory",
+          "Everett Brown",
+          "Howard Hickman",
+          "Alicia Rhett",
+          "Rand Brooks",
+          "Carroll Nye",
+          "Laura Hope Crews"
+        ],
+        "release_date": "1939-12-15",
+        "year": 1939,
+        "runtime_minutes": 238,
+        "rating": 7.903,
+        "vote_count": 4498,
+        "url": "https://www.themoviedb.org/movie/770",
+        "fetched_at": "2026-10-02T07:26:57.490Z"
+      },
+      "poster": {
+        "source_path": "/3F2AYTFHjcygEdlRWEFaTGK8W9M.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2024-03-20",
+        "rating": 9.5,
+        "review": "人生有许多戛然而止，但明天又是新的一天\n看完《飘》之后看的这部电影，从开始讨厌斯嘉丽和瑞德，随着故事的继续，愈发感受到瑞德的魅力和斯嘉丽的勇敢",
+        "tags": []
+      },
+      "created_at": "2026-10-02T07:29:42.204Z",
+      "updated_at": "2026-10-02T07:29:42.204Z"
     }
   ]
 }
