@@ -1189,6 +1189,69 @@
       },
       "created_at": "2026-10-02T06:36:37.286Z",
       "updated_at": "2026-10-02T06:36:37.286Z"
+    },
+    {
+      "id": "68dcfed5-9ccd-4982-ba86-ca9d0d5f9ad8",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 13,
+        "title": "阿甘正传",
+        "original_title": "Forrest Gump",
+        "overview": "阿甘出生在美国南方阿拉巴马州一个闭塞的小镇，智商只有75，然而他的妈妈是一位性格坚强的女性，她常常鼓励阿甘要自强不息。阿甘像普通孩子一样上学，并认识了一生的朋友和挚爱珍妮。在珍妮和妈妈的爱护下，阿甘凭着自己出众的奔跑能力，开始了一生不停的奔跑。他先后成为橄榄球明星、越战英雄、乒乓球外交使者和亿万富翁，但始终忘不了珍妮。一次次匆匆的相聚与离别，更加深了阿甘对她的思念。有一天，阿甘收到珍妮的来信，他们终于又要见面……",
+        "countries": [
+          "United States of America"
+        ],
+        "genres": [
+          "喜剧",
+          "剧情",
+          "爱情"
+        ],
+        "directors": [
+          "罗伯特·泽米吉斯"
+        ],
+        "cast": [
+          "汤姆·汉克斯",
+          "罗宾·怀特",
+          "加里·西尼斯",
+          "莎莉·菲尔德",
+          "麦凯尔泰·威廉逊",
+          "迈克尔·康纳·汉弗莱斯",
+          "汉娜·豪尔",
+          "海利·乔·奥斯蒙",
+          "西奥本·法隆·霍根",
+          "丽贝卡·威廉姆斯",
+          "鲍勃·彭尼",
+          "Harold G. Herthum",
+          "George Kelly",
+          "John Randall",
+          "山姆·安德森",
+          "Margo Moorer",
+          "Ione M. Telech",
+          "Christine Seabrook",
+          "John Worsham",
+          "彼得·多布森"
+        ],
+        "release_date": "1994-06-23",
+        "year": 1994,
+        "runtime_minutes": 142,
+        "rating": 8.461,
+        "vote_count": 30564,
+        "url": "https://www.themoviedb.org/movie/13",
+        "fetched_at": "2026-10-02T06:37:05.047Z"
+      },
+      "poster": {
+        "source_path": "/pplybKImR7LKzSVzRylK6Cl4dzm.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": null,
+        "rating": 8.5,
+        "review": "二等饼干！\n就是有点美国精神过于强烈",
+        "tags": []
+      },
+      "created_at": "2026-10-02T06:37:50.205Z",
+      "updated_at": "2026-10-02T06:37:50.205Z"
     }
   ]
 }
