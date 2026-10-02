@@ -3105,6 +3105,68 @@
       },
       "created_at": "2026-10-02T07:30:41.007Z",
       "updated_at": "2026-10-02T07:30:41.007Z"
+    },
+    {
+      "id": "cf9f1f97-3cf8-4bc0-b738-fd505f381bf8",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 43824,
+        "title": "魂断蓝桥",
+        "original_title": "Waterloo Bridge",
+        "overview": "第一次世界大战期间，回国度假的陆军中尉罗伊（罗伯特·泰勒）在滑铁卢桥上邂逅了舞蹈演员玛拉（费雯·丽），两人彼此倾心，爱情迅速升温。就在两人决定结婚之时，罗伊应招回营地，两人被迫分离。由于错过剧团演出，玛拉被开除，只能和好友相依为命。  　　不久玛拉得知罗伊阵亡的消息，几欲崩溃，备受打击。失去爱情的玛拉感到一切都失去了意义，为了生存，她和好友不得不沦为妓女。然而命运弄人，就在此时玛拉竟然再次遇到了罗伊。虽然为罗伊的生还兴奋不已，玛拉却因自己的失身陷入痛苦之中。  　　感到一切难以挽回的玛拉潸然离开，独自来到两人最初相遇的地点——滑铁卢桥上…",
+        "countries": [
+          "United States of America"
+        ],
+        "genres": [
+          "剧情",
+          "爱情"
+        ],
+        "directors": [
+          "梅尔文·勒罗伊"
+        ],
+        "cast": [
+          "费雯·丽",
+          "罗伯特·泰勒",
+          "露西尔·沃森",
+          "弗吉尼亚·菲尔德",
+          "玛丽亚·彭斯卡娅",
+          "C·奥布雷·史密斯",
+          "珍妮特·肖",
+          "珍妮特·沃尔多",
+          "斯蒂菲·杜纳",
+          "Virginia Carroll",
+          "Leda Nicova",
+          "Florence Baker",
+          "Margery Manning",
+          "Frances MacInerney",
+          "Eleanor Stewart",
+          "Lowden Adams",
+          "Harry Allen",
+          "Jimmy Aubrey",
+          "Phyllis Barry",
+          "Colin Campbell"
+        ],
+        "release_date": "1940-05-17",
+        "year": 1940,
+        "runtime_minutes": 108,
+        "rating": 7.5,
+        "vote_count": 185,
+        "url": "https://www.themoviedb.org/movie/43824",
+        "fetched_at": "2026-10-02T07:30:59.054Z"
+      },
+      "poster": {
+        "source_path": "/d8KZh9o4XDGXz1oLFN3nD5RAOLC.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2020-02-02",
+        "rating": 8,
+        "review": "",
+        "tags": []
+      },
+      "created_at": "2026-10-02T07:31:39.458Z",
+      "updated_at": "2026-10-02T07:31:39.458Z"
     }
   ]
 }
