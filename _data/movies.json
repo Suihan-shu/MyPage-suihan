@@ -2663,6 +2663,70 @@
       },
       "created_at": "2026-10-02T07:16:20.386Z",
       "updated_at": "2026-10-02T07:16:20.386Z"
+    },
+    {
+      "id": "a1cd2546-2fdb-481d-93b1-b8960b1b298b",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 475557,
+        "title": "小丑",
+        "original_title": "Joker",
+        "overview": "亚瑟·弗兰克是一个依靠扮演小丑赚取营生的普通人，患有精神疾病的他和母亲一同住在哥谭市的一座公寓里，幻想成为脱口秀演员的亚瑟为了这个目标而努力的生活着，但是现实却屡次击败他的梦想，亚瑟渐渐地变得越来越癫狂，某天在地铁上，亚瑟为了自保杀害了几名嘲笑他的人，同时，一个疯狂的想法在亚瑟心灵萌发……  在看似和平的哥谭市，即将发生翻天覆地的巨变。",
+        "countries": [
+          "Canada",
+          "United States of America"
+        ],
+        "genres": [
+          "犯罪",
+          "惊悚",
+          "剧情"
+        ],
+        "directors": [
+          "托德·菲利普斯"
+        ],
+        "cast": [
+          "华金·菲尼克斯",
+          "罗伯特·德尼罗",
+          "莎姬·贝兹",
+          "弗兰西丝·康罗伊",
+          "布莱特·卡伦",
+          "谢伊·惠格姆",
+          "比尔·坎普",
+          "格伦·弗莱什勒",
+          "利·吉尔",
+          "乔什·派斯",
+          "Rocco Luna",
+          "马克·马伦",
+          "Sondra James",
+          "Murphy Guyer",
+          "道格拉斯·霍奇",
+          "但丁·佩雷拉-奥尔森",
+          "Carrie Louise Putrello",
+          "莎朗·华盛顿",
+          "Hannah Gross",
+          "Frank Wood"
+        ],
+        "release_date": "2019-10-01",
+        "year": 2019,
+        "runtime_minutes": 122,
+        "rating": 8.115,
+        "vote_count": 28412,
+        "url": "https://www.themoviedb.org/movie/475557",
+        "fetched_at": "2026-10-02T07:16:59.833Z"
+      },
+      "poster": {
+        "source_path": "/6wRhlfO6CKdN1U49c3ZJ0MZtV4D.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2024-01-12",
+        "rating": 8,
+        "review": "",
+        "tags": []
+      },
+      "created_at": "2026-10-02T07:18:04.445Z",
+      "updated_at": "2026-10-02T07:18:04.445Z"
     }
   ]
 }
