@@ -1565,6 +1565,69 @@
       },
       "created_at": "2026-10-02T06:49:16.298Z",
       "updated_at": "2026-10-02T06:49:16.298Z"
+    },
+    {
+      "id": "56c0a28d-1aa7-4625-91d2-aa9c47aab33b",
+      "source": {
+        "provider": "tmdb",
+        "tmdb_id": 28178,
+        "title": "忠犬八公的故事",
+        "original_title": "Hachi: A Dog's Tale",
+        "overview": "八公 是一条谜一样的犬，因为没有人知道它从哪里来。教授帕克 在小镇的火车站拣到一只走失的小狗，冥冥中似乎注定小狗和帕克教授有着某种缘分，帕克一抱起这只小狗就再也放不下来，最终，帕克对小狗八公的疼爱感化了起初极力反对养狗的妻子卡特。八公在帕克的呵护下慢慢长大，帕克上班时八公会一直把他送到车站，下班时八公也会早早便爬在车站等候，八公的忠诚让小镇的人家对它更加疼爱。有一天，八公在帕克要上班时表现异常，居然玩起了以往从来不会的捡球游戏，八公的表现让帕克非常满意，可是就是在那天，帕克因病去世。帕克的妻子、女儿安迪 及女婿迈克尔 怀着无比沉痛的心情埋葬了帕克，可是不明就里的八公却依然每天傍晚五点准时守候在小站的门前，等待着主人归来……",
+        "countries": [
+          "United Kingdom",
+          "United States of America"
+        ],
+        "genres": [
+          "剧情",
+          "家庭"
+        ],
+        "directors": [
+          "莱塞·霍尔斯道姆"
+        ],
+        "cast": [
+          "理查·基尔",
+          "琼·艾伦",
+          "莎拉露瑪",
+          "田川洋行",
+          "埃里克·阿瓦里",
+          "罗比·萨布莱特",
+          "达文尼亚·麦克法登",
+          "杰森·亚历山大",
+          "凯文·德科斯特",
+          "Robert Degnan",
+          "Tora Hallström",
+          "Donna Sorbello",
+          "Frank S. Aronson",
+          "Troy Doherty",
+          "Ian Sherman",
+          "Timothy Crowe",
+          "Denece Ryland",
+          "Blake Friedman",
+          "Bates Wilder",
+          "Daniel Kirby"
+        ],
+        "release_date": "2009-06-08",
+        "year": 2009,
+        "runtime_minutes": 93,
+        "rating": 8.003,
+        "vote_count": 7343,
+        "url": "https://www.themoviedb.org/movie/28178",
+        "fetched_at": "2026-10-02T06:49:52.594Z"
+      },
+      "poster": {
+        "source_path": "/fCRj02jAyqzDvPEUceFYEA7WmWM.jpg",
+        "local_path": null
+      },
+      "overrides": {},
+      "personal": {
+        "watched_on": "2016-08-03",
+        "rating": 9,
+        "review": "记得是小时候和姐姐一起看的，当时哭得稀里哗啦的",
+        "tags": []
+      },
+      "created_at": "2026-10-02T06:50:37.665Z",
+      "updated_at": "2026-10-02T06:50:37.665Z"
     }
   ]
 }
